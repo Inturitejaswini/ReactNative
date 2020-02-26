@@ -14,7 +14,8 @@
 ******************************************************************************/
 
 import React, { Component } from 'react'
-import { View} from 'react-native'
+import { View,Text} from 'react-native'
+import styles from '../../Css';
 export class Login extends Component {
     constructor() {
         super();
@@ -26,8 +27,8 @@ export class Login extends Component {
     }
     render() {
         return (
-            <View style={styles.container}>
-                hai react
+            <View>
+                <Text>hai react</Text>
             </View>
         )
     }
