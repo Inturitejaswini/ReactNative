@@ -73,6 +73,35 @@ const styles = StyleSheet.create({
         width:200,
         borderRadius:10,
         top:20 
-      }
+      },
+      /**
+       * forgot password css
+       */
+      forgotcontainer:{
+        flex: 1,
+        alignItems: 'center',
+        justifyContent: 'center',
+        backgroundColor: '#d6dbdf',
+      },
+      input3: {
+        width: 200,
+        height: 44,
+        padding: 10,
+        borderWidth: 1,
+        borderColor: 'black',
+        marginBottom: 10,
+        borderRadius:8
+      },
+      forgotbtn1:{
+        width:200,
+        borderRadius:10,
+        top:10
+      },
+      Text3:{
+        width:130,
+        borderRadius:10,
+        fontSize:20,
+        marginBottom:30
+      },
   });
   export default styles

@@ -56,7 +56,7 @@ export class Login extends Component {
                 </TextInput>
                 <TextInput
                     value={this.state.password}
-                    onChange={this.handlepassword}
+                    onChangeText={this.handlepassword}
                     placeholder={'Password'}
                     secureTextEntry={true}
                     style={styles.input}>
