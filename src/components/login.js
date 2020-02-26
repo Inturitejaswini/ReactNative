@@ -70,7 +70,7 @@ export class Login extends Component {
                 </View>
                 <View style={styles.btn2}>
                 <Button
-                        onPress={this.handleLogin}
+                        onPress={this.handleRegister}
                         title="Register"
                         color="#00B0FF"
                     />
