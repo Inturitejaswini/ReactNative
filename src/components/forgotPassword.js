@@ -44,7 +44,7 @@ export class Forgot extends Component {
                 </View>
                 <TextInput
                     value={this.state.email}
-                    onChange={this.handleemail}
+                    onChangeText={this.handleemail}
                     placeholder={'Username'}
                     style={styles.input3}>
                 </TextInput>
@@ -53,6 +53,13 @@ export class Forgot extends Component {
                     <Button
                         onPress={this.handleForgot}
                         title="Submit"
+                        color="#00B0FF"
+                    />
+                </View>
+                <View style={styles.forgotbtn2}>
+                    <Button
+                        onPress={() => this.props.navigation.navigate('login')}
+                        title="Goback"
                         color="#00B0FF"
                     />
                 </View>

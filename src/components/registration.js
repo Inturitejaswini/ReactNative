@@ -48,31 +48,31 @@ export class Register extends Component {
                 </View>
                 <TextInput
                     value={this.state.firstname}
-                    onChange={this.handlefirstname}
+                    onChangeText={this.handlefirstname}
                     placeholder={'Firstname'}
                     style={styles.input1}>
                 </TextInput>
                 <TextInput
                     value={this.state.lastname}
-                    onChange={this.handlelastname}
+                    onChangeText={this.handlelastname}
                     placeholder={'Lastname'}
                     style={styles.input1}>
                 </TextInput>
                 <TextInput
                     value={this.state.fullname}
-                    onChange={this.handlefullname}
+                    onChangeText={this.handlefullname}
                     placeholder={'Fullname'}
                     style={styles.input1}>
                 </TextInput>
                 <TextInput
                     value={this.state.email}
-                    onChange={this.handleemail}
+                    onChangeText={this.handleemail}
                     placeholder={'Email'}
                     style={styles.input1}>
                 </TextInput>
                 <TextInput
                     value={this.state.password}
-                    onChange={this.handlepassword}
+                    onChangeText={this.handlepassword}
                     placeholder={'Password'}
                     style={styles.input1}>
                 </TextInput>
@@ -85,35 +85,11 @@ export class Register extends Component {
                 </View>
                 <View style={styles.loginbtn}>
                     <Button
-                        onPress={this.handleLogin}
+                        onPress={() => this.props.navigation.navigate('login')}
                         title="Login"
                         color="#00B0FF"
                     />
                 </View>
-                {/* <TextInput
-                    value={this.state.password}
-                    onChange={this.handlepassword}
-                    placeholder={'Password'}
-                    secureTextEntry={true}
-                    style={styles.input}>
-                </TextInput>
-                <View style={styles.btn}>
-                    <Button
-                        onPress={this.handleLogin}
-                        title="Login"
-                        color="#00B0FF"
-                    />
-                </View>
-                <View style={styles.btn2}>
-                <Button
-                        onPress={this.handleRegister}
-                        title="Register"
-                        color="#00B0FF"
-                    />
-                </View>
-                <View style={styles.forgot}>
-                    <Text>Forgot Password?</Text>
-                </View> */}
             </View>
         )
     }

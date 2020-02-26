@@ -35,7 +35,9 @@ export class Login extends Component {
         this.setState({ password: event.target.value });
         console.log("password", this.state.password);
     };
+    handleForgot = () => {
 
+    }
     handleLogin = () => {
         alert("Clicked On Button !!!");
     };
@@ -50,7 +52,7 @@ export class Login extends Component {
                 </View>
                 <TextInput
                     value={this.state.username}
-                    onChange={this.handleusername}
+                    onChangeText={this.handleusername}
                     placeholder={'Username'}
                     style={styles.input}>
                 </TextInput>
@@ -69,14 +71,15 @@ export class Login extends Component {
                     />
                 </View>
                 <View style={styles.btn2}>
-                <Button
-                        onPress={this.handleRegister}
+                    <Button
+                        onPress={() => this.props.navigation.navigate('registration')}
                         title="Register"
                         color="#00B0FF"
                     />
                 </View>
                 <View style={styles.forgot}>
-                    <Text>Forgot Password?</Text>
+                    <Text onPress={() => this.props.navigation.navigate('forgotPassword')}
+                    >Forgot Password?</Text>
                 </View>
             </View>
         )

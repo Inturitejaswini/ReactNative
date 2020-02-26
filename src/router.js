@@ -24,7 +24,7 @@ const AppNavigation=createStackNavigator(
         }
     },
     {
-     initialRouteName:"forgotPassword"
+     initialRouteName:"login"
     }
 )
 export default AppNavigation
