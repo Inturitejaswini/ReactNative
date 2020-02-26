@@ -31,12 +31,14 @@ export class LoginComponent extends Component {
         }
     }
     handleusername = event => {
+        console.warn(event)
         this.setState({ username: event.target.value });
-        console.log("email", this.state.username);
+        console.warn("email", this.state.username);
     };
     handlepassword = event => {
+        console.warn(event)
         this.setState({ password: event.target.value });
-        console.log("password", this.state.password);
+        console.warn("password", this.state.password);
     };
     handleLogin = () => {
         const user = {
@@ -45,9 +47,7 @@ export class LoginComponent extends Component {
         }
         console.log("new user dateils", user);
         Login(user).then(response => {
-            if (response) {
-
-            }
+            console.warn("response coming to userlogin", response)
         }
         )
     }

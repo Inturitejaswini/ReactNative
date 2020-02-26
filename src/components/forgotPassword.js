@@ -56,13 +56,14 @@ export class Forgot extends Component {
                         color="#00B0FF"
                     />
                 </View>
-                <View style={styles.forgotbtn2}>
-                    <Button
+                {/* <View >
+                    <Text
+                        style={styles.forgotbtn2}
                         onPress={() => this.props.navigation.navigate('login')}
                         title="Goback"
                         color="#00B0FF"
                     />
-                </View>
+                </View> */}
             </View>
         )
     }

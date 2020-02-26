@@ -112,7 +112,8 @@ const styles = StyleSheet.create({
     forgotbtn2: {
         width: 200,
         borderRadius: 10,
-        top: 20
+        top: 20,
+        fontSize:3
     }
 });
 export default styles

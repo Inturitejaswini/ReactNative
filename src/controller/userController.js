@@ -6,3 +6,4 @@ export default function register(data){
     console.warn("",data)
     return axios.post('http://fundoonotes.incubation.bridgelabz.com/api/user/userSignUp',data)
     }
+    
