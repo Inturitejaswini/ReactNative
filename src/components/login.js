@@ -14,8 +14,10 @@
 ******************************************************************************/
 
 import React, { Component } from 'react'
-import { View,Text} from 'react-native'
+import { View, Button, Text, Alert } from 'react-native'
+// import Icon from 'react-native-vector-icons/FontAwesome';
 import styles from '../../Css';
+import { TextInput } from 'react-native-gesture-handler';
 export class Login extends Component {
     constructor() {
         super();
@@ -25,10 +27,57 @@ export class Login extends Component {
 
         }
     }
+    handleusername = event => {
+        this.setState({ username: event.target.value });
+        console.log("email", this.state.username);
+    };
+    handlepassword = event => {
+        this.setState({ password: event.target.value });
+        console.log("password", this.state.password);
+    };
+
+    handleLogin = () => {
+        alert("Clicked On Button !!!");
+    };
     render() {
         return (
-            <View>
-                <Text>hai react</Text>
+            <View style={styles.container}>
+                <View>
+                    <Text style={styles.Text}>Member Login</Text>
+                </View>
+                <View>
+
+                </View>
+                <TextInput
+                    value={this.state.username}
+                    onChange={this.handleusername}
+                    placeholder={'Username'}
+                    style={styles.input}>
+                </TextInput>
+                <TextInput
+                    value={this.state.password}
+                    onChange={this.handlepassword}
+                    placeholder={'Password'}
+                    secureTextEntry={true}
+                    style={styles.input}>
+                </TextInput>
+                <View style={styles.btn}>
+                    <Button
+                        onPress={this.handleLogin}
+                        title="Login"
+                        color="#00B0FF"
+                    />
+                </View>
+                <View style={styles.btn2}>
+                <Button
+                        onPress={this.handleLogin}
+                        title="Register"
+                        color="#00B0FF"
+                    />
+                </View>
+                <View style={styles.forgot}>
+                    <Text>Forgot Password?</Text>
+                </View>
             </View>
         )
     }
