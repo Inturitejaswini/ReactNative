@@ -1,17 +1,17 @@
 import {createStackNavigator} from 'react-navigation-stack'
-import Login from './components/login'
-import Register from './components/registration'
+import LoginComponent from './components/login'
+import RegisterComponent from './components/registration'
 import Forgot from './components/forgotPassword'
 const AppNavigation=createStackNavigator(
     {
         login:{
-            screen:Login,
+            screen:LoginComponent,
             navigationOptions:{
                 header:null
             }
         },
         registration:{
-            screen:Register,
+            screen:RegisterComponent,
             navigationOptions:{
                 header:null
             }

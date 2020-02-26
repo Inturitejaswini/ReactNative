@@ -14,11 +14,14 @@
 ******************************************************************************/
 
 import React, { Component } from 'react'
-import { View, Button, Text, Alert } from 'react-native'
+import { View, Button, Text, Alert, Image,Card } from 'react-native'
 // import Icon from 'react-native-vector-icons/FontAwesome';
+// import image from '../assets/avatar.jpeg'
 import styles from '../../Css';
+import Login from '../controller/userController'
+import Icon from 'react-native-vector-icons/FontAwesome';
 import { TextInput } from 'react-native-gesture-handler';
-export class Login extends Component {
+export class LoginComponent extends Component {
     constructor() {
         super();
         this.state = {
@@ -35,20 +38,25 @@ export class Login extends Component {
         this.setState({ password: event.target.value });
         console.log("password", this.state.password);
     };
-    handleForgot = () => {
-
-    }
     handleLogin = () => {
-        alert("Clicked On Button !!!");
-    };
+        const user = {
+            email: this.state.email,
+            password: this.state.password,
+        }
+        console.log("new user dateils", user);
+        Login(user).then(response => {
+            if (response) {
+
+            }
+        }
+        )
+    }
     render() {
         return (
             <View style={styles.container}>
+                {/* <Card style={styles.cardcontainer}> */}
                 <View >
                     <Text style={styles.Text}>Member Login</Text>
-                </View>
-                <View>
-
                 </View>
                 <TextInput
                     value={this.state.username}
@@ -81,8 +89,9 @@ export class Login extends Component {
                     <Text onPress={() => this.props.navigation.navigate('forgotPassword')}
                     >Forgot Password?</Text>
                 </View>
+                {/* </Card> */}
             </View>
         )
     }
 }
-export default Login
+export default LoginComponent
