@@ -42,7 +42,7 @@ export class Login extends Component {
     render() {
         return (
             <View style={styles.container}>
-                <View>
+                <View >
                     <Text style={styles.Text}>Member Login</Text>
                 </View>
                 <View>

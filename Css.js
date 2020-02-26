@@ -17,7 +17,10 @@ const styles = StyleSheet.create({
         borderRadius:8
       },
       Text:{
-          fontSize:30,
+        width:120,
+        borderRadius:10,
+        fontSize:20,
+        marginBottom:30
       },
       btn:{
           width:200,
