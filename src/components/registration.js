@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import { View, Button, Text, Alert } from 'react-native'
-// import Icon from 'react-native-vector-icons/FontAwesome';
 import styles from '../../Css';
 import { TextInput } from 'react-native-gesture-handler';
 export class Register extends Component {
