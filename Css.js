@@ -37,6 +37,40 @@ const styles = StyleSheet.create({
         borderRadius:10,
         top:40,
         
+      },
+      /**
+       * REGISTARTION CSS
+       */
+      registercontainer:{
+        flex: 1,
+        alignItems: 'center',
+        justifyContent: 'center',
+        backgroundColor: '#f5b7b1',
+      },
+      input1: {
+        width: 200,
+        height: 44,
+        padding: 10,
+        borderWidth: 1,
+        borderColor: 'black',
+        marginBottom: 10,
+        borderRadius:8
+      },
+      Text1:{
+        width:70,
+        borderRadius:10,
+        fontSize:20,
+        marginBottom:30
+      },
+      registerbtn:{
+        width:200,
+        borderRadius:10,
+        top:10 
+      },
+      loginbtn:{
+        width:200,
+        borderRadius:10,
+        top:20 
       }
   });
   export default styles
