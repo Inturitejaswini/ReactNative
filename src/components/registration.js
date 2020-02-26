@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { View, Button, Text, Alert } from 'react-native'
 import styles from '../../Css';
 import register from '../controller/userController'
+// import { Card } from 'react-native-elements';
 import { TextInput } from 'react-native-gesture-handler';
 export class RegisterComponent extends Component {
     constructor() {
@@ -15,46 +16,43 @@ export class RegisterComponent extends Component {
         }
     }
     handlefirstname = event => {
-        console.warn(event)
+        // console.warn(event)
         this.setState({ firstname: event});
-        console.log("firstname", this.state.firstname);
+        // console.warn("firstname", this.state.firstname);
     };
     handlelastname = event => {
-        console.warn(event)
+        // console.warn(event)
         this.setState({ lastname: event});
-        console.log("lastname", this.state.lastname);
+        // console.log("lastname", this.state.lastname);
     };
     handlephonenumber = event => {
-        console.warn(event)
+        // console.warn(event)
         this.setState({ phonenumber: event});
-        console.log("phonenumber", this.state.phonenumber);
+        // console.log("phonenumber", this.state.phonenumber);
     };
     handleemail = event => {
-        console.warn(event)
+        // console.warn(event)
         this.setState({ email: event});
-        console.log("email", this.state.email);
+        // console.log("email", this.state.email);
     };
     handlepassword = event => {
-        console.warn(event)
+        // console.warn(event)
         this.setState({ password: event});
-        console.log("password", this.state.password);
+        // console.warn("password", this.state.password);
     };
     handleregister = () => {
         const user = {
-            firstName: this.state.firstName,
-            lastName: this.state.lastName,
-            phonenumber:this.state.phonenumber,
+            firstName: this.state.firstname,
+            lastName: this.state.lastname,
+            phoneNumber:this.state.phonenumber,
             email: this.state.email,
             password: this.state.password,
             service:"basic",
         }
         console.warn("new user datails", user);
         register(user).then((response) => {
-            if(response) {
-                console.log("response coming to user", response)
-            }
+                console.warn("response coming to user", response)
         })
-        //this.props.history.push('/login')
     }
     handleLogin = () => {
         this.props.history.push('./login')
@@ -63,7 +61,7 @@ export class RegisterComponent extends Component {
     render() {
         return (
             <View style={styles.registercontainer}>
-                <Card>
+                 {/* <Card title="Local Modules"> */}
                 <View >
                     <Text style={styles.Text1}>Register</Text>
                 </View>
@@ -103,7 +101,7 @@ export class RegisterComponent extends Component {
                 </TextInput>
                 <View style={styles.registerbtn}>
                     <Button
-                        onPress={this.handleRegister}
+                        onPress={this.handleregister}
                         title="Register"
                         color="#00B0FF"
                     />
@@ -115,7 +113,7 @@ export class RegisterComponent extends Component {
                         color="#00B0FF"
                     />
                 </View>
-                </Card>
+                {/* </Card> */}
             </View>
         )
     }

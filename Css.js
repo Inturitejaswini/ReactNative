@@ -9,8 +9,8 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         backgroundColor: '#d6dbdf',
     },
-    cardcontainer:{
-width:200
+    cardcontainer: {
+        width: 200
     },
     input: {
         width: 200,
@@ -68,7 +68,7 @@ width:200
         width: 70,
         borderRadius: 10,
         fontSize: 20,
-        marginBottom: 30
+        marginBottom: 15
     },
     registerbtn: {
         width: 200,
