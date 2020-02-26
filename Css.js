@@ -1,11 +1,13 @@
 import {StyleSheet} from 'react-native'
 const styles = StyleSheet.create({
-   
+   /**
+    * login css
+    */
     container: {
         flex: 1,
         alignItems: 'center',
         justifyContent: 'center',
-        backgroundColor: '#f5b7b1',
+        backgroundColor: '#d6dbdf',
       },
       input: {
         width: 200,
@@ -45,7 +47,7 @@ const styles = StyleSheet.create({
         flex: 1,
         alignItems: 'center',
         justifyContent: 'center',
-        backgroundColor: '#f5b7b1',
+        backgroundColor: '#d6dbdf',
       },
       input1: {
         width: 200,

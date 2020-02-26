@@ -7,7 +7,7 @@ export class Register extends Component {
     constructor() {
         super();
         this.state = {
-           firstname:'',
+            firstname: '',
         }
     }
     handlefirstname = event => {
@@ -30,12 +30,13 @@ export class Register extends Component {
         this.setState({ password: event.target.value });
         console.log("password", this.state.password);
     };
-handleRegister=()=>{
-
-}
-    // handleLogin = () => {
-    //     alert("Clicked On Button !!!");
-    // };
+    handleRegister = () => {
+        alert("Clicked On Button !!!");
+    }
+    handleLogin = () => {
+        this.props.history.push('./login')
+        alert("Clicked On Button !!!");
+    };
     render() {
         return (
             <View style={styles.registercontainer}>
@@ -76,7 +77,7 @@ handleRegister=()=>{
                     style={styles.input1}>
                 </TextInput>
                 <View style={styles.registerbtn}>
-                <Button
+                    <Button
                         onPress={this.handleRegister}
                         title="Register"
                         color="#00B0FF"
