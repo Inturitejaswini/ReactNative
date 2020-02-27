@@ -32,14 +32,14 @@ export class LoginComponent extends Component {
         }
     }
     handleusername = event => {
-        console.warn(event)
+        // console.warn(event)
         this.setState({ email: event });
-        console.warn("email", this.state.email);
+        // console.warn("email", this.state.email);
     };
     handlepassword = event => {
-        console.warn(event)
+        // console.warn(event)
         this.setState({ password: event });
-        console.warn("password", this.state.password);
+        // console.warn("password", this.state.password);
     };
     handleLogin = () => {
         const user = {

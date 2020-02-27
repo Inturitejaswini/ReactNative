@@ -23,19 +23,23 @@ export class Forgot extends Component {
     constructor() {
         super();
         this.state = {
-            email: '',
-            password: '',
+            newPassword: '',
 
         }
     }
-    handleemail = event => {
-        this.setState({ email: event.target.value });
-        console.log("email", this.state.email);
+    handlenewPassword = event => {
+        this.setState({ newPassword: event});
+        console.log("newPassword", this.state.newPassword);
     };
-   
 
     handleForgot = () => {
-        alert("Clicked On Button !!!");
+        const user = {
+            newPassword:this.state.newPassword
+        }
+        console.warn("new user pasword datails", user);
+        Fotgot(user).then((response) => {
+        console.warn("response coming to forgotpassword", response)
+        })
     };
     render() {
         return (
@@ -45,12 +49,11 @@ export class Forgot extends Component {
                     <Text style={styles.Text3}>ForgotPassword</Text>
                 </View>
                 <TextInput
-                    value={this.state.email}
-                    onChangeText={this.handleemail}
-                    placeholder={'Username'}
+                    value={this.state.newPassword}
+                    onChangeText={this.handlenewPassword}
+                    placeholder={'newPassword'}
                     style={styles.input3}>
                 </TextInput>
-               
                 <View style={styles.forgotbtn1}>
                     <Button
                         onPress={this.handleForgot}
@@ -58,14 +61,6 @@ export class Forgot extends Component {
                         color="#00B0FF"
                     />
                 </View>
-                {/* <View >
-                    <Text
-                        style={styles.forgotbtn2}
-                        onPress={() => this.props.navigation.navigate('login')}
-                        title="Goback"
-                        color="#00B0FF"
-                    />
-                </View> */}
               </Card>
             </View>
         )
