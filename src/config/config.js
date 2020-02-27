@@ -1,4 +1,5 @@
 var configApi={
-registration:"user/userSignUp"
+registration:"user/userSignUp",
+login:"user/login"
 }
 export default configApi

@@ -14,11 +14,12 @@
 ******************************************************************************/
 
 import React, { Component } from 'react'
-import { View, Button, Text, Alert, Image,Card } from 'react-native'
+import { View, Button, Text} from 'react-native'
 // import Icon from 'react-native-vector-icons/FontAwesome';
 // import image from '../assets/avatar.jpeg'
+import {Card} from 'react-native-elements';
 import styles from '../../Css';
-import Login from '../controller/userController'
+import {Login} from '../controller/userController'
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { TextInput } from 'react-native-gesture-handler';
 export class LoginComponent extends Component {
@@ -32,12 +33,12 @@ export class LoginComponent extends Component {
     }
     handleusername = event => {
         console.warn(event)
-        this.setState({ username: event.target.value });
-        console.warn("email", this.state.username);
+        this.setState({ email: event });
+        console.warn("email", this.state.email);
     };
     handlepassword = event => {
         console.warn(event)
-        this.setState({ password: event.target.value });
+        this.setState({ password: event });
         console.warn("password", this.state.password);
     };
     handleLogin = () => {
@@ -54,7 +55,7 @@ export class LoginComponent extends Component {
     render() {
         return (
             <View style={styles.container}>
-                {/* <Card style={styles.cardcontainer}> */}
+                <Card style={styles.cardcontainer}>
                 <View >
                     <Text style={styles.Text}>Member Login</Text>
                 </View>
@@ -89,7 +90,7 @@ export class LoginComponent extends Component {
                     <Text onPress={() => this.props.navigation.navigate('forgotPassword')}
                     >Forgot Password?</Text>
                 </View>
-                {/* </Card> */}
+                </Card>
             </View>
         )
     }

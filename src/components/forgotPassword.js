@@ -16,6 +16,7 @@
 import React, { Component } from 'react'
 import { View, Button, Text, Alert } from 'react-native'
 // import Icon from 'react-native-vector-icons/FontAwesome';
+import { Card } from 'react-native-elements';
 import styles from '../../Css';
 import { TextInput } from 'react-native-gesture-handler';
 export class Forgot extends Component {
@@ -39,6 +40,7 @@ export class Forgot extends Component {
     render() {
         return (
             <View style={styles.forgotcontainer}>
+              <Card style={styles.cardcontainer1}>
                 <View >
                     <Text style={styles.Text3}>ForgotPassword</Text>
                 </View>
@@ -64,6 +66,7 @@ export class Forgot extends Component {
                         color="#00B0FF"
                     />
                 </View> */}
+              </Card>
             </View>
         )
     }

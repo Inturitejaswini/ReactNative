@@ -10,7 +10,8 @@ const styles = StyleSheet.create({
         backgroundColor: '#d6dbdf',
     },
     cardcontainer: {
-        width: 200
+        width: 400,
+        height:90
     },
     input: {
         width: 200,
@@ -25,6 +26,9 @@ const styles = StyleSheet.create({
         width: 120,
         borderRadius: 10,
         fontSize: 20,
+        marginLeft:40,
+        // justifyContent:'center',
+        // alignContent:'space-between',
         marginBottom: 30
     },
     btn: {
@@ -38,10 +42,11 @@ const styles = StyleSheet.create({
         top: 20
     },
     forgot: {
-        width: 110,
+        width: 120,
         borderRadius: 10,
         top: 40,
-
+        marginBottom:30,
+        marginLeft:45
     },
     iconbtn: {
         fontSize: 3
@@ -54,6 +59,10 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         backgroundColor: '#d6dbdf',
+    },
+    cardcontainer1:{
+        width: 400,
+        height:150
     },
     input1: {
         width: 200,
@@ -68,17 +77,20 @@ const styles = StyleSheet.create({
         width: 70,
         borderRadius: 10,
         fontSize: 20,
-        marginBottom: 15
+        // marginBottom: 10,
+        marginLeft:70,
+        marginBottom: 10
+        // marginTop:5
     },
     registerbtn: {
         width: 200,
         borderRadius: 10,
-        top: 10
+        top: 5
     },
     loginbtn: {
         width: 200,
         borderRadius: 10,
-        top: 20
+        top: 12
     },
     /**
      * forgot password css
@@ -107,7 +119,8 @@ const styles = StyleSheet.create({
         width: 130,
         borderRadius: 10,
         fontSize: 20,
-        marginBottom: 30
+        marginBottom: 30,
+        marginLeft:40
     },
     forgotbtn2: {
         width: 200,

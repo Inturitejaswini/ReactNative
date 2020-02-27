@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { View, Button, Text, Alert } from 'react-native'
 import styles from '../../Css';
 import register from '../controller/userController'
-// import { Card } from 'react-native-elements';
+import { Card } from 'react-native-elements';
 import { TextInput } from 'react-native-gesture-handler';
 export class RegisterComponent extends Component {
     constructor() {
@@ -61,7 +61,7 @@ export class RegisterComponent extends Component {
     render() {
         return (
             <View style={styles.registercontainer}>
-                 {/* <Card title="Local Modules"> */}
+             <Card style={styles.cardcontainer1}>
                 <View >
                     <Text style={styles.Text1}>Register</Text>
                 </View>
@@ -92,7 +92,6 @@ export class RegisterComponent extends Component {
                     placeholder={'Email'}
                     style={styles.input1}>
                 </TextInput>
-
                 <TextInput
                     value={this.state.password}
                     onChangeText={this.handlepassword}
@@ -113,7 +112,7 @@ export class RegisterComponent extends Component {
                         color="#00B0FF"
                     />
                 </View>
-                {/* </Card> */}
+                </Card>
             </View>
         )
     }
