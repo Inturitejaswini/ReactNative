@@ -63,7 +63,7 @@ export class RegisterComponent extends Component {
             <View style={styles.registercontainer}>
              <Card style={styles.cardcontainer1}>
                 <View >
-                    <Text style={styles.Text1}>Register</Text>
+                    <Text style={styles.Text1}>Registration</Text>
                 </View>
                 <View>
 

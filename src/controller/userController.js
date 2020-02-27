@@ -12,3 +12,8 @@ export function Login(data){
     return axios.post('http://fundoonotes.incubation.bridgelabz.com/api/user/login',data)
 
 }
+export function Fotgot(data){
+    console.warn("forgetpassword data",data)
+    return axios.post('http://fundoonotes.incubation.bridgelabz.com/api/user/reset-password',data)
+
+}

@@ -74,11 +74,11 @@ const styles = StyleSheet.create({
         borderRadius: 8
     },
     Text1: {
-        width: 70,
+        width: 100,
         borderRadius: 10,
         fontSize: 20,
         // marginBottom: 10,
-        marginLeft:70,
+        marginLeft:55,
         marginBottom: 10
         // marginTop:5
     },

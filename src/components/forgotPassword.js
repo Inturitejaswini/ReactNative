@@ -1,21 +1,22 @@
 /******************************************************************************
-* Execution : 1. default node cmd> node archive.jsx 
-* 2. if nodemon installed cmd> nodemodule archive.jsx
+* Execution : 1. default node cmd> node forgetpassword.js
+* 2. if nodemon installed cmd> nodemodule forgetpassword.js
 * 
-* Purpose : create archive page.
+* Purpose : create forgotpassword page.
 * @description 
 * 
-* @file :archive.jsx
-* @overview :archive form problem.
-* @module :archive - This is optional if expeclictly its an npm or local package
+* @file :forgetpassword.js
+* @overview :forgotpassword form problem.
+* @module :forgotpassword - This is optional if expeclictly its an npm or local package
 * @author :tejaswini<chowdarytejaswini2@gmail.com>
 * @version :1.0
-* @since :-28-01-2020
+* @since :-26-02-2020
 ******************************************************************************/
 
 import React, { Component } from 'react'
 import { View, Button, Text, Alert } from 'react-native'
 // import Icon from 'react-native-vector-icons/FontAwesome';
+import {Fotgot} from '../controller/userController'
 import { Card } from 'react-native-elements';
 import styles from '../../Css';
 import { TextInput } from 'react-native-gesture-handler';
@@ -28,8 +29,9 @@ export class Forgot extends Component {
         }
     }
     handlenewPassword = event => {
+        console.warn(event)
         this.setState({ newPassword: event});
-        console.log("newPassword", this.state.newPassword);
+        console.warn("newPassword", this.state.newPassword);
     };
 
     handleForgot = () => {
