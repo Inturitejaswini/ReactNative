@@ -16,9 +16,11 @@
     "react-native-config": "^0.11.7",
     "react-native-elements": "^1.2.0",
     "react-native-gesture-handler": "^1.4.1",
+    "react-native-paper": "^2.16.0",
     "react-native-screens": "^1.0.0-alpha.22",
+    "react-native-snackbar-component": "^1.1.0",
     "react-native-transition": "^1.1.8",
-    "react-native-vector-icons": "^6.4.1",
+    "react-native-vector-icons": "^6.6.0",
     "react-navigation": "^4.0.0",
     "react-navigation-stack": "^1.2.0"
   },

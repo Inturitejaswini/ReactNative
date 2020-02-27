@@ -20,6 +20,7 @@ import { View, Button, Text} from 'react-native'
 import {Card} from 'react-native-elements';
 import styles from '../../Css';
 import {Login} from '../controller/userController'
+import {Snackbar} from 'react-native-snackbar-component'
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { TextInput } from 'react-native-gesture-handler';
 export class LoginComponent extends Component {
@@ -28,13 +29,23 @@ export class LoginComponent extends Component {
         this.state = {
             email: '',
             password: '',
+            snackbarOpen: false,
+            snackbarMessage: '',
 
         }
     }
+    snackbarClose = (event) => {
+        this.setState({ snackbarOpen: false })
+     }
     handleusername = event => {
+        if (event.match("^([a-zA-Z0-9]+@+[a-zA-Z0-9]+.+[A-z])*$") != null) {
         // console.warn(event)
         this.setState({ email: event });
         // console.warn("email", this.state.email);
+    }
+    else {
+       this.setState({ snackbarOpen: true, snackbarMessage: " *invalid email" })
+    }
     };
     handlepassword = event => {
         // console.warn(event)
@@ -49,6 +60,7 @@ export class LoginComponent extends Component {
         console.log("new user dateils", user);
         Login(user).then(response => {
             console.warn("response coming to userlogin", response)
+            // this.props.navigation.navigate('dashboard')
         }
         )
     }
@@ -59,6 +71,17 @@ export class LoginComponent extends Component {
                 <View >
                     <Text style={styles.Text}>Member Login</Text>
                 </View>
+                <Snackbar
+                     anchorOrigin={{
+                        vertical: 'top',
+                        horizontal: 'center',
+                     }}
+                     open={this.state.snackbarOpen}
+                     autoHideDuration={6000}
+                     onClose={this.snackbarOpen}
+                     message={<span id="messege-id" >
+                        {this.state.snackbarMessage}</span>}>
+                  </Snackbar>
                 <TextInput
                     value={this.state.username}
                     onChangeText={this.handleusername}

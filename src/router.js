@@ -2,6 +2,7 @@ import {createStackNavigator} from 'react-navigation-stack'
 import LoginComponent from './components/login'
 import RegisterComponent from './components/registration'
 import Forgot from './components/forgotPassword'
+import DashBoard from './components/dashboard'
 const AppNavigation=createStackNavigator(
     {
         login:{
@@ -21,10 +22,16 @@ const AppNavigation=createStackNavigator(
             navigationOptions:{
                 header:null
             }
+        },
+        dashboard:{
+            screen:DashBoard,
+            navigationOptions:{
+                header:null
+            }
         }
     },
     {
-     initialRouteName:"login"
+     initialRouteName:"dashboard"
     }
 )
 export default AppNavigation

@@ -127,6 +127,29 @@ const styles = StyleSheet.create({
         borderRadius: 10,
         top: 20,
         fontSize:3
-    }
+    },
+    /**
+     * dashboard component app.css
+     */
+    top: {
+        position: 'absolute',
+        left: 10,
+        right: 10,
+        backgroundColor:'#fbfcfc',
+        borderRadius:10,
+        top:15,
+      },
+      menuitem:{
+          marginLeft:5
+      },
+      keepicon:{
+        marginLeft:5,
+        height:30,
+        width:20
+    
+      },
+      fundooText:{
+        marginLeft:5 
+      }
 });
 export default styles
