@@ -150,6 +150,9 @@ const styles = StyleSheet.create({
       },
       fundooText:{
         marginLeft:5 
+      },
+      searchicon:{
+        marginLeft:30
       }
 });
 export default styles

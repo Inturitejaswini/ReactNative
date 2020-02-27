@@ -20,7 +20,7 @@ import { View, Button, Text} from 'react-native'
 import {Card} from 'react-native-elements';
 import styles from '../../Css';
 import {Login} from '../controller/userController'
-import {Snackbar} from 'react-native-snackbar-component'
+import {Snackbar} from 'react-native-paper'
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { TextInput } from 'react-native-gesture-handler';
 export class LoginComponent extends Component {
@@ -71,17 +71,7 @@ export class LoginComponent extends Component {
                 <View >
                     <Text style={styles.Text}>Member Login</Text>
                 </View>
-                <Snackbar
-                     anchorOrigin={{
-                        vertical: 'top',
-                        horizontal: 'center',
-                     }}
-                     open={this.state.snackbarOpen}
-                     autoHideDuration={6000}
-                     onClose={this.snackbarOpen}
-                     message={<span id="messege-id" >
-                        {this.state.snackbarMessage}</span>}>
-                  </Snackbar>
+          
                 <TextInput
                     value={this.state.username}
                     onChangeText={this.handleusername}
@@ -113,6 +103,17 @@ export class LoginComponent extends Component {
                     <Text onPress={() => this.props.navigation.navigate('forgotPassword')}
                     >Forgot Password?</Text>
                 </View>
+                <Snackbar
+                     anchorOrigin={{
+                        vertical: 'top',
+                        horizontal: 'center',
+                     }}
+                     open={this.state.snackbarOpen}
+                     autoHideDuration={6000}
+                     onClose={this.snackbarOpen}
+                     message={<span id="messege-id" >
+                        {this.state.snackbarMessage}</span>}>
+                  </Snackbar>
                 </Card>
             </View>
         )

@@ -31,7 +31,7 @@ const AppNavigation=createStackNavigator(
         }
     },
     {
-     initialRouteName:"dashboard"
+     initialRouteName:"login"
     }
 )
 export default AppNavigation

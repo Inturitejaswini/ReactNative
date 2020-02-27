@@ -33,7 +33,9 @@ export class DashBoard extends React.Component {
                     <View>
                         <Text style={styles.fundooText}>FundooNote</Text>
                     </View>
-                    
+                    <View style={styles.searchicon}>
+                        <Image source={require("../assets/search.png")}></Image>
+                    </View>
                 </Appbar>
             </View>
         );
