@@ -19,6 +19,7 @@ import { View, Button, Text} from 'react-native'
 // import image from '../assets/avatar.jpeg'
 import {Card} from 'react-native-elements';
 import styles from '../../Css';
+import { Image } from 'react-native';
 import {Login} from '../controller/userController'
 import {Snackbar} from 'react-native-paper'
 import Icon from 'react-native-vector-icons/FontAwesome';
@@ -29,28 +30,22 @@ export class LoginComponent extends Component {
         this.state = {
             email: '',
             password: '',
-            snackbarOpen: false,
-            snackbarMessage: '',
+           
 
         }
     }
-    snackbarClose = (event) => {
-        this.setState({ snackbarOpen: false })
-     }
+   
     handleusername = event => {
-        if (event.match("^([a-zA-Z0-9]+@+[a-zA-Z0-9]+.+[A-z])*$") != null) {
         // console.warn(event)
         this.setState({ email: event });
         // console.warn("email", this.state.email);
-    }
-    else {
-       this.setState({ snackbarOpen: true, snackbarMessage: " *invalid email" })
-    }
+  
     };
     handlepassword = event => {
         // console.warn(event)
         this.setState({ password: event });
-        // console.warn("password", this.state.password);
+    //     // console.warn("password", this.state.password);
+   
     };
     handleLogin = () => {
         const user = {
@@ -71,7 +66,10 @@ export class LoginComponent extends Component {
                 <View >
                     <Text style={styles.Text}>Member Login</Text>
                 </View>
-          
+                <View >
+                   <Image source={require("../assets/account.png")}
+                   style={styles.accounticon1}></Image>
+                 </View>
                 <TextInput
                     value={this.state.username}
                     onChangeText={this.handleusername}
@@ -103,17 +101,6 @@ export class LoginComponent extends Component {
                     <Text onPress={() => this.props.navigation.navigate('forgotPassword')}
                     >Forgot Password?</Text>
                 </View>
-                <Snackbar
-                     anchorOrigin={{
-                        vertical: 'top',
-                        horizontal: 'center',
-                     }}
-                     open={this.state.snackbarOpen}
-                     autoHideDuration={6000}
-                     onClose={this.snackbarOpen}
-                     message={<span id="messege-id" >
-                        {this.state.snackbarMessage}</span>}>
-                  </Snackbar>
                 </Card>
             </View>
         )

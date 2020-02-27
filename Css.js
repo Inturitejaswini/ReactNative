@@ -51,6 +51,14 @@ const styles = StyleSheet.create({
     iconbtn: {
         fontSize: 3
     },
+    accounticon1:{
+        marginLeft:80,
+        width:40,
+        height:40,
+        marginTop:-20,
+        marginBottom:10,
+
+    },
     /**
      * REGISTARTION CSS
      */
@@ -153,6 +161,15 @@ const styles = StyleSheet.create({
       },
       searchicon:{
         marginLeft:30
-      }
+      },
+      gridicon:{
+        marginLeft:30
+      },
+      accounticon:{
+        marginLeft:50,
+        width:40,
+        height:40
+      },
+     
 });
 export default styles

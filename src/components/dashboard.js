@@ -19,7 +19,9 @@ import Icon from 'react-native-vector-icons/Entypo';
 // import image from '../assets/menu'
 import { View, Text } from 'react-native';
 import { Image } from 'react-native';
+import { TextInput } from 'react-native-gesture-handler';
 export class DashBoard extends React.Component {
+    
     render() {
         return (
             <View>
@@ -33,8 +35,14 @@ export class DashBoard extends React.Component {
                     <View>
                         <Text style={styles.fundooText}>FundooNote</Text>
                     </View>
-                    <View style={styles.searchicon}>
+                    <View style={styles.searchicon} >
                         <Image source={require("../assets/search.png")}></Image>
+                    </View>
+                    <View style={styles.gridicon}>
+                        <Image source={require("../assets/grid.png")}></Image>
+                    </View>
+                    <View >
+                        <Image source={require("../assets/account.png")} style={styles.accounticon}></Image>
                     </View>
                 </Appbar>
             </View>

@@ -3,48 +3,56 @@ import { View, Button, Text, Alert } from 'react-native'
 import styles from '../../Css';
 import register from '../controller/userController'
 import { Card } from 'react-native-elements';
+import {Snackbar} from 'react-native-paper'
 import { TextInput } from 'react-native-gesture-handler';
 export class RegisterComponent extends Component {
     constructor() {
         super();
         this.state = {
-            firstname: '',
-            lastname: '',
-            phonenumber: '',
+            firstName: '',
+            lastName: '',
+            phoneNumber: '',
             email: '',
-            password: '',
+             password: '',
+       
         }
     }
-    handlefirstname = event => {
+   x
+    handlefirstName = event => {
         // console.warn(event)
-        this.setState({ firstname: event});
+        this.setState({ firstName: event});
         // console.warn("firstname", this.state.firstname);
+    
     };
-    handlelastname = event => {
+    handlelastName = event => {
         // console.warn(event)
-        this.setState({ lastname: event});
+        this.setState({ lastName: event});
         // console.log("lastname", this.state.lastname);
+   
     };
-    handlephonenumber = event => {
+    handlephoneNumber = event => {
         // console.warn(event)
-        this.setState({ phonenumber: event});
+        this.setState({ phoneNumber: event});
         // console.log("phonenumber", this.state.phonenumber);
+  
     };
     handleemail = event => {
         // console.warn(event)
         this.setState({ email: event});
         // console.log("email", this.state.email);
+   
     };
     handlepassword = event => {
         // console.warn(event)
         this.setState({ password: event});
         // console.warn("password", this.state.password);
+   
     };
     handleregister = () => {
         const user = {
-            firstName: this.state.firstname,
-            lastName: this.state.lastname,
-            phoneNumber:this.state.phonenumber,
+            firstName: this.state.firstName,
+            lastName: this.state.lastName,
+            phoneNumber:this.state.phoneNumber,
             email: this.state.email,
             password: this.state.password,
             service:"basic",
@@ -68,21 +76,32 @@ export class RegisterComponent extends Component {
                 <View>
 
                 </View>
+                <Snackbar
+                     anchorOrigin={{
+                        vertical: 'top',
+                        horizontal: 'center',
+                     }}
+                     open={this.state.snackbarOpen}
+                     autoHideDuration={6000}
+                     onClose={this.snackbarOpen}
+                     message={<span id="messege-id" >
+                        {this.state.snackbarMessage}</span>}>
+                  </Snackbar>
                 <TextInput
-                    value={this.state.firstname}
-                    onChangeText={this.handlefirstname}
+                    value={this.state.firstName}
+                    onChangeText={this.handlefirstName}
                     placeholder={'Firstname'}
                     style={styles.input1}>
                 </TextInput>
                 <TextInput
-                    value={this.state.lastname}
-                    onChangeText={this.handlelastname}
+                    value={this.state.lastName}
+                    onChangeText={this.handlelastName}
                     placeholder={'Lastname'}
                     style={styles.input1}>
                 </TextInput>
                 <TextInput
-                    value={this.state.phonenumber}
-                    onChangeText={this.handlephonenumber}
+                    value={this.state.phoneNumber}
+                    onChangeText={this.handlephoneNumber}
                     placeholder={'Phonenumber'}
                     style={styles.input1}>
                 </TextInput>
