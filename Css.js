@@ -27,8 +27,6 @@ const styles = StyleSheet.create({
         borderRadius: 10,
         fontSize: 20,
         marginLeft:40,
-        // justifyContent:'center',
-        // alignContent:'space-between',
         marginBottom: 30
     },
     btn: {
@@ -85,10 +83,8 @@ const styles = StyleSheet.create({
         width: 100,
         borderRadius: 10,
         fontSize: 20,
-        // marginBottom: 10,
         marginLeft:55,
         marginBottom: 10
-        // marginTop:5
     },
     registerbtn: {
         width: 200,
@@ -170,6 +166,11 @@ const styles = StyleSheet.create({
         width:40,
         height:40
       },
+    //   accounticon:{
+    //     marginLeft:50,
+    //     width:40,
+    //     height:40
+    //   },
      
 });
 export default styles
