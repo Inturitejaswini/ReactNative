@@ -41,19 +41,19 @@ export class DashBoard extends React.Component {
                         {/* </TouchableOpacity> */}
                     </View>
                     <View >
-                        <Image source={require("../assets/keep.png")} style={styles.keepicon}></Image>
+                        <Image source={require("../assets/keepicon.png")} style={styles.keepicon}></Image>
                     </View>
                     <View>
                         <Text style={styles.fundooText}>FundooNote</Text>
                     </View>
                     <View style={styles.searchicon} >
-                        <Image source={require("../assets/search.png")}></Image>
+                        <Image source={require("../assets/searchicon.png")}></Image>
                     </View>
                     <View style={styles.gridicon}>
-                        <Image source={require("../assets/gridicon.png")}></Image>
+                        <Image source={require("../assets/gridiconicon.png")}></Image>
                     </View>
                     <View >
-                        <Image source={require("../assets/account.png")} style={styles.accounticon}></Image>
+                        <Image source={require("../assets/accounticon.png")} style={styles.accounticon}></Image>
                     </View>
                 </Appbar>
             </View>
