@@ -56,3 +56,5 @@ target 'fundoonote-tvOS' do
   end
 
 end
+# target 'fundoonote-tvOS' do
+#   # Pods for fundoonote-tvOS
