@@ -6,7 +6,7 @@
  * @flow
  */
 
-import styles from './Css'
+// import styles from './src/Css'
 import React, { Component } from 'react';
 import { createAppContainer } from 'react-navigation';
 import AppNavigation from './src/router'
@@ -20,4 +20,4 @@ class App extends Component {
 }
 
 
-export default App;
+export default AppContainer;

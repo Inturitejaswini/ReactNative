@@ -14,18 +14,15 @@
  ******************************************************************************/
 import * as React from 'react';
 import { Appbar } from 'react-native-paper';
-import styles from '../../Css';
-import Icon from 'react-native-vector-icons/Entypo';
-// import image from '../assets/menu'
+import styles from '../Css';
 // import { DrawerActions } from 'react-navigation-drawer';
-import { View, Text,TouchableOpacity } from 'react-native';
-import { Image } from 'react-native';
-import { TextInput, TouchableOpacity } from 'react-native-gesture-handler';
+import { View, Text } from 'react-native';
+import {Image} from 'react-native'
 export class DashBoard extends React.Component {
     constructor() {
         super();
         this.state = {
-            openDrawer: false,
+            // openDrawer: false,
         }
     }
     // openDrawer=()=>{
@@ -36,9 +33,7 @@ export class DashBoard extends React.Component {
             <View>
                 <Appbar style={styles.top}>
                     <View style={styles.menuitem}>
-                        {/* <TouchableOpacity onPress={this.props.navigation.dispatch(DrawerActions.openDrawer())}> */}
-                            <Image source={require("../assets/menu.png")}> </Image>
-                        {/* </TouchableOpacity> */}
+                        <Image source={require("../assets/menuicon.png")}></Image>
                     </View>
                     <View >
                         <Image source={require("../assets/keepicon.png")} style={styles.keepicon}></Image>
@@ -46,11 +41,11 @@ export class DashBoard extends React.Component {
                     <View>
                         <Text style={styles.fundooText}>FundooNote</Text>
                     </View>
-                    <View style={styles.searchicon} >
+                    <View style={styles.searchicon}>
                         <Image source={require("../assets/searchicon.png")}></Image>
                     </View>
                     <View style={styles.gridicon}>
-                        <Image source={require("../assets/gridiconicon.png")}></Image>
+                        <Image source={require("../assets/gridicon.png")}></Image>
                     </View>
                     <View >
                         <Image source={require("../assets/accounticon.png")} style={styles.accounticon}></Image>

@@ -4,7 +4,7 @@ import RegisterComponent from './components/registration'
 import Forget from './components/forgetPassword'
 import DashBoard from './components/dashboard'
 // import DrawerComponent from './components/drawerComponent'
-import { Drawer } from 'react-native-paper'
+// import { Drawer } from 'react-native-paper'
 const AppNavigation=createStackNavigator(
     {
         login:{
@@ -31,12 +31,6 @@ const AppNavigation=createStackNavigator(
                 header:null
             }
         },
-        // drawerComponent:{
-        //     screen:Drawer,
-        //     navigationOptions:{
-        //         header:null
-        //     }
-        // },
     },
     {
      initialRouteName:"dashboard"

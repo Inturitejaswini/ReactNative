@@ -1,26 +1,24 @@
 /******************************************************************************
-* Execution : 1. default node cmd> node archive.jsx 
-* 2. if nodemon installed cmd> nodemodule archive.jsx
+* Execution : 1. default node cmd> node login.js
+* 2. if nodemon installed cmd> nodemodule login.js
 * 
-* Purpose : create archive page.
+* Purpose : create login page.
 * @description 
 * 
-* @file :archive.jsx
-* @overview :archive form problem.
-* @module :archive - This is optional if expeclictly its an npm or local package
+* @file :login
+* @overview :login form problem.
+* @module :login - This is optional if expeclictly its an npm or local package
 * @author :tejaswini<chowdarytejaswini2@gmail.com>
 * @version :1.0
-* @since :-28-01-2020
+* @since :-23-02-2020
 ******************************************************************************/
 
 import React, { Component } from 'react'
 import { View, Button, Text } from 'react-native'
-// import Icon from 'react-native-vector-icons/FontAwesome';
-// import image from '../assets/avatar.jpeg'
 import { Card } from 'react-native-elements';
-import styles from '../../Css';
+import styles from '../Css';
 import { Image } from 'react-native';
-import { Login } from '../controller/userController'
+import { Login } from '../services/userServices'
 import { Snackbar } from 'react-native-paper'
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { TextInput } from 'react-native-gesture-handler';
@@ -77,7 +75,7 @@ export class LoginComponent extends Component {
                         <Text style={styles.Text}>Member Login</Text>
                     </View>
                     <View >
-                        <Image source={require("../assets/account.png")}
+                        <Image source={require("../assets/accounticon.png")}
                             style={styles.accounticon1}></Image>
                     </View>
                     <Snackbar

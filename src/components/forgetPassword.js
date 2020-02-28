@@ -16,9 +16,9 @@
 import React, { Component } from 'react'
 import { View, Button, Text, Alert } from 'react-native'
 // import Icon from 'react-native-vector-icons/FontAwesome';
-import {Fotgot} from '../controller/userController'
+import {Fotget} from '../services/userServices'
 import { Card } from 'react-native-elements';
-import styles from '../../Css';
+import styles from '../Css';
 import { TextInput } from 'react-native-gesture-handler';
 export class Forgot extends Component {
     constructor() {
@@ -39,7 +39,7 @@ export class Forgot extends Component {
             newPassword:this.state.newPassword
         }
         console.warn("new user pasword datails", user);
-        Fotgot(user).then((response) => {
+        Fotget(user).then((response) => {
         console.warn("response coming to forgotpassword", response)
         })
     };
