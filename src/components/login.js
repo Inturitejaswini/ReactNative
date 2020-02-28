@@ -14,14 +14,14 @@
 ******************************************************************************/
 
 import React, { Component } from 'react'
-import { View, Button, Text} from 'react-native'
+import { View, Button, Text } from 'react-native'
 // import Icon from 'react-native-vector-icons/FontAwesome';
 // import image from '../assets/avatar.jpeg'
-import {Card} from 'react-native-elements';
+import { Card } from 'react-native-elements';
 import styles from '../../Css';
 import { Image } from 'react-native';
-import {Login} from '../controller/userController'
-import {Snackbar} from 'react-native-paper'
+import { Login } from '../controller/userController'
+import { Snackbar } from 'react-native-paper'
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { TextInput } from 'react-native-gesture-handler';
 export class LoginComponent extends Component {
@@ -30,22 +30,32 @@ export class LoginComponent extends Component {
         this.state = {
             email: '',
             password: '',
-           
-
+            snackbarOpen: false,
+            snackbarMessage: '',
         }
     }
-   
-    handleusername = event => {
+    snackbarClose = (event) => {
+        this.setState({ snackbarOpen: false })
+     }
+    handleusername = async (event) => {
         // console.warn(event)
-        this.setState({ email: event });
+        if (event.match("^([a-zA-Z0-9]+@+[a-zA-Z0-9]+.+[A-z])*$") != null) {
+        await this.setState({ email: event });
         // console.warn("email", this.state.email);
-  
+    }
+    else {
+       await this.setState({ snackbarOpen: true, snackbarMessage: " *enter valid email" })
+    }
     };
-    handlepassword = event => {
+    handlepassword = async (event) => {
         // console.warn(event)
-        this.setState({ password: event });
-    //     // console.warn("password", this.state.password);
-   
+        if (event.match("^[0-9 ]*$") != null) {
+       await this.setState({ password: event });
+        //     // console.warn("password", this.state.password);
+    }
+    else {
+      await this.setState({ snackbarOpen: true, snackbarMessage: " *password should minimum 6 character" })
+    }
     };
     handleLogin = () => {
         const user = {
@@ -55,7 +65,7 @@ export class LoginComponent extends Component {
         console.log("new user dateils", user);
         Login(user).then(response => {
             console.warn("response coming to userlogin", response)
-            // this.props.navigation.navigate('dashboard')
+            this.props.navigation.navigate('dashboard')
         }
         )
     }
@@ -63,44 +73,48 @@ export class LoginComponent extends Component {
         return (
             <View style={styles.container}>
                 <Card style={styles.cardcontainer}>
-                <View >
-                    <Text style={styles.Text}>Member Login</Text>
-                </View>
-                <View >
-                   <Image source={require("../assets/account.png")}
-                   style={styles.accounticon1}></Image>
-                 </View>
-                <TextInput
-                    value={this.state.username}
-                    onChangeText={this.handleusername}
-                    placeholder={'Username'}
-                    style={styles.input}>
-                </TextInput>
-                <TextInput
-                    value={this.state.password}
-                    onChangeText={this.handlepassword}
-                    placeholder={'Password'}
-                    secureTextEntry={true}
-                    style={styles.input}>
-                </TextInput>
-                <View style={styles.btn}>
-                    <Button
-                        onPress={this.handleLogin}
-                        title="Login"
-                        color="#00B0FF"
-                    />
-                </View>
-                <View style={styles.btn2}>
-                    <Button
-                        onPress={() => this.props.navigation.navigate('registration')}
-                        title="Register"
-                        color="#00B0FF"
-                    />
-                </View>
-                <View style={styles.forgot}>
-                    <Text onPress={() => this.props.navigation.navigate('forgotPassword')}
-                    >Forgot Password?</Text>
-                </View>
+                    <View >
+                        <Text style={styles.Text}>Member Login</Text>
+                    </View>
+                    <View >
+                        <Image source={require("../assets/account.png")}
+                            style={styles.accounticon1}></Image>
+                    </View>
+                    <Snackbar
+                     visible={this.state.snackbarOpen}>
+                        {this.state.snackbarMessage}
+                  </Snackbar>
+                    <TextInput
+                        value={this.state.username}
+                        onChangeText={this.handleusername}
+                        placeholder={'Username'}
+                        style={styles.input}>
+                    </TextInput>
+                    <TextInput
+                        value={this.state.password}
+                        onChangeText={this.handlepassword}
+                        placeholder={'Password'}
+                        secureTextEntry={true}
+                        style={styles.input}>
+                    </TextInput>
+                    <View style={styles.btn}>
+                        <Button
+                            onPress={this.handleLogin}
+                            title="Login"
+                            color="#00B0FF"
+                        />
+                    </View>
+                    <View style={styles.btn2}>
+                        <Button
+                            onPress={() => this.props.navigation.navigate('registration')}
+                            title="Register"
+                            color="#00B0FF"
+                        />
+                    </View>
+                    <View style={styles.forgot}>
+                        <Text onPress={() => this.props.navigation.navigate('forgotPassword')}
+                        >Forgot Password?</Text>
+                    </View>
                 </Card>
             </View>
         )

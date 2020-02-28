@@ -17,17 +17,24 @@ import { Appbar } from 'react-native-paper';
 import styles from '../../Css';
 import Icon from 'react-native-vector-icons/Entypo';
 // import image from '../assets/menu'
+import { DrawerActions } from 'react-navigation-drawer';
 import { View, Text } from 'react-native';
 import { Image } from 'react-native';
 import { TextInput } from 'react-native-gesture-handler';
 export class DashBoard extends React.Component {
-    
+    constructor() {
+        super();
+        this.state = {
+          openDrawer:false,
+        }
+    }
     render() {
         return (
             <View>
                 <Appbar style={styles.top}>
                     <View style={styles.menuitem}>
-                        <Image source={require("../assets/menu.png")}></Image>
+                        <Image source={require("../assets/menu.png")}
+                        onPress={this.props.navigation.dispatch(DrawerActions.openDrawer())}></Image>
                     </View>
                     <View >
                         <Image source={require("../assets/keep.png")} style={styles.keepicon}></Image>

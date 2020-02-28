@@ -114,6 +114,7 @@ export class RegisterComponent extends Component {
                 <TextInput
                     value={this.state.password}
                     onChangeText={this.handlepassword}
+                    secureTextEntry={true}
                     placeholder={'Password'}
                     style={styles.input1}>
                 </TextInput>

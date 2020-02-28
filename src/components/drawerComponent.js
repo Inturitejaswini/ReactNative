@@ -13,29 +13,7 @@
  *  @since          :16-1-2019
  ******************************************************************************/
 import React, { Component } from 'react';
-import { Drawer } from 'react-navigation-drawer';
-import { createDrawerNavigator } from '@react-navigation/drawer';
-const Drawer = createDrawerNavigator();
-class DrawerComponent extends Component {
-    constructor(props) {
-        super(props)
-        this.state = {
+const Drawer = createDrawerNavigator({
 
-        }
-    }
-
-    render() {
-        return (
-            <View >
-                <NavigationContainer>
-                    <Drawer >
-                        hai
-                    </Drawer>
-                </NavigationContainer>
-            </View>
-        )
-    }
-
-
-}
-export default DrawerComponent
+})
+export default createAppContainer(Drawer);

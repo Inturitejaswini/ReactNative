@@ -3,6 +3,8 @@ import LoginComponent from './components/login'
 import RegisterComponent from './components/registration'
 import Forgot from './components/forgotPassword'
 import DashBoard from './components/dashboard'
+// import DrawerComponent from './components/drawerComponent'
+import { Drawer } from 'react-native-paper'
 const AppNavigation=createStackNavigator(
     {
         login:{
@@ -28,10 +30,16 @@ const AppNavigation=createStackNavigator(
             navigationOptions:{
                 header:null
             }
-        }
+        },
+        drawerComponent:{
+            screen:Drawer,
+            navigationOptions:{
+                header:null
+            }
+        },
     },
     {
-     initialRouteName:"login"
+     initialRouteName:"dashboard"
     }
 )
 export default AppNavigation
