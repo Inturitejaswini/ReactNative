@@ -754,6 +754,7 @@
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
+			
 		};
 		83CBBA211A601CBA00E9B192 /* Release */ = {
 			isa = XCBuildConfiguration;
@@ -803,6 +804,9 @@
 		};
 /* End XCBuildConfiguration section */
 
+
+
+
 /* Begin XCConfigurationList section */
 		00E357021AD99517003FC87E /* Build configuration list for PBXNativeTarget "fundoonoteTests" */ = {
 			isa = XCConfigurationList;
@@ -849,7 +853,10 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
+
+
 /* End XCConfigurationList section */
 	};
 	rootObject = 83CBB9F71A601CBA00E9B192 /* Project object */;
 }
+
