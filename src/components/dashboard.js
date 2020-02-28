@@ -10,31 +10,35 @@
  *  @module         :dashBoard - This is optional if expeclictly its an npm or local package
  *  @author         :Tejaswini<chowdarytejaswini2@gmail.com>
  *  @version        :1.0
- *  @since          :14-1-2019
+ *  @since          :24-0-2020
  ******************************************************************************/
 import * as React from 'react';
 import { Appbar } from 'react-native-paper';
 import styles from '../../Css';
 import Icon from 'react-native-vector-icons/Entypo';
 // import image from '../assets/menu'
-import { DrawerActions } from 'react-navigation-drawer';
-import { View, Text } from 'react-native';
+// import { DrawerActions } from 'react-navigation-drawer';
+import { View, Text,TouchableOpacity } from 'react-native';
 import { Image } from 'react-native';
-import { TextInput } from 'react-native-gesture-handler';
+import { TextInput, TouchableOpacity } from 'react-native-gesture-handler';
 export class DashBoard extends React.Component {
     constructor() {
         super();
         this.state = {
-          openDrawer:false,
+            openDrawer: false,
         }
     }
+    // openDrawer=()=>{
+    //     this.setState({openDrawer:!this.state.openDrawer})
+    // }
     render() {
         return (
             <View>
                 <Appbar style={styles.top}>
                     <View style={styles.menuitem}>
-                        <Image source={require("../assets/menu.png")}
-                        onPress={this.props.navigation.dispatch(DrawerActions.openDrawer())}></Image>
+                        {/* <TouchableOpacity onPress={this.props.navigation.dispatch(DrawerActions.openDrawer())}> */}
+                            <Image source={require("../assets/menu.png")}> </Image>
+                        {/* </TouchableOpacity> */}
                     </View>
                     <View >
                         <Image source={require("../assets/keep.png")} style={styles.keepicon}></Image>
@@ -46,7 +50,7 @@ export class DashBoard extends React.Component {
                         <Image source={require("../assets/search.png")}></Image>
                     </View>
                     <View style={styles.gridicon}>
-                        <Image source={require("../assets/grid.png")}></Image>
+                        <Image source={require("../assets/gridicon.png")}></Image>
                     </View>
                     <View >
                         <Image source={require("../assets/account.png")} style={styles.accounticon}></Image>

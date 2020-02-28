@@ -1,6 +1,9 @@
-var configApi={
+ 
+ 
+ 
+ var configApi={
 registration:"user/userSignUp",
 login:"user/login",
-forgotPassword:"user/reset-password"
+forgetPassword:"user/reset-password"
 }
 export default configApi
