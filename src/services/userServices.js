@@ -1,5 +1,5 @@
 import axios from 'react-native-axios'
-import configApi from '../config/config'
+import configApi from '../constants/userApiConstants'
 // require ('dotenv').config()
 const baseUrl  = process.env.BASE_URL
 
