@@ -41,6 +41,8 @@ target 'fundoonote' do
 
   pod 'react-native-config', :path => '../node_modules/react-native-config'
 
+  pod 'RNReanimated', :path => '../node_modules/react-native-reanimated'
+
   target 'fundoonoteTests' do
     inherit! :search_paths
     # Pods for testing

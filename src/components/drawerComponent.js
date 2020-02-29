@@ -14,9 +14,11 @@
  ******************************************************************************/
 import React, { Component } from 'react';
 import createDrawerNavigator from 'react-navigation-drawer'
+import DashBoard from'../components/dashboard';
 const Drawer = createDrawerNavigator({
-    notes:{
-     screen:dashboard
+    DashBoard:{
+     screen: DashBoard
+
  }
 })
 

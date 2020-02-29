@@ -15,25 +15,30 @@
 import * as React from 'react';
 import { Appbar } from 'react-native-paper';
 import styles from '../Css';
-// import { DrawerActions } from 'react-navigation-drawer';
-import { View, Text } from 'react-native';
+import { DrawerActions } from 'react-navigation-drawer';
+import { View, Text,TouchableOpacity} from 'react-native';
 import {Image} from 'react-native'
+import Drawer from '../components/drawerComponent'
+// import { TouchableOpacity } from 'react-native-gesture-handler';
 export class DashBoard extends React.Component {
     constructor() {
         super();
         this.state = {
-            // openDrawer: false,
+            openDrawer: false,
         }
     }
-    // openDrawer=()=>{
-    //     this.setState({openDrawer:!this.state.openDrawer})
-    // }
+    DrawerOpen=()=>{
+        this.setState({openDrawer:!this.state.openDrawer})
+    }
     render() {
         return (
             <View>
                 <Appbar style={styles.top}>
                     <View style={styles.menuitem}>
-                        <Image source={require("../assets/menuicon.png")}></Image>
+                        <TouchableOpacity >
+                        <Image source={require("../assets/menuicon.png")}
+                        onPress={()=>this.props.navigation.dispatch(DrawerActions.openDrawer())}></Image>
+                        </TouchableOpacity>
                     </View>
                     <View >
                         <Image source={require("../assets/keepicon.png")} style={styles.keepicon}></Image>
@@ -50,6 +55,7 @@ export class DashBoard extends React.Component {
                     <View >
                         <Image source={require("../assets/accounticon.png")} style={styles.accounticon}></Image>
                     </View>
+                {/* {<Drawer  openDrawer={this.state.openDrawer}></Drawer>} */}
                 </Appbar>
             </View>
         );
