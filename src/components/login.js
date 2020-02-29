@@ -14,13 +14,12 @@
 ******************************************************************************/
 
 import React, { Component } from 'react'
-import { View, Button, Text } from 'react-native'
+import { View, Button, Text ,Alert} from 'react-native'
 import { Card } from 'react-native-elements';
 import styles from '../Css';
 import { Image } from 'react-native';
 import { Login } from '../services/userServices'
 import { Snackbar } from 'react-native-paper'
-import Icon from 'react-native-vector-icons/FontAwesome';
 import { TextInput } from 'react-native-gesture-handler';
 export class LoginComponent extends Component {
     constructor() {
@@ -28,9 +27,9 @@ export class LoginComponent extends Component {
         this.state = {
             email: '',
             password: '',
-            snackbarOpen: false,
-            snackbarMessage: '',
-            visible: false,
+            // snackbarOpen: false,
+            // snackbarMessage: '',
+            snackIsVisible:false,
         }
     }
     snackbarClose = (event) => {
@@ -38,25 +37,35 @@ export class LoginComponent extends Component {
      }
     handleusername = async (event) => {
         // console.warn(event)
-        if (event.match("^([a-zA-Z0-9]+@+[a-zA-Z0-9]+.+[A-z])*$") != null) {
+        // if (event.match("^([a-zA-Z0-9]+@+[a-zA-Z0-9]+.+[A-z])*$") != null) {
         await this.setState({ email: event });
         // console.warn("email", this.state.email);
-    }
-    else {
-       await this.setState({ snackbarOpen: true, snackbarMessage: " *enter valid email" })
-    }
+    // }
+    // else {
+    //    await this.setState({ snackbarOpen: true, snackbarMessage: " *enter valid email" })
+    // }
     };
     handlepassword = async (event) => {
         // console.warn(event)
-        if (event.match("^[0-9 ]*$") != null) {
+        // if (event.match("^[0-9 ]*$") != null) {
        await this.setState({ password: event });
         //     // console.warn("password", this.state.password);
-    }
-    else {
-      await this.setState({ snackbarOpen: true, snackbarMessage: " *password should minimum 6 character" })
-    }
+    // }
+    // else {
+    //   await this.setState({ snackbarOpen: true, snackbarMessage: " *password should minimum 6 character" })
+    // }
     };
-    handleLogin = () => {
+    handleLogin = async () => {
+        // User(this.state.email);
+        if(this.state.email === ""){
+            this.setState({
+                snackIsVisible:!this.state.snackIsVisible
+            });
+        }else if(this.state.password === ""){
+            this.setState({
+                snackIsVisible:!this.state.snackIsVisible
+            });
+        }else {
         const user = {
             email: this.state.email,
             password: this.state.password,
@@ -64,10 +73,11 @@ export class LoginComponent extends Component {
         console.log("new user dateils", user);
         Login(user).then(response => {
             console.warn("response coming to userlogin", response)
-            // this.props.navigation.navigate('dashboard')
+            this.props.navigation.navigate('dashboard')
         }
         )
     }
+}
     render() {
         return (
             <View style={styles.container}>
@@ -79,10 +89,10 @@ export class LoginComponent extends Component {
                         <Image source={require("../assets/accounticon.png")}
                             style={styles.accounticon1}></Image>
                     </View>
-                    <Snackbar
+                    {/* <Snackbar
                      visible={this.state.snackbarOpen}>
                         {this.state.snackbarMessage}
-                  </Snackbar>
+                  </Snackbar> */}
                     <TextInput
                         value={this.state.username}
                         onChangeText={this.handleusername}
@@ -114,6 +124,26 @@ export class LoginComponent extends Component {
                         <Text onPress={() => this.props.navigation.navigate('forgetPassword')}
                         >Forgot Password?</Text>
                     </View>
+                    <Snackbar 
+                    visible={this.state.snackIsVisible}
+                   //snackbar visibility controlle
+                    textMessage="enter the requirements"
+                    //text on snackbar
+                    actionHandler={()=>{
+                        //function called while clicking on action text
+                        alert("fill the correct email and password");
+                      //  after handling click making snackbar invisible
+                        this.setState({
+                            snackIsVisible:!this.state.snackIsVisible
+                        });
+                    }}
+                    actionText="lets go"
+                    //action text will be print on snackbar
+                    distanceCallback={distance=>{
+                        //number indicating distance taken up by snackbar
+                        this.setState({distance:distance});
+                    }}>
+                    </Snackbar>
                 </Card>
             </View>
         )
