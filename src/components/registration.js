@@ -95,7 +95,7 @@ export class RegisterComponent extends Component {
             password: this.state.password,
             service: "advance",
         }
-        console.warn("new user datails", user);
+        // console.warn("new user datails", user);
         register(user).then((response) => {
             console.warn("response coming to user", response)
         })
