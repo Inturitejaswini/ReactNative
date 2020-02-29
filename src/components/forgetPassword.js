@@ -20,23 +20,23 @@ import {Fotget} from '../services/userServices'
 import { Card } from 'react-native-elements';
 import styles from '../Css';
 import { TextInput } from 'react-native-gesture-handler';
-export class Forgot extends Component {
+export class Forget extends Component {
     constructor() {
         super();
         this.state = {
-            newPassword: '',
+            email: '',
 
         }
     }
-    handlenewPassword = event => {
+    handleemail = event => {
         console.warn(event)
-        this.setState({ newPassword: event});
-        console.warn("newPassword", this.state.newPassword);
+        this.setState({ email: event});
+        console.warn("newPassword", this.state.email);
     };
 
-    handleForgot = () => {
+    handleForget = () => {
         const user = {
-            newPassword:this.state.newPassword
+            email:this.state.email
         }
         console.warn("new user pasword datails", user);
         Fotget(user).then((response) => {
@@ -51,14 +51,14 @@ export class Forgot extends Component {
                     <Text style={styles.Text3}>ForgotPassword</Text>
                 </View>
                 <TextInput
-                    value={this.state.newPassword}
-                    onChangeText={this.handlenewPassword}
-                    placeholder={'newPassword'}
+                    value={this.state.email}
+                    onChangeText={this.handleemail}
+                    placeholder={'email'}
                     style={styles.input3}>
                 </TextInput>
                 <View style={styles.forgotbtn1}>
                     <Button
-                        onPress={this.handleForgot}
+                        onPress={this.handleForget}
                         title="Submit"
                         color="#00B0FF"
                     />
@@ -68,4 +68,4 @@ export class Forgot extends Component {
         )
     }
 }
-export default Forgot
+export default Forget

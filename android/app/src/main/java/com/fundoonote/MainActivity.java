@@ -1,7 +1,7 @@
 package com.fundoonote;
 
 import com.facebook.react.ReactActivity;
-
+// import com.ismaeld.RNBuildConfig.RNBuildConfigPackage;
 public class MainActivity extends ReactActivity {
 
   /**
@@ -13,3 +13,24 @@ public class MainActivity extends ReactActivity {
     return "fundoonote";
   }
 }
+//import com.ismaeld.RNBuildConfig.RNBuildConfigPackage; // add import
+ 
+//public class MainApplication extends Application implements ReactApplication {
+//
+//    private final ReactNativeHost mReactNativeHost = new ReactNativeHost(this) {
+//
+//        /* ... */
+//
+//        @Override
+//        public boolean getUseDeveloperSupport() {
+//            return false;
+//        }
+//
+//        @Override
+//        protected List<ReactPackage> getPackages() {
+//            return Arrays.<ReactPackage>asList(
+//                    new MainReactPackage(),
+//                    new RNBuildConfigPackage(BuildConfig.class)// add the package here
+//            );
+//        }
+//    };

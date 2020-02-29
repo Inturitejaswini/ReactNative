@@ -39,6 +39,8 @@ target 'fundoonote' do
   pod 'RNGestureHandler', :path => '../node_modules/react-native-gesture-handler'
 
 
+  pod 'react-native-config', :path => '../node_modules/react-native-config'
+
   target 'fundoonoteTests' do
     inherit! :search_paths
     # Pods for testing

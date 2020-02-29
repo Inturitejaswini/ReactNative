@@ -30,6 +30,7 @@ export class LoginComponent extends Component {
             password: '',
             snackbarOpen: false,
             snackbarMessage: '',
+            visible: false,
         }
     }
     snackbarClose = (event) => {
@@ -63,7 +64,7 @@ export class LoginComponent extends Component {
         console.log("new user dateils", user);
         Login(user).then(response => {
             console.warn("response coming to userlogin", response)
-            this.props.navigation.navigate('dashboard')
+            // this.props.navigation.navigate('dashboard')
         }
         )
     }
@@ -110,7 +111,7 @@ export class LoginComponent extends Component {
                         />
                     </View>
                     <View style={styles.forgot}>
-                        <Text onPress={() => this.props.navigation.navigate('forgotPassword')}
+                        <Text onPress={() => this.props.navigation.navigate('forgetPassword')}
                         >Forgot Password?</Text>
                     </View>
                 </Card>

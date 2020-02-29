@@ -6,7 +6,7 @@
  * @flow
  */
 
-// import styles from './src/Css'
+// import styles from './src/Css'z
 import React, { Component } from 'react';
 import { createAppContainer } from 'react-navigation';
 import AppNavigation from './src/router'

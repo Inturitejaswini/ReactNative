@@ -18,7 +18,7 @@ import { View, Button, Text, Alert } from 'react-native'
 import styles from '../Css';
 import register from '../services/userServices'
 import { Card } from 'react-native-elements';
-import {Snackbar} from 'react-native-paper'
+import { Snackbar } from 'react-native-paper'
 import { TextInput } from 'react-native-gesture-handler';
 export class RegisterComponent extends Component {
     constructor() {
@@ -28,53 +28,76 @@ export class RegisterComponent extends Component {
             lastName: '',
             phoneNumber: '',
             email: '',
-             password: '',
-       
+            password: '',
+            snackbarOpen: false,
+            snackbarMessage: '',
+            visible: false,
+
         }
     }
-   x
-    handlefirstName = event => {
-        console.warn(event)
-        this.setState({ firstName: event});
-        console.warn("firstname", this.state.firstname);
-    
-    };
-    handlelastName = event => {
+    x
+    handlefirstName = async (event) => {
         // console.warn(event)
-        this.setState({ lastName: event});
-        // console.log("lastname", this.state.lastname);
-   
+        if (event.match("^[a-zA-z ]*$") != null) {
+            this.setState({ firstName: event });
+            // console.warn("firstname", this.state.firstname);
+        }
+        else {
+            this.setState({ snackbarOpen: true, snackbarMessage: " *first name should contain only characters" })
+        }
     };
-    handlephoneNumber = event => {
+    handlelastName = async (event) => {
         // console.warn(event)
-        this.setState({ phoneNumber: event});
-        // console.log("phonenumber", this.state.phonenumber);
-  
+        if (event.match("^[a-zA-z ]*$") != null) {
+            this.setState({ lastName: event });
+            // console.log("lastname", this.state.lastname);
+        }
+        else {
+            this.setState({ snackbarOpen: true, snackbarMessage: " *last name should contain only characters" })
+        }
     };
-    handleemail = event => {
+    handlephoneNumber = async (event) => {
         // console.warn(event)
-        this.setState({ email: event});
-        // console.log("email", this.state.email);
-   
+        if (event.match("^[0-9 ]") != null) {
+            this.setState({ phoneNumber: event });
+            // console.log("phonenumber", this.state.phonenumber);
+        }
+        else {
+            await this.setState({ snackbarOpen: true, snackbarMessage: " *number should be 10 digits" })
+        }
     };
-    handlepassword = event => {
+    handleemail = async (event) => {
+        // console.warn(event)        
+        // if (event.match("^([a-zA-Z0-9]+@+[a-zA-Z0-9]+.+[A-z])*$") != null) {
+            this.setState({ email: event });
+            // console.log("email", this.state.email);
+        // }
+        // else {
+        //     await this.setState({ snackbarOpen: true, snackbarMessage: " *enter valid email" })
+        // }
+    };
+    handlepassword = async (event) => {
         // console.warn(event)
-        this.setState({ password: event});
-        // console.warn("password", this.state.password);
-   
+        if (event.match("^[0-9 ]*$") != null) {
+            this.setState({ password: event });
+            // console.warn("password", this.state.password);
+        }
+        else {
+            await this.setState({ snackbarOpen: true, snackbarMessage: " *password should minimum 6 character" })
+        }
     };
     handleregister = () => {
         const user = {
             firstName: this.state.firstName,
             lastName: this.state.lastName,
-            phoneNumber:this.state.phoneNumber,
+            phoneNumber: this.state.phoneNumber,
             email: this.state.email,
             password: this.state.password,
-            service:"basic",
+            service: "advance",
         }
         console.warn("new user datails", user);
         register(user).then((response) => {
-                console.warn("response coming to user", response)
+            console.warn("response coming to user", response)
         })
     }
     handleLogin = () => {
@@ -84,69 +107,62 @@ export class RegisterComponent extends Component {
     render() {
         return (
             <View style={styles.registercontainer}>
-             <Card style={styles.cardcontainer1}>
-                <View >
-                    <Text style={styles.Text1}>Registration</Text>
-                </View>
-                <View>
+                <Card style={styles.cardcontainer1}>
+                    <View >
+                        <Text style={styles.Text1}>Registration</Text>
+                    </View>
+                    <View>
 
-                </View>
-                <Snackbar
-                     anchorOrigin={{
-                        vertical: 'top',
-                        horizontal: 'center',
-                     }}
-                     open={this.state.snackbarOpen}
-                     autoHideDuration={6000}
-                     onClose={this.snackbarOpen}
-                     message={<span id="messege-id" >
-                        {this.state.snackbarMessage}</span>}>
-                  </Snackbar>
-                <TextInput
-                    value={this.state.firstName}
-                    onChangeText={this.handlefirstName}
-                    placeholder={'Firstname'}
-                    style={styles.input1}>
-                </TextInput>
-                <TextInput
-                    value={this.state.lastName}
-                    onChangeText={this.handlelastName}
-                    placeholder={'Lastname'}
-                    style={styles.input1}>
-                </TextInput>
-                <TextInput
-                    value={this.state.phoneNumber}
-                    onChangeText={this.handlephoneNumber}
-                    placeholder={'Phonenumber'}
-                    style={styles.input1}>
-                </TextInput>
-                <TextInput
-                    value={this.state.email}
-                    onChangeText={this.handleemail}
-                    placeholder={'Email'}
-                    style={styles.input1}>
-                </TextInput>
-                <TextInput
-                    value={this.state.password}
-                    onChangeText={this.handlepassword}
-                    secureTextEntry={true}
-                    placeholder={'Password'}
-                    style={styles.input1}>
-                </TextInput>
-                <View style={styles.registerbtn}>
-                    <Button
-                        onPress={this.handleregister}
-                        title="Register"
-                        color="#00B0FF"
-                    />
-                </View>
-                <View style={styles.loginbtn}>
-                    <Button
-                        onPress={() => this.props.navigation.navigate('login')}
-                        title="Login"
-                        color="#00B0FF"
-                    />
-                </View>
+                    </View>
+                    <Snackbar
+                        visible={this.state.snackbarOpen}>
+                        {this.state.snackbarMessage}
+                    </Snackbar>
+                    <TextInput
+                        value={this.state.firstName}
+                        onChangeText={this.handlefirstName}
+                        placeholder={'Firstname'}
+                        style={styles.input1}>
+                    </TextInput>
+                    <TextInput
+                        value={this.state.lastName}
+                        onChangeText={this.handlelastName}
+                        placeholder={'Lastname'}
+                        style={styles.input1}>
+                    </TextInput>
+                    <TextInput
+                        value={this.state.phoneNumber}
+                        onChangeText={this.handlephoneNumber}
+                        placeholder={'Phonenumber'}
+                        style={styles.input1}>
+                    </TextInput>
+                    <TextInput
+                        value={this.state.email}
+                        onChangeText={this.handleemail}
+                        placeholder={'Email'}
+                        style={styles.input1}>
+                    </TextInput>
+                    <TextInput
+                        value={this.state.password}
+                        onChangeText={this.handlepassword}
+                        secureTextEntry={true}
+                        placeholder={'Password'}
+                        style={styles.input1}>
+                    </TextInput>
+                    <View style={styles.registerbtn}>
+                        <Button
+                            onPress={this.handleregister}
+                            title="Register"
+                            color="#00B0FF"
+                        />
+                    </View>
+                    <View style={styles.loginbtn}>
+                        <Button
+                            onPress={() => this.props.navigation.navigate('login')}
+                            title="Login"
+                            color="#00B0FF"
+                        />
+                    </View>
                 </Card>
             </View>
         )

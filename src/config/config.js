@@ -1,9 +1,8 @@
  
- 
- 
- var configApi={
-registration:"user/userSignUp",
-login:"user/login",
-forgetPassword:"user/reset-password"
-}
-export default configApi
+
+//  var configApi={
+// registration:"user/userSignUp",
+// login:"user/login",
+// forgetPassword:"user/reset-password"
+// }
+// export default configApi
