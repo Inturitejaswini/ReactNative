@@ -73,7 +73,7 @@ export class LoginComponent extends Component {
         console.log("new user dateils", user);
         Login(user).then(response => {
             console.warn("response coming to userlogin", response)
-            this.props.navigation.navigate('dashboard')
+            this.props.navigation.navigate('das hboard')
         }
         )
     }
