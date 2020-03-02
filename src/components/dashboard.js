@@ -19,16 +19,15 @@ import { DrawerActions } from 'react-navigation-drawer';
 import { View, Text, TouchableOpacity } from 'react-native';
 import { Image } from 'react-native'
 // import Drawer from '../components/drawerComponent'
-
-// import { TouchableOpacity } from 'react-native-gesture-handler';
 export class DashBoard extends React.Component {
     constructor() {
         super();
         this.state = {
             openDrawer: false,
+            open:false
         }
     }
-    openDrawer = () => {
+    handleopenDrawer = () => {
         this.setState({ openDrawer: !this.state.openDrawer })
     }
     render() {
@@ -36,9 +35,10 @@ export class DashBoard extends React.Component {
             <View>
                 <Appbar style={styles.top}>
                     <View style={styles.menuitem}>
-                        <TouchableOpacity >
+                        <TouchableOpacity>
                             <Image source={require("../assets/menuicon.png")}
-                                onPress={() => this.props.navigation.dispatch(DrawerActions.openDrawer())}></Image>
+                             onPress={() => this.props.navigation.dispatch(DrawerActions.openDrawer())}>
+                            </Image>
                         </TouchableOpacity>
                     </View>
                     <View >
@@ -50,9 +50,14 @@ export class DashBoard extends React.Component {
                     <View style={styles.searchicon}>
                         <Image source={require("../assets/searchicon.png")}></Image>
                     </View>
+                    {!this.state.open? (
                     <View style={styles.gridicon}>
                         <Image source={require("../assets/gridicon.png")}></Image>
                     </View>
+                     ) : (
+                    <View style={styles.listicon}>
+                        <Image source={require("../assets/listview.png")}></Image>
+                    </View>)}
                     <View >
                         <Image source={require("../assets/accounticon.png")} style={styles.accounticon}></Image>
                     </View>

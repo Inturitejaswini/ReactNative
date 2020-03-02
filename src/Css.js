@@ -225,13 +225,18 @@ const styles = StyleSheet.create({
    },
    moreicon:{
     marginLeft:320,
-    marginTop:440,
+    marginTop:430,
+    height:10
+
+   },
+   menupaper:{
+    marginTop:40,
+    width:300,
    },
    textinput:{
        marginLeft:20,
        fontSize:20,
        marginTop:4
-
    },
    textinput1:{
     marginLeft:20,
