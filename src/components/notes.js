@@ -14,10 +14,10 @@ export class Notes extends React.Component {
             visible: false,
         }
     }
-    // _toggleBottomNavigationView = () => {
-    //     //Toggling the visibility state of the bottom sheet
-    //     this.setState({ visible: !this.state.visible });
-    // };
+    _toggleBottomNavigationView = () => {
+        //Toggling the visibility state of the bottom sheet
+        this.setState({ visible: !this.state.visible });
+    };
     render() {
         return (
             <View>
@@ -48,12 +48,12 @@ export class Notes extends React.Component {
                     <Image source={require("../assets/more.png")}
                      style={styles.moreicon}></Image>
                 </TouchableOpacity>
-                {/* <BottomSheet visible={this.state.visible}
+                <BottomSheet visible={this.state.visible}
                     //setting the visibility state of the bottom shee
                     onBackButtonPress={this._toggleBottomNavigationView}
                     //Toggling the visibility state on the click of the back botton
                     onBackdropPress={this._toggleBottomNavigationView}>
-                </BottomSheet> */}
+                </BottomSheet>
             </View>
         )
     }
