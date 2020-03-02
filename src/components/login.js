@@ -126,21 +126,15 @@ export class LoginComponent extends Component {
                     </View>
                     <Snackbar 
                     visible={this.state.snackIsVisible}
-                   //snackbar visibility controlle
                     textMessage="enter the requirements"
-                    //text on snackbar
                     actionHandler={()=>{
-                        //function called while clicking on action text
                         alert("fill the correct email and password");
-                      //  after handling click making snackbar invisible
                         this.setState({
                             snackIsVisible:!this.state.snackIsVisible
                         });
                     }}
                     actionText="lets go"
-                    //action text will be print on snackbar
                     distanceCallback={distance=>{
-                        //number indicating distance taken up by snackbar
                         this.setState({distance:distance});
                     }}>
                     </Snackbar>

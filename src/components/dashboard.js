@@ -13,12 +13,13 @@
  *  @since          :24-0-2020
  ******************************************************************************/
 import * as React from 'react';
-import { Appbar } from 'react-native-paper';
+import { Appbar, Toolbar } from 'react-native-paper';
 import styles from '../Css';
 import { DrawerActions } from 'react-navigation-drawer';
-import { View, Text,TouchableOpacity} from 'react-native';
-import {Image} from 'react-native'
-import Drawer from '../components/drawerComponent'
+import { View, Text, TouchableOpacity } from 'react-native';
+import { Image } from 'react-native'
+// import Drawer from '../components/drawerComponent'
+
 // import { TouchableOpacity } from 'react-native-gesture-handler';
 export class DashBoard extends React.Component {
     constructor() {
@@ -27,8 +28,8 @@ export class DashBoard extends React.Component {
             openDrawer: false,
         }
     }
-    DrawerOpen=()=>{
-        this.setState({openDrawer:!this.state.openDrawer})
+    openDrawer = () => {
+        this.setState({ openDrawer: !this.state.openDrawer })
     }
     render() {
         return (
@@ -36,8 +37,8 @@ export class DashBoard extends React.Component {
                 <Appbar style={styles.top}>
                     <View style={styles.menuitem}>
                         <TouchableOpacity >
-                        <Image source={require("../assets/menuicon.png")}
-                        onPress={()=>this.props.navigation.dispatch(DrawerActions.openDrawer())}></Image>
+                            <Image source={require("../assets/menuicon.png")}
+                                onPress={() => this.props.navigation.dispatch(DrawerActions.openDrawer())}></Image>
                         </TouchableOpacity>
                     </View>
                     <View >
@@ -55,8 +56,24 @@ export class DashBoard extends React.Component {
                     <View >
                         <Image source={require("../assets/accounticon.png")} style={styles.accounticon}></Image>
                     </View>
-                {/* {<Drawer  openDrawer={this.state.openDrawer}></Drawer>} */}
+                    {/* {<Drawer  openDrawer={this.state.openDrawer}></Drawer>} */}
                 </Appbar>
+                <View>
+                    <Appbar style={styles.input4}>
+                    <View style={styles.checkicon}>
+                        <Image source={require("../assets/checkbox.png")}></Image>
+                    </View>
+                    <View style={styles.brushicon}>
+                        <Image source={require("../assets/brush.png")}></Image>
+                    </View>
+                    <View style={styles.voiceicon}>
+                        <Image source={require("../assets/voice.png")}></Image>
+                    </View>
+                    <View style={styles.imageicon}>
+                        <Image source={require("../assets/image.png")}></Image>
+                    </View>
+                    </Appbar>
+                </View>
             </View>
         );
     }

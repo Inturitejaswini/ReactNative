@@ -166,11 +166,73 @@ const styles = StyleSheet.create({
         width:40,
         height:40
       },
-    //   accounticon:{
-    //     marginLeft:50,
-    //     width:40,
-    //     height:40
+    //   bottom: {
+    //     position: 'absolute',
+    //     left: 10,
+    //     right: 10,
+    //     backgroundColor:'#fbfcfc',
+    //     borderRadius:10,
+    //     bottom:40,
+    //     marginBottom:100
     //   },
-     
+    input4:{
+        top:560,
+        backgroundColor:'#fbfcfc',
+        // boxshadow:'0 0 15',
+        borderRadius:8,
+        },
+    checkicon:{
+        marginLeft:25,
+        width:20,
+        height:20
+    },
+    brushicon:{
+        marginLeft:25
+    },
+    imageicon:{
+        marginLeft:25
+ 
+    },
+    voiceicon:{
+        marginLeft:25
+
+    },
+   /**
+    *notes app.css  
+    * */  
+
+   gobackicon:{
+       width:20,
+       marginTop:10,
+       marginLeft:8
+   },
+   pushpinicon:{
+    width:25,
+    height:25,
+    marginLeft:210,
+    marginTop:-20
+
+   },
+   alerticon:{
+    marginLeft:270,
+    marginTop:-25,
+    width:20,
+   },
+   archiveicon :{
+        marginLeft:320,
+        marginTop:-25,
+        width:20,
+   },
+   textinput:{
+       marginLeft:20,
+       fontSize:20,
+       marginTop:4
+
+   },
+   textinput1:{
+    marginLeft:20,
+    fontSize:15
+
+}
 });
 export default styles
