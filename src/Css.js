@@ -57,6 +57,13 @@ const styles = StyleSheet.create({
         marginBottom:10,
 
     },
+    bottomNavigationView: {
+        backgroundColor: '#fff',
+        width: '100%',
+        height: 250,
+        justifyContent: 'center',
+        alignItems: 'center',
+      },
     /**
      * REGISTARTION CSS
      */
@@ -226,7 +233,6 @@ const styles = StyleSheet.create({
    moreicon:{
     marginLeft:320,
     marginTop:430,
-    height:10
 
    },
    menupaper:{

@@ -24,10 +24,10 @@ export class DashBoard extends React.Component {
         super();
         this.state = {
             openDrawer: false,
-            open:false
+            open: false
         }
     }
-    handleopenDrawer = () => {
+    openDrawer = () => {
         this.setState({ openDrawer: !this.state.openDrawer })
     }
     render() {
@@ -35,9 +35,9 @@ export class DashBoard extends React.Component {
             <View>
                 <Appbar style={styles.top}>
                     <View style={styles.menuitem}>
-                        <TouchableOpacity>
-                            <Image source={require("../assets/menuicon.png")}
-                             onPress={() => this.props.navigation.dispatch(DrawerActions.openDrawer())}>
+                        <TouchableOpacity
+                            onPress={() => this.props.navigation.dispatch(DrawerActions.openDrawer())}>
+                            <Image source={require("../assets/menuicon.png")}>
                             </Image>
                         </TouchableOpacity>
                     </View>
@@ -50,14 +50,14 @@ export class DashBoard extends React.Component {
                     <View style={styles.searchicon}>
                         <Image source={require("../assets/searchicon.png")}></Image>
                     </View>
-                    {!this.state.open? (
-                    <View style={styles.gridicon}>
-                        <Image source={require("../assets/gridicon.png")}></Image>
-                    </View>
-                     ) : (
-                    <View style={styles.listicon}>
-                        <Image source={require("../assets/listview.png")}></Image>
-                    </View>)}
+                    {!this.state.open ? (
+                        <View style={styles.gridicon}>
+                            <Image source={require("../assets/gridicon.png")}></Image>
+                        </View>
+                    ) : (
+                            <View style={styles.listicon}>
+                                <Image source={require("../assets/listview.png")}></Image>
+                            </View>)}
                     <View >
                         <Image source={require("../assets/accounticon.png")} style={styles.accounticon}></Image>
                     </View>
@@ -65,18 +65,18 @@ export class DashBoard extends React.Component {
                 </Appbar>
                 <View>
                     <Appbar style={styles.input4}>
-                    <View style={styles.checkicon}>
-                        <Image source={require("../assets/checkbox.png")}></Image>
-                    </View>
-                    <View style={styles.brushicon}>
-                        <Image source={require("../assets/brush.png")}></Image>
-                    </View>
-                    <View style={styles.voiceicon}>
-                        <Image source={require("../assets/voice.png")}></Image>
-                    </View>
-                    <View style={styles.imageicon}>
-                        <Image source={require("../assets/image.png")}></Image>
-                    </View>
+                        <View style={styles.checkicon}>
+                            <Image source={require("../assets/checkbox.png")}></Image>
+                        </View>
+                        <View style={styles.brushicon}>
+                            <Image source={require("../assets/brush.png")}></Image>
+                        </View>
+                        <View style={styles.voiceicon}>
+                            <Image source={require("../assets/voice.png")}></Image>
+                        </View>
+                        <View style={styles.imageicon}>
+                            <Image source={require("../assets/image.png")}></Image>
+                        </View>
                     </Appbar>
                 </View>
             </View>
