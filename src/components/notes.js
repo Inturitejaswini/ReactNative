@@ -39,23 +39,6 @@ export class Notes extends React.Component {
                         <TextInput placeholder={'Note'} style={styles.textinput1}></TextInput>
                     </View>
                 </View>
-                {/* <TouchableOpacity onPress={() => { this.RBSheet.open() }}>
-                <Image source={require("../assets/addbox.png")}
-                        style={styles.boxicon}>
-                    </Image>
-                    <RBSheet
-                        ref={ref => {
-                            this.RBSheet = ref;
-                        }}
-                        height={300}
-                        duration={250}
-                        customStyles={{
-                            container: {
-                                justifyContent: "center",
-                                alignItems: "center"}}}>
-
-                    </RBSheet>
-                </TouchableOpacity > */}
                 <TouchableOpacity onPress={() => { this.RBSheet.open() }}>
                     <Image source={require("../assets/more.png")}
                         style={styles.moreicon}>
@@ -69,9 +52,7 @@ export class Notes extends React.Component {
                         customStyles={{
                             container: {
                                 justifyContent: "center",
-                                alignItems: "center"
-                            }
-                        }}>
+                                alignItems: "center"}}}>
                         <View style={styles.moreicons}>
                             <TouchableOpacity>
                                 <View style={styles.deleteicons}>
