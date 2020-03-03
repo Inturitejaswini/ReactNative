@@ -4,8 +4,6 @@ import RegisterComponent from './components/registration'
 import Forget from './components/forgetPassword'
 import DashBoard from './components/dashboard'
 import Notes from './components/notes'
-// import Example from './components/more'
-// import Drawer from './components/drawerComponent'
 import drawerComponent from './components/drawerComponent'
 const AppNavigation = createStackNavigator(
     {
@@ -27,7 +25,7 @@ const AppNavigation = createStackNavigator(
                 header: null
             }
         },
-        drawerComponent:{
+        drawerComponent: {
             screen: drawerComponent,
             navigationOptions: {
                 header: null
@@ -39,21 +37,15 @@ const AppNavigation = createStackNavigator(
                 header: null
             }
         },
-        // more: {
-        //     screen: Example,
-        //     navigationOptions: {
-        //         header: null
-        //     }
-        // },
-        notes:{
-            screen:Notes,
-            navigationOptions:{
-                header:null
+        notes: {
+            screen: Notes,
+            navigationOptions: {
+                header: null
             }
         },
     },
-{
-    initialRouteName: "drawerComponent"
-}
+    {
+        initialRouteName: "drawerComponent"
+    }
 )
 export default AppNavigation
