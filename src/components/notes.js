@@ -11,7 +11,7 @@ export class Notes extends React.Component {
             visible: false,
         }
     }
-    
+
     render() {
         return (
             <View>
@@ -53,7 +53,9 @@ export class Notes extends React.Component {
                         customStyles={{
                             container: {
                                 justifyContent: "center",
-                                alignItems: "center"}}}>
+                                alignItems: "center"
+                            }
+                        }}>
                         <View style={styles.moreicons}>
                             <TouchableOpacity>
                                 <View style={styles.deleteicons}>
