@@ -1,3 +1,18 @@
+
+/******************************************************************************
+* Execution : 1. default node cmd> node notes.js
+* 2. if nodemon installed cmd> nodemodule notes.js
+* 
+* Purpose : create notes page.
+* @description 
+* 
+* @file :notes
+* @overview :notes form problem.
+* @module :notes - This is optional if expeclictly its an npm or local package
+* @author :tejaswini<chowdarytejaswini2@gmail.com>
+* @version :1.0
+* @since :-2-03-2020
+******************************************************************************/
 import React, { Component } from 'react'
 import { View, Button, Text } from 'react-native'
 import { Image, TouchableOpacity } from 'react-native'
