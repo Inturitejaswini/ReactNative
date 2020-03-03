@@ -82,7 +82,7 @@ export class LoginComponent extends Component {
         return (
             <View style={styles.container}>
                 <Card style={styles.cardcontainer}>
-                    <View >
+                    <View>
                         <Text style={styles.Text}>Member Login</Text>
                     </View>
                     <View >

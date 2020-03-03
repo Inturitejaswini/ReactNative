@@ -23,10 +23,8 @@ const Drawer = createDrawerNavigator({
         screen:DashBoard
     },
     notes: {
-        screen:Notes,
+        screen:Notes
       },
-    //   remainder:{
-    //       screen:Remainder
-    //   }
+    
 })
 export default drawer=createAppContainer(Drawer);

@@ -58,8 +58,9 @@ export class DashBoard extends React.Component {
                             <View style={styles.listicon}>
                                 <Image source={require("../assets/listview.png")}></Image>
                             </View>)}
-                    <View >
-                        <Image source={require("../assets/accounticon.png")} style={styles.accounticon}></Image>
+                    <View>
+                        <Image source={require("../assets/accounticon.png")}
+                         style={styles.accounticon}></Image>
                     </View>
                 </Appbar>
                 <View>

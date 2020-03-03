@@ -4,9 +4,6 @@ import { Image, TouchableOpacity } from 'react-native'
 import styles from '../Css';
 import { TextInput, } from 'react-native-gesture-handler';
 import RBSheet from "react-native-raw-bottom-sheet";
-// import { SocialIcon } from 'react-native-elements';
-// import MoreComponent from '../components/moreComponent';
-// import { BottomSheet } from 'react-native-raw-bottom-sheet'
 export class Notes extends React.Component {
     constructor() {
         super();
@@ -14,6 +11,7 @@ export class Notes extends React.Component {
             visible: false,
         }
     }
+    
     render() {
         return (
             <View>
@@ -39,6 +37,9 @@ export class Notes extends React.Component {
                         <TextInput placeholder={'Note'} style={styles.textinput1}></TextInput>
                     </View>
                 </View>
+                {/* <View>
+                <Image source={require("../assets/addbox.png")} style={styles.boxicon}></Image>
+                </View> */}
                 <TouchableOpacity onPress={() => { this.RBSheet.open() }}>
                     <Image source={require("../assets/more.png")}
                         style={styles.moreicon}>

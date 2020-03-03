@@ -232,12 +232,13 @@ const styles = StyleSheet.create({
     },
     moreicon: {
         marginLeft: 320,
-        marginTop: 430,
+        marginTop: 440,
 
     },
-    // boxicon:{
-    //     marginTop: 430,
-    // },
+    boxicon:{
+        marginTop: 450,
+        marginLeft:20
+    },
     menupaper: {
         marginTop: 40,
         width: 300,
