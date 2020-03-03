@@ -5,7 +5,7 @@ import Forget from './components/forgetPassword'
 import DashBoard from './components/dashboard'
 import Notes from './components/notes'
 // import Example from './components/more'
-import Drawer from './components/drawerComponent'
+// import Drawer from './components/drawerComponent'
 import drawerComponent from './components/drawerComponent'
 const AppNavigation = createStackNavigator(
     {

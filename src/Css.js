@@ -11,7 +11,7 @@ const styles = StyleSheet.create({
     },
     cardcontainer: {
         width: 400,
-        height:90
+        height: 90
     },
     input: {
         width: 200,
@@ -26,7 +26,7 @@ const styles = StyleSheet.create({
         width: 120,
         borderRadius: 10,
         fontSize: 20,
-        marginLeft:40,
+        marginLeft: 40,
         marginBottom: 30
     },
     btn: {
@@ -43,18 +43,18 @@ const styles = StyleSheet.create({
         width: 120,
         borderRadius: 10,
         top: 40,
-        marginBottom:30,
-        marginLeft:45
+        marginBottom: 30,
+        marginLeft: 45
     },
     iconbtn: {
         fontSize: 3
     },
-    accounticon1:{
-        marginLeft:80,
-        width:40,
-        height:40,
-        marginTop:-20,
-        marginBottom:10,
+    accounticon1: {
+        marginLeft: 80,
+        width: 40,
+        height: 40,
+        marginTop: -20,
+        marginBottom: 10,
 
     },
     bottomNavigationView: {
@@ -63,7 +63,7 @@ const styles = StyleSheet.create({
         height: 250,
         justifyContent: 'center',
         alignItems: 'center',
-      },
+    },
     /**
      * REGISTARTION CSS
      */
@@ -73,9 +73,9 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         backgroundColor: '#d6dbdf',
     },
-    cardcontainer1:{
+    cardcontainer1: {
         width: 400,
-        height:150
+        height: 150
     },
     input1: {
         width: 200,
@@ -90,7 +90,7 @@ const styles = StyleSheet.create({
         width: 100,
         borderRadius: 10,
         fontSize: 20,
-        marginLeft:55,
+        marginLeft: 55,
         marginBottom: 10
     },
     registerbtn: {
@@ -131,13 +131,13 @@ const styles = StyleSheet.create({
         borderRadius: 10,
         fontSize: 20,
         marginBottom: 30,
-        marginLeft:40
+        marginLeft: 40
     },
     forgotbtn2: {
         width: 200,
         borderRadius: 10,
         top: 20,
-        fontSize:3
+        fontSize: 3
     },
     /**
      * dashboard component app.css
@@ -146,33 +146,33 @@ const styles = StyleSheet.create({
         position: 'absolute',
         left: 10,
         right: 10,
-        backgroundColor:'#fbfcfc',
-        borderRadius:10,
-        top:15,
-      },
-      menuitem:{
-          marginLeft:5
-      },
-      keepicon:{
-        marginLeft:5,
-        height:30,
-        width:20
-    
-      },
-      fundooText:{
-        marginLeft:5 
-      },
-      searchicon:{
-        marginLeft:30
-      },
-      gridicon:{
-        marginLeft:30
-      },
-      accounticon:{
-        marginLeft:50,
-        width:40,
-        height:40
-      },
+        backgroundColor: '#fbfcfc',
+        borderRadius: 10,
+        top: 15,
+    },
+    menuitem: {
+        marginLeft: 5
+    },
+    keepicon: {
+        marginLeft: 5,
+        height: 30,
+        width: 20
+
+    },
+    fundooText: {
+        marginLeft: 5
+    },
+    searchicon: {
+        marginLeft: 30
+    },
+    gridicon: {
+        marginLeft: 30
+    },
+    accounticon: {
+        marginLeft: 50,
+        width: 40,
+        height: 40
+    },
     //   bottom: {
     //     position: 'absolute',
     //     left: 10,
@@ -182,72 +182,158 @@ const styles = StyleSheet.create({
     //     bottom:40,
     //     marginBottom:100
     //   },
-    input4:{
-        top:560,
-        backgroundColor:'#fbfcfc',
+    input4: {
+        top: 560,
+        backgroundColor: '#fbfcfc',
         // boxshadow:'0 0 15',
-        borderRadius:8,
-        },
-    checkicon:{
-        marginLeft:25,
-        width:20,
-        height:20
+        borderRadius: 8,
     },
-    brushicon:{
-        marginLeft:25
+    checkicon: {
+        marginLeft: 25,
+        width: 20,
+        height: 20
     },
-    imageicon:{
-        marginLeft:25
- 
+    brushicon: {
+        marginLeft: 25
     },
-    voiceicon:{
-        marginLeft:25
+    imageicon: {
+        marginLeft: 25
 
     },
-   /**
-    *notes app.css  
-    * */  
+    voiceicon: {
+        marginLeft: 25
 
-   gobackicon:{
-       width:20,
-       marginTop:10,
-       marginLeft:8
-   },
-   pushpinicon:{
-    width:25,
-    height:25,
-    marginLeft:210,
-    marginTop:-20
+    },
+    /**
+     *notes app.css  
+     * */
 
-   },
-   alerticon:{
-    marginLeft:270,
-    marginTop:-25,
-    width:20,
-   },
-   archiveicon :{
-        marginLeft:320,
-        marginTop:-25,
-        width:20,
-   },
-   moreicon:{
-    marginLeft:320,
-    marginTop:430,
+    gobackicon: {
+        width: 20,
+        marginTop: 10,
+        marginLeft: 8
+    },
+    pushpinicon: {
+        width: 25,
+        height: 25,
+        marginLeft: 210,
+        marginTop: -20
 
-   },
-   menupaper:{
-    marginTop:40,
-    width:300,
-   },
-   textinput:{
-       marginLeft:20,
-       fontSize:20,
-       marginTop:4
-   },
-   textinput1:{
-    marginLeft:20,
-    fontSize:15
+    },
+    alerticon: {
+        marginLeft: 270,
+        marginTop: -25,
+        width: 20,
+    },
+    archiveicon: {
+        marginLeft: 320,
+        marginTop: -25,
+        width: 20,
+    },
+    moreicon: {
+        marginLeft: 320,
+        marginTop: 430,
 
-}
+    },
+    menupaper: {
+        marginTop: 40,
+        width: 300,
+    },
+    textinput: {
+        marginLeft: 20,
+        fontSize: 20,
+        marginTop: 4
+    },
+    textinput1: {
+        marginLeft: 20,
+        fontSize: 15
+
+    },
+    deleteicons: {
+        display: 'flex',
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        marginTop:120,
+        fontSize: 20
+    },
+    deleteText: {
+        marginLeft: 20,
+        fontSize: 20
+    },
+    deleteicon:{
+        marginLeft: 25,
+    },
+    copyicons: {
+        display: 'flex',
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+       alignContent:'flex-start',
+       marginTop:25
+    },
+    copyText:{
+        marginLeft: 20,
+        fontSize: 20
+    },
+    copy:{
+        marginLeft: 20,
+    },
+    sendicons: {
+        display: 'flex',
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        fontSize: 20,
+        marginTop:25
+    },
+    sendText:{
+        marginLeft: 20,
+        fontSize: 20
+    },
+    send:{
+        marginLeft: 25,
+    },
+    addpersonicons:{
+        display: 'flex',
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        fontSize: 20,
+        marginTop:25
+        // marginRight: 200,
+    },
+    collabaratorText :{
+        marginLeft: 20,
+        fontSize: 20
+    },
+    collabator:{
+        marginLeft: 25,
+    },
+    labelicons:{
+        display: 'flex',
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        fontSize: 20,
+        marginTop:25
+        // marginRight: 200,  
+    },
+    labelText:{
+        marginLeft: 20,
+        fontSize: 20
+    },
+    label:{
+        marginLeft: 25,
+    },
+    moreicons:{
+display:'flex',
+flexDirection:'column',
+alignItems:'flex-start',
+justifyContent:'space-between',
+marginRight:230,
+marginBottom:160,
+// marginflexstart:20
+    }
 });
 export default styles

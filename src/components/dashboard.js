@@ -61,7 +61,6 @@ export class DashBoard extends React.Component {
                     <View >
                         <Image source={require("../assets/accounticon.png")} style={styles.accounticon}></Image>
                     </View>
-                    {/* {<Drawer  openDrawer={this.state.openDrawer}></Drawer>} */}
                 </Appbar>
                 <View>
                     <Appbar style={styles.input4}>

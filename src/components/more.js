@@ -1,75 +1,43 @@
-import React, { Component } from 'react'
-import { AppRegistry, StyleSheet, Text, View, Button } from 'react-native'
-import BottomSheet from 'react-native-js-bottom-sheet'
-import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
-import Entypo from 'react-native-vector-icons/Entypo'
+import React, { Component } from "react";
+import {
+  View,
+  ScrollView,
+  DatePickerIOS,
+  TouchableOpacity,
+  Text,
+  TextInput,
+  StyleSheet
+} from "react-native";
+import FAIcon from "react-native-vector-icons/FontAwesome";
+import MDIcon from "react-native-vector-icons/MaterialIcons";
+import RBSheet from "react-native-raw-bottom-sheet";
+import data from "./static.json";
 
-export  class Example extends Component {
+FAIcon.loadFont();
+MDIcon.loadFont();
 
-
-  _onPressButton = () => {
-    this.bottomSheet.open()
-  }
-
+class App extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <Button title="Open" onPress={this._onPressButton} />
-        <BottomSheet
-          ref={() => {
-            this.bottomSheet = ref
+        <Text style={styles.textTitle}>REACT NATIVE RAW BOTTOMSHEET</Text>
+
+        {/* TextInput */}
+        <RBSheet
+          ref={ref => {
+            this.Input = ref;
           }}
-          itemDivider={3}
-          backButtonEnabled={true}
-          coverScreen={false}
-          title="Create"
-          options={[
-            {
-              title: 'Document',
-              icon: (
-                <MaterialCommunityIcons
-                  name="file-document-box"
-                  color="#2186fa"
-                  size={24}
-                />
-              ),
-              onPress: () => null
-            },
-            {
-              title: 'Spreadsheet',
-              icon: <Entypo name="spreadsheet" color="#43a047" size={24} />,
-              onPress: () => null
-            },
-            {
-              title: 'Folder',
-              icon: (
-                <MaterialCommunityIcons name="folder" color="grey" size={24} />
-              ),
-              onPress: () => null
-            },
-            {
-              title: 'Upload photos or videos',
-              icon: (
-                <MaterialCommunityIcons
-                  name="cloud-upload"
-                  color="grey"
-                  size={24}
-                />
-              ),
-              onPress: () => null
-            },
-            {
-              title: 'Use Camera',
-              icon: (
-                <MaterialCommunityIcons name="camera" color="grey" size={24} />
-              ),
-              onPress: () => null
-            }
-          ]}
-          isOpen={false}
-        />
+          height={60}
+          animationType="none"
+          duration={200}
+          customStyles={{
+            wrapper: { backgroundColor: "#fff" }}}>
+          <View style={styles.inputContainer}>
+            <TextInput style={styles.input} autoFocus placeholder="Write a comment..." />
+          </View>
+        </RBSheet>
       </View>
-    )
+    );
   }
 }
-export default Example
+export default App
