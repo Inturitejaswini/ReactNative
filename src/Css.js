@@ -235,6 +235,9 @@ const styles = StyleSheet.create({
         marginTop: 430,
 
     },
+    // boxicon:{
+    //     marginTop: 430,
+    // },
     menupaper: {
         marginTop: 40,
         width: 300,
