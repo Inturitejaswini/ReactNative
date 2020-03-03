@@ -38,9 +38,6 @@ export class Notes extends React.Component {
                         <TextInput placeholder={'Note'} style={styles.textinput1}></TextInput>
                     </View>
                 </View>
-                {/* <View>
-                <Image source={require("../assets/addbox.png")} style={styles.boxicon}></Image>
-                </View> */}
                 <TouchableOpacity onPress={() => { this.RBSheet.open() }}>
                     <Image source={require("../assets/more.png")}
                         style={styles.moreicon}>
