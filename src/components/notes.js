@@ -19,6 +19,7 @@ import { Image, TouchableOpacity } from 'react-native'
 import styles from '../Css';
 import { TextInput, } from 'react-native-gesture-handler';
 import RBSheet from "react-native-raw-bottom-sheet";
+import Example from '../components/remainder'
 export class Notes extends React.Component {
     constructor() {
         super();
@@ -31,16 +32,18 @@ export class Notes extends React.Component {
         return (
             <View>
                 <View >
-                    <TouchableOpacity onPress={() => this.props.navigation.navigate('dashboard')}>
-                        <Image source={require("../assets/goback.png")} style={styles.gobackicon}></Image>
+                    <TouchableOpacity  onPress={() => this.props.navigation.navigate('dashboard')}>
+                        <Image source={require("../assets/goback.png")}
+                        style={styles.gobackicon}></Image>
                     </TouchableOpacity>
                 </View>
                 <View >
                     <Image source={require("../assets/pushpin.jpeg")} style={styles.pushpinicon}></Image>
                 </View>
                 <View >
-                    <Image source={require("../assets/alert.png")}
-                        style={styles.alerticon} ></Image>
+                    {/* <Image source={require("../assets/alert.png")}
+                        style={styles.alerticon} ></Image> */}
+                        <Example></Example>
                 </View>
                 <View>
                     <Image source={require("../assets/archive.png")} style={styles.archiveicon}></Image>

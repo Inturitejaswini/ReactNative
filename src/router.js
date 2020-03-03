@@ -52,7 +52,7 @@ const AppNavigation = createStackNavigator(
         }
     },
     {
-        initialRouteName: "remainder"
+        initialRouteName: "drawerComponent"
     }
 )
 export default AppNavigation

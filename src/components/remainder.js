@@ -3,6 +3,8 @@
 import React, { useState } from "react";
 import { Button, View } from "react-native";
 import DateTimePickerModal from "react-native-modal-datetime-picker";
+import { Image, TouchableOpacity } from 'react-native'
+import styles from '../Css';
 
 const Example = () => {
     const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
@@ -22,12 +24,15 @@ const Example = () => {
 
     return (
         <View>
-            <Button title="Show Date Picker" onPress={showDatePicker} />
+            <TouchableOpacity  onPress={showDatePicker}>
+            <Image source={require("../assets/alert.png")}
+             style={styles.alerticon}></Image>
             <DateTimePickerModal
                 isVisible={isDatePickerVisible}
                 mode="date"
                 onConfirm={handleConfirm}
                 onCancel={hideDatePicker} />
+                </TouchableOpacity>
         </View>
     );
 };
