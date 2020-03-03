@@ -5,6 +5,7 @@ import Forget from './components/forgetPassword'
 import DashBoard from './components/dashboard'
 import Notes from './components/notes'
 import drawerComponent from './components/drawerComponent'
+import Example from './components/remainder'
 const AppNavigation = createStackNavigator(
     {
         login: {
@@ -43,9 +44,15 @@ const AppNavigation = createStackNavigator(
                 header: null
             }
         },
+        remainder:{
+            screen:Example,
+            navigationOptions:{
+                header:null
+            }
+        }
     },
     {
-        initialRouteName: "drawerComponent"
+        initialRouteName: "remainder"
     }
 )
 export default AppNavigation

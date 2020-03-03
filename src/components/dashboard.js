@@ -30,6 +30,7 @@ export class DashBoard extends React.Component {
     openDrawer = () => {
         this.setState({ openDrawer: !this.state.openDrawer })
     }
+    
     render() {
         return (
             <View>
