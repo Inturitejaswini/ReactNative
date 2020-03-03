@@ -11,7 +11,7 @@ export class Notes extends React.Component {
             visible: false,
         }
     }
-
+   
     render() {
         return (
             <View>
@@ -24,16 +24,17 @@ export class Notes extends React.Component {
                     <Image source={require("../assets/pushpin.jpeg")} style={styles.pushpinicon}></Image>
                 </View>
                 <View >
-                    <Image source={require("../assets/alert.png")} style={styles.alerticon}></Image>
+                    <Image source={require("../assets/alert.png")} 
+                    style={styles.alerticon} ></Image>
                 </View>
-                <View >
+                <View>
                     <Image source={require("../assets/archive.png")} style={styles.archiveicon}></Image>
                 </View>
                 <View>
-                    <View >
+                    <View>
                         <TextInput placeholder={'Title'} style={styles.textinput}></TextInput>
                     </View>
-                    <View >
+                    <View>
                         <TextInput placeholder={'Note'} style={styles.textinput1}></TextInput>
                     </View>
                 </View>
