@@ -11,7 +11,7 @@ const styles = StyleSheet.create({
     },
     cardcontainer: {
         width: 400,
-        height: 90
+        height: 90,
     },
     input: {
         width: 200,
@@ -73,7 +73,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         backgroundColor: '#d6dbdf',
     },
-    cardcontainer1: {
+    cardContainer1: {
         width: 400,
         height: 150
     },
@@ -106,7 +106,7 @@ const styles = StyleSheet.create({
     /**
      * forgot password css
      */
-    forgotcontainer: {
+    forgotContainer: {
         flex: 1,
         alignItems: 'center',
         justifyContent: 'center',

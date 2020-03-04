@@ -7,12 +7,12 @@ export default function register(data){
     return axios.post(Config.REACT_APP_BASE_URL+configApi.registration,data)
     }
     
-export function Login(data){
+export function login(data){
     console.warn("login data",data,"url")
     return axios.post(Config.REACT_APP_BASE_URL+configApi.login,data)
 
 }
-export function Fotget(data){
+export function forget(data){
     console.warn("forgetpassword data",data)
     return axios.post(Config.REACT_APP_BASE_URL+configApi.forgetPassword,data)
 

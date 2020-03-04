@@ -5,7 +5,7 @@ import Forget from './components/forgetPassword'
 import DashBoard from './components/dashboard'
 import Notes from './components/notes'
 import drawerComponent from './components/drawerComponent'
-import ReminderComponent from './components/remainder'
+// import ReminderComponent from './components/remainder'
 const AppNavigation = createStackNavigator(
     {
         login: {
@@ -44,15 +44,15 @@ const AppNavigation = createStackNavigator(
                 header: null
             }
         },
-        remainder:{
-            screen:ReminderComponent,
-            navigationOptions:{
-                header:null
-            }
-        }
+        // remainder:{
+        //     screen:ReminderComponent,
+        //     navigationOptions:{
+        //         header:null
+        //     }
+        // }
     },
     {
-        initialRouteName: "remainder"
+        initialRouteName: "login"
     }
 )
 export default AppNavigation

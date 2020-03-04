@@ -16,7 +16,7 @@
 import React, { Component } from 'react'
 import { View, Button, Text, Alert } from 'react-native'
 // import Icon from 'react-native-vector-icons/FontAwesome';
-import {Fotget} from '../services/userServices'
+import {forget} from '../services/userServices'
 import { Card } from 'react-native-elements';
 import styles from '../Styles';
 import { TextInput } from 'react-native-gesture-handler';
@@ -39,14 +39,14 @@ export class Forget extends Component {
             email:this.state.email
         }
         console.warn("new user pasword datails", user);
-        Fotget(user).then((response) => {
+        forget(user).then((response) => {
         console.warn("response coming to forgotpassword", response)
         })
     };
     render() {
         return (
-            <View style={styles.forgotcontainer}>
-              <Card style={styles.cardcontainer1}>
+            <View style={styles.forgotContainer}>
+              <Card style={styles.cardContainer1}>
                 <View >
                     <Text style={styles.Text3}>ForgotPassword</Text>
                 </View>

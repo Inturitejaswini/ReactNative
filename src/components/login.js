@@ -18,9 +18,9 @@ import { View, Button, Text ,Alert} from 'react-native'
 import { Card } from 'react-native-elements';
 import styles from '../Styles';
 import { Image } from 'react-native';
-import { Login } from '../services/userServices'
+import { login } from '../services/userServices'
 import { Snackbar } from 'react-native-paper'
-import { TextInput } from 'react-native-gesture-handler';
+import { TextInput, ScrollView } from 'react-native-gesture-handler';
 export class LoginComponent extends Component {
     constructor() {
         super();
@@ -71,7 +71,7 @@ export class LoginComponent extends Component {
             password: this.state.password,
         }
         console.log("new user dateils", user);
-        Login(user).then(response => {
+        login(user).then(response => {
             console.warn("response coming to userlogin", response)
             this.props.navigation.navigate('dashboard')
         }
@@ -81,6 +81,7 @@ export class LoginComponent extends Component {
     render() {
         return (
             <View style={styles.container}>
+                <ScrollView>
                 <Card style={styles.cardcontainer}>
                     <View>
                         <Text style={styles.Text}>Member Login</Text>
@@ -139,6 +140,7 @@ export class LoginComponent extends Component {
                     }}>
                     </Snackbar>
                 </Card>
+                </ScrollView>
             </View>
         )
     }
