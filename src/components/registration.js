@@ -15,7 +15,7 @@
 
 import React, { Component } from 'react'
 import { View, Button, Text, Alert } from 'react-native'
-import styles from '../Css';
+import styles from '../Styles';
 import register from '../services/userServices'
 import { Card } from 'react-native-elements';
 import { Snackbar } from 'react-native-paper'

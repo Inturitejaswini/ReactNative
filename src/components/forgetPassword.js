@@ -18,7 +18,7 @@ import { View, Button, Text, Alert } from 'react-native'
 // import Icon from 'react-native-vector-icons/FontAwesome';
 import {Fotget} from '../services/userServices'
 import { Card } from 'react-native-elements';
-import styles from '../Css';
+import styles from '../Styles';
 import { TextInput } from 'react-native-gesture-handler';
 export class Forget extends Component {
     constructor() {

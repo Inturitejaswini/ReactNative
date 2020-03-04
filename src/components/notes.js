@@ -16,10 +16,10 @@
 import React, { Component } from 'react'
 import { View, Button, Text } from 'react-native'
 import { Image, TouchableOpacity } from 'react-native'
-import styles from '../Css';
+import styles from '../Styles';
 import { TextInput, } from 'react-native-gesture-handler';
 import RBSheet from "react-native-raw-bottom-sheet";
-import Example from '../components/remainder'
+// import Example from '../components/remainder'
 export class Notes extends React.Component {
     constructor() {
         super();
@@ -41,9 +41,7 @@ export class Notes extends React.Component {
                     <Image source={require("../assets/pushpin.jpeg")} style={styles.pushpinicon}></Image>
                 </View>
                 <View >
-                    {/* <Image source={require("../assets/alert.png")}
-                        style={styles.alerticon} ></Image> */}
-                        <Example></Example>
+                    <Image source={require("../assets/alert.png")}></Image>
                 </View>
                 <View>
                     <Image source={require("../assets/archive.png")} style={styles.archiveicon}></Image>

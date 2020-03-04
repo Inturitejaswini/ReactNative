@@ -14,7 +14,7 @@
  ******************************************************************************/
 import * as React from 'react';
 import { Appbar, Toolbar } from 'react-native-paper';
-import styles from '../Css';
+import styles from '../Styles';
 import { DrawerActions } from 'react-navigation-drawer';
 import { View, Text, TouchableOpacity } from 'react-native';
 import { Image } from 'react-native'
