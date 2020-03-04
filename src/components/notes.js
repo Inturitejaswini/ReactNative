@@ -19,7 +19,8 @@ import { Image, TouchableOpacity } from 'react-native'
 import styles from '../Styles';
 import { TextInput, } from 'react-native-gesture-handler';
 import RBSheet from "react-native-raw-bottom-sheet";
-// import Example from '../components/remainder'
+
+import ReminderComponent from '../components/remainder'
 export class Notes extends React.Component {
     constructor() {
         super();
@@ -41,7 +42,8 @@ export class Notes extends React.Component {
                     <Image source={require("../assets/pushpin.jpeg")} style={styles.pushpinicon}></Image>
                 </View>
                 <View >
-                    <Image source={require("../assets/alert.png")}></Image>
+                    {/* <Image source={require("../assets/alert.png")}></Image> */}
+                    <ReminderComponent></ReminderComponent>
                 </View>
                 <View>
                     <Image source={require("../assets/archive.png")} style={styles.archiveicon}></Image>
