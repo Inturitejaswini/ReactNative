@@ -28,16 +28,7 @@ export class ReminderComponent extends Component {
         this.setState({ dialogVisible: false });
     };
 
-    // handleSave = async () => {
-    //     let value = this.state.date + " " + this.state.time;
-    //     console.log("value", value);
-    //     await this.setState({
-    //         reminderValue: value,
-    //         dialogVisible: false
-    //     });
-    //     console.log("reminder value", this.state.reminderValue);
-    //     this.props.reminderProps(this.state.reminderValue);
-    // };
+   
     showDatePicker = () => {
         this.setState({ isDatePickerVisible: true });
     };
@@ -72,14 +63,14 @@ export class ReminderComponent extends Component {
 
         this.hideTimePicker();
     };
-    updateUser = user => {
-        this.setState({ user: user });
-    };
+    // updateUser = user => {
+    //     this.setState({ user: user });
+    // };
     render() {
         return (
             <View>
-                <TouchableOpacity>
-                    <Image source={require("../assets/alert.png")} onPress={this.showDialog}></Image>
+                <TouchableOpacity onPress={this.showDialog}>
+                    <Image source={require("../assets/alert.png")} ></Image>
                 </TouchableOpacity>
                 <Dialog visible={this.state.dialogVisible}>
                     <Title>Add reminder</Title>

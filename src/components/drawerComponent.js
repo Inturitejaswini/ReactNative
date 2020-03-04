@@ -17,6 +17,7 @@ import {createDrawerNavigator} from 'react-navigation-drawer'
 import { createAppContainer } from 'react-navigation';
 import DashBoard from'../components/dashboard';
 import { StyleSheet } from 'react-native'
+import ReminderComponent from '../components/remainder'
 import Notes from '../components/notes'
 const Drawer = createDrawerNavigator({
     dashboard:{
@@ -25,6 +26,9 @@ const Drawer = createDrawerNavigator({
     notes: {
         screen:Notes
       },
+Remainder:{
+    screen:ReminderComponent
+}
     
 })
 export default drawer=createAppContainer(Drawer);
