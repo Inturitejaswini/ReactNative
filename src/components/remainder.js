@@ -50,7 +50,31 @@ export class ReminderComponent extends Component {
     hideTimePicker = () => {
         this.setState({ isTimePickerVisible: false });
     };
-    
+    handleDatePicked = date => {
+        console.log("A date has been picked: ", date);
+        let date1 = "" + date;
+        let dateFormat = date1.slice(4, 10);
+        this.setState({
+            date: dateFormat
+        });
+        console.log("date after state", this.state.date);
+
+        this.hideDatePicker();
+    };
+    handleTimePicked = time => {
+        console.log("A date has been picked: ", time);
+        let Time1 = "" + time;
+        let timeFormat = Time1.slice(16, 21);
+        this.setState({
+            time: timeFormat
+        });
+        console.log("time after state", this.state.time);
+
+        this.hideTimePicker();
+    };
+    // updateUser = user => {
+    //     this.setState({ user: user });
+    // };
     render() {
         return (
             <View>
