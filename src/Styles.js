@@ -8,14 +8,12 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         backgroundColor: '#d6dbdf',
+        display:'flex'
     },
-    cardcontainer: {
-        width: 400,
-        height: 90,
+    snackbar:{
+
     },
     input: {
-        width: 200,
-        height: 44,
         padding: 10,
         borderWidth: 1,
         borderColor: 'black',
@@ -57,22 +55,16 @@ const styles = StyleSheet.create({
         marginBottom: 10,
 
     },
-    bottomNavigationView: {
-        backgroundColor: '#fff',
-        width: '100%',
-        height: 250,
-        justifyContent: 'center',
-        alignItems: 'center',
-    },
     /**
      * REGISTARTION CSS
      */
-    registercontainer: {
+    registerContainer: {
         flex: 1,
         alignItems: 'center',
         justifyContent: 'center',
         backgroundColor: '#d6dbdf',
     },
+   
     cardContainer1: {
         width: 400,
         height: 150
@@ -235,9 +227,9 @@ const styles = StyleSheet.create({
         marginTop: 440,
 
     },
-    boxicon:{
+    boxicon: {
         marginTop: 450,
-        marginLeft:20
+        marginLeft: 20
     },
     menupaper: {
         marginTop: 40,
@@ -258,14 +250,14 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center',
-        marginTop:120,
+        marginTop: 120,
         fontSize: 20
     },
     deleteText: {
         marginLeft: 20,
         fontSize: 20
     },
-    deleteicon:{
+    deleteicon: {
         marginLeft: 25,
     },
     copyicons: {
@@ -273,14 +265,14 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center',
-       alignContent:'flex-start',
-       marginTop:25
+        alignContent: 'flex-start',
+        marginTop: 25
     },
-    copyText:{
+    copyText: {
         marginLeft: 20,
         fontSize: 20
     },
-    copy:{
+    copy: {
         marginLeft: 20,
     },
     sendicons: {
@@ -289,55 +281,55 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between',
         alignItems: 'center',
         fontSize: 20,
-        marginTop:25
+        marginTop: 25
     },
-    sendText:{
+    sendText: {
         marginLeft: 20,
         fontSize: 20
     },
-    send:{
+    send: {
         marginLeft: 25,
     },
-    addpersonicons:{
+    addpersonicons: {
         display: 'flex',
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center',
         fontSize: 20,
-        marginTop:25
+        marginTop: 25
         // marginRight: 200,
     },
-    collabaratorText :{
+    collabaratorText: {
         marginLeft: 20,
         fontSize: 20
     },
-    collabator:{
+    collabator: {
         marginLeft: 25,
     },
-    labelicons:{
+    labelicons: {
         display: 'flex',
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center',
         fontSize: 20,
-        marginTop:25
+        marginTop: 25
         // marginRight: 200,  
     },
-    labelText:{
+    labelText: {
         marginLeft: 20,
         fontSize: 20
     },
-    label:{
+    label: {
         marginLeft: 25,
     },
-    moreicons:{
-display:'flex',
-flexDirection:'column',
-alignItems:'flex-start',
-justifyContent:'space-between',
-marginRight:230,
-marginBottom:160,
-// marginflexstart:20
+    moreicons: {
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'flex-start',
+        justifyContent: 'space-between',
+        marginRight: 230,
+        marginBottom: 160,
+        // marginflexstart:20
     }
 });
 export default styles

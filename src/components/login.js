@@ -19,7 +19,7 @@ import { Card } from 'react-native-elements';
 import styles from '../Styles';
 import { Image } from 'react-native';
 import { login } from '../services/userServices'
-import { Snackbar } from 'react-native-paper'
+import Snackbar from "react-native-snackbar-component";
 import { TextInput, ScrollView } from 'react-native-gesture-handler';
 export class LoginComponent extends Component {
     constructor() {
@@ -27,50 +27,34 @@ export class LoginComponent extends Component {
         this.state = {
             email: '',
             password: '',
-            // snackbarOpen: false,
-            // snackbarMessage: '',
-            snackIsVisible:false,
+            snackIsVisible: false
         }
     }
-    snackbarClose = (event) => {
-        this.setState({ snackbarOpen: false })
-     }
-    handleusername = async (event) => {
+    handleemail = async (event) => {
         // console.warn(event)
-        // if (event.match("^([a-zA-Z0-9]+@+[a-zA-Z0-9]+.+[A-z])*$") != null) {
         await this.setState({ email: event });
         // console.warn("email", this.state.email);
-    // }
-    // else {
-    //    await this.setState({ snackbarOpen: true, snackbarMessage: " *enter valid email" })
-    // }
     };
     handlepassword = async (event) => {
         // console.warn(event)
-        // if (event.match("^[0-9 ]*$") != null) {
        await this.setState({ password: event });
         //     // console.warn("password", this.state.password);
-    // }
-    // else {
-    //   await this.setState({ snackbarOpen: true, snackbarMessage: " *password should minimum 6 character" })
-    // }
     };
     handleLogin = async () => {
-        // User(this.state.email);
-        if(this.state.email === ""){
+        if (this.state.email === "") {
             this.setState({
-                snackIsVisible:!this.state.snackIsVisible
+              snackIsVisible: !this.state.snackIsVisible
             });
-        }else if(this.state.password === ""){
+        } else if (this.state.password === "") {
             this.setState({
-                snackIsVisible:!this.state.snackIsVisible
+              snackIsVisible: !this.state.snackIsVisible
             });
         }else {
         const user = {
             email: this.state.email,
             password: this.state.password,
         }
-        console.log("new user dateils", user);
+        console.warn("new user dateils", user);
         login(user).then(response => {
             console.warn("response coming to userlogin", response)
             this.props.navigation.navigate('dashboard')
@@ -81,8 +65,24 @@ export class LoginComponent extends Component {
     render() {
         return (
             <View style={styles.container}>
-                <ScrollView>
-                <Card style={styles.cardcontainer}>
+                <Snackbar  
+                    style={styles.snackbar}
+                    visible={this.state.snackIsVisible}
+                    textMessage="enter the requirements"
+                    actionHandler={()=>{
+                        alert("fill the correct email and password");
+                        this.setState({
+                            snackIsVisible:!this.state.snackIsVisible
+                        });
+                    }}
+                    actionText="lets go"
+                    distanceCallback={distance=>{
+                        this.setState({distance:distance});
+                        }}>
+                    {/* enter valid email and password */}
+                    </Snackbar>
+                <Card style={styles.cardContainer}>
+                {/* <ScrollView></ScrollView> */}
                     <View>
                         <Text style={styles.Text}>Member Login</Text>
                     </View>
@@ -95,8 +95,8 @@ export class LoginComponent extends Component {
                         {this.state.snackbarMessage}
                   </Snackbar> */}
                     <TextInput
-                        value={this.state.username}
-                        onChangeText={this.handleusername}
+                        value={this.state.email}
+                        onChangeText={this.handleemail}
                         placeholder={'Username'}
                         style={styles.input}>
                     </TextInput>
@@ -122,25 +122,11 @@ export class LoginComponent extends Component {
                         />
                     </View>
                     <View style={styles.forgot}>
-                        <Text onPress={() => this.props.navigation.navigate('forgetPassword')}
-                        >Forgot Password?</Text>
+                        <Text onPress={() => this.props.navigation.navigate('forgetPassword')}>Forgot Password?</Text>
                     </View>
-                    <Snackbar 
-                    visible={this.state.snackIsVisible}
-                    textMessage="enter the requirements"
-                    actionHandler={()=>{
-                        alert("fill the correct email and password");
-                        this.setState({
-                            snackIsVisible:!this.state.snackIsVisible
-                        });
-                    }}
-                    actionText="lets go"
-                    distanceCallback={distance=>{
-                        this.setState({distance:distance});
-                    }}>
-                    </Snackbar>
+                   
                 </Card>
-                </ScrollView>
+                {/* </ScrollView>    */}
             </View>
         )
     }

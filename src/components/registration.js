@@ -18,8 +18,8 @@ import { View, Button, Text, Alert } from 'react-native'
 import styles from '../Styles';
 import register from '../services/userServices'
 import { Card } from 'react-native-elements';
-import { Snackbar } from 'react-native-paper'
-import { TextInput } from 'react-native-gesture-handler';
+import Snackbar from "react-native-snackbar-component";
+import { TextInput, ScrollView } from 'react-native-gesture-handler';
 export class RegisterComponent extends Component {
     constructor() {
         super();
@@ -29,64 +29,50 @@ export class RegisterComponent extends Component {
             phoneNumber: '',
             email: '',
             password: '',
-            snackbarOpen: false,
-            snackbarMessage: '',
+            snackIsVisible: false,
             visible: false,
 
         }
     }
     x
     handlefirstName = async (event) => {
-        // console.warn(event)
-        if (event.match("^[a-zA-z ]*$") != null) {
             this.setState({ firstName: event });
-            // console.warn("firstname", this.state.firstname);
-        }
-        else {
-            this.setState({ snackbarOpen: true, snackbarMessage: " *first name should contain only characters" })
-        }
     };
     handlelastName = async (event) => {
-        // console.warn(event)
-        if (event.match("^[a-zA-z ]*$") != null) {
             this.setState({ lastName: event });
-            // console.log("lastname", this.state.lastname);
-        }
-        else {
-            this.setState({ snackbarOpen: true, snackbarMessage: " *last name should contain only characters" })
-        }
     };
     handlephoneNumber = async (event) => {
-        // console.warn(event)
-        if (event.match("^[0-9 ]") != null) {
             this.setState({ phoneNumber: event });
-            // console.log("phonenumber", this.state.phonenumber);
-        }
-        else {
-            await this.setState({ snackbarOpen: true, snackbarMessage: " *number should be 10 digits" })
-        }
     };
     handleemail = async (event) => {
-        // console.warn(event)        
-        // if (event.match("^([a-zA-Z0-9]+@+[a-zA-Z0-9]+.+[A-z])*$") != null) {
             this.setState({ email: event });
-            // console.log("email", this.state.email);
-        // }
-        // else {
-        //     await this.setState({ snackbarOpen: true, snackbarMessage: " *enter valid email" })
-        // }
     };
     handlepassword = async (event) => {
-        // console.warn(event)
-        if (event.match("^[0-9 ]*$") != null) {
             this.setState({ password: event });
-            // console.warn("password", this.state.password);
-        }
-        else {
-            await this.setState({ snackbarOpen: true, snackbarMessage: " *password should minimum 6 character" })
-        }
     };
     handleregister = () => {
+        if (this.state.firstName === "") {
+            this.setState({
+              snackIsVisible: !this.state.snackIsVisible
+            });
+          } else if (this.state.lastName === "") {
+            this.setState({
+              snackIsVisible: !this.state.snackIsVisible
+            });
+          }
+          else if (this.state.phoneNumber === "") {
+            this.setState({
+              snackIsVisible: !this.state.snackIsVisible
+            });
+          }  else if (this.state.email === "") {
+            this.setState({
+              snackIsVisible: !this.state.snackIsVisible
+            });
+          } else if (this.state.password === "") {
+            this.setState({
+              snackIsVisible: !this.state.snackIsVisible
+            });
+          } else {
         const user = {
             firstName: this.state.firstName,
             lastName: this.state.lastName,
@@ -95,19 +81,34 @@ export class RegisterComponent extends Component {
             password: this.state.password,
             service: "advance",
         }
-        // console.warn("new user datails", user);
         register(user).then((response) => {
             console.warn("response coming to user", response)
         })
     }
+}
     handleLogin = () => {
         this.props.history.push('./login')
-        alert("Clicked On Button !!!");
     };
     render() {
         return (
-            <View style={styles.registercontainer}>
-                <Card style={styles.cardcontainer1}>
+            <View style={styles.registerContainer}>
+                <Snackbar
+              style={styles.snackbarCss}
+              visible={this.state.snackIsVisible}
+              textMessage="enter the requirements"
+              actionHandler={() => {
+                alert("fill all the details of registration");
+                this.setState({
+                  snackIsVisible: !this.state.snackIsVisible
+                });
+              }}
+              actionText="let's go"
+              distanceCallback={distance => {
+                this.setState({ distance: distance });
+              }}
+            />
+                {/* <ScrollView style={styles.scrole}> */}
+                <Card style={styles.cardContainer1}>
                     <View >
                         <Text style={styles.Text1}>Registration</Text>
                     </View>
@@ -153,17 +154,17 @@ export class RegisterComponent extends Component {
                         <Button
                             onPress={this.handleregister}
                             title="Register"
-                            color="#00B0FF"
-                        />
+                            color="#00B0FF"/>
                     </View>
                     <View style={styles.loginbtn}>
                         <Button
                             onPress={() => this.props.navigation.navigate('login')}
                             title="Login"
-                            color="#00B0FF"
-                        />
+                            color="#00B0FF"/>
                     </View>
                 </Card>
+                
+                {/* </ScrollView> */}
             </View>
         )
     }
