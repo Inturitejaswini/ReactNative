@@ -8,9 +8,9 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         backgroundColor: '#d6dbdf',
-        display:'flex'
+        display: 'flex'
     },
-    snackbar:{
+    cardContainer: {
 
     },
     input: {
@@ -64,7 +64,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         backgroundColor: '#d6dbdf',
     },
-   
+
     cardContainer1: {
         width: 400,
         height: 150
@@ -142,6 +142,10 @@ const styles = StyleSheet.create({
         borderRadius: 10,
         top: 15,
     },
+    Icon: {
+        marginTop: 470,
+        marginLeft: 300
+    },
     menuitem: {
         marginLeft: 5
     },
@@ -157,23 +161,14 @@ const styles = StyleSheet.create({
     searchicon: {
         marginLeft: 30
     },
-    gridicon: {
-        marginLeft: 30
+    grid: {
+        right: -20,
+        top: -1,
+
     },
     accounticon: {
-        marginLeft: 50,
-        width: 40,
-        height: 40
+        marginLeft: 60,
     },
-    //   bottom: {
-    //     position: 'absolute',
-    //     left: 10,
-    //     right: 10,
-    //     backgroundColor:'#fbfcfc',
-    //     borderRadius:10,
-    //     bottom:40,
-    //     marginBottom:100
-    //   },
     input4: {
         top: 560,
         backgroundColor: '#fbfcfc',
@@ -199,23 +194,24 @@ const styles = StyleSheet.create({
     /**
      *notes app.css  
      * */
-
     gobackicon: {
         width: 20,
         marginTop: 10,
         marginLeft: 8
     },
     pushpinicon: {
-        width: 25,
-        height: 25,
         marginLeft: 210,
         marginTop: -20
 
     },
+    plusicon: {
+        marginTop: 420,
+        marginLeft: 8
+
+    },
     alerticon: {
-        marginLeft: 270,
-        marginTop: -25,
-        width: 20,
+        marginLeft: 260,
+        marginTop: -20,
     },
     archiveicon: {
         marginLeft: 320,
@@ -224,8 +220,7 @@ const styles = StyleSheet.create({
     },
     moreicon: {
         marginLeft: 320,
-        marginTop: 440,
-
+        top:-22
     },
     boxicon: {
         marginTop: 450,

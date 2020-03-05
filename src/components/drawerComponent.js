@@ -13,22 +13,28 @@
  *  @since          :25-2-2020
  ******************************************************************************/
 import React, { Component } from 'react';
-import {createDrawerNavigator} from 'react-navigation-drawer'
+import { createDrawerNavigator } from 'react-navigation-drawer'
 import { createAppContainer } from 'react-navigation';
-import DashBoard from'../components/dashboard';
+import DashBoard from '../components/dashboard';
 import { StyleSheet } from 'react-native'
 import ReminderComponent from '../components/remainder'
 import Notes from '../components/notes'
 const Drawer = createDrawerNavigator({
-    dashboard:{
-        screen:DashBoard
+    dashboard: {
+        screen: DashBoard
     },
     notes: {
-        screen:Notes
-      },
-Remainder:{
-    screen:ReminderComponent
-}
-    
-})
-export default drawer=createAppContainer(Drawer);
+        screen: Notes
+    },
+    Remainder: {
+        screen: ReminderComponent
+    }
+},
+{
+        drawerWidth: 300,
+        drawerPosition: "left",
+        contentOptions: {
+        }
+    }
+)
+export default drawer = createAppContainer(Drawer);

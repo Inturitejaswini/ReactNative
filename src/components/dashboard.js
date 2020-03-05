@@ -17,72 +17,121 @@ import { Appbar, Toolbar } from 'react-native-paper';
 import styles from '../Styles';
 import { DrawerActions } from 'react-navigation-drawer';
 import { View, Text, TouchableOpacity } from 'react-native';
+import Icon from "react-native-vector-icons/Entypo";
+import Icon5 from "react-native-vector-icons/Entypo";
+import Icon0 from "react-native-vector-icons/AntDesign";
+import Icon4 from "react-native-vector-icons/AntDesign";
+import Icon6 from "react-native-vector-icons/MaterialIcons";
+import Icon7 from "react-native-vector-icons/Entypo";
 import { Image } from 'react-native'
+import Icon1 from "react-native-vector-icons/MaterialCommunityIcons";
+import Icon3 from 'react-native-vector-icons/MaterialCommunityIcons'
+// import {Notes} from '../components/notes'
 // import Drawer from '../components/drawerComponent'
 export class DashBoard extends React.Component {
-    constructor() {
-        super();
-        this.state = {
-            openDrawer: false,
-            open: false
-        }
+  constructor() {
+    super();
+    this.state = {
+      openDrawer: false,
+      open: false
     }
-    openDrawer = () => {
-        this.setState({ openDrawer: !this.state.openDrawer })
-    }
-    
-    render() {
-        return (
-            <View>
-                <Appbar style={styles.top}>
-                    <View style={styles.menuitem}>
-                        <TouchableOpacity
-                            onPress={() => this.props.navigation.dispatch(DrawerActions.openDrawer())}>
-                            <Image source={require("../assets/menuicon.png")}>
-                            </Image>
-                        </TouchableOpacity>
-                    </View>
-                    <View >
-                        <Image source={require("../assets/keepicon.png")} style={styles.keepicon}></Image>
-                    </View>
-                    <View>
-                        <Text style={styles.fundooText}>FundooNote</Text>
-                    </View>
-                    <View style={styles.searchicon}>
-                        <Image source={require("../assets/searchicon.png")}></Image>
-                    </View>
-                    {!this.state.open ? (
-                        <View style={styles.gridicon}>
-                            <Image source={require("../assets/gridicon.png")}></Image>
-                        </View>
-                    ) : (
-                            <View style={styles.listicon}>
-                                <Image source={require("../assets/listview.png")}></Image>
-                            </View>)}
-                    <View>
-                        <Image source={require("../assets/accounticon.png")}
-                         style={styles.accounticon}></Image>
-                    </View>
-                </Appbar>
-                <View>
-                    <Appbar style={styles.input4}>
-                        <View style={styles.checkicon}>
-                            <Image source={require("../assets/checkbox.png")}></Image>
-                        </View>
-                        <View style={styles.brushicon}>
-                            <Image source={require("../assets/brush.png")}></Image>
-                        </View>
-                        <View style={styles.voiceicon}>
-                            <Image source={require("../assets/voice.png")}></Image>
-                        </View>
-                        <View style={styles.imageicon}>
-                            <Image source={require("../assets/image.png")}></Image>
-                        </View>
-                    </Appbar>
-                </View>
+  }
+  openDrawer = () => {
+    this.setState({ openDrawer: !this.state.openDrawer })
+  }
+  handleNote = () => {
+    this.props.navigation.navigate("notes");
+  };
+
+  handleGridView() {
+    // console.log("listview response", listOpen);
+    this.setState({
+      listOpen: !this.state.listOpen
+    });
+    console.log("listView response", this.state.listOpen);
+  }
+ 
+  render() {
+    return (
+      <View>
+        <Appbar style={styles.top}>
+          <View style={styles.menuitem}>
+            <TouchableOpacity
+              onPress={() => this.props.navigation.dispatch(DrawerActions.openDrawer())}>
+              <Image source={require("../assets/menuicon.png")}>
+              </Image>
+            </TouchableOpacity>
+          </View>
+          <View >
+            <Image source={require("../assets/keepicon.png")} style={styles.keepicon}></Image>
+          </View>
+          <View>
+            <Text style={styles.fundooText}>FundooNote</Text>
+          </View>
+          <View style={styles.searchicon}>
+            <Image source={require("../assets/searchicon.png")}></Image>
+          </View>
+          <View style={styles.grid}>
+            {!this.state.listOpen ? (
+              <TouchableOpacity >
+                <Icon1
+                  name="view-stream"
+                  size={30}
+                  onPress={() => {
+                    this.handleGridView();
+                  }}
+                />
+              </TouchableOpacity>
+            ) : (
+                <TouchableOpacity >
+                  <Icon
+                    name="grid"
+                    size={30}
+                    onPress={() => {
+                      this.handleGridView();
+                    }}
+                  />
+                </TouchableOpacity>
+              )}
+          </View>
+          <View>
+            <Icon3 name="account-circle"
+              size={40}
+              style={styles.accounticon}></Icon3>
+          </View>
+        </Appbar>
+        {/* <Notes></Notes> */}
+
+        <View>
+          <Appbar style={styles.input4}>
+            <View style={styles.checkicon}>
+              <Icon4 name="checksquareo" size={20}>
+              </Icon4>
             </View>
-        );
-    }
+            <View style={styles.brushicon}>
+              <Icon5 name="brush" size={20}>
+              </Icon5>
+            </View>
+            <View style={styles.voiceicon}>
+              <Icon6 name="keyboard-voice" size={20}>
+              </Icon6>
+            </View>
+            <View style={styles.imageicon}>
+              <Icon7 name="image" size={20}>
+              </Icon7>
+            </View>
+          </Appbar>
+        </View>
+        <TouchableOpacity style={styles.plusIcon} onPress={() => this.handleNote()}>
+          <Icon0
+            style={styles.Icon}
+            name="pluscircleo"
+            size={30}
+          />
+        </TouchableOpacity>
+      </View>
+    );
+  }
 }
 
 

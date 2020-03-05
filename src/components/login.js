@@ -79,10 +79,9 @@ export class LoginComponent extends Component {
                     distanceCallback={distance=>{
                         this.setState({distance:distance});
                         }}>
-                    {/* enter valid email and password */}
                     </Snackbar>
+                {/* <ScrollView> */}
                 <Card style={styles.cardContainer}>
-                {/* <ScrollView></ScrollView> */}
                     <View>
                         <Text style={styles.Text}>Member Login</Text>
                     </View>

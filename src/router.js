@@ -4,6 +4,7 @@ import RegisterComponent from './components/registration'
 import Forget from './components/forgetPassword'
 import DashBoard from './components/dashboard'
 import Notes from './components/notes'
+import ReminderComponent from './components/remainder'
 import drawerComponent from './components/drawerComponent'
 const AppNavigation = createStackNavigator(
     {
@@ -39,6 +40,12 @@ const AppNavigation = createStackNavigator(
         },
         notes: {
             screen: Notes,
+            navigationOptions: {
+                header: null
+            }
+        },
+        remainder: {
+            screen: ReminderComponent,
             navigationOptions: {
                 header: null
             }
