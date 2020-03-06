@@ -26,16 +26,32 @@ import Icon7 from "react-native-vector-icons/Entypo";
 import { Image } from 'react-native'
 import Icon1 from "react-native-vector-icons/MaterialCommunityIcons";
 import Icon3 from 'react-native-vector-icons/MaterialCommunityIcons'
-// import {Notes} from '../components/notes'
+import {Notes} from '../components/notes'
 // import Drawer from '../components/drawerComponent'
+import GetNoteComponent from "../components/getNoteComponent";
 export class DashBoard extends React.Component {
   constructor() {
     super();
     this.state = {
       openDrawer: false,
-      open: false
+      open: false,
+      notes: [],
+      reminder: [],
+
     }
   }
+  // componentDidMount() {
+  //   this.getNotes();
+  //   // this.getImage();
+  // }
+  // getNotes = () => {
+  //   getNotes().then(res => {
+  //     console.log("res in get notes", res);
+  //     this.setState({
+  //       notes: res
+  //     });
+  //   });
+  // };
   openDrawer = () => {
     this.setState({ openDrawer: !this.state.openDrawer })
   }
@@ -52,6 +68,22 @@ export class DashBoard extends React.Component {
   }
  
   render() {
+    let noteDetails = this.state.notes.map(key => {
+      let notes = key.data();
+      {
+        return (
+          <View>
+            <TouchableOpacity >
+              <Card>
+                <Text> {notes.title}</Text>
+                <Text> {notes.description}</Text>
+                <Text>{notes.reminder}</Text>
+              </Card>
+            </TouchableOpacity>
+          </View>
+        );
+      }
+    });
     return (
       <View>
         <Appbar style={styles.top}>

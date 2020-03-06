@@ -5,6 +5,7 @@ import Forget from './components/forgetPassword'
 import DashBoard from './components/dashboard'
 import Notes from './components/notes'
 import ReminderComponent from './components/remainder'
+import GetNoteComponent from './components/getNoteComponent'
 import drawerComponent from './components/drawerComponent'
 const AppNavigation = createStackNavigator(
     {
@@ -50,6 +51,12 @@ const AppNavigation = createStackNavigator(
                 header: null
             }
         },
+        getNoteComponent:{
+            screen:GetNoteComponent,
+            navigationOptions:{
+                header:null
+            }
+        }
     },
     {
         initialRouteName: "login"

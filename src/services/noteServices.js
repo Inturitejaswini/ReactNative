@@ -1,8 +1,16 @@
 import axios from 'axios'
 import Config from 'react-native-config'
 import noteConfigApi from '../constants/noteApiConstant'
+import AsyncStorage from '@react-native-community/async-storage'
 
-export default function createNotes(data){
-    console.warn("note data",data,"url");
-    return axios.post(Config.REACT_APP_BASE_URL+noteConfigApi.noteAdd,data)
-    }
+export async function createNotes(data) {
+    let AccessToken = await AsyncStorage.getItem('@storage_Key')
+    console.warn("token is coming",AccessToken)
+    let res = axios.post(Config.REACT_APP_BASE_URL + noteConfigApi.noteAdd, data,
+        {
+            headers: {
+                Authorization:AccessToken
+            }
+        })
+    return res
+}

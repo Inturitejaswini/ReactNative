@@ -15,7 +15,7 @@
 ******************************************************************************/
 import React, { Component } from 'react'
 import { View, Button, Text } from 'react-native'
-import { Image, TouchableOpacity } from 'react-native'
+import { Image, TouchableOpacity , FlatList} from 'react-native'
 import styles from '../Styles';
 import { TextInput, ScrollView, } from 'react-native-gesture-handler';
 import RBSheet from "react-native-raw-bottom-sheet";
@@ -29,10 +29,28 @@ import Icon9 from "react-native-vector-icons/AntDesign";
 import Icon10 from "react-native-vector-icons/Feather";
 import Icon8 from "react-native-vector-icons/MaterialCommunityIcons";
 import Icon3 from "react-native-vector-icons/MaterialCommunityIcons";
-import createNotes from '../services/noteServices'
+import {createNotes} from '../services/noteServices'
 import Icon from "react-native-vector-icons/Ionicons";
-import { Chip } from 'react-native-paper';
+import AsyncStorage from '@react-native-community/async-storage'
+import { IconButton } from 'react-native-paper';
 import { Card } from 'react-native-elements';
+const colors = [
+    // { name: "blue", hexcode: "#F5F5DC" }
+    { name: "blue", hexcode: " #39a78e" },
+    { name: "violet", hexcode: "#7DCEA0" },
+    { name: "blue", hexcode: "#76D7C4" },
+    { name: "orange", hexcode: "#5499C7" },
+    { name: "beige", hexcode: "#79d4e7" },
+    { name: "golden", hexcode: "#EC7063" },
+    { name: "lightorange", hexcode: "#E59866" },
+    { name: "skyblue", hexcode: "#d3a625" },
+    { name: "green", hexcode: "#F7DC6F" },
+    { name: "darkseagreen", hexcode: "#BB8FCE" },
+    { name: "blue", hexcode: "#D2B4DE" },
+    { name: "gray", hexcode: "#ABB2B9" },
+    { name: "salmon", hexcode: "#98AFC7" },
+    { name: "mistyRose", hexcode: "#74a775" }
+  ];
 // import ReminderComponent from '../components/remainder'
 export class Notes extends React.Component {
     constructor() {
@@ -42,6 +60,7 @@ export class Notes extends React.Component {
             title: "",
             description: "",
             reminderDate: "",
+            color: "",
         }
         this.reminderData = this.reminderData.bind(this);
     }
@@ -52,6 +71,13 @@ export class Notes extends React.Component {
         });
         console.warn("date and time ", this.state.reminderDate);
     };
+    // handleColor = async color => {
+    //     console.log("colors-------->", color);
+    //     await this.setState({
+    //       color: color
+    //     });
+    //     console.log("data of color ", this.state.color);
+    //   };
     handleNote = () => {
         let data = {
             title: this.state.title,
@@ -59,8 +85,8 @@ export class Notes extends React.Component {
             reminder: this.state.reminderDate,
         };
         // console.warn("note data", data);
-        createNotes(data).then(Response => {
-            console.warn("res of note data--->", Response);
+        createNotes(data).then(response => {
+            console.warn("response is coming to note component",response)
         });
         this.props.navigation.navigate("dashboard");
     };
@@ -72,138 +98,129 @@ export class Notes extends React.Component {
         return (
             <View>
                 <ScrollView>
-                {/* <Card > */}
-                <View   style={styles.icons} >
-                <View>
-                    <TouchableOpacity onPress={() => this.handleNote()}>
-                        <Image source={require("../assets/goback.png")}
-                            style={styles.gobackicon}></Image>
-                    </TouchableOpacity>
-                </View>
-               
-                <View >
-                    <Icon3 name="pin-outline"  style={styles.pushpinicon} size={25}></Icon3>
-                </View>
-                <View>
-                    <ReminderComponent reminderProps={this.reminderData} ></ReminderComponent>
-                </View>
-                <View>
-                    <Icon name="md-archive" style={styles.archiveicon} size={22}></Icon>
-                </View>
-                </View>
-                <View >
+                    {/* <Card > */}
+
                     <View>
-                        <TextInput placeholder={'Title'}
-                            style={styles.textinput}
-                            onChangeText={title => this.setState({ title })}
-                            value={this.state.text}>
-                        </TextInput>
+                        <TouchableOpacity onPress={() => this.handleNote()}>
+                            <Image source={require("../assets/goback.png")}
+                                style={styles.gobackicon}></Image>
+                        </TouchableOpacity>
                     </View>
-                    <View>
-                        <TextInput placeholder={'Note'}
-                            style={styles.textinput1}
-                            onChangeText={description => this.setState({ description })}
-                            value={this.state.text}>
-                        </TextInput>
+                    <View style={styles.icons} >
+                        <View >
+                            <Icon3 name="pin-outline" style={styles.pushpinicon} size={25}></Icon3>
+                        </View>
+                        <View>
+                            <ReminderComponent reminderProps={this.reminderData} ></ReminderComponent>
+                        </View>
+                        <View>
+                            <Icon name="md-archive" style={styles.archiveicon} size={22}></Icon>
+                        </View>
                     </View>
-                    {/* <Chip style={{ width: 150,left: 25  }}> */}
-                    <Text style={{ fontWeight: "bold", left: 25 }}>
-                        {this.state.reminderDate}
-                    </Text>
-                    {/* </Chip> */}
-                </View>
-                <View>
-                <View>
-                 <TouchableOpacity onPress={() => { this.RBSheet1.open() }}>
-                <Icon9 name="plussquareo" size={20} style={styles.plusicon}></Icon9>
-                <RBSheet1
-                        ref={ref => {
-                            this.RBSheet1 = ref;
-                        }}
-                        height={300}
-                        duration={250}
-                        customStyles={{
-                            container: {
-                                justifyContent: "center",
-                                alignItems: "center"
-                            }
-                        }}>    
-                        </RBSheet1>
-                </TouchableOpacity>
-                </View>
-                <View>
-                <TouchableOpacity onPress={() => { this.RBSheet.open() }}>
-                    <Icon10 name="more-vertical"  style={styles.moreicon} size={20}></Icon10>
-                    <RBSheet
-                        ref={ref => {
-                            this.RBSheet = ref;
-                        }}
-                        height={300}
-                        duration={250}
-                        customStyles={{
-                            container: {
-                                justifyContent: "center",
-                                alignItems: "center"
-                            }
-                        }}>
-                        <View style={styles.moreicons}>
-                            <TouchableOpacity>
-                                <View style={styles.deleteicons} >
-                                    <View>
-                                    <Icon5 name="delete" style={styles.deleteicon} size={20}></Icon5>
-                                    </View>
-                                    <View>
-                                        <Text style={styles.deleteText}>Delete</Text>
-                                    </View>
-                                </View>
-                            </TouchableOpacity>
-                            <TouchableOpacity>
-                                <View style={styles.copyicons}>
-                                    <View>
-                                        <Image source={require("../assets/copy.png")} style={styles.copy}></Image>
-                                    </View>
-                                    <View>
-                                        <Text style={styles.copyText}>Make a Copy</Text>
-                                    </View>
-                                </View>
-                            </TouchableOpacity>
-                            <TouchableOpacity>
-                                <View style={styles.sendicons}>
-                                    <View>
-                                        <Icon6 name="md-send" style={styles.send} size={20}></Icon6>
-                                    </View>
-                                    <View>
-                                        <Text style={styles.sendText}>Send</Text>
-                                    </View>
-                                </View>
-                            </TouchableOpacity>
-                            <TouchableOpacity>
-                                <View style={styles.addpersonicons}>
-                                    <View>
-                                        <Icon7 name="md-person-add"  style={styles.collabator} size={20}></Icon7>
-                                    </View>
-                                    <View>
-                                        <Text style={styles.collabaratorText}>Collabarator</Text>
-                                    </View>
-                                </View>
-                            </TouchableOpacity>
-                            <TouchableOpacity>
-                                <View style={styles.labelicons}>
-                                    <View>
-                                    <Icon8 name="label-outline" style={styles.label} size={20}></Icon8>
-                                    </View>
-                                    <View>
-                                        <Text style={styles.labelText}>Labels</Text>
-                                    </View>
-                                </View>
+                    <View style={styles.textinput} >
+                        <View>
+                            <TextInput placeholder={'Title'}
+                                onChangeText={title => this.setState({ title })}
+                                value={this.state.text}>
+                            </TextInput>
+                        </View>
+                        <View>
+                            <TextInput placeholder={'Note'}
+                                onChangeText={description => this.setState({ description })}
+                                value={this.state.text}>
+                            </TextInput>
+                        </View>
+                        {/* <Chip style={{ width: 150,left: 25  }}> */}
+                        <Text style={{ fontWeight: "bold", left: 25 }}>
+                            {this.state.reminderDate}
+                        </Text>
+                        {/* </Chip> */}
+                    </View>
+                    <View style={styles.plusicon}>
+                        <View>
+                            <TouchableOpacity onPress={() => { this.RBSheet1.open() }}>
+                                <Icon9 name="plussquareo" size={20} ></Icon9>
+                                <RBSheet1
+                                    ref={ref => {
+                                        this.RBSheet1 = ref;
+                                    }}
+                                    height={300}
+                                    duration={250}
+                                    customStyles={{
+                                        container: {
+                                            justifyContent: "center",
+                                            alignItems: "center"}}}>
+                                </RBSheet1>
                             </TouchableOpacity>
                         </View>
+                        <View>
+                            <TouchableOpacity onPress={() => { this.RBSheet.open() }}>
+                                <Icon10 name="more-vertical" style={styles.moreicon} size={20}></Icon10>
+                                <RBSheet
+                                    ref={ref => {
+                                        this.RBSheet = ref;
+                                    }}
+                                    height={300}
+                                    duration={250}
+                                    customStyles={{
+                                        container: {
+                                            justifyContent: "center",
+                                            alignItems: "center"
+                                        }
+                                    }}>
+                                    <View style={styles.deleteicons}>
+                                        <TouchableOpacity style={styles.icon}>
+                                            <View style={styles.iconText}>
+                                                <Icon5 name="delete" size={20}></Icon5>
+                                                <Text style={styles.iconText1}>Delete</Text>
+                                            </View>
+                                        </TouchableOpacity>
+                                        <TouchableOpacity style={styles.icon}>
+                                            <View style={styles.iconText}>
+                                                <Image source={require("../assets/copy.png")}></Image>
+                                                <Text style={styles.iconText1}>Make a Copy</Text>
+                                            </View>
+                                        </TouchableOpacity>
+                                        <TouchableOpacity style={styles.icon}>
+                                            <View style={styles.iconText}>
+                                                <Icon6 name="md-send" size={20}></Icon6>
+                                                <Text style={styles.iconText1}>Send</Text>
+                                            </View>
+                                        </TouchableOpacity>
+                                        <TouchableOpacity style={styles.icon}>
+                                            <View style={styles.iconText}>
+                                                <Icon7 name="md-person-add" size={20}></Icon7>
+                                                <Text style={styles.iconText1}>Collabarator</Text>
+                                            </View>
+                                        </TouchableOpacity>
+                                        <TouchableOpacity style={styles.icon}>
+                                            <View style={styles.iconText}>
+                                                <Icon8 name="label-outline" size={20}></Icon8>
+                                                <Text style={styles.iconText1}>Labels</Text>
+                                            </View>
+                                        </TouchableOpacity>
+                                        {/* <View>
+                                            <FlatList
+                                                data={colors}
+                                                horizontal={true}
+                                                renderItem={({ item }) => (
+                                                    <View>
+                                                        <IconButton
+                                                            style={{ backgroundColor: item.hexcode }}
+                                                            value={item.hexcode}
+                                                            size={20}
+                                                            onPress={() => this.handleColor(item.hexcode)}
+                                                        />
+                                                    </View>
+                                                     )}/>
+                                        </View> */}
+                                    </View>
 
-                    </RBSheet>
-                </TouchableOpacity>
-                </View>
-                </View>
-                {/* </Card> */}
+                                </RBSheet>
+                            </TouchableOpacity>
+                        </View>
+                    </View>
+                    {/* </Card> */}
                 </ScrollView>
             </View>
         )

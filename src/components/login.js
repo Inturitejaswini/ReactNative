@@ -14,11 +14,12 @@
 ******************************************************************************/
 
 import React, { Component } from 'react'
-import { View, Button, Text ,Alert} from 'react-native'
+import { View, Button, Text, Alert } from 'react-native'
 import { Card } from 'react-native-elements';
 import styles from '../Styles';
 import { Image } from 'react-native';
 import { login } from '../services/userServices'
+import AsyncStorage from '@react-native-community/async-storage'
 import Snackbar from "react-native-snackbar-component";
 import { TextInput, ScrollView } from 'react-native-gesture-handler';
 export class LoginComponent extends Component {
@@ -31,56 +32,55 @@ export class LoginComponent extends Component {
         }
     }
     handleemail = async (event) => {
-        // console.warn(event)
         await this.setState({ email: event });
-        // console.warn("email", this.state.email);
     };
     handlepassword = async (event) => {
-        // console.warn(event)
-       await this.setState({ password: event });
-        //     // console.warn("password", this.state.password);
+        await this.setState({ password: event });
     };
     handleLogin = async () => {
         if (this.state.email === "") {
             this.setState({
-              snackIsVisible: !this.state.snackIsVisible
+                snackIsVisible: !this.state.snackIsVisible
             });
         } else if (this.state.password === "") {
             this.setState({
-              snackIsVisible: !this.state.snackIsVisible
+                snackIsVisible: !this.state.snackIsVisible
             });
-        }else {
-        const user = {
-            email: this.state.email,
-            password: this.state.password,
+        } else {
+            const user = {
+                email: this.state.email,
+                password: this.state.password,
+            }
+            console.warn("new user datails", user);
+            login(user).then(async response => {
+                console.warn("response coming to userlogin", response.data.id)
+                let Id = await AsyncStorage.setItem('@storage_Key',response.data.id);
+                console.warn("token id", Id)
+                let AccessToken = await AsyncStorage.getItem('@storage_Key')
+                console.warn("token is coming", AccessToken)
+                this.props.navigation.navigate('dashboard')
+            }
+            )
         }
-        console.warn("new user dateils", user);
-        login(user).then(response => {
-            console.warn("response coming to userlogin", response)
-            this.props.navigation.navigate('dashboard')
-        }
-        )
     }
-}
     render() {
         return (
             <View style={styles.container}>
-                <Snackbar  
+                <Snackbar
                     style={styles.snackbar}
                     visible={this.state.snackIsVisible}
                     textMessage="enter the requirements"
-                    actionHandler={()=>{
+                    actionHandler={() => {
                         alert("fill the correct email and password");
                         this.setState({
-                            snackIsVisible:!this.state.snackIsVisible
+                            snackIsVisible: !this.state.snackIsVisible
                         });
                     }}
                     actionText="lets go"
-                    distanceCallback={distance=>{
-                        this.setState({distance:distance});
-                        }}>
-                    </Snackbar>
-                {/* <ScrollView> */}
+                    distanceCallback={distance => {
+                        this.setState({ distance: distance });
+                    }}>
+                </Snackbar>
                 <Card style={styles.cardContainer}>
                     <View>
                         <Text style={styles.Text}>Member Login</Text>
@@ -123,9 +123,8 @@ export class LoginComponent extends Component {
                     <View style={styles.forgot}>
                         <Text onPress={() => this.props.navigation.navigate('forgetPassword')}>Forgot Password?</Text>
                     </View>
-                   
+
                 </Card>
-                {/* </ScrollView>    */}
             </View>
         )
     }

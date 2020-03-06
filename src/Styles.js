@@ -197,134 +197,45 @@ const styles = StyleSheet.create({
     gobackicon: {
         width: 20,
         marginTop: 10,
-        marginLeft: 8
-    },
-    pushpinicon: {
-        marginLeft: 210,
-        marginTop: -20
-
+        marginLeft:20
     },
     plusicon: {
-        marginTop: 420,
-        marginLeft: 8
+        justifyContent: 'space-between',
+        flexDirection: 'row',
+        marginTop: 420
 
     },
-    alerticon: {
-        marginLeft: 260,
-        marginTop: -20,
-    },
-    archiveicon: {
-        marginLeft: 320,
-        marginTop: -25,
-        width: 20,
-    },
-    moreicon: {
-        marginLeft: 320,
-        top:-22
-    },
-    boxicon: {
-        marginTop: 450,
-        marginLeft: 20
-    },
-    menupaper: {
-        marginTop: 40,
-        width: 300,
-    },
-    textinput: {
-        marginLeft: 20,
-        fontSize: 20,
-        marginTop: 4
-    },
-    textinput1: {
-        marginLeft: 20,
-        fontSize: 15
-
+    icons: {
+        alignItems: 'flex-start',
+        justifyContent: 'space-around',
+        flexDirection: 'row',
+        marginTop:-20,
+        marginLeft:70
     },
     deleteicons: {
-        display: 'flex',
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        alignItems: 'center',
-        marginTop: 120,
-        fontSize: 20
-    },
-    deleteText: {
-        marginLeft: 20,
-        fontSize: 20
-    },
-    deleteicon: {
-        marginLeft: 25,
-    },
-    copyicons: {
-        display: 'flex',
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        alignItems: 'center',
-        alignContent: 'flex-start',
-        marginTop: 25
-    },
-    copyText: {
-        marginLeft: 20,
-        fontSize: 20
-    },
-    copy: {
-        marginLeft: 20,
-    },
-    sendicons: {
-        display: 'flex',
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        alignItems: 'center',
-        fontSize: 20,
-        marginTop: 25
-    },
-    sendText: {
-        marginLeft: 20,
-        fontSize: 20
-    },
-    send: {
-        marginLeft: 25,
-    },
-    addpersonicons: {
-        display: 'flex',
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        alignItems: 'center',
-        fontSize: 20,
-        marginTop: 25
-        // marginRight: 200,
-    },
-    collabaratorText: {
-        marginLeft: 20,
-        fontSize: 20
-    },
-    collabator: {
-        marginLeft: 25,
-    },
-    labelicons: {
-        display: 'flex',
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        alignItems: 'center',
-        fontSize: 20,
-        marginTop: 25
-        // marginRight: 200,  
-    },
-    labelText: {
-        marginLeft: 20,
-        fontSize: 20
-    },
-    label: {
-        marginLeft: 25,
-    },
-    moreicons: {
-        display: 'flex',
-        flexDirection: 'column',
+        flex: 2,
         alignItems: 'flex-start',
+        flexDirection: 'column',
+        justifyContent: 'space-between'
+    },
+    icon: {
+        alignItems: 'flex-start',
+        justifyContent: 'space-around',
+        flexDirection: 'column',
+    },
+    iconText: {
+        flexDirection: 'row',
         justifyContent: 'space-between',
-        marginRight: 230,
-        marginBottom: 160,
-        // marginflexstart:20
+        marginTop: 30,
+        marginLeft: -170,
+    },
+    iconText1: {
+        marginLeft: 30
+    },
+    textinput:{
+        marginLeft:20,
+        marginTop:20
     }
+   
 });
 export default styles
