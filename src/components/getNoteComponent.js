@@ -3,26 +3,36 @@ import { Image } from "react-native";
 import { ScrollView, Text, View, TouchableOpacity } from "react-native";
 import { Card } from "react-native-elements";
 import styles from "../Styles";
+import {getNotes} from '../services/noteServices'
 import { Chip } from "react-native-paper";
-export  class GetNoteComponent extends Component {
+export class GetNoteComponent extends Component {
   constructor() {
     super();
-    this.state = { notes: [] };
+    this.state = {
+      notes: []
+    };
   }
   // static navigationOptions = {
   //   drawerLabel: "Notes",
   //   drawerIcon: <Icon2 name="bulb1" size={20} />
   // };
-//   componentDidMount() {
-//     getNotes().then(res => {
-//       console.log("res in get notes", res);
-//       this.setState({
-//         notes: res
-//       });
-//       console.log("getNote data after setting state", this.state.notes);
-//     });
-//   }
   
+    componentDidMount = () => {
+      this.getAllNotes();
+  }
+    getAllNotes = () => {
+      getNotes()
+          .then(res => {
+              this.setState({
+                  notes: res.data.data.data
+              })
+              console.log("getNote data ", this.state.notes)
+           
+          })
+      this.setState({
+          open: false
+      })
+  }
   render() {
     let noteDetails = this.state.notes.map(key => {
       return (
@@ -37,8 +47,8 @@ export  class GetNoteComponent extends Component {
         </View>
       );
     });
-    return( 
-    <View >{noteDetails}</View>
+    return (
+      <View >{noteDetails}</View>
     );
   }
 }

@@ -16,7 +16,7 @@ import * as React from 'react';
 import { Appbar, Toolbar } from 'react-native-paper';
 import styles from '../Styles';
 import { DrawerActions } from 'react-navigation-drawer';
-import { View, Text, TouchableOpacity } from 'react-native';
+import { View, Text, TouchableOpacity ,ProgressBarAndroid} from 'react-native';
 import Icon from "react-native-vector-icons/Entypo";
 import Icon5 from "react-native-vector-icons/Entypo";
 import Icon0 from "react-native-vector-icons/AntDesign";
@@ -26,7 +26,7 @@ import Icon7 from "react-native-vector-icons/Entypo";
 import { Image } from 'react-native'
 import Icon1 from "react-native-vector-icons/MaterialCommunityIcons";
 import Icon3 from 'react-native-vector-icons/MaterialCommunityIcons'
-import {Notes} from '../components/notes'
+import { getNotes } from '../services/noteServices'
 // import Drawer from '../components/drawerComponent'
 import GetNoteComponent from "../components/getNoteComponent";
 export class DashBoard extends React.Component {
@@ -40,18 +40,22 @@ export class DashBoard extends React.Component {
 
     }
   }
-  // componentDidMount() {
-  //   this.getNotes();
-  //   // this.getImage();
-  // }
-  // getNotes = () => {
-  //   getNotes().then(res => {
-  //     console.log("res in get notes", res);
-  //     this.setState({
-  //       notes: res
-  //     });
-  //   });
-  // };
+  componentDidMount = () => {
+    this.getAllNotes();
+  }
+  getAllNotes = () => {
+    getNotes()
+      .then(res => {
+        this.setState({
+          notes: res.data.data.data
+        })
+        console.log("getNote data ", this.state.notes)
+
+      })
+    this.setState({
+      open: false
+    })
+  }
   openDrawer = () => {
     this.setState({ openDrawer: !this.state.openDrawer })
   }
@@ -66,24 +70,24 @@ export class DashBoard extends React.Component {
     });
     console.log("listView response", this.state.listOpen);
   }
- 
+
   render() {
-    let noteDetails = this.state.notes.map(key => {
-      let notes = key.data();
-      {
-        return (
-          <View>
-            <TouchableOpacity >
-              <Card>
-                <Text> {notes.title}</Text>
-                <Text> {notes.description}</Text>
-                <Text>{notes.reminder}</Text>
-              </Card>
-            </TouchableOpacity>
-          </View>
-        );
-      }
-    });
+    // let noteDetails = this.state.notes.map(key => {
+    //   let notes = key.data();
+    //    {
+    //     return (
+    //       <View >
+    //         <TouchableOpacity>
+    //           <Card >
+    //             <Text > {notes.title}</Text>
+    //             <Text> {notes.description}</Text>
+    //             <Text >{notes.reminder}</Text>
+    //           </Card>
+    //         </TouchableOpacity>
+    //       </View>
+    //     );
+    //   }
+    // });
     return (
       <View>
         <Appbar style={styles.top}>
@@ -132,8 +136,22 @@ export class DashBoard extends React.Component {
               style={styles.accounticon}></Icon3>
           </View>
         </Appbar>
-        {/* <Notes></Notes> */}
-
+        <GetNoteComponent ></GetNoteComponent>
+        {/* {noteDetails.length > 0 ? (
+            <View>
+              <View>{noteDetails}</View>
+            </View>
+          ) : (
+            <ProgressBarAndroid
+              color="gray"
+              progress={0.9}
+              style={{
+                flex: 1,
+                flexDirection: "column",
+                alignItems: "center"
+              }}
+            />
+          )} */}
         <View>
           <Appbar style={styles.input4}>
             <View style={styles.checkicon}>
