@@ -235,7 +235,12 @@ const styles = StyleSheet.create({
     textinput:{
         marginLeft:20,
         marginTop:20
-    }
-   
+    },
+   /**
+    * getnote component css
+    */
+   getcard:{
+       marginTop:50
+   }
 });
 export default styles

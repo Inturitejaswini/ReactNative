@@ -15,10 +15,10 @@ export async function createNotes(data) {
     return res
 }
 
-export async function getNotes(data){
+export async function getNotes(){
     let AccessToken = await AsyncStorage.getItem('@storage_Key')
     console.warn("token is coming",AccessToken)
-    let res = axios.get(Config.REACT_APP_BASE_URL + noteConfigApi.getNotes, data,
+    let res = axios.get(Config.REACT_APP_BASE_URL + noteConfigApi.getNotes,
         {
             headers: {
                 Authorization:AccessToken

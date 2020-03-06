@@ -29,6 +29,7 @@ import Icon3 from 'react-native-vector-icons/MaterialCommunityIcons'
 import { getNotes } from '../services/noteServices'
 // import Drawer from '../components/drawerComponent'
 import GetNoteComponent from "../components/getNoteComponent";
+import { ScrollView } from 'react-native-gesture-handler';
 export class DashBoard extends React.Component {
   constructor() {
     super();
@@ -72,22 +73,7 @@ export class DashBoard extends React.Component {
   }
 
   render() {
-    // let noteDetails = this.state.notes.map(key => {
-    //   let notes = key.data();
-    //    {
-    //     return (
-    //       <View >
-    //         <TouchableOpacity>
-    //           <Card >
-    //             <Text > {notes.title}</Text>
-    //             <Text> {notes.description}</Text>
-    //             <Text >{notes.reminder}</Text>
-    //           </Card>
-    //         </TouchableOpacity>
-    //       </View>
-    //     );
-    //   }
-    // });
+
     return (
       <View>
         <Appbar style={styles.top}>
@@ -136,7 +122,10 @@ export class DashBoard extends React.Component {
               style={styles.accounticon}></Icon3>
           </View>
         </Appbar>
-        <GetNoteComponent ></GetNoteComponent>
+        <ScrollView>
+        <GetNoteComponent />
+        </ScrollView>
+       
         {/* {noteDetails.length > 0 ? (
             <View>
               <View>{noteDetails}</View>
