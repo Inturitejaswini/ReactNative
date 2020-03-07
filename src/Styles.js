@@ -266,9 +266,21 @@ const styles = StyleSheet.create({
         borderRadius: 10
     },
     getNoteCard: {
-        // flexDirection: "row",
+        flexDirection: "row",
         justifyContent: "space-between",
-        // flexWrap: "wrap"
-    }
+        flexWrap: "wrap"
+    },
+    /**
+     * editcomponent css
+     */
+    editIcons: {
+        flex: 1,
+        flexDirection: "row",
+        justifyContent:'space-around'
+        // justifyContent: "space-between"
+      },
+      noteData: {
+        left: 10
+      },
 });
 export default styles

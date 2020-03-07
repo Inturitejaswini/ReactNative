@@ -7,6 +7,7 @@ import Notes from './components/notes'
 import ReminderComponent from './components/remainder'
 import GetNoteComponent from './components/getNoteComponent'
 import drawerComponent from './components/drawerComponent'
+import EditComponent from './components/editComponent'
 const AppNavigation = createStackNavigator(
     {
         login: {
@@ -53,6 +54,12 @@ const AppNavigation = createStackNavigator(
         },
         getNoteComponent:{
             screen:GetNoteComponent,
+            navigationOptions:{
+                header:null
+            }
+        },
+        editComponent:{
+            screen:EditComponent,
             navigationOptions:{
                 header:null
             }

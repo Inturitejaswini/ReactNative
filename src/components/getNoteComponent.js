@@ -36,20 +36,32 @@ export class GetNoteComponent extends Component {
   }
   
   render() {
-    let Align = this.props.listViewProps ? styles.gridAlign : styles.listAlign;
+    let Align = this.state.listOpen ? styles.listAlign : styles.gridAlign;
     let noteDetails = this.state.notes.map(key => {
       // let notes=key.data;
       return (
         <View style={styles.getcard}>
+         <View style={Align}>
           <ScrollView>
-          <Card>
-            <View>
-              <Text>{key.title}</Text>
-            <Text>{key.description}</Text>
-              <Text>{key.reminder}</Text> 
-            </View>
-          </Card>
+          <TouchableOpacity
+                onPress={() =>
+                  this.props.navigation.navigate("editComponent", {
+                    display: key,
+                    key: key.id
+                  })
+                }
+                style={styles.card_css}
+              >
+            <Card >
+              <View>
+                <Text>{key.title}</Text>
+                <Text>{key.description}</Text>
+                <Text>{key.reminder}</Text>
+              </View>
+            </Card>
+            </TouchableOpacity>
           </ScrollView>
+          </View>
         </View>
       );
     });

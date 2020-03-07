@@ -29,7 +29,7 @@ import Icon2 from "react-native-vector-icons/AntDesign";
 import Icon1 from "react-native-vector-icons/MaterialCommunityIcons";
 import Icon3 from 'react-native-vector-icons/MaterialCommunityIcons'
 import { getNotes } from '../services/noteServices'
-// import Drawer from '../components/drawerComponent'
+import EditComponent from '../components/editComponent'
 import GetNoteComponent from "../components/getNoteComponent";
 import { ScrollView } from 'react-native-gesture-handler';
 export class DashBoard extends React.Component {
@@ -43,33 +43,15 @@ export class DashBoard extends React.Component {
 
     }
   }
-  // componentDidMount = () => {
-  //   this.getAllNotes();
-  // }
-  // getAllNotes = () => {
-  //   getNotes()
-  //     .then(res => {
-  //       this.setState({
-  //         notes: res.data.data.data
-  //       })
-  //       console.log("getNote data ", this.state.notes)
-
-  //     })
-  //   this.setState({
-  //     open: false
-  //   })
-  // }
   componentDidMount() {
     this.getNotes();
     // this.getImage();
   }
   getNotes = () => {
     getNotes().then(res => {
-      // console.warn("res in get notes", res.data.data.data);
       this.setState({
         notes: res.data.data.data
       });
-      // console.warn("res in get notes", notes);
     });
   };
   openDrawer = () => {
@@ -80,7 +62,6 @@ export class DashBoard extends React.Component {
   };
 
   handleGridView() {
-    // console.log("listview response", listOpen);
     this.setState({
       listOpen: !this.state.listOpen
     });
@@ -98,11 +79,23 @@ export class DashBoard extends React.Component {
   };
 
   render() {
+    let Align = this.state.listOpen ? styles.listAlign : styles.gridAlign;
     var noteDetails = this.state.notes.map(key => {
       // let notes=key.data;
       return (
         <View >
+          <View style={Align}>
           <ScrollView>
+          <TouchableOpacity
+                onPress={() =>
+                  this.props.navigation.navigate('editComponent',{
+                    display: key,
+                    key: key.id
+                  }
+                  )
+                }
+                style={styles.card_css}
+              >
             <Card >
               <View>
                 <Text>{key.title}</Text>
@@ -110,7 +103,9 @@ export class DashBoard extends React.Component {
                 <Text>{key.reminder}</Text>
               </View>
             </Card>
+            </TouchableOpacity>
           </ScrollView>
+          </View>
         </View>
       )
     })
@@ -158,7 +153,6 @@ export class DashBoard extends React.Component {
           </Card>
           <View>
         <ScrollView>
-          <View style={styles.getNoteCard}>{noteDetails}</View>
           {noteDetails.length > 0 ? (
             <View>
               <View style={styles.getNoteCard}>{noteDetails}</View>
