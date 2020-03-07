@@ -134,17 +134,32 @@ const styles = StyleSheet.create({
     /**
      * dashboard component app.css
      */
-    top: {
-        position: 'absolute',
-        left: 10,
-        right: 10,
-        backgroundColor: '#fbfcfc',
-        borderRadius: 10,
-        top: 15,
+    cardText: {
+        fontSize: 30,
+        left: 26
     },
+    input4: {
+        backgroundColor: "#fff",
+        flexDirection: "row",
+        justifyContent: "space-between",
+        elevation: 5,
+        height: 50,
+        position:'absolute'
+      },
+      input5: {
+        width: "50%",
+        flexDirection: "row",
+        margin: 15,
+        justifyContent: "space-between"
+      },
+    dashboardContainer: {
+        flex: 1,
+        flexDirection: "column",
+        justifyContent: "space-between"
+      },
     Icon: {
-        marginTop: 470,
-        marginLeft: 300
+        left: 130
+
     },
     menuitem: {
         marginLeft: 5
@@ -155,11 +170,18 @@ const styles = StyleSheet.create({
         width: 20
 
     },
+    appicons: {
+        // flex: 2,
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        top:-10
+    },
     fundooText: {
         marginLeft: 5
     },
     searchicon: {
-        marginLeft: 30
+        marginLeft: 40
     },
     grid: {
         right: -20,
@@ -170,34 +192,33 @@ const styles = StyleSheet.create({
         marginLeft: 60,
     },
     input4: {
-        top: 560,
+        // top: 580,
         backgroundColor: '#fbfcfc',
         // boxshadow:'0 0 15',
-        borderRadius: 8,
+        // borderRadius: 8,
+        flexDirection: 'row',
+        justifyContent: 'space-around',
+        alignItems: 'center',
+        right: 10
     },
-    checkicon: {
-        marginLeft: 25,
-        width: 20,
-        height: 20
+    input5: {
+        top: -5,
+        backgroundColor: '#fbfcfc',
+        // boxshadow:'0 0 15',
+        // borderRadius: 8,
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        right: 8
     },
-    brushicon: {
-        marginLeft: 25
-    },
-    imageicon: {
-        marginLeft: 25
-
-    },
-    voiceicon: {
-        marginLeft: 25
-
-    },
+    
     /**
      *notes app.css  
      * */
     gobackicon: {
         width: 20,
         marginTop: 10,
-        marginLeft:20
+        marginLeft: 20
     },
     plusicon: {
         justifyContent: 'space-between',
@@ -209,8 +230,8 @@ const styles = StyleSheet.create({
         alignItems: 'flex-start',
         justifyContent: 'space-around',
         flexDirection: 'row',
-        marginTop:-20,
-        marginLeft:70
+        marginTop: -20,
+        marginLeft: 70
     },
     deleteicons: {
         flex: 2,
@@ -232,15 +253,22 @@ const styles = StyleSheet.create({
     iconText1: {
         marginLeft: 30
     },
-    textinput:{
-        marginLeft:20,
-        marginTop:20
+    textinput: {
+        marginLeft: 20,
+        marginTop: 20
     },
-   /**
-    * getnote component css
-    */
-   getcard:{
-       marginTop:50
-   }
+    /**
+     * getnote component css
+     */
+    getcard: {
+        marginTop: 60,
+        marginBottom: -60,
+        borderRadius: 10
+    },
+    getNoteCard: {
+        flexDirection: "row",
+        justifyContent: "space-between",
+        flexWrap: "wrap"
+    }
 });
 export default styles

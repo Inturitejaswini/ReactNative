@@ -59,7 +59,7 @@ const AppNavigation = createStackNavigator(
         }
     },
     {
-        initialRouteName: "login"
+        initialRouteName: "drawerComponent"
     }
 )
 export default AppNavigation

@@ -76,6 +76,10 @@ export default class ReminderComponent extends Component {
   updateUser = user => {
     this.setState({ user: user });
   };
+  static navigationOptions = {
+    drawerLabel: "Reminder",
+    drawerIcon: <Icon1 name="bell-plus-outline" size={20} />
+};
   render() {
     return (
       <View>

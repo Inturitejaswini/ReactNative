@@ -34,17 +34,19 @@ export class GetNoteComponent extends Component {
       open: false
     })
   }
+  
   render() {
+    let Align = this.props.listViewProps ? styles.gridAlign : styles.listAlign;
     let noteDetails = this.state.notes.map(key => {
       // let notes=key.data;
       return (
-        <View>
+        <View style={styles.getcard}>
           <ScrollView>
-          <Card style={styles.getcard}>
+          <Card>
             <View>
               <Text>{key.title}</Text>
             <Text>{key.description}</Text>
-            <Chip>{key.reminder}</Chip>
+              <Text>{key.reminder}</Text> 
             </View>
           </Card>
           </ScrollView>
