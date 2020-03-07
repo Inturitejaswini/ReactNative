@@ -14,7 +14,6 @@ export async function createNotes(data) {
         })
     return res
 }
-
 export async function getNotes(){
     let AccessToken = await AsyncStorage.getItem('@storage_Key')
     console.warn("token is coming",AccessToken)
