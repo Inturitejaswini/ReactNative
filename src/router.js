@@ -4,6 +4,7 @@ import RegisterComponent from './components/registration'
 import Forget from './components/forgetPassword'
 import DashBoard from './components/dashboard'
 import Notes from './components/notes'
+import CreateLabelComponent from './components/createLabel'
 import ReminderComponent from './components/remainder'
 import GetNoteComponent from './components/getNoteComponent'
 import drawerComponent from './components/drawerComponent'
@@ -60,6 +61,12 @@ const AppNavigation = createStackNavigator(
         },
         editComponent:{
             screen:EditComponent,
+            navigationOptions:{
+                header:null
+            }
+        },
+        createLabel:{
+            screen:CreateLabelComponent,
             navigationOptions:{
                 header:null
             }

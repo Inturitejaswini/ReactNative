@@ -19,6 +19,7 @@ import DashBoard from '../components/dashboard';
 import { StyleSheet } from 'react-native'
 import ReminderComponent from '../components/remainder'
 import Notes from '../components/notes'
+import CreateLabelComponent from '../components/createLabel'
 const Drawer = createDrawerNavigator({
     dashboard: {
         screen: DashBoard
@@ -28,6 +29,9 @@ const Drawer = createDrawerNavigator({
     },
     Remainder: {
         screen: ReminderComponent
+    },
+    createLabel:{
+        screen:CreateLabelComponent
     }
 },
 {

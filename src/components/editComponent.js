@@ -11,6 +11,7 @@ import RBSheet1 from "react-native-raw-bottom-sheet";
 import RBSheet2 from "react-native-raw-bottom-sheet";
 import styles from "../Styles";
 import { editNotes } from '../services/noteServices'
+import {archiveNotes} from '../services/noteServices'
 import ReminderComponent from '../components/remainder'
 import {
     ScrollView,
@@ -30,6 +31,7 @@ export class EditComponent extends Component {
             reminderDate: "",
             reminder: "",
             delete: false,
+            archive: false,
             key: ''
 
         };
@@ -61,13 +63,28 @@ export class EditComponent extends Component {
             });
         });
     };
+    handleArchiveNote = (key) => {
+        console.log("archive data", this.state.archive);
+        let data = {
+          archive: this.state.archive,
+          key: this.props.navigation.state.params.key
+        };
+        archiveNotes(data).then(res => {
+          console.log("res after api", res);
+          this.setState({
+            archive: res.archive
+          });
+          console.log("archive data after set state", this.state.archive);
+        });
+      };
     handleEditCard = () => {
         let data = {
             title: this.state.title,
             description: this.state.description,
             delete: this.state.delete,
-            // key: this.props.navigation.state.params.key,
+            noteId: this.props.navigation.state.params.key,
             reminder: this.state.reminderDate,
+            archive: this.state.archive,
         };
         console.warn("editnote data", data);
         editNotes(data).then(res => {
@@ -82,6 +99,7 @@ export class EditComponent extends Component {
             delete: this.props.navigation.state.params.display.delete,
             description: this.props.navigation.state.params.display.description,
             reminder: this.props.navigation.state.params.display.reminder,
+            archive: this.props.navigation.state.params.display.archive
         })
     }
     render() {
@@ -115,7 +133,7 @@ export class EditComponent extends Component {
                             <Icon3
                                 name="archive"
                                 size={25}
-                                onPress={() => { this.handleArchiveNote() }} />
+                                onPress={() =>  this.handleArchiveNote()}/>
                         </View>
                     </View>
                 </View>
@@ -139,7 +157,7 @@ export class EditComponent extends Component {
                         />
                     </View>
                     <Text style={{ fontWeight: "bold", left: 10 }}>
-                        {this.state.reminder}
+                        {this.state.reminderDate}
                     </Text>
                 </View>
                 <View
