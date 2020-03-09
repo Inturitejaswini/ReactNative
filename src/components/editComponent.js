@@ -12,7 +12,14 @@ import RBSheet2 from "react-native-raw-bottom-sheet";
 import styles from "../Styles";
 import { editNotes } from '../services/noteServices'
 import ReminderComponent from '../components/remainder'
-import { ScrollView, Text, TextInput, View, FlatList, TouchableOpacity } from "react-native";
+import {
+    ScrollView,
+    Text,
+    TextInput,
+    View,
+    FlatList,
+    TouchableOpacity
+} from "react-native";
 
 export class EditComponent extends Component {
     constructor() {
@@ -21,6 +28,7 @@ export class EditComponent extends Component {
             title: "",
             description: "",
             reminderDate: "",
+            reminder: "",
             delete: false,
             key: ''
 
@@ -58,7 +66,7 @@ export class EditComponent extends Component {
             title: this.state.title,
             description: this.state.description,
             delete: this.state.delete,
-            key: this.props.navigation.state.params.key,
+            // key: this.props.navigation.state.params.key,
             reminder: this.state.reminderDate,
         };
         console.warn("editnote data", data);
@@ -71,7 +79,7 @@ export class EditComponent extends Component {
         console.log("key------>", this.props.navigation.state.params.display);
         this.setState({
             title: this.props.navigation.state.params.display.title,
-            //   delete: this.props.navigation.state.params.display.delete,
+            delete: this.props.navigation.state.params.display.delete,
             description: this.props.navigation.state.params.display.description,
             reminder: this.props.navigation.state.params.display.reminder,
         })
@@ -131,7 +139,7 @@ export class EditComponent extends Component {
                         />
                     </View>
                     <Text style={{ fontWeight: "bold", left: 10 }}>
-                        {this.state.reminderDate}
+                        {this.state.reminder}
                     </Text>
                 </View>
                 <View

@@ -64,7 +64,13 @@ export class DashBoard extends React.Component {
 
   handleGridView() {
     this.setState({
-      listOpen: !this.state.listOpen
+      listOpen: true
+    });
+    console.log("listView response", this.state.listOpen);
+  }
+  handleGridView1() {
+    this.setState({
+      listOpen:false
     });
     console.log("listView response", this.state.listOpen);
   }
@@ -82,24 +88,17 @@ export class DashBoard extends React.Component {
   render() {
     let Align = this.state.listOpen ? styles.listAlign : styles.gridAlign;
     var noteDetails = this.state.notes.map(key => {
-      if (
-        key.pined !== true && key.delete!==true
-      ) {
+      if(key.pined !== true && key.delete!==true) {
         // let notes=key.data;
         return (
-          <View >
-            <View style={Align}>
+          <View style={Align}>       
               <ScrollView>
                 <TouchableOpacity
                   onPress={() =>
                     this.props.navigation.navigate('editComponent', {
                       display: key,
                       key: key.id
-                    }
-                    )
-                  }
-                  style={styles.card_css}
-                >
+                    })}>
                   <Card >
                     <View>
                       <Text style={{ fontWeight: "bold" }}>{key.title}</Text>
@@ -110,7 +109,6 @@ export class DashBoard extends React.Component {
                 </TouchableOpacity>
               </ScrollView>
             </View>
-          </View>
         )
       }
     });
@@ -171,7 +169,7 @@ export class DashBoard extends React.Component {
                     <TouchableOpacity>
                       <Icon
                         name="grid"
-                        size={30} onPress={() => this.handleGridView()} />
+                        size={30} onPress={() => this.handleGridView1()} />
                     </TouchableOpacity>
                   )}
               </View>

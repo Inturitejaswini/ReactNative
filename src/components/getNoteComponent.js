@@ -61,9 +61,7 @@ export class GetNoteComponent extends Component {
           </View>
       );
     });
-    return (
-      <View style={styles.getNoteCard}>{noteDetails}</View>
-    );
+    return <View style={styles.getNoteCard}>{noteDetails}</View>
   }
 }
 export default GetNoteComponent
