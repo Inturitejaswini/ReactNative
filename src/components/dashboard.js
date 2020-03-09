@@ -41,7 +41,7 @@ export class DashBoard extends React.Component {
       open: false,
       notes: [],
       reminder: [],
-      // archive: []
+
     }
   }
   componentDidMount() {
@@ -64,13 +64,7 @@ export class DashBoard extends React.Component {
 
   handleGridView() {
     this.setState({
-      listOpen: true
-    });
-    console.log("listView response", this.state.listOpen);
-  }
-  handleGridView1() {
-    this.setState({
-      listOpen: false
+      listOpen: !this.state.listOpen
     });
     console.log("listView response", this.state.listOpen);
   }
@@ -88,55 +82,55 @@ export class DashBoard extends React.Component {
   render() {
     let Align = this.state.listOpen ? styles.listAlign : styles.gridAlign;
     var noteDetails = this.state.notes.map(key => {
-      if (key.archive !== true) {
+      if(key.pined !== true && key.delete!==true) {
         // let notes=key.data;
         return (
-          <View style={Align}>
-            <ScrollView>
-              <TouchableOpacity
-                onPress={() =>
-                  this.props.navigation.navigate('editComponent', {
-                    display: key,
-                    key: key.id
-                  })}>
-                <Card >
-                  <View>
-                    <Text style={{ fontWeight: "bold" }}>{key.title}</Text>
-                    <Text>{key.description}</Text>
-                    <Text style={{ fontWeight: "bold" }}>{key.reminder}</Text>
-                  </View>
-                </Card>
-              </TouchableOpacity>
-            </ScrollView>
-          </View>
+          <View style={Align}>       
+              <ScrollView>
+                <TouchableOpacity
+                  onPress={() =>
+                    this.props.navigation.navigate('editComponent', {
+                      display: key,
+                      key: key.id
+                    })}>
+                  <Card >
+                    <View>
+                      <Text style={{ fontWeight: "bold" }}>{key.title}</Text>
+                      <Text>{key.description}</Text>
+                      <Text style={{ fontWeight: "bold" }}>{key.reminder}</Text>
+                    </View>
+                  </Card>
+                </TouchableOpacity>
+              </ScrollView>
+            </View>
         )
       }
     });
-    // let pinNoteDetails = this.state.notes.map(key => {
-    //   // console.log("key in getNote component---->", key.data().pined);
-    //   // let notes = key.data();
-    //   if (key.pined === true) {
-    //     // console.log("details of pined", notes);
-    //     return (
-    //       <View style={Align}>
-    //         <TouchableOpacity
-    //           onPress={() =>
-    //             this.props.navigation.navigate("editComponent", {
-    //               display: key,
-    //               key: key.id
-    //             })
-    //           }
-    //         >
-    //           <Card>
-    //             <Text > {key.title}</Text>
-    //             <Text> {key.description}</Text>
-    //             <Text > {key.reminder}</Text>
-    //           </Card>
-    //         </TouchableOpacity>
-    //       </View>
-    //     );
-    //   }
-    // });
+    let pinNoteDetails = this.state.notes.map(key => {
+      // console.log("key in getNote component---->", key.data().pined);
+      // let notes = key.data();
+      if (key.pined === true) {
+        // console.log("details of pined", notes);
+        return (
+          <View style={Align}>
+            <TouchableOpacity
+              onPress={() =>
+                this.props.navigation.navigate("editComponent", {
+                  display: key,
+                  key: key.id
+                })
+              }
+            >
+              <Card>
+                <Text > {key.title}</Text>
+                <Text> {key.description}</Text>
+                <Text > {key.reminder}</Text>
+              </Card>
+            </TouchableOpacity>
+          </View>
+        );
+      }
+    });
     return (
       <View style={styles.dashboardContainer}>
         <ScrollView>
@@ -169,7 +163,7 @@ export class DashBoard extends React.Component {
                     <TouchableOpacity>
                       <Icon
                         name="grid"
-                        size={30} onPress={() => this.handleGridView1()} />
+                        size={30} onPress={() => this.handleGridView()} />
                     </TouchableOpacity>
                   )}
               </View>
@@ -184,7 +178,7 @@ export class DashBoard extends React.Component {
               {noteDetails.length > 0 ? (
                 <View>
                   <View style={styles.getNoteCard}>{noteDetails}</View>
-                  {/* <View style={styles.getNoteCard}>{pinNoteDetails}</View> */}
+                  <View style={styles.getNoteCard}>{pinNoteDetails}</View>
                 </View>
               ) : (
                   <ProgressBarAndroid
