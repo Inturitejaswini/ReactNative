@@ -15,7 +15,7 @@
 ******************************************************************************/
 import React, { Component } from 'react'
 import { View, Button, Text } from 'react-native'
-import { Image, TouchableOpacity , FlatList} from 'react-native'
+import { Image, TouchableOpacity, FlatList } from 'react-native'
 import styles from '../Styles';
 import { TextInput, ScrollView, } from 'react-native-gesture-handler';
 import RBSheet from "react-native-raw-bottom-sheet";
@@ -27,9 +27,10 @@ import Icon6 from "react-native-vector-icons/Ionicons";
 import Icon7 from "react-native-vector-icons/Ionicons";
 import Icon9 from "react-native-vector-icons/AntDesign";
 import Icon10 from "react-native-vector-icons/Feather";
+import Icon3 from "react-native-vector-icons/AntDesign";
 import Icon8 from "react-native-vector-icons/MaterialCommunityIcons";
-import Icon3 from "react-native-vector-icons/MaterialCommunityIcons";
-import {createNotes} from '../services/noteServices'
+// import Icon3 from "react-native-vector-icons/MaterialCommunityIcons";
+import { createNotes } from '../services/noteServices'
 import Icon from "react-native-vector-icons/Ionicons";
 import AsyncStorage from '@react-native-community/async-storage'
 import { IconButton } from 'react-native-paper';
@@ -50,7 +51,7 @@ const colors = [
     { name: "gray", hexcode: "#ABB2B9" },
     { name: "salmon", hexcode: "#98AFC7" },
     { name: "mistyRose", hexcode: "#74a775" }
-  ];
+];
 // import ReminderComponent from '../components/remainder'
 export class Notes extends React.Component {
     constructor() {
@@ -61,6 +62,8 @@ export class Notes extends React.Component {
             description: "",
             reminderDate: "",
             color: "",
+            delete: false,
+            pined:false,
         }
         this.reminderData = this.reminderData.bind(this);
     }
@@ -78,15 +81,29 @@ export class Notes extends React.Component {
     //     });
     //     console.log("data of color ", this.state.color);
     //   };
+    handleDelete = async () => {
+        await this.setState({
+          delete: !this.state.delete
+        });
+        console.log("delete after set state", this.state.delete);
+      };
+      handlePin = async () => {
+        await this.setState({
+            pined: !this.state.pined
+        });
+        console.log("log of pined", this.state.pined);
+    };
     handleNote = () => {
         let data = {
             title: this.state.title,
             description: this.state.description,
             reminder: this.state.reminderDate,
+            delete: this.state.delete,
+            Pined: this.state.pined,
         };
         // console.warn("note data", data);
         createNotes(data).then(response => {
-            console.warn("response is coming to note component",response)
+            console.warn("response is coming to note component", response)
         });
         this.props.navigation.navigate("dashboard");
     };
@@ -107,8 +124,19 @@ export class Notes extends React.Component {
                         </TouchableOpacity>
                     </View>
                     <View style={styles.icons} >
-                        <View >
-                            <Icon3 name="pin-outline" style={styles.pushpinicon} size={25}></Icon3>
+                    <View>
+                        <TouchableOpacity  onPress={() =>  this.handlePin() }>
+                            {!this.state.pined ? (
+                                <Icon3
+                                    name="pushpino"
+                                    size={25}
+                                   />
+                            ) : (
+                                    <Icon3
+                                        name="pushpin"
+                                        size={25}/>
+                                )}
+                        </TouchableOpacity>  
                         </View>
                         <View>
                             <ReminderComponent reminderProps={this.reminderData} ></ReminderComponent>
@@ -149,7 +177,9 @@ export class Notes extends React.Component {
                                     customStyles={{
                                         container: {
                                             justifyContent: "center",
-                                            alignItems: "center"}}}>
+                                            alignItems: "center"
+                                        }
+                                    }}>
                                 </RBSheet1>
                             </TouchableOpacity>
                         </View>
@@ -169,9 +199,9 @@ export class Notes extends React.Component {
                                         }
                                     }}>
                                     <View style={styles.deleteicons}>
-                                        <TouchableOpacity style={styles.icon}>
+                                        <TouchableOpacity style={styles.icon} >
                                             <View style={styles.iconText}>
-                                                <Icon5 name="delete" size={20}></Icon5>
+                                                <Icon5 name="delete" size={20} ></Icon5>
                                                 <Text style={styles.iconText1}>Delete</Text>
                                             </View>
                                         </TouchableOpacity>

@@ -81,37 +81,66 @@ export class DashBoard extends React.Component {
   render() {
     let Align = this.state.listOpen ? styles.listAlign : styles.gridAlign;
     var noteDetails = this.state.notes.map(key => {
-      // let notes=key.data;
-      return (
-        <View >
-          <View style={Align}>
-          <ScrollView>
-          <TouchableOpacity
-                onPress={() =>
-                  this.props.navigation.navigate('editComponent',{
-                    display: key,
-                    key: key.id
+      if (
+        key.pined !== true && key.delete!==true
+      ) {
+        // let notes=key.data;
+        return (
+          <View >
+            <View style={Align}>
+              <ScrollView>
+                <TouchableOpacity
+                  onPress={() =>
+                    this.props.navigation.navigate('editComponent', {
+                      display: key,
+                      key: key.id
+                    }
+                    )
                   }
-                  )
-                }
-                style={styles.card_css}
-              >
-            <Card >
-              <View>
-                <Text>{key.title}</Text>
-                <Text>{key.description}</Text>
-                <Text>{key.reminder}</Text>
-              </View>
-            </Card>
-            </TouchableOpacity>
-          </ScrollView>
+                  style={styles.card_css}
+                >
+                  <Card >
+                    <View>
+                      <Text>{key.title}</Text>
+                      <Text>{key.description}</Text>
+                      <Text>{key.reminder}</Text>
+                    </View>
+                  </Card>
+                </TouchableOpacity>
+              </ScrollView>
+            </View>
           </View>
-        </View>
-      )
-    })
+        )
+      }
+    });
+    let pinNoteDetails = this.state.notes.map(key => {
+      // console.log("key in getNote component---->", key.data().pined);
+      // let notes = key.data();
+      if (key.pined === true) {
+        // console.log("details of pined", notes);
+        return (
+          <View style={Align}>
+            <TouchableOpacity
+              onPress={() =>
+                this.props.navigation.navigate("Edit", {
+                  display: key,
+                  key: key.id
+                })
+              }
+            >
+              <Card>
+                <Text > {key.title}</Text>
+                <Text> {key.description}</Text>
+                <Text > {key.reminder}</Text>
+              </Card>
+            </TouchableOpacity>
+          </View>
+        );
+      }
+    });
     return (
       <View style={styles.dashboardContainer}>
-          <ScrollView>  
+        <ScrollView>
           <Card style={styles.top} containerStyle={{ height: 50, borderRadius: 10 }}>
             <View style={styles.appicons}>
               <View style={styles.menuitem}>
@@ -152,54 +181,55 @@ export class DashBoard extends React.Component {
             </View>
           </Card>
           <View>
-        <ScrollView>
-          {noteDetails.length > 0 ? (
-            <View>
-              <View style={styles.getNoteCard}>{noteDetails}</View>
-            </View>
-          ) : (
-            <ProgressBarAndroid
-              color="gray"
-              progress={0.9}
-              style={{
-                flex: 1,  
-                flexDirection: "column",
-                alignItems: "center"
-              }}
-            />
-          )}
-        </ScrollView>
-        </View>
-        <Card style={styles.input4}
-          containerStyle={{ height: 50, borderRadius: 10,width:370,right:20 }}>
-          <View style={styles.input5}>
-            <View >
-              <Icon4 name="checksquareo" size={20}>
-              </Icon4>
-            </View>
-            <View >
-              <Icon5 name="brush" size={20}>
-              </Icon5>
-            </View>
-            <View >
-              <Icon6 name="keyboard-voice" size={20}>
-              </Icon6>
-            </View>
-            <View >
-              <Icon7 name="image" size={20}>
-              </Icon7>
-            </View>
-            <View>
-              <TouchableOpacity  >
-                <Icon0
-                  name="pluscircleo"
-                  size={30}
-                  onPress={() => this.handleNote()}
-                />
-              </TouchableOpacity>
-            </View>
+            <ScrollView>
+              {noteDetails.length > 0 ? (
+                <View>
+                  <View style={styles.getNoteCard}>{noteDetails}</View>
+                  <View style={styles.getNoteCard}>{pinNoteDetails}</View>
+                </View>
+              ) : (
+                  <ProgressBarAndroid
+                    color="gray"
+                    progress={0.9}
+                    style={{
+                      flex: 1,
+                      flexDirection: "column",
+                      alignItems: "center"
+                    }}
+                  />
+                )}
+            </ScrollView>
           </View>
-        </Card>
+          <Card style={styles.input4}
+            containerStyle={{ height: 50, borderRadius: 10, width: 370, right: 20 }}>
+            <View style={styles.input5}>
+              <View >
+                <Icon4 name="checksquareo" size={20}>
+                </Icon4>
+              </View>
+              <View >
+                <Icon5 name="brush" size={20}>
+                </Icon5>
+              </View>
+              <View >
+                <Icon6 name="keyboard-voice" size={20}>
+                </Icon6>
+              </View>
+              <View >
+                <Icon7 name="image" size={20}>
+                </Icon7>
+              </View>
+              <View>
+                <TouchableOpacity  >
+                  <Icon0
+                    name="pluscircleo"
+                    size={30}
+                    onPress={() => this.handleNote()}
+                  />
+                </TouchableOpacity>
+              </View>
+            </View>
+          </Card>
         </ScrollView>
       </View>
     );

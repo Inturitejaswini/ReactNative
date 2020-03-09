@@ -266,9 +266,9 @@ const styles = StyleSheet.create({
         borderRadius: 10
     },
     getNoteCard: {
-        flexDirection: "row",
+        // flexDirection: "row",
         justifyContent: "space-between",
-        flexWrap: "wrap"
+        // flexWrap: "wrap"
     },
     /**
      * editcomponent css
