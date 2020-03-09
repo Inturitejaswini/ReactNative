@@ -26,10 +26,10 @@ export async function getNotes(){
     return res
 }
 
-export async function editNotes(){
+export async function editNotes(data){
     let AccessToken = await AsyncStorage.getItem('@storage_Key')
     console.warn("token is coming",AccessToken)
-    let res = axios.post(Config.REACT_APP_BASE_URL + noteConfigApi.editNotes,
+    let res = axios.post(Config.REACT_APP_BASE_URL + noteConfigApi.editNotes,data,
         {
             headers: {
                 Authorization:AccessToken

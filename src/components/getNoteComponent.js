@@ -10,7 +10,8 @@ export class GetNoteComponent extends Component {
     super();
     this.state = {
       notes: [],
-      open: false
+      open: false,
+      listViewProps:false
     };
   }
   // static navigationOptions = {
@@ -36,11 +37,10 @@ export class GetNoteComponent extends Component {
   }
   
   render() {
-    let Align = this.state.listOpen ? styles.listAlign : styles.gridAlign;
+    let Align = this.state.listViewProps ? styles.gridAlign : styles.listAlign;
     let noteDetails = this.state.notes.map(key => {
       // let notes=key.data;
       return (
-        <View style={styles.getcard}>
          <View style={Align}>
           <ScrollView>
           <TouchableOpacity
@@ -62,7 +62,6 @@ export class GetNoteComponent extends Component {
             </TouchableOpacity>
           </ScrollView>
           </View>
-        </View>
       );
     });
     return (

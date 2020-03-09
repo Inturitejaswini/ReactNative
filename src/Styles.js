@@ -260,15 +260,15 @@ const styles = StyleSheet.create({
     /**
      * getnote component css
      */
-    getcard: {
-        marginTop: 60,
-        marginBottom: -60,
-        borderRadius: 10
-    },
+    // getcard: {
+    //     marginTop: 60,
+    //     marginBottom: -60,
+    //     borderRadius: 10
+    // },
     getNoteCard: {
-        // flexDirection: "row",
+        flexDirection: "row",
         justifyContent: "space-between",
-        // flexWrap: "wrap"
+        flexWrap: "wrap"
     },
     /**
      * editcomponent css

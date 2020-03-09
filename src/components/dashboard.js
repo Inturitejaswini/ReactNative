@@ -37,6 +37,7 @@ export class DashBoard extends React.Component {
     super();
     this.state = {
       openDrawer: false,
+      listOpen: false,
       open: false,
       notes: [],
       reminder: [],
