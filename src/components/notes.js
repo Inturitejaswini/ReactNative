@@ -21,20 +21,22 @@ import { TextInput, ScrollView, } from 'react-native-gesture-handler';
 import RBSheet from "react-native-raw-bottom-sheet";
 import RBSheet1 from "react-native-raw-bottom-sheet";
 import ReminderComponent from './remainder'
+import Icon0 from "react-native-vector-icons/AntDesign";
 import Icon2 from "react-native-vector-icons/AntDesign";
-import Icon5 from "react-native-vector-icons/AntDesign";
-import Icon6 from "react-native-vector-icons/Ionicons";
-import Icon7 from "react-native-vector-icons/Ionicons";
+import Icon1 from "react-native-vector-icons/MaterialCommunityIcons";
+// import Icon5 from "react-native-vector-icons/AntDesign";
+// import Icon6 from "react-native-vector-icons/Ionicons";
+// import Icon7 from "react-native-vector-icons/Ionicons";
 import Icon9 from "react-native-vector-icons/AntDesign";
 import Icon10 from "react-native-vector-icons/Feather";
 import Icon3 from "react-native-vector-icons/AntDesign";
-import Icon8 from "react-native-vector-icons/MaterialCommunityIcons";
+// import Icon8 from "react-native-vector-icons/MaterialCommunityIcons";
 // import Icon3 from "react-native-vector-icons/MaterialCommunityIcons";
 import { createNotes } from '../services/noteServices'
 import Icon from "react-native-vector-icons/Ionicons";
-import AsyncStorage from '@react-native-community/async-storage'
-import { IconButton } from 'react-native-paper';
-import { Card } from 'react-native-elements';
+// import AsyncStorage from '@react-native-community/async-storage'
+// import { IconButton } from 'react-native-paper';
+// import { Card } from 'react-native-elements';
 const colors = [
     // { name: "blue", hexcode: "#F5F5DC" }
     { name: "blue", hexcode: " #39a78e" },
@@ -63,7 +65,7 @@ export class Notes extends React.Component {
             reminderDate: "",
             color: "",
             delete: false,
-            pined:false,
+            pined: false,
         }
         this.reminderData = this.reminderData.bind(this);
     }
@@ -83,11 +85,11 @@ export class Notes extends React.Component {
     //   };
     handleDelete = async () => {
         await this.setState({
-          delete: !this.state.delete
+            delete: !this.state.delete
         });
         console.log("delete after set state", this.state.delete);
-      };
-      handlePin = async () => {
+    };
+    handlePin = async () => {
         await this.setState({
             pined: !this.state.pined
         });
@@ -99,7 +101,7 @@ export class Notes extends React.Component {
             description: this.state.description,
             reminder: this.state.reminderDate,
             delete: this.state.delete,
-            Pined: this.state.pined,
+            // Pined: this.state.pined,
         };
         // console.warn("note data", data);
         createNotes(data).then(response => {
@@ -124,19 +126,19 @@ export class Notes extends React.Component {
                         </TouchableOpacity>
                     </View>
                     <View style={styles.icons} >
-                    <View>
-                        <TouchableOpacity  onPress={() =>  this.handlePin() }>
-                            {!this.state.pined ? (
-                                <Icon3
-                                    name="pushpino"
-                                    size={25}
-                                   />
-                            ) : (
+                        <View>
+                            <TouchableOpacity onPress={() => this.handlePin()}>
+                                {!this.state.pined ? (
                                     <Icon3
-                                        name="pushpin"
-                                        size={25}/>
-                                )}
-                        </TouchableOpacity>  
+                                        name="pushpino"
+                                        size={25}
+                                    />
+                                ) : (
+                                        <Icon3
+                                            name="pushpin"
+                                            size={25} />
+                                    )}
+                            </TouchableOpacity>
                         </View>
                         <View>
                             <ReminderComponent reminderProps={this.reminderData} ></ReminderComponent>
@@ -199,36 +201,49 @@ export class Notes extends React.Component {
                                         }
                                     }}>
                                     <View style={styles.deleteicons}>
-                                        <TouchableOpacity style={styles.icon} >
-                                            <View style={styles.iconText}>
-                                                <Icon5 name="delete" size={20} ></Icon5>
-                                                <Text style={styles.iconText1}>Delete</Text>
-                                            </View>
-                                        </TouchableOpacity>
-                                        <TouchableOpacity style={styles.icon}>
-                                            <View style={styles.iconText}>
-                                                <Image source={require("../assets/copy.png")}></Image>
-                                                <Text style={styles.iconText1}>Make a Copy</Text>
-                                            </View>
-                                        </TouchableOpacity>
-                                        <TouchableOpacity style={styles.icon}>
-                                            <View style={styles.iconText}>
-                                                <Icon6 name="md-send" size={20}></Icon6>
-                                                <Text style={styles.iconText1}>Send</Text>
-                                            </View>
-                                        </TouchableOpacity>
-                                        <TouchableOpacity style={styles.icon}>
-                                            <View style={styles.iconText}>
-                                                <Icon7 name="md-person-add" size={20}></Icon7>
-                                                <Text style={styles.iconText1}>Collabarator</Text>
-                                            </View>
-                                        </TouchableOpacity>
-                                        <TouchableOpacity style={styles.icon}>
-                                            <View style={styles.iconText}>
-                                                <Icon8 name="label-outline" size={20}></Icon8>
-                                                <Text style={styles.iconText1}>Labels</Text>
-                                            </View>
-                                        </TouchableOpacity>
+                                        <View style={{
+                                            flexDirection: "row",
+                                            left: -90,
+                                            marginTop:38
+                                        }}>
+                                            <TouchableOpacity onPress={() => this.handleDelete()}>
+                                                <Icon0
+                                                    name="delete"
+                                                    size={20} />
+                                                <Text style={{ fontSize: 18, left: 30 ,top:-20}}>Delete</Text>
+                                            </TouchableOpacity>
+                                        </View>
+                                        <View
+                                            style={{
+                                                flexDirection: "row",
+                                                left: -90,
+                                                marginTop: -68
+                                            }}>
+                                            <Icon2 name="sharealt" size={22} />
+                                            <Text style={{ fontSize: 18, left: 20 }}>send</Text>
+                                        </View>
+                                        <View
+                                            style={{
+                                                flexDirection: "row",
+                                                left: -90,
+                                                marginTop: -78
+                                            }}>
+                                            <Icon2 name="addusergroup" size={25} />
+                                            <Text
+                                                style={{ fontSize: 18, left: 20 }}
+                                                onPress={() => { this.RBSheet1.open() }}>collaborator</Text>
+                                        </View>
+                                        <View
+                                            style={{
+                                                flexDirection: "row",
+                                                left: -90,
+                                                marginTop: -58
+                                            }} >
+                                            <Icon1 name="label-outline" size={25} />
+                                            <Text
+                                                onPress={() => { this.RBSheet2.open(); }}
+                                                style={{ fontSize: 18, left: 20 }}>Labels</Text>
+                                        </View>
                                         {/* <View>
                                             <FlatList
                                                 data={colors}

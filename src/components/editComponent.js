@@ -10,16 +10,9 @@ import RBSheet from "react-native-raw-bottom-sheet";
 import RBSheet1 from "react-native-raw-bottom-sheet";
 import RBSheet2 from "react-native-raw-bottom-sheet";
 import styles from "../Styles";
-import {deleteNotes} from '../services/noteServices'
+import {editNotes} from '../services/noteServices'
 import ReminderComponent from '../components/remainder'
-import {
-    ScrollView,
-    Text,
-    TextInput,
-    View,
-    FlatList,
-    TouchableOpacity
-} from "react-native";
+import {ScrollView, Text, TextInput, View, FlatList, TouchableOpacity} from "react-native";
 
 export class EditComponent extends Component {
     constructor() {
@@ -28,8 +21,8 @@ export class EditComponent extends Component {
             title: "",
             description: "",
             reminderDate: "",
-            reminder: "",
             delete: false,
+            key:''
 
         };
         this.reminderData = this.reminderData.bind(this);
@@ -68,21 +61,17 @@ export class EditComponent extends Component {
         //   key: this.props.navigation.state.params.key,
         reminder: this.state.reminderDate,
     };
-        console.log("editnote data", data);
-        // editNotes(data).then(res => {
-        //   console.log("res of edit note data--->", res);
-        //   this.setState({
-        //     color: res.color
-        //   });
-        //   console.log("color after edit", this.state.color);
-        // });
+        console.warn("editnote data", data);
+        editNotes(data).then(res => {
+          console.warn("res of edit note data--->", res);
+        });
         this.props.navigation.navigate("dashboard");
       };
       componentDidMount() {
         console.log("key------>", this.props.navigation.state.params.display);
         this.setState({
           title: this.props.navigation.state.params.display.title,
-          delete: this.props.navigation.state.params.display.delete,
+        //   delete: this.props.navigation.state.params.display.delete,
           description: this.props.navigation.state.params.display.description,
           reminder: this.props.navigation.state.params.display.reminder,
         })
@@ -142,7 +131,7 @@ export class EditComponent extends Component {
                         />
                     </View>
                     <Text style={{ fontWeight: "bold", left: 10 }}>
-                        {this.state.reminder}
+                        {this.state.reminderDate}
                     </Text>
                 </View>
                 <View
@@ -163,7 +152,7 @@ export class EditComponent extends Component {
                                 left: 10,
                                 marginTop: 18
                             }}>
-                                <TouchableOpacity onPress={() => this.handleDelete()}>
+                            <TouchableOpacity onPress={() => this.handleDelete()}>
                             <Icon0
                                 name="delete"
                                 size={20} />

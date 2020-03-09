@@ -1,6 +1,6 @@
 var noteConfigApi={
     noteAdd:"/notes/addNotes",
     getNotes:"/notes/getNotesList",
-    deleteNotes:"/notes/deleteForeverNotes"
+    editNotes:"/notes/updateNotes"
 }
 export default noteConfigApi
