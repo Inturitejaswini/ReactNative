@@ -10,9 +10,9 @@ import RBSheet from "react-native-raw-bottom-sheet";
 import RBSheet1 from "react-native-raw-bottom-sheet";
 import RBSheet2 from "react-native-raw-bottom-sheet";
 import styles from "../Styles";
-import {editNotes} from '../services/noteServices'
+import { editNotes } from '../services/noteServices'
 import ReminderComponent from '../components/remainder'
-import {ScrollView, Text, TextInput, View, FlatList, TouchableOpacity} from "react-native";
+import { ScrollView, Text, TextInput, View, FlatList, TouchableOpacity } from "react-native";
 
 export class EditComponent extends Component {
     constructor() {
@@ -22,7 +22,7 @@ export class EditComponent extends Component {
             description: "",
             reminderDate: "",
             delete: false,
-            key:''
+            key: ''
 
         };
         this.reminderData = this.reminderData.bind(this);
@@ -42,38 +42,38 @@ export class EditComponent extends Component {
     };
     handleDelete = () => {
         let data = {
-          delete: this.state.delete,
-          key: this.props.navigation.state.params.key
+            delete: this.state.delete,
+            key: this.props.navigation.state.params.key
         };
         console.log("delete after set state", data);
         deleteNotes(data).then(res => {
-          console.log("res in delete notes", res.delete);
-          this.setState({
-            delete: res.delete
-          });
+            console.log("res in delete notes", res.delete);
+            this.setState({
+                delete: res.delete
+            });
         });
-      };
+    };
     handleEditCard = () => {
         let data = {
-          title: this.state.title,
-          description: this.state.description,
-          delete: this.state.delete,
-        //   key: this.props.navigation.state.params.key,
-        reminder: this.state.reminderDate,
-    };
+            title: this.state.title,
+            description: this.state.description,
+            delete: this.state.delete,
+            key: this.props.navigation.state.params.key,
+            reminder: this.state.reminderDate,
+        };
         console.warn("editnote data", data);
         editNotes(data).then(res => {
-          console.warn("res of edit note data--->", res);
+            console.warn("res of edit note data--->", res);
         });
         this.props.navigation.navigate("dashboard");
-      };
-      componentDidMount() {
+    };
+    componentDidMount() {
         console.log("key------>", this.props.navigation.state.params.display);
         this.setState({
-          title: this.props.navigation.state.params.display.title,
-        //   delete: this.props.navigation.state.params.display.delete,
-          description: this.props.navigation.state.params.display.description,
-          reminder: this.props.navigation.state.params.display.reminder,
+            title: this.props.navigation.state.params.display.title,
+            //   delete: this.props.navigation.state.params.display.delete,
+            description: this.props.navigation.state.params.display.description,
+            reminder: this.props.navigation.state.params.display.reminder,
         })
     }
     render() {
@@ -114,14 +114,14 @@ export class EditComponent extends Component {
                 <View style={styles.noteData}>
                     <View>
                         <TextInput
-                            style={{ height: 60, fontSize: 22 ,left:20}}
+                            style={{ height: 60, fontSize: 22, left: 20 }}
                             placeholder="Tittle"
                             defaultValue={this.props.navigation.state.params.display.title}
                             onChangeText={title => this.setState({ title })}
                             value={this.state.title}
                         />
                     </View>
-                    <View style={{ marginTop: -10,left:23 }}>
+                    <View style={{ marginTop: -10, left: 23 }}>
                         <TextInput
                             style={{ height: 60, fontSize: 17 }}
                             placeholder="note"
@@ -135,28 +135,30 @@ export class EditComponent extends Component {
                     </Text>
                 </View>
                 <View
-                    style={{top: 400,left: 340}}>
+                    style={{ top: 400, left: 340 }}>
                     <Icon4
                         name="ellipsis-v"
                         size={25}
                         onPress={() => { this.RBSheet.open() }} />
                     <RBSheet
-                        ref={ref => {this.RBSheet = ref}}
+                        ref={ref => { this.RBSheet = ref }}
                         height={200}
                         duration={250}
                         customStyles={{
                             container: {
-                                flexDirection: "column"}}}>
+                                flexDirection: "column"
+                            }
+                        }}>
                         <View style={{
-                                flexDirection: "row",
-                                left: 10,
-                                marginTop: 18
-                            }}>
+                            flexDirection: "row",
+                            left: 10,
+                            marginTop: 18
+                        }}>
                             <TouchableOpacity onPress={() => this.handleDelete()}>
-                            <Icon0
-                                name="delete"
-                                size={20} />
-                            <Text style={{ fontSize: 18, left: 30,top:-20}}>Delete</Text>
+                                <Icon0
+                                    name="delete"
+                                    size={20} />
+                                <Text style={{ fontSize: 18, left: 30, top: -20 }}>Delete</Text>
                             </TouchableOpacity>
                         </View>
                         <View

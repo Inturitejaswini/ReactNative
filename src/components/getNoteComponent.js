@@ -11,7 +11,7 @@ export class GetNoteComponent extends Component {
     this.state = {
       notes: [],
       open: false,
-      listViewProps:false
+      listOpen:false
     };
   }
   // static navigationOptions = {
@@ -37,7 +37,7 @@ export class GetNoteComponent extends Component {
   }
   
   render() {
-    let Align = this.state.listViewProps ? styles.gridAlign : styles.listAlign;
+    let Align = this.props.listOpen ? styles.gridAlign : styles.listAlign;
     let noteDetails = this.state.notes.map(key => {
       // let notes=key.data;
       return (
@@ -48,15 +48,12 @@ export class GetNoteComponent extends Component {
                   this.props.navigation.navigate("editComponent", {
                     display: key,
                     key: key.id
-                  })
-                }
-                style={styles.card_css}
-              >
+                  })}>
             <Card >
               <View>
-                <Text>{key.title}</Text>
+                <Text style={{ fontWeight: "bold" }}>{key.title}</Text>
                 <Text>{key.description}</Text>
-                <Text>{key.reminder}</Text>
+                <Text style={{ fontWeight: "bold" }}>{key.reminder}</Text>
               </View>
             </Card>
             </TouchableOpacity>
@@ -65,7 +62,7 @@ export class GetNoteComponent extends Component {
       );
     });
     return (
-      <View >{noteDetails}</View>
+      <View style={styles.getNoteCard}>{noteDetails}</View>
     );
   }
 }

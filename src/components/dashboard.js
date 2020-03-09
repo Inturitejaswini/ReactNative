@@ -102,9 +102,9 @@ export class DashBoard extends React.Component {
                 >
                   <Card >
                     <View>
-                      <Text>{key.title}</Text>
+                      <Text style={{ fontWeight: "bold" }}>{key.title}</Text>
                       <Text>{key.description}</Text>
-                      <Text>{key.reminder}</Text>
+                      <Text style={{ fontWeight: "bold" }}>{key.reminder}</Text>
                     </View>
                   </Card>
                 </TouchableOpacity>
@@ -123,7 +123,7 @@ export class DashBoard extends React.Component {
           <View style={Align}>
             <TouchableOpacity
               onPress={() =>
-                this.props.navigation.navigate("Edit", {
+                this.props.navigation.navigate("editComponent", {
                   display: key,
                   key: key.id
                 })
@@ -195,7 +195,7 @@ export class DashBoard extends React.Component {
                     style={{
                       flex: 1,
                       flexDirection: "column",
-                      alignItems: "center"
+                      alignItems: "center",
                     }}
                   />
                 )}

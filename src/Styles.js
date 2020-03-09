@@ -265,10 +265,10 @@ const styles = StyleSheet.create({
     //     marginBottom: -60,
     //     borderRadius: 10
     // },
-    getNoteCard: {
-        flexDirection: "row",
-        justifyContent: "space-between",
-        flexWrap: "wrap"
+     getNoteCard: {
+         flexDirection: "row",
+         justifyContent:"space-between",
+         flexWrap: "wrap",
     },
     /**
      * editcomponent css
