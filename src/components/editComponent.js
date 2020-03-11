@@ -5,13 +5,14 @@ import Icon2 from "react-native-vector-icons/AntDesign";
 import Icon3 from "react-native-vector-icons/Foundation";
 import Icon4 from "react-native-vector-icons/FontAwesome";
 import Icon0 from "react-native-vector-icons/AntDesign";
-import Icon5 from "react-native-vector-icons/Entypo";
+import Icon5 from "react-native-vector-icons/AntDesign";
 import RBSheet from "react-native-raw-bottom-sheet";
 import RBSheet1 from "react-native-raw-bottom-sheet";
 import RBSheet2 from "react-native-raw-bottom-sheet";
 import styles from "../Styles";
 import { editNotes } from '../services/noteServices'
 import {archiveNotes} from '../services/noteServices'
+import {deleteNotes} from '../services/noteServices'
 import ReminderComponent from '../components/remainder'
 import {
     ScrollView,
@@ -63,7 +64,7 @@ export class EditComponent extends Component {
             });
         });
     };
-    handleArchiveNote = (key) => {
+    handleArchiveNote = () => {
         console.log("archive data", this.state.archive);
         let data = {
           archive: this.state.archive,
@@ -113,18 +114,19 @@ export class EditComponent extends Component {
                             onPress={() => { this.handleEditCard() }} />
                     </View>
                     <View style={styles.editIcons}>
-                        <View>
-                            {!this.state.pined ? (
-                                <Icon2
-                                    name="pushpino"
-                                    size={25}
-                                    onPress={() => { this.handlePin() }} />
-                            ) : (
-                                    <Icon2
-                                        name="pushpin"
+                    <View>
+                            <TouchableOpacity onPress={() => this.handlePin()}>
+                                {!this.state.pined ? (
+                                    <Icon5
+                                        name="pushpino"
                                         size={25}
-                                        onPress={() => { this.handlePin() }} />
-                                )}
+                                    />
+                                ) : (
+                                        <Icon5
+                                            name="pushpin"
+                                            size={25} />
+                                    )}
+                            </TouchableOpacity>
                         </View>
                         <View>
                             <ReminderComponent reminderProps={this.reminderData} ></ReminderComponent>
@@ -157,7 +159,7 @@ export class EditComponent extends Component {
                         />
                     </View>
                     <Text style={{ fontWeight: "bold", left: 10 }}>
-                        {this.state.reminderDate}
+                        {this.state.reminder}
                     </Text>
                 </View>
                 <View

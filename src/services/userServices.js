@@ -17,3 +17,9 @@ export function forget(data){
     return axios.post(Config.REACT_APP_BASE_URL+configApi.forgetPassword,data)
 
 }
+
+export function userLogOut(data){
+    console.warn("login data",data,"url")
+    return axios.post(Config.REACT_APP_BASE_URL+configApi.signOut,data)
+
+}

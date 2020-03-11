@@ -144,19 +144,19 @@ const styles = StyleSheet.create({
         justifyContent: "space-between",
         elevation: 5,
         height: 50,
-        position:'absolute'
-      },
-      input5: {
+        position: 'absolute'
+    },
+    input5: {
         width: "50%",
         flexDirection: "row",
         margin: 15,
         justifyContent: "space-between"
-      },
+    },
     dashboardContainer: {
         flex: 1,
         flexDirection: "column",
         justifyContent: "space-between"
-      },
+    },
     Icon: {
         left: 130
 
@@ -175,7 +175,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center',
-        top:-10
+        top: -10
     },
     fundooText: {
         marginLeft: 5
@@ -192,26 +192,25 @@ const styles = StyleSheet.create({
         marginLeft: 60,
     },
     input4: {
-        // top: 580,
         backgroundColor: '#fbfcfc',
-        // boxshadow:'0 0 15',
-        // borderRadius: 8,
         flexDirection: 'row',
         justifyContent: 'space-around',
         alignItems: 'center',
-        right: 10
+        right: 0,
+        flex: 1,
+        position:'absolute',
+        // marginTop:50,
+
     },
     input5: {
         top: -5,
         backgroundColor: '#fbfcfc',
-        // boxshadow:'0 0 15',
-        // borderRadius: 8,
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center',
-        right: 8
+        right: 8,
     },
-    
+
     /**
      *notes app.css  
      * */
@@ -257,18 +256,19 @@ const styles = StyleSheet.create({
         marginLeft: 20,
         marginTop: 20
     },
+    // moreicons: {
+    //     flex: 1,
+    //     justifyContent: 'space-around',
+    //     alignItems: 'center',
+    //     alignContent:'flex-start'
+    // },
     /**
      * getnote component css
      */
-    // getcard: {
-    //     marginTop: 60,
-    //     marginBottom: -60,
-    //     borderRadius: 10
-    // },
-     getNoteCard: {
-        //  flexDirection: "row",
-         justifyContent:"space-between",
-        //  flexWrap: "wrap",
+    getNoteCard: {
+         flexDirection: "row",
+        justifyContent: "space-between",
+         flexWrap: "wrap",
     },
     /**
      * editcomponent css
@@ -276,11 +276,18 @@ const styles = StyleSheet.create({
     editIcons: {
         flex: 1,
         flexDirection: "row",
-        justifyContent:'space-around'
+        justifyContent: 'space-around',
+        right: 10
         // justifyContent: "space-between"
-      },
-      noteData: {
+    },
+    noteData: {
         left: 10
-      },
+    },
+    listAlign:{
+        width: "100%"
+    },
+    gridAlign:{
+        width: "50%"
+    }
 });
 export default styles

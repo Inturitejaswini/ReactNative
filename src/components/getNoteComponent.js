@@ -37,7 +37,7 @@ export class GetNoteComponent extends Component {
   }
   
   render() {
-    let Align = this.props.listOpen ? styles.gridAlign : styles.listAlign;
+    let Align = this.state.listOpen ? styles.gridAlign : styles.listAlign;
     let noteDetails = this.state.notes.map(key => {
       // let notes=key.data;
       return (

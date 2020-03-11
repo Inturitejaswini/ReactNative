@@ -112,6 +112,7 @@ export class Notes extends React.Component {
     static navigationOptions = {
         drawerLabel: "Notes",
         drawerIcon: <Icon2 name="bulb1" size={20} />
+       
     };
     render() {
         return (
