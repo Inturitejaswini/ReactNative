@@ -270,7 +270,7 @@ export class DashBoard extends React.Component {
           }}>
           <View style={styles.input5}>
             <View >
-              <Icon4 name="checksquareo" size={20}>
+              <Icon4 name="checksquareo" size={20} >
               </Icon4>
             </View>
             <View >

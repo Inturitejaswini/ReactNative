@@ -9,10 +9,11 @@ import Icon5 from "react-native-vector-icons/AntDesign";
 import RBSheet from "react-native-raw-bottom-sheet";
 import RBSheet1 from "react-native-raw-bottom-sheet";
 import RBSheet2 from "react-native-raw-bottom-sheet";
+import { IconButton, Colors } from "react-native-paper";
 import styles from "../Styles";
 import { editNotes } from '../services/noteServices'
-import {archiveNotes} from '../services/noteServices'
-import {deleteNotes} from '../services/noteServices'
+import { archiveNotes } from '../services/noteServices'
+import { deleteNotes } from '../services/noteServices'
 import ReminderComponent from '../components/remainder'
 import {
     ScrollView,
@@ -22,7 +23,23 @@ import {
     FlatList,
     TouchableOpacity
 } from "react-native";
-
+const colors = [
+    // { name: "blue", hexcode: "#F5F5DC" }
+    { name: "blue", hexcode: " #39a78e" },
+    { name: "violet", hexcode: "#7DCEA0" },
+    { name: "blue", hexcode: "#76D7C4" },
+    { name: "orange", hexcode: "#5499C7" },
+    { name: "beige", hexcode: "#79d4e7" },
+    { name: "golden", hexcode: "#EC7063" },
+    { name: "lightorange", hexcode: "#E59866" },
+    { name: "skyblue", hexcode: "#d3a625" },
+    { name: "green", hexcode: "#F7DC6F" },
+    { name: "darkseagreen", hexcode: "#BB8FCE" },
+    { name: "blue", hexcode: "#D2B4DE" },
+    { name: "gray", hexcode: "#ABB2B9" },
+    { name: "salmon", hexcode: "#98AFC7" },
+    { name: "mistyRose", hexcode: "#74a775" }
+  ];
 export class EditComponent extends Component {
     constructor() {
         super();
@@ -33,7 +50,8 @@ export class EditComponent extends Component {
             reminder: "",
             delete: false,
             archive: false,
-            key: ''
+            key: '',
+            color: "",
 
         };
         this.reminderData = this.reminderData.bind(this);
@@ -64,20 +82,20 @@ export class EditComponent extends Component {
             });
         });
     };
-    handleArchiveNote = () => {
+    handleArchiveNote = (key) => {
         console.log("archive data", this.state.archive);
         let data = {
-          archive: this.state.archive,
-          key: this.props.navigation.state.params.key
+            archive: this.state.archive,
+            key: this.props.navigation.state.params.key
         };
         archiveNotes(data).then(res => {
-          console.log("res after api", res);
-          this.setState({
-            archive: res.archive
-          });
-          console.log("archive data after set state", this.state.archive);
+            console.log("res after api", res);
+            this.setState({
+                archive: res.archive
+            });
+            console.log("archive data after set state", this.state.archive);
         });
-      };
+    };
     handleEditCard = () => {
         let data = {
             title: this.state.title,
@@ -93,6 +111,13 @@ export class EditComponent extends Component {
         });
         this.props.navigation.navigate("dashboard");
     };
+    handleColor = async color => {
+        console.log("colors-------->", color);
+        await this.setState({
+          color: color
+        });
+        console.log("data of color ", this.state.color);
+      };
     componentDidMount() {
         console.log("key------>", this.props.navigation.state.params.display);
         this.setState({
@@ -100,7 +125,9 @@ export class EditComponent extends Component {
             delete: this.props.navigation.state.params.display.delete,
             description: this.props.navigation.state.params.display.description,
             reminder: this.props.navigation.state.params.display.reminder,
-            archive: this.props.navigation.state.params.display.archive
+            archive: this.props.navigation.state.params.display.archive,
+            color: this.props.navigation.state.params.display.color,
+
         })
     }
     render() {
@@ -114,7 +141,7 @@ export class EditComponent extends Component {
                             onPress={() => { this.handleEditCard() }} />
                     </View>
                     <View style={styles.editIcons}>
-                    <View>
+                        <View>
                             <TouchableOpacity onPress={() => this.handlePin()}>
                                 {!this.state.pined ? (
                                     <Icon5
@@ -135,7 +162,7 @@ export class EditComponent extends Component {
                             <Icon3
                                 name="archive"
                                 size={25}
-                                onPress={() =>  this.handleArchiveNote()}/>
+                                onPress={() => this.handleArchiveNote()} />
                         </View>
                     </View>
                 </View>
@@ -170,30 +197,28 @@ export class EditComponent extends Component {
                         onPress={() => { this.RBSheet.open() }} />
                     <RBSheet
                         ref={ref => { this.RBSheet = ref }}
-                        height={200}
+                        height={230}
                         duration={250}
                         customStyles={{
                             container: {
-                                flexDirection: "column"
-                            }
-                        }}>
+                                flexDirection: "column",
+                                bottom:45}}}>
                         <View style={{
                             flexDirection: "row",
                             left: 10,
-                            marginTop: 18
-                        }}>
+                            marginTop: 18}}>
                             <TouchableOpacity onPress={() => this.handleDelete()}>
                                 <Icon0
                                     name="delete"
                                     size={20} />
-                                <Text style={{ fontSize: 18, left: 30, top: -20 }}>Delete</Text>
+                                <Text style={{ fontSize: 18, left: 38, top: -20 }}>Delete</Text>
                             </TouchableOpacity>
                         </View>
                         <View
                             style={{
                                 flexDirection: "row",
                                 left: 10,
-                                marginTop: 18
+                                // marginTop: 18
                             }}>
                             <Icon2 name="sharealt" size={22} />
                             <Text style={{ fontSize: 18, left: 20 }}>send</Text>
@@ -221,6 +246,20 @@ export class EditComponent extends Component {
                                 style={{ fontSize: 18, left: 20 }}>Labels</Text>
                         </View>
                         <View>
+                            <FlatList
+                                data={colors}
+                                horizontal={true}
+                                renderItem={({ item }) => (
+                                    <View
+                                        style={{
+                                            marginTop: 10}}>
+                                        <IconButton
+                                            style={{ backgroundColor: item.hexcode ,borderRadius:15}}
+                                            value={item.hexcode}
+                                            size={40}
+                                            onPress={() => this.handleColor(item.hexcode)}/>
+                                    </View>
+                                )}/>
                         </View>
                     </RBSheet>
                 </View>
