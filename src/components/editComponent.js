@@ -14,6 +14,8 @@ import styles from "../Styles";
 import { editNotes } from '../services/noteServices'
 import { archiveNotes } from '../services/noteServices'
 import { deleteNotes } from '../services/noteServices'
+import {pinUnPinNotes} from '../services/noteServices'
+import {updateColor} from '../services/noteServices'
 import ReminderComponent from '../components/remainder'
 import {
     ScrollView,
@@ -48,10 +50,12 @@ export class EditComponent extends Component {
             description: "",
             reminderDate: "",
             reminder: "",
-            delete: false,
-            archive: false,
+            isDeleted: false,
+            isArchived: false,
+            isPined:false,
             key: '',
-            color: "",
+            color:false,
+            // key1: '',
 
         };
         this.reminderData = this.reminderData.bind(this);
@@ -65,48 +69,57 @@ export class EditComponent extends Component {
     };
     handlePin = async () => {
         await this.setState({
-            pined: !this.state.pined
+            // noteIdList: [this.props.navigation.state.params.key],
+            isPined: !this.state.isPined,
+            isPined:true
         });
-        console.log("log of pined", this.state.pined);
-    };
-    handleDelete = () => {
-        //   await this.setState({ delete: true })
         let data = {
             noteIdList: [this.props.navigation.state.params.key],
-            delete: this.state.delete
+            isPined: this.state.isPined,
+        }
+        console.warn("log of pined", data);
+        pinUnPinNotes(data).then(res=>{
+            console.warn("response in pin notes", res);
+        });
+        // this.props.navigation.navigate("dashboard");
+    };
+    handleDelete = async () => {
+          await this.setState({ isDeleted: true })
+        let data = {
+            noteIdList: [this.props.navigation.state.params.key],
+            isDeleted: this.state.isDeleted
             // delete: this.state.delete,
             // key: this.props.navigation.state.params.key
         };
         console.warn("delete after set state", data);
         deleteNotes(data).then(res => {
-            console.warn("res in delete notes", res.delete);
-            this.setState({
-                delete: res.delete
-            });
+            console.warn("response in delete notes", res);
         });
+        this.props.navigation.navigate("dashboard");
     };
-    handleArchiveNote = (key) => {
-        console.log("archive data", this.state.archive);
+    handleArchiveNote = async () => {
+        await this.setState({ isArchived: true })
+        console.log("archive data", this.state.isArchived);
         let data = {
-            archive: this.state.archive,
-            key: this.props.navigation.state.params.key
+            noteIdList: [this.props.navigation.state.params.key],
+            isArchived: this.state.isArchived
         };
         archiveNotes(data).then(res => {
-            console.log("res after api", res);
-            this.setState({
-                archive: res.archive
-            });
-            console.log("archive data after set state", this.state.archive);
+            console.log("res in archive component", res);
         });
+        this.props.navigation.navigate("dashboard");
     };
     handleEditCard = () => {
         let data = {
             title: this.state.title,
             description: this.state.description,
-            delete: this.state.delete,
+            isDeleted: this.state.isDeleted,
             noteId: this.props.navigation.state.params.key,
             reminder: this.state.reminderDate,
-            archive: this.state.archive,
+            isArchived: this.state.isArchived,
+            isPined: this.state.isPined,
+            color:this.state.color
+
         };
         console.warn("editnote data", data);
         editNotes(data).then(res => {
@@ -115,20 +128,28 @@ export class EditComponent extends Component {
         this.props.navigation.navigate("dashboard");
     };
     handleColor = async color => {
-        console.log("colors-------->", color);
+        console.warn("colors-------->", color);
         await this.setState({
-            color: color
+            // color: color,
+           color:true
         });
-        console.log("data of color ", this.state.color);
+        let data={
+            noteIdList: [this.props.navigation.state.params.key],
+            color:this.state.color
+        }
+        updateColor(data).then(res=>{
+            console.log("response data of color ", res);
+        })
+       
     };
     componentDidMount() {
         console.log("key------>", this.props.navigation.state.params.display);
         this.setState({
             title: this.props.navigation.state.params.display.title,
-            delete: this.props.navigation.state.params.display.delete,
+            isDeleted: this.props.navigation.state.params.display.isDeleted,
             description: this.props.navigation.state.params.display.description,
             reminder: this.props.navigation.state.params.display.reminder,
-            archive: this.props.navigation.state.params.display.archive,
+            isArchived: this.props.navigation.state.params.display.isArchived,
             color: this.props.navigation.state.params.display.color,
 
         })
@@ -146,7 +167,7 @@ export class EditComponent extends Component {
                     <View style={styles.editIcons}>
                         <View>
                             <TouchableOpacity onPress={() => this.handlePin()}>
-                                {!this.state.pined ? (
+                                {!this.state.isPined ? (
                                     <Icon5
                                         name="pushpino"
                                         size={25}
@@ -189,7 +210,7 @@ export class EditComponent extends Component {
                         />
                     </View>
                     <Text style={{ fontWeight: "bold", left: 10 }}>
-                        {this.state.reminder}
+                        {this.state.reminderDate}
                     </Text>
                 </View>
                 <View

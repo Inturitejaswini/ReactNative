@@ -64,8 +64,9 @@ export class Notes extends React.Component {
             description: "",
             reminderDate: "",
             color: "",
-            delete: false,
-            pined: false,
+            isDeleted: false,
+            isArchived: false,
+            isPined:false,
         }
         this.reminderData = this.reminderData.bind(this);
     }
@@ -83,17 +84,47 @@ export class Notes extends React.Component {
         });
         console.log("data of color ", this.state.color);
     };
-    handleDelete = async () => {
-        await this.setState({
-            delete: !this.state.delete
-        });
-        console.log("delete after set state", this.state.delete);
-    };
     handlePin = async () => {
         await this.setState({
-            pined: !this.state.pined
+            // noteIdList: [this.props.navigation.state.params.key],
+            isPined: !this.state.isPined,
+            isPined:true
         });
-        console.log("log of pined", this.state.pined);
+        let data = {
+            noteIdList: [this.props.navigation.state.params.key],
+            isPined: this.state.isPined,
+        }
+        console.warn("log of pined", data);
+        pinUnPinNotes(data).then(res=>{
+            console.warn("response in pin notes", res);
+        });
+        // this.props.navigation.navigate("dashboard");
+    };
+    handleDelete = async () => {
+          await this.setState({ isDeleted: true })
+        let data = {
+            noteIdList: [this.props.navigation.state.params.key],
+            isDeleted: this.state.isDeleted
+            // delete: this.state.delete,
+            // key: this.props.navigation.state.params.key
+        };
+        console.warn("delete after set state", data);
+        deleteNotes(data).then(res => {
+            console.warn("response in delete notes", res);
+        });
+        this.props.navigation.navigate("dashboard");
+    };
+    handleArchiveNote = async () => {
+        await this.setState({ isArchived: true })
+        console.log("archive data", this.state.isArchived);
+        let data = {
+            noteIdList: [this.props.navigation.state.params.key],
+            isArchived: this.state.isArchived
+        };
+        archiveNotes(data).then(res => {
+            console.log("res in archive component", res);
+        });
+        this.props.navigation.navigate("dashboard");
     };
     handleNote = () => {
         let data = {

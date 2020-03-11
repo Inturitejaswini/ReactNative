@@ -103,7 +103,7 @@ export class DashBoard extends React.Component {
   render() {
     let Align = this.state.listOpen ? styles.listAlign : styles.gridAlign;
     var noteDetails = this.state.notes.map(key => {
-      if (key.pined !== true && key.delete !== true) {
+      if (key.isPined !== true && key.isDeleted !== true&&key.isArchived!==true) {
         // let notes=key.data;
         return (
           <View style={Align}>
@@ -127,31 +127,31 @@ export class DashBoard extends React.Component {
         )
       }
     });
-    // let pinNoteDetails = this.state.notes.map(key => {
-    //   // console.log("key in getNote component---->", key.data().pined);
-    //   // let notes = key.data();
-    //   if (key.pined === true) {
-    //     // console.log("details of pined", notes);
-    //     return (
-    //       <View style={Align}>
-    //         <TouchableOpacity
-    //           onPress={() =>
-    //             this.props.navigation.navigate("editComponent", {
-    //               display: key,
-    //               key: key.id
-    //             })
-    //           }
-    //         >
-    //           <Card>
-    //             <Text > {key.title}</Text>
-    //             <Text> {key.description}</Text>
-    //             <Text > {key.reminder}</Text>
-    //           </Card>
-    //         </TouchableOpacity>
-    //       </View>
-    //     );
-    //   }
-    // });
+    let pinNoteDetails = this.state.notes.map(key => {
+      // console.log("key in getNote component---->", key.data().pined);
+      // let notes = key.data();
+      if (key.isPined === true) {
+        // console.log("details of pined", notes);
+        return (
+          <View style={Align}>
+            <TouchableOpacity
+              onPress={() =>
+                this.props.navigation.navigate("editComponent", {
+                  display: key,
+                  key: key.id
+                })
+              }
+            >
+              <Card>
+                <Text > {key.title}</Text>
+                <Text> {key.description}</Text>
+                <Text > {key.reminder}</Text>
+              </Card>
+            </TouchableOpacity>
+          </View>
+        );
+      }
+    });
     return (
       <View style={styles.dashboardContainer}>
         <ScrollView>
@@ -243,9 +243,11 @@ export class DashBoard extends React.Component {
           </Card>
           {noteDetails.length > 0 ? (
             <View>
-              <View style={styles.getNoteCard}>{noteDetails}</View>
-              {/* <View style={styles.getNoteCard}>{pinNoteDetails}</View> */}
-            </View>
+            <Text style={{ left: 25, fontWeight: "bold",top:10 }}>PINED</Text>
+            <View style={styles.getNoteCard}>{pinNoteDetails}</View>
+            <Text style={{ left: 25, fontWeight: "bold",top:10 }}>OTHERS</Text>
+            <View style={styles.getNoteCard}>{noteDetails}</View>
+          </View>
           )
             :
             (
