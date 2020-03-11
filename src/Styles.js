@@ -236,7 +236,8 @@ const styles = StyleSheet.create({
         flex: 2,
         alignItems: 'flex-start',
         flexDirection: 'column',
-        justifyContent: 'space-between'
+        justifyContent: 'space-between',
+        left:9
     },
     icon: {
         alignItems: 'flex-start',

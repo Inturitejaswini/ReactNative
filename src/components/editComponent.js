@@ -39,7 +39,7 @@ const colors = [
     { name: "gray", hexcode: "#ABB2B9" },
     { name: "salmon", hexcode: "#98AFC7" },
     { name: "mistyRose", hexcode: "#74a775" }
-  ];
+];
 export class EditComponent extends Component {
     constructor() {
         super();
@@ -70,13 +70,16 @@ export class EditComponent extends Component {
         console.log("log of pined", this.state.pined);
     };
     handleDelete = () => {
+        //   await this.setState({ delete: true })
         let data = {
-            delete: this.state.delete,
-            key: this.props.navigation.state.params.key
+            noteIdList: [this.props.navigation.state.params.key],
+            delete: this.state.delete
+            // delete: this.state.delete,
+            // key: this.props.navigation.state.params.key
         };
-        console.log("delete after set state", data);
+        console.warn("delete after set state", data);
         deleteNotes(data).then(res => {
-            console.log("res in delete notes", res.delete);
+            console.warn("res in delete notes", res.delete);
             this.setState({
                 delete: res.delete
             });
@@ -114,10 +117,10 @@ export class EditComponent extends Component {
     handleColor = async color => {
         console.log("colors-------->", color);
         await this.setState({
-          color: color
+            color: color
         });
         console.log("data of color ", this.state.color);
-      };
+    };
     componentDidMount() {
         console.log("key------>", this.props.navigation.state.params.display);
         this.setState({
@@ -202,11 +205,14 @@ export class EditComponent extends Component {
                         customStyles={{
                             container: {
                                 flexDirection: "column",
-                                bottom:45}}}>
+                                // bottom:45
+                            }
+                        }}>
                         <View style={{
                             flexDirection: "row",
                             left: 10,
-                            marginTop: 18}}>
+                            marginTop: 18
+                        }}>
                             <TouchableOpacity onPress={() => this.handleDelete()}>
                                 <Icon0
                                     name="delete"
@@ -252,14 +258,15 @@ export class EditComponent extends Component {
                                 renderItem={({ item }) => (
                                     <View
                                         style={{
-                                            marginTop: 10}}>
+                                            marginTop: 10
+                                        }}>
                                         <IconButton
-                                            style={{ backgroundColor: item.hexcode ,borderRadius:15}}
+                                            style={{ backgroundColor: item.hexcode, borderRadius: 15 }}
                                             value={item.hexcode}
                                             size={40}
-                                            onPress={() => this.handleColor(item.hexcode)}/>
+                                            onPress={() => this.handleColor(item.hexcode)} />
                                     </View>
-                                )}/>
+                                )} />
                         </View>
                     </RBSheet>
                 </View>

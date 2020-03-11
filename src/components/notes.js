@@ -35,7 +35,7 @@ import Icon3 from "react-native-vector-icons/AntDesign";
 import { createNotes } from '../services/noteServices'
 import Icon from "react-native-vector-icons/Ionicons";
 // import AsyncStorage from '@react-native-community/async-storage'
-// import { IconButton } from 'react-native-paper';
+import { IconButton } from 'react-native-paper';
 // import { Card } from 'react-native-elements';
 const colors = [
     // { name: "blue", hexcode: "#F5F5DC" }
@@ -76,13 +76,13 @@ export class Notes extends React.Component {
         });
         console.warn("date and time ", this.state.reminderDate);
     };
-    // handleColor = async color => {
-    //     console.log("colors-------->", color);
-    //     await this.setState({
-    //       color: color
-    //     });
-    //     console.log("data of color ", this.state.color);
-    //   };
+    handleColor = async (color) => {
+        console.log("colors-------->", color);
+        await this.setState({
+            color: color
+        });
+        console.log("data of color ", this.state.color);
+    };
     handleDelete = async () => {
         await this.setState({
             delete: !this.state.delete
@@ -112,7 +112,7 @@ export class Notes extends React.Component {
     static navigationOptions = {
         drawerLabel: "Notes",
         drawerIcon: <Icon2 name="bulb1" size={20} />
-       
+
     };
     render() {
         return (
@@ -193,7 +193,7 @@ export class Notes extends React.Component {
                                     ref={ref => {
                                         this.RBSheet = ref;
                                     }}
-                                    height={300}
+                                    height={200}
                                     duration={250}
                                     customStyles={{
                                         container: {
@@ -204,21 +204,20 @@ export class Notes extends React.Component {
                                     <View style={styles.deleteicons}>
                                         <View style={{
                                             flexDirection: "row",
-                                            left: -90,
-                                            marginTop:38
+                                            top:20,
+                                            
                                         }}>
                                             <TouchableOpacity onPress={() => this.handleDelete()}>
                                                 <Icon0
                                                     name="delete"
                                                     size={20} />
-                                                <Text style={{ fontSize: 18, left: 30 ,top:-20}}>Delete</Text>
+                                                <Text style={{ fontSize: 18, left: 39, top: -20 }}>Delete</Text>
                                             </TouchableOpacity>
                                         </View>
                                         <View
                                             style={{
                                                 flexDirection: "row",
-                                                left: -90,
-                                                marginTop: -68
+                                                top:10
                                             }}>
                                             <Icon2 name="sharealt" size={22} />
                                             <Text style={{ fontSize: 18, left: 20 }}>send</Text>
@@ -226,8 +225,7 @@ export class Notes extends React.Component {
                                         <View
                                             style={{
                                                 flexDirection: "row",
-                                                left: -90,
-                                                marginTop: -78
+                                                top:20
                                             }}>
                                             <Icon2 name="addusergroup" size={25} />
                                             <Text
@@ -237,29 +235,30 @@ export class Notes extends React.Component {
                                         <View
                                             style={{
                                                 flexDirection: "row",
-                                                left: -90,
-                                                marginTop: -58
+                                                top:30
                                             }} >
                                             <Icon1 name="label-outline" size={25} />
                                             <Text
                                                 onPress={() => { this.RBSheet2.open(); }}
                                                 style={{ fontSize: 18, left: 20 }}>Labels</Text>
                                         </View>
-                                        {/* <View>
+                                        <View>
                                             <FlatList
                                                 data={colors}
                                                 horizontal={true}
                                                 renderItem={({ item }) => (
-                                                    <View>
+                                                    <View
+                                                        style={{
+                                                            marginTop: 30
+                                                        }}>
                                                         <IconButton
-                                                            style={{ backgroundColor: item.hexcode }}
+                                                            style={{ backgroundColor: item.hexcode, borderRadius: 15 ,left:-12}}
                                                             value={item.hexcode}
-                                                            size={20}
-                                                            onPress={() => this.handleColor(item.hexcode)}
-                                                        />
+                                                            size={60}
+                                                            onPress={() => this.handleColor(item.hexcode)} />
                                                     </View>
-                                                     )}/>
-                                        </View> */}
+                                                )} />
+                                        </View>
                                     </View>
 
                                 </RBSheet>

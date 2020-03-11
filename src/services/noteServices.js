@@ -50,10 +50,10 @@ export async function archiveNotes(data){
     return res
 }
 
-export async function deleteNotes(data){
+export async function deleteNotes(){
     let AccessToken = await AsyncStorage.getItem('@storage_Key')
     console.warn("token is coming to deletecomponent",AccessToken)
-    let res = axios.post(Config.REACT_APP_BASE_URL+noteConfigApi.deleteNotes,data,
+    let res = axios.post(Config.REACT_APP_BASE_URL+noteConfigApi.deleteNotes,
         {
             headers: {
                 Authorization:AccessToken
