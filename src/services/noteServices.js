@@ -85,3 +85,15 @@ export async function updateColor(data){
         })
     return res
 }
+
+export async function createLabels(data){
+    let AccessToken = await AsyncStorage.getItem('@storage_Key')
+    console.warn("token is coming to labelcomponent",AccessToken)
+    let res = axios.post(Config.REACT_APP_BASE_URL+noteConfigApi.addLabel,data,
+        {
+            headers: {
+                Authorization:AccessToken
+            }
+        })
+    return res
+}

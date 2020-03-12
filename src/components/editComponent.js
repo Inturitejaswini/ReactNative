@@ -16,6 +16,7 @@ import { archiveNotes } from '../services/noteServices'
 import { deleteNotes } from '../services/noteServices'
 import { pinUnPinNotes } from '../services/noteServices'
 import { updateColor } from '../services/noteServices'
+import { createLabels } from '../services/noteServices'
 import ReminderComponent from '../components/remainder'
 import {
     ScrollView,
@@ -54,10 +55,12 @@ export class EditComponent extends Component {
             isArchived: false,
             isPined: false,
             key: '',
+            key1:'',
             colors: false,
             labelValue: "",
             selectedLabels: "",
             labelData: [],
+            label: false
             // key1: '',
 
         };
@@ -112,31 +115,33 @@ export class EditComponent extends Component {
         });
         this.props.navigation.navigate("dashboard");
     };
-    handleDone = () => {
-        console.log("label Data", this.state.label);
+    handleLabelDone = async () => {
+        await this.setState({ label: true })
+        console.warn("label Data", this.state.label);
         let data = {
-          label: this.state.label
+            noteIdList: [this.props.navigation.state.params.key],
+            label: this.state.label
         };
-        console.log("lebel data------->", data);
-        // createLabels(data).then(res => {
-        //   console.log("label data-------->", res);
-        // });
-      };
-      handleSelection = async (labelName) => {
+        console.warn("lebel data------->", data);
+        createLabels(data).then(res => {
+            console.log(" response from label data-------->", res);
+        });
+    };
+    handleSelectLabel = async (labelName) => {
         console.log("id of label", labelName);
         await this.setState({
-          selectedLabels: labelName
+            selectedLabels: labelName
         });
         console.log("label name after set state", this.state.selectedLabels);
-      };
+    };
     handleLabelArrow = labelValue => {
         this.RBSheet2.close();
         this.RBSheet.close();
         this.setState({
-          labelValue: labelValue
+            labelValue: labelValue
         });
         console.log("labelValue", this.state.labelValue);
-      };
+    };
     handleEditCard = () => {
         let data = {
             title: this.state.title,
@@ -178,22 +183,29 @@ export class EditComponent extends Component {
             reminder: this.props.navigation.state.params.display.reminder,
             isArchived: this.props.navigation.state.params.display.isArchived,
             color: this.props.navigation.state.params.display.color,
-            labelValue: this.props.navigation.state.params.display.label,
-
-
+            labelValue: this.props.navigation.state.params.display.label
         })
     }
+    // componentWillMount() {
+    //     getLabels().then(response => {
+    //       console.log("res in label notes", response);
+    //       this.setState({
+    //         labelData: response
+    //       });
+    //       console.log("label data after setting state", this.state.labelData);
+    //     });
+    //   }
     render() {
-        let labelDetails = this.state.labelData.map(key => {
-            console.log("key in label component---->", key.data().label);
-            return (
-              <View>
-                <CheckBox
-                  title={key.data().label}
-                  onPress={() => this.handleSelection(key.data().label)}/>
-              </View>
-            );
-          });
+        // let labelDetails = this.state.labelData.map(key1 => {
+        //     console.log("key in label component---->", key1.data().label);
+        //     return (
+        //         <View>
+        //             <CheckBox
+        //                 title={key1.data().label}
+        //                 onPress={() => this.handleSelectLabel(key1.data().label)} />
+        //         </View>
+        //     );
+        // });
         return (
             <View>
                 <View style={{ flexDirection: "row", margin: 10 }}>
@@ -334,7 +346,6 @@ export class EditComponent extends Component {
                     <RBSheet2
                         ref={ref => {
                             this.RBSheet2 = ref;
-                            console.warn("rbsheet open");
                         }}
                         height={620}
                         duration={250}
@@ -342,8 +353,7 @@ export class EditComponent extends Component {
                             container: {
                                 flexDirection: "column"
                             }
-                        }}
-                    >
+                        }}>
                         <View style={{ flexDirection: "row", margin: 10 }}>
                             <View>
                                 <TouchableOpacity
@@ -357,7 +367,8 @@ export class EditComponent extends Component {
                                         height: 40,
                                         fontSize: 18,
                                         left: 30,
-                                        marginTop: -3}}
+                                        marginTop: -3
+                                    }}
                                     placeholder="Enter label name"
                                     value={this.state.label}
                                     onChangeText={label => this.setState({ label })}
@@ -368,11 +379,11 @@ export class EditComponent extends Component {
                                     name="done"
                                     size={25}
                                     onPress={() => {
-                                        this.handleDone();
-                                    }}/>
+                                        this.handleLabelDone();
+                                    }} />
                             </View>
                         </View>
-                        <ScrollView>{labelDetails}</ScrollView>
+                        {/* <ScrollView>{labelDetails}</ScrollView> */}
                     </RBSheet2>
                 </View>
             </View>
