@@ -220,7 +220,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         right: 0,
         flex: 1,
-        position: 'absolute',
+        position:'absolute'
     },
     reminderinput5: {
         top: -5,

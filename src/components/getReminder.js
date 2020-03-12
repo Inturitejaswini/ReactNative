@@ -20,7 +20,7 @@ import Icon0 from "react-native-vector-icons/AntDesign";
 import Icon4 from "react-native-vector-icons/AntDesign";
 import Icon6 from "react-native-vector-icons/MaterialIcons";
 import Icon7 from "react-native-vector-icons/Entypo";
-export  class ReminderComponent1 extends Component {
+export class ReminderComponent1 extends Component {
     constructor() {
         super();
         this.state = {
@@ -53,12 +53,7 @@ export  class ReminderComponent1 extends Component {
             if (key.reminder.length !== 0) {
                 return (
                     <View style={Align}>
-                        <TouchableOpacity
-                            onPress={() =>
-                                this.props.navigation.navigate("remainder", {
-                                    display: key,
-                                    key: key.id
-                                })}>
+                        <TouchableOpacity>
                             <Card
                                 containerStyle={{
                                     backgroundColor: key.color,
@@ -76,65 +71,65 @@ export  class ReminderComponent1 extends Component {
 
         return (
             <View>
-                <ScrollView>
-                    <Card
-                        containerStyle={{
-                            height: 50,
-                            borderRadius: 10
+                <Card
+                    containerStyle={{
+                        height: 50,
+                        borderRadius: 10
+                    }}>
+                    <View
+                        style={{
+                            flexDirection: "row",
+                            justifyContent: "space-between"
                         }}>
+                        <View style={{ top: -5 }}>
+                            <TouchableOpacity
+                                onPress={() =>
+                                    this.props.navigation.dispatch(DrawerActions.openDrawer())}>
+                                <Image source={require("../assets/menuicon.png")}>
+                                </Image>
+                            </TouchableOpacity>
+                        </View>
+                        <View>
+                            <Text style={{ fontSize: 30, top: -10 }}>Reminder </Text>
+                        </View>
+                        <View style={styles.searchicon}>
+                            <Image source={require("../assets/searchicon.png")}></Image>
+                        </View>
                         <View
                             style={{
                                 flexDirection: "row",
-                                justifyContent: "space-between"}}>
-                            <View style={{ top: -5 }}>
-                                <TouchableOpacity
-                                    onPress={() =>
-                                        this.props.navigation.dispatch(DrawerActions.openDrawer())}>
-                                    <Image source={require("../assets/menuicon.png")}>
-                                    </Image>
-                                </TouchableOpacity>
-                            </View>
-                            <View>
-                                <Text style={{fontSize:30 ,top:-10}}>Reminder </Text>
-                            </View>
-                            <View style={styles.searchicon}>
-                                <Image source={require("../assets/searchicon.png")}></Image>
-                            </View>
-                            <View
-                                style={{
-                                    flexDirection: "row",
-                                    justifyContent: "space-between"
-                                }}>
-                                <View style={{ right: 20 }}>
-                                    {!this.state.listOpen ? (
-                                        <TouchableOpacity style={{ top: -5 }}>
-                                            <Icon1
-                                                name="view-stream"
-                                                size={32}
+                                justifyContent: "space-between"
+                            }}>
+                            <View style={{ right: 20 }}>
+                                {!this.state.listOpen ? (
+                                    <TouchableOpacity style={{ top: -5 }}>
+                                        <Icon1
+                                            name="view-stream"
+                                            size={32}
+                                            onPress={() => {
+                                                this.handleGridView();
+                                            }} />
+                                    </TouchableOpacity>
+                                ) : (
+                                        <TouchableOpacity style={{ top: -4 }}>
+                                            <Icon2
+                                                name="th-large"
+                                                size={25}
                                                 onPress={() => {
                                                     this.handleGridView();
-                                                }} />
+                                                }}
+                                            />
                                         </TouchableOpacity>
-                                    ) : (
-                                            <TouchableOpacity style={{ top: -4 }}>
-                                                <Icon2
-                                                    name="th-large"
-                                                    size={25}
-                                                    onPress={() => {
-                                                        this.handleGridView();
-                                                    }}
-                                                />
-                                            </TouchableOpacity>
-                                        )}
-                                </View>
+                                    )}
                             </View>
                         </View>
-                    </Card>
-
+                    </View>
+                </Card>
+                <ScrollView>
                     <View style={styles.getNoteCard}>{noteDetails}</View>
                 </ScrollView>
                 {/* <Card style={styles.reminderinput}
-                    containerStyle={{  height: 50, borderRadius: 10}}>
+                    containerStyle={{ height: 50, borderRadius: 10 }}>
                     <View style={styles.reminderinput5}>
                         <View >
                             <Icon4 name="checksquareo" size={20} >

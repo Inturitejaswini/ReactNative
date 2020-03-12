@@ -49,12 +49,7 @@ export default class Trash extends Component {
       if (key.isDeleted == true) {
         return (
           <View style={Align}>
-            <TouchableOpacity
-              onPress={() =>
-                this.props.navigation.navigate("trashComponent", {
-                  display: key,
-                  key: key.id
-                })}>
+            <TouchableOpacity>
               <Card
                 containerStyle={{
                   backgroundColor: key.color,

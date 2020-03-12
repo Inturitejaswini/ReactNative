@@ -41,12 +41,7 @@ export class ArchiveComponent extends Component {
             if (key.isArchived == true) {
                 return (
                     <View style={Align}>
-                        <TouchableOpacity
-                            onPress={() =>
-                                this.props.navigation.navigate("archiveComponent", {
-                                    display: key,
-                                    key: key.id
-                                })}>
+                        <TouchableOpacity>
                             <Card
                                 containerStyle={{
                                     backgroundColor: key.color,
