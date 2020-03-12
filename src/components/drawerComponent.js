@@ -18,20 +18,26 @@ import { createAppContainer } from 'react-navigation';
 import DashBoard from '../components/dashboard';
 import { StyleSheet } from 'react-native'
 import ReminderComponent from '../components/remainder'
+import GetReminderComponent from '../components/getReminder'
 // import Notes from '../components/notes'
+import ArchiveComponent from '../components/archiveComponent'
 import CreateLabelComponent from '../components/createLabel'
+import Trash from '../components/trashComponent';
 const Drawer = createDrawerNavigator({
-    // dashboard: {
-    //     screen: DashBoard
-    // },
     Notes: {
         screen: DashBoard
     },
     Remainder: {
-        screen: ReminderComponent
+        screen: GetReminderComponent
     },
     createLabel:{
         screen:CreateLabelComponent
+    },
+    trashComponent:{
+        screen:Trash
+    },
+    archiveComponent:{
+        screen:ArchiveComponent
     }
 },
 {

@@ -210,7 +210,26 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         // right: 8,
     },
-
+/**
+ * reminder css
+ */
+reminderinput:{
+    backgroundColor: '#fbfcfc',
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    alignItems: 'center',
+    right: 0,
+    flex: 1,
+    position:'absolute',
+},
+reminderinput5:{
+    top: -5,
+    backgroundColor: '#fbfcfc',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    
+},
     /**
      *notes app.css  
      * */

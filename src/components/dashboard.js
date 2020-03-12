@@ -124,10 +124,7 @@ export class DashBoard extends React.Component {
       }
     });
     let pinNoteDetails = this.state.notes.map(key => {
-      // console.log("key in getNote component---->", key.data().pined);
-      // let notes = key.data();
-      if (key.isPined === true) {
-        // console.log("details of pined", notes);
+      if (key.isPined === true&&key.isDeleted !== true&&key.isArchived!==true) {
         return (
           <View style={Align}>
             <TouchableOpacity
@@ -244,9 +241,7 @@ export class DashBoard extends React.Component {
             <Text style={{ left: 25, fontWeight: "bold",top:10 }}>OTHERS</Text>
             <View style={styles.getNoteCard}>{noteDetails}</View>
           </View>
-          )
-            :
-            (
+          ):(
               <ProgressBarAndroid
                 color="gray"
                 progress={0.9}

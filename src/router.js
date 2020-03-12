@@ -9,6 +9,8 @@ import ReminderComponent from './components/remainder'
 import GetNoteComponent from './components/getNoteComponent'
 import drawerComponent from './components/drawerComponent'
 import EditComponent from './components/editComponent'
+import Trash from './components/trashComponent'
+import ArchiveComponent from './components/archiveComponent'
 const AppNavigation = createStackNavigator(
     {
         login: {
@@ -67,6 +69,18 @@ const AppNavigation = createStackNavigator(
         },
         createLabel:{
             screen:CreateLabelComponent,
+            navigationOptions:{
+                header:null
+            }
+        },
+        trashComponent:{
+            screen:Trash,
+            navigationOptions:{
+                header:null
+            }
+        },
+        archiveComponent:{
+            screen:ArchiveComponent,
             navigationOptions:{
                 header:null
             }

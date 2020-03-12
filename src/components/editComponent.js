@@ -74,7 +74,6 @@ export class EditComponent extends Component {
     };
     handlePin = async () => {
         await this.setState({
-            isPined: !this.state.isPined,
             isPined: true
         });
         let data = {

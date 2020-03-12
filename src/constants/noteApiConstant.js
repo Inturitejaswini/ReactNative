@@ -6,6 +6,6 @@ var noteConfigApi={
     deleteNotes:"/notes/trashNotes",
     pinUnPinNotes:"/notes/pinUnpinNotes",
     colorNotes:"/notes/changesColorNotes",
-    addLabel:"/noteLabels"
+    addLabel:"/noteLabels",
 }             
 export default noteConfigApi
