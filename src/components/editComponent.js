@@ -61,7 +61,6 @@ export class EditComponent extends Component {
             selectedLabels: "",
             labelData: [],
             label: false
-            // key1: '',
 
         };
         this.reminderData = this.reminderData.bind(this);
@@ -75,7 +74,6 @@ export class EditComponent extends Component {
     };
     handlePin = async () => {
         await this.setState({
-            // noteIdList: [this.props.navigation.state.params.key],
             isPined: !this.state.isPined,
             isPined: true
         });
@@ -87,15 +85,12 @@ export class EditComponent extends Component {
         pinUnPinNotes(data).then(res => {
             console.warn("response in pin notes", res);
         });
-        // this.props.navigation.navigate("dashboard");
     };
     handleDelete = async () => {
         await this.setState({ isDeleted: true })
         let data = {
             noteIdList: [this.props.navigation.state.params.key],
             isDeleted: this.state.isDeleted
-            // delete: this.state.delete,
-            // key: this.props.navigation.state.params.key
         };
         console.warn("delete after set state", data);
         deleteNotes(data).then(res => {
