@@ -20,36 +20,32 @@ import Icon0 from "react-native-vector-icons/AntDesign";
 import Icon4 from "react-native-vector-icons/AntDesign";
 import Icon6 from "react-native-vector-icons/MaterialIcons";
 import Icon7 from "react-native-vector-icons/Entypo";
-export default class GetReminderComponent extends Component {
+export  class ReminderComponent1 extends Component {
     constructor() {
         super();
         this.state = {
             listOpen: false,
-            // listValue: "",
             notes: [],
-            searchOpen: false,
             reminder: []
         };
     }
     static navigationOptions = {
-        // drawerLabel: "Notes",
+        drawerLabel: "Reminder",
         drawerIcon: <Icon1 name="bell-plus-outline" size={20} />
     };
     componentDidMount() {
         getNotes().then(res => {
-            console.log("res in get notes", res);
             this.setState({
                 notes: res.data.data.data
             });
-            console.log("getNote data after setting state", this.state.notes);
+            console.log("getNotes data", this.state.notes);
         });
     }
     handleGridView() {
-        // console.log("listview response", listOpen);
         this.setState({
             listOpen: !this.state.listOpen
         });
-        console.log("listView response", this.state.listOpen);
+        console.warn("response from listview", this.state.listOpen);
     }
     render() {
         let Align = this.state.listOpen ? styles.listAlign : styles.gridAlign;
@@ -99,7 +95,7 @@ export default class GetReminderComponent extends Component {
                                 </TouchableOpacity>
                             </View>
                             <View>
-                                <Text >Reminder </Text>
+                                <Text style={{fontSize:30 ,top:-10}}>Reminder </Text>
                             </View>
                             <View style={styles.searchicon}>
                                 <Image source={require("../assets/searchicon.png")}></Image>
@@ -171,3 +167,4 @@ export default class GetReminderComponent extends Component {
         );
     }
 }
+export default ReminderComponent1

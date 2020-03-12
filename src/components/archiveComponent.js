@@ -14,10 +14,7 @@ export class ArchiveComponent extends Component {
         super();
         this.state = {
             listOpen: false,
-            // listValue: "",
             notes: [],
-            searchOpen: false,
-            reminder: []
         };
     }
     static navigationOptions = {
@@ -26,18 +23,17 @@ export class ArchiveComponent extends Component {
     };
     componentDidMount() {
         getNotes().then(res => {
-            console.log("res in get notes", res);
             this.setState({
                 notes: res.data.data.data
             });
-            console.log("getNote data after setting state", this.state.notes);
+            console.warn("getNote data ", this.state.notes);
         });
     }
     handleGridView() {
         this.setState({
             listOpen: !this.state.listOpen
         });
-        console.log("listView response", this.state.listOpen);
+        console.warn(" response from listview", this.state.listOpen);
     }
     render() {
         let Align = this.state.listOpen ? styles.listAlign : styles.gridAlign;
@@ -77,7 +73,7 @@ export class ArchiveComponent extends Component {
                                 <Image source={require("../assets/menuicon.png")}></Image>
                             </TouchableOpacity>
                         </View>
-                        <Text >Archive</Text>
+                        <Text style={{fontSize:30 ,top:-10}}>Archive</Text>
                         <View style={styles.searchicon}>
                             <Image source={require("../assets/searchicon.png")}></Image>
                         </View>
