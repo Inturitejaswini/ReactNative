@@ -254,8 +254,8 @@ export class DashBoard extends React.Component {
                   flex: 1,
                   flexDirection: "column",
                   alignItems: "center",
-                }}
-              />
+                  marginTop:200
+                }}/>
             )}
         </ScrollView>
 
