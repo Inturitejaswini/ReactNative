@@ -128,7 +128,8 @@ export class ReminderComponent1 extends Component {
                 <ScrollView>
                     <View style={styles.getNoteCard}>{noteDetails}</View>
                 </ScrollView>
-                {/* <Card style={styles.reminderinput}
+                <View>
+                <Card style={styles.reminderinput}
                     containerStyle={{ height: 50, borderRadius: 10 }}>
                     <View style={styles.reminderinput5}>
                         <View >
@@ -157,7 +158,8 @@ export class ReminderComponent1 extends Component {
                             </TouchableOpacity>
                         </View>
                     </View>
-                </Card> */}
+                </Card>
+                </View>
             </View>
         );
     }
