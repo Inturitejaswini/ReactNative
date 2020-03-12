@@ -14,8 +14,8 @@ import styles from "../Styles";
 import { editNotes } from '../services/noteServices'
 import { archiveNotes } from '../services/noteServices'
 import { deleteNotes } from '../services/noteServices'
-import {pinUnPinNotes} from '../services/noteServices'
-import {updateColor} from '../services/noteServices'
+import { pinUnPinNotes } from '../services/noteServices'
+import { updateColor } from '../services/noteServices'
 import ReminderComponent from '../components/remainder'
 import {
     ScrollView,
@@ -52,9 +52,12 @@ export class EditComponent extends Component {
             reminder: "",
             isDeleted: false,
             isArchived: false,
-            isPined:false,
+            isPined: false,
             key: '',
-            color:false,
+            colors: false,
+            labelValue: "",
+            selectedLabels: "",
+            labelData: [],
             // key1: '',
 
         };
@@ -71,20 +74,20 @@ export class EditComponent extends Component {
         await this.setState({
             // noteIdList: [this.props.navigation.state.params.key],
             isPined: !this.state.isPined,
-            isPined:true
+            isPined: true
         });
         let data = {
             noteIdList: [this.props.navigation.state.params.key],
             isPined: this.state.isPined,
         }
         console.warn("log of pined", data);
-        pinUnPinNotes(data).then(res=>{
+        pinUnPinNotes(data).then(res => {
             console.warn("response in pin notes", res);
         });
         // this.props.navigation.navigate("dashboard");
     };
     handleDelete = async () => {
-          await this.setState({ isDeleted: true })
+        await this.setState({ isDeleted: true })
         let data = {
             noteIdList: [this.props.navigation.state.params.key],
             isDeleted: this.state.isDeleted
@@ -109,6 +112,31 @@ export class EditComponent extends Component {
         });
         this.props.navigation.navigate("dashboard");
     };
+    handleDone = () => {
+        console.log("label Data", this.state.label);
+        let data = {
+          label: this.state.label
+        };
+        console.log("lebel data------->", data);
+        // createLabels(data).then(res => {
+        //   console.log("label data-------->", res);
+        // });
+      };
+      handleSelection = async (labelName) => {
+        console.log("id of label", labelName);
+        await this.setState({
+          selectedLabels: labelName
+        });
+        console.log("label name after set state", this.state.selectedLabels);
+      };
+    handleLabelArrow = labelValue => {
+        this.RBSheet2.close();
+        this.RBSheet.close();
+        this.setState({
+          labelValue: labelValue
+        });
+        console.log("labelValue", this.state.labelValue);
+      };
     handleEditCard = () => {
         let data = {
             title: this.state.title,
@@ -118,8 +146,8 @@ export class EditComponent extends Component {
             reminder: this.state.reminderDate,
             isArchived: this.state.isArchived,
             isPined: this.state.isPined,
-            color:this.state.color
-
+            color: this.state.color,
+            labelValue: this.state.labelValue
         };
         console.warn("editnote data", data);
         editNotes(data).then(res => {
@@ -127,20 +155,19 @@ export class EditComponent extends Component {
         });
         this.props.navigation.navigate("dashboard");
     };
-    handleColor = async color => {
+    handleColor = async (color) => {
         console.warn("colors-------->", color);
         await this.setState({
-            // color: color,
-           color:true
+            color: color
         });
-        let data={
+        let data = {
             noteIdList: [this.props.navigation.state.params.key],
-            color:this.state.color
-        }
-        updateColor(data).then(res=>{
-            console.log("response data of color ", res);
-        })
-       
+            color: this.state.color,
+        };
+        console.warn("data of updateColor", data);
+        updateColor(data).then(res => {
+            console.warn(" response in color updation", res)
+        });
     };
     componentDidMount() {
         console.log("key------>", this.props.navigation.state.params.display);
@@ -151,10 +178,22 @@ export class EditComponent extends Component {
             reminder: this.props.navigation.state.params.display.reminder,
             isArchived: this.props.navigation.state.params.display.isArchived,
             color: this.props.navigation.state.params.display.color,
+            labelValue: this.props.navigation.state.params.display.label,
+
 
         })
     }
     render() {
+        let labelDetails = this.state.labelData.map(key => {
+            console.log("key in label component---->", key.data().label);
+            return (
+              <View>
+                <CheckBox
+                  title={key.data().label}
+                  onPress={() => this.handleSelection(key.data().label)}/>
+              </View>
+            );
+          });
         return (
             <View>
                 <View style={{ flexDirection: "row", margin: 10 }}>
@@ -290,6 +329,51 @@ export class EditComponent extends Component {
                                 )} />
                         </View>
                     </RBSheet>
+                </View>
+                <View>
+                    <RBSheet2
+                        ref={ref => {
+                            this.RBSheet2 = ref;
+                            console.warn("rbsheet open");
+                        }}
+                        height={620}
+                        duration={250}
+                        customStyles={{
+                            container: {
+                                flexDirection: "column"
+                            }
+                        }}
+                    >
+                        <View style={{ flexDirection: "row", margin: 10 }}>
+                            <View>
+                                <TouchableOpacity
+                                    onPress={() => this.handleLabelArrow(this.state.selectedLabels)}>
+                                    <Icon1 name="arrow-left" size={25} />
+                                </TouchableOpacity>
+                            </View>
+                            <View>
+                                <TextInput
+                                    style={{
+                                        height: 40,
+                                        fontSize: 18,
+                                        left: 30,
+                                        marginTop: -3}}
+                                    placeholder="Enter label name"
+                                    value={this.state.label}
+                                    onChangeText={label => this.setState({ label })}
+                                />
+                            </View>
+                            <View style={{ left: 150 }}>
+                                <Icon
+                                    name="done"
+                                    size={25}
+                                    onPress={() => {
+                                        this.handleDone();
+                                    }}/>
+                            </View>
+                        </View>
+                        <ScrollView>{labelDetails}</ScrollView>
+                    </RBSheet2>
                 </View>
             </View>
 

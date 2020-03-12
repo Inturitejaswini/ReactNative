@@ -208,7 +208,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center',
-        right: 8,
+        // right: 8,
     },
 
     /**

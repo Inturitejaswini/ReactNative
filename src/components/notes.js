@@ -24,19 +24,19 @@ import ReminderComponent from './remainder'
 import Icon0 from "react-native-vector-icons/AntDesign";
 import Icon2 from "react-native-vector-icons/AntDesign";
 import Icon1 from "react-native-vector-icons/MaterialCommunityIcons";
-// import Icon5 from "react-native-vector-icons/AntDesign";
-// import Icon6 from "react-native-vector-icons/Ionicons";
-// import Icon7 from "react-native-vector-icons/Ionicons";
 import Icon9 from "react-native-vector-icons/AntDesign";
 import Icon10 from "react-native-vector-icons/Feather";
 import Icon3 from "react-native-vector-icons/AntDesign";
-// import Icon8 from "react-native-vector-icons/MaterialCommunityIcons";
-// import Icon3 from "react-native-vector-icons/MaterialCommunityIcons";
+import IconM from 'react-native-vector-icons/MaterialCommunityIcons'
 import { createNotes } from '../services/noteServices'
 import Icon from "react-native-vector-icons/Ionicons";
-// import AsyncStorage from '@react-native-community/async-storage'
 import { IconButton } from 'react-native-paper';
-// import { Card } from 'react-native-elements';
+import { Chip } from 'react-native-paper';
+import { getNotes } from '../services/noteServices'
+import { archiveNotes } from '../services/noteServices'
+import { deleteNotes } from '../services/noteServices'
+import { pinUnPinNotes } from '../services/noteServices'
+import { updateColor } from '../services/noteServices'
 const colors = [
     // { name: "blue", hexcode: "#F5F5DC" }
     { name: "blue", hexcode: " #39a78e" },
@@ -63,13 +63,28 @@ export class Notes extends React.Component {
             title: "",
             description: "",
             reminderDate: "",
-            color: "",
             isDeleted: false,
             isArchived: false,
-            isPined:false,
+            isPined: false,
+            key: '',
+            colors: false,
+            labelValue: "",
+            selectedLabels: "",
+            labelData: [],
         }
         this.reminderData = this.reminderData.bind(this);
     }
+    // componentDidMount() {
+    //     this.getNotes();
+    //     // this.getImage();
+    //   }
+    //   getNotes = () => {
+    //     getNotes().then(res => {
+    //       this.setState({
+    //         notes: res.data.data.data
+    //       });
+    //     });
+    //   };
     reminderData = (value) => {
         console.warn("dataaa---->", value);
         this.setState({
@@ -78,30 +93,37 @@ export class Notes extends React.Component {
         console.warn("date and time ", this.state.reminderDate);
     };
     handleColor = async (color) => {
-        console.log("colors-------->", color);
+        console.warn("colors-------->", color);
         await this.setState({
             color: color
         });
-        console.log("data of color ", this.state.color);
+        let data = {
+            noteIdList: [this.props.navigation.state.params.key],
+            color: this.state.color,
+        };
+        console.warn("data of updateColor", data);
+        updateColor(data).then(res => {
+            console.warn(" response in color updation", res)
+        });
     };
     handlePin = async () => {
         await this.setState({
             // noteIdList: [this.props.navigation.state.params.key],
             isPined: !this.state.isPined,
-            isPined:true
+            isPined: true
         });
         let data = {
             noteIdList: [this.props.navigation.state.params.key],
             isPined: this.state.isPined,
         }
         console.warn("log of pined", data);
-        pinUnPinNotes(data).then(res=>{
+        pinUnPinNotes(data).then(res => {
             console.warn("response in pin notes", res);
         });
         // this.props.navigation.navigate("dashboard");
     };
     handleDelete = async () => {
-          await this.setState({ isDeleted: true })
+        await this.setState({ isDeleted: true })
         let data = {
             noteIdList: [this.props.navigation.state.params.key],
             isDeleted: this.state.isDeleted
@@ -131,8 +153,12 @@ export class Notes extends React.Component {
             title: this.state.title,
             description: this.state.description,
             reminder: this.state.reminderDate,
-            delete: this.state.delete,
-            // Pined: this.state.pined,
+            isDeleted: this.state.isDeleted,
+            // noteId: this.props.navigation.state.params.key,
+            reminder: this.state.reminderDate,
+            isArchived: this.state.isArchived,
+            isPined: this.state.isPined,
+            color: this.state.color,
         };
         // console.warn("note data", data);
         createNotes(data).then(response => {
@@ -145,6 +171,21 @@ export class Notes extends React.Component {
         drawerIcon: <Icon2 name="bulb1" size={20} />
 
     };
+    // componentDidMount() {
+    //     // console.warn("key------>", this.props.navigation.state.params.display);
+    //     this.setState({
+    //         title: this.props.navigation.state.params.display.title,
+    //         isDeleted: this.props.navigation.state.params.display.isDeleted,
+    //         description: this.props.navigation.state.params.display.description,
+    //         reminder: this.props.navigation.state.params.display.reminder,
+    //         isArchived: this.props.navigation.state.params.display.isArchived,
+    //         color: this.props.navigation.state.params.display.color,
+    //         labelValue: this.props.navigation.state.params.display.label,
+
+
+    //     })
+    // }
+   
     render() {
         return (
             <View>
@@ -192,11 +233,13 @@ export class Notes extends React.Component {
                                 value={this.state.text}>
                             </TextInput>
                         </View>
-                        {/* <Chip style={{ width: 150,left: 25  }}> */}
-                        <Text style={{ fontWeight: "bold", left: 25 }}>
-                            {this.state.reminderDate}
-                        </Text>
-                        {/* </Chip> */}
+                        {this.state.reminderDate.length > 1 &&
+                            <TouchableOpacity>
+                                <Chip>
+                                    <IconM name="clock-outline" size={15} color="black" />
+                                    {this.state.reminderDate}
+                                </Chip>
+                            </TouchableOpacity>}
                     </View>
                     <View style={styles.plusicon}>
                         <View>
@@ -235,9 +278,7 @@ export class Notes extends React.Component {
                                     <View style={styles.deleteicons}>
                                         <View style={{
                                             flexDirection: "row",
-                                            top:20,
-                                            
-                                        }}>
+                                            top: 20}}>
                                             <TouchableOpacity onPress={() => this.handleDelete()}>
                                                 <Icon0
                                                     name="delete"
@@ -248,7 +289,7 @@ export class Notes extends React.Component {
                                         <View
                                             style={{
                                                 flexDirection: "row",
-                                                top:10
+                                                top: 10
                                             }}>
                                             <Icon2 name="sharealt" size={22} />
                                             <Text style={{ fontSize: 18, left: 20 }}>send</Text>
@@ -256,7 +297,7 @@ export class Notes extends React.Component {
                                         <View
                                             style={{
                                                 flexDirection: "row",
-                                                top:20
+                                                top: 20
                                             }}>
                                             <Icon2 name="addusergroup" size={25} />
                                             <Text
@@ -266,7 +307,7 @@ export class Notes extends React.Component {
                                         <View
                                             style={{
                                                 flexDirection: "row",
-                                                top:30
+                                                top: 30
                                             }} >
                                             <Icon1 name="label-outline" size={25} />
                                             <Text
@@ -280,10 +321,9 @@ export class Notes extends React.Component {
                                                 renderItem={({ item }) => (
                                                     <View
                                                         style={{
-                                                            marginTop: 30
-                                                        }}>
+                                                            marginTop: 30}}>
                                                         <IconButton
-                                                            style={{ backgroundColor: item.hexcode, borderRadius: 15 ,left:-12}}
+                                                            style={{ backgroundColor: item.hexcode, borderRadius: 15, left: -12 }}
                                                             value={item.hexcode}
                                                             size={60}
                                                             onPress={() => this.handleColor(item.hexcode)} />

@@ -84,8 +84,6 @@ export class DashBoard extends React.Component {
     userLogOut().then(response => {
       console.log("response in signout", response);
     });
-    // console.log("props in signout ", this.props.navigation.navigate);
-
     this.props.navigation.navigate("login");
     this.setState({ dialogVisible: false });
   };
@@ -104,7 +102,6 @@ export class DashBoard extends React.Component {
     let Align = this.state.listOpen ? styles.listAlign : styles.gridAlign;
     var noteDetails = this.state.notes.map(key => {
       if (key.isPined !== true && key.isDeleted !== true&&key.isArchived!==true) {
-        // let notes=key.data;
         return (
           <View style={Align}>
             <ScrollView>
@@ -114,11 +111,15 @@ export class DashBoard extends React.Component {
                     display: key,
                     key: key.id
                   })}>
-                <Card >
+                <Card  containerStyle={{
+                  backgroundColor: key.color,
+                  borderRadius: 10
+                }}>
                   <View>
                     <Text>{key.title}</Text>
                     <Text>{key.description}</Text>
                     <Text style={{ fontWeight: "bold" }}>{key.reminder}</Text>
+                    <Text style={{ fontWeight: "bold" }}>{key.label}</Text>
                   </View>
                 </Card>
               </TouchableOpacity>
@@ -138,11 +139,11 @@ export class DashBoard extends React.Component {
               onPress={() =>
                 this.props.navigation.navigate("editComponent", {
                   display: key,
-                  key: key.id
-                })
-              }
-            >
-              <Card>
+                  key: key.id})}>
+              <Card containerStyle={{
+                  backgroundColor: key.color,
+                  borderRadius: 10
+                }}>
                 <Text > {key.title}</Text>
                 <Text> {key.description}</Text>
                 <Text > {key.reminder}</Text>
@@ -264,12 +265,7 @@ export class DashBoard extends React.Component {
         </ScrollView>
 
         <Card style={styles.input4}
-          containerStyle={{
-            height: 50,
-            borderRadius: 10,
-            width: 380,
-            right: 23,
-          }}>
+          containerStyle={{ height: 50, borderRadius: 10}}>
           <View style={styles.input5}>
             <View >
               <Icon4 name="checksquareo" size={20} >
