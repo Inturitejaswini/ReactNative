@@ -166,11 +166,11 @@ export class Notes extends React.Component {
         });
         this.props.navigation.navigate("dashboard");
     };
-    static navigationOptions = {
-        drawerLabel: "Notes",
-        drawerIcon: <Icon2 name="bulb1" size={20} />
+    // static navigationOptions = {
+    //     drawerLabel: "Notes",
+    //     drawerIcon: <Icon2 name="bulb1" size={20} />
 
-    };
+    // };
     // componentDidMount() {
     //     // console.warn("key------>", this.props.navigation.state.params.display);
     //     this.setState({

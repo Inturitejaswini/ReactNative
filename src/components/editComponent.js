@@ -122,9 +122,9 @@ export class EditComponent extends Component {
             noteIdList: [this.props.navigation.state.params.key],
             label: this.state.label
         };
-        console.warn("lebel data------->", data);
+        console.warn("label data", data);
         createLabels(data).then(res => {
-            console.log(" response from label data-------->", res);
+            console.log(" response from label data", res);
         });
     };
     handleSelectLabel = async (labelName) => {
@@ -132,15 +132,15 @@ export class EditComponent extends Component {
         await this.setState({
             selectedLabels: labelName
         });
-        console.log("label name after set state", this.state.selectedLabels);
+        console.warn("label  setstate", this.state.selectedLabels);
     };
-    handleLabelArrow = labelValue => {
+    handleLabelArrow = async (labelValue) => {
         this.RBSheet2.close();
         this.RBSheet.close();
-        this.setState({
+       await this.setState({
             labelValue: labelValue
         });
-        console.log("labelValue", this.state.labelValue);
+        console.warn("labelValue", this.state.labelValue);
     };
     handleEditCard = () => {
         let data = {
@@ -156,12 +156,14 @@ export class EditComponent extends Component {
         };
         console.warn("editnote data", data);
         editNotes(data).then(res => {
-            console.warn("res of edit note data--->", res);
+            console.warn("response from edit note data", res);
+            this.setState({
+                color: res.color
+            })
         });
         this.props.navigation.navigate("dashboard");
     };
     handleColor = async (color) => {
-        console.warn("colors-------->", color);
         await this.setState({
             color: color
         });
@@ -171,11 +173,10 @@ export class EditComponent extends Component {
         };
         console.warn("data of updateColor", data);
         updateColor(data).then(res => {
-            console.warn(" response in color updation", res)
+            console.warn(" response from  color updation", res)
         });
     };
     componentDidMount() {
-        console.log("key------>", this.props.navigation.state.params.display);
         this.setState({
             title: this.props.navigation.state.params.display.title,
             isDeleted: this.props.navigation.state.params.display.isDeleted,
@@ -183,7 +184,7 @@ export class EditComponent extends Component {
             reminder: this.props.navigation.state.params.display.reminder,
             isArchived: this.props.navigation.state.params.display.isArchived,
             color: this.props.navigation.state.params.display.color,
-            labelValue: this.props.navigation.state.params.display.label
+            labelValue: this.props.navigation.state.params.display.labelValue
         })
     }
     // componentWillMount() {
@@ -207,7 +208,9 @@ export class EditComponent extends Component {
         //     );
         // });
         return (
-            <View>
+            <View style={{
+                backgroundColor: this.state.color,
+                height: "100%"}}>
                 <View style={{ flexDirection: "row", margin: 10 }}>
                     <View style={{ width: "60%" }}>
                         <Icon1
@@ -261,7 +264,7 @@ export class EditComponent extends Component {
                         />
                     </View>
                     <Text style={{ fontWeight: "bold", left: 10 }}>
-                        {this.state.reminderDate}
+                        {this.state.reminder}
                     </Text>
                 </View>
                 <View

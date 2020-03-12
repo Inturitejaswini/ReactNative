@@ -88,15 +88,10 @@ export class DashBoard extends React.Component {
     this.setState({ dialogVisible: false });
   };
   static navigationOptions = {
-    drawerLabel: <Text style={styles.cardText} size={70}>
-      <Text style={{ color: "red" }}>F</Text>
-      <Text style={{ color: "aqua" }}>u</Text>
-      <Text style={{ color: "blue" }}>n</Text>
-      <Text style={{ color: "darkGreen" }}>d</Text>
-      <Text style={{ color: "purple" }}>o</Text>
-      <Text style={{ color: "orange" }}>o</Text>
-    </Text>
-  };
+    drawerLabel: "Notes",
+    drawerIcon: <Icon2 name="bulb1" size={20} />
+
+};
 
   render() {
     let Align = this.state.listOpen ? styles.listAlign : styles.gridAlign;
@@ -147,6 +142,7 @@ export class DashBoard extends React.Component {
                 <Text > {key.title}</Text>
                 <Text> {key.description}</Text>
                 <Text > {key.reminder}</Text>
+                <Text style={{ fontWeight: "bold" }}>{key.label}</Text>
               </Card>
             </TouchableOpacity>
           </View>
@@ -155,7 +151,6 @@ export class DashBoard extends React.Component {
     });
     return (
       <View style={styles.dashboardContainer}>
-        <ScrollView>
           <Card style={styles.top} containerStyle={{ height: 50, borderRadius: 10 }}>
             <View style={styles.appicons}>
               <View style={styles.menuitem}>
@@ -224,24 +219,24 @@ export class DashBoard extends React.Component {
                       <Dialog.Button label="Manage Your Google Account"></Dialog.Button>
                     </View>
                     <Divider style={{ marginTop: 15 }} />
-                    <View style={{ marginTop: 10 }}>
-                      <Text style={{ fontWeight: "bold" ,left:50}}>
-                        Add another Account
-                        </Text>
-                    </View>
+                    <View  style={{ left:70,flexDirection: "row"}}>
                     <Dialog.Button
                       label="Cancel"
                       onPress={this.handleCancel}
                     />
+                    {/* </View>
+                    <View style={{ right:50}}> */}
                     <Dialog.Button
                       label="Logout"
                       onPress={() => this.handleSignOut()}
                     />
+                    </View>
                   </Dialog.Container>
                 </View>
               </View>
             </View>
           </Card>
+          <ScrollView>
           {noteDetails.length > 0 ? (
             <View>
             <Text style={{ left: 25, fontWeight: "bold",top:10 }}>PINED</Text>
