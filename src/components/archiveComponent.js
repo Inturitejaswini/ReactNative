@@ -28,7 +28,7 @@ export class ArchiveComponent extends Component {
         getNotes().then(res => {
             console.log("res in get notes", res);
             this.setState({
-                notes: res
+                notes: res.data.data.data
             });
             console.log("getNote data after setting state", this.state.notes);
         });
@@ -68,36 +68,22 @@ export class ArchiveComponent extends Component {
 
         return (
             <ScrollView>
-                <Card
-                    containerStyle={{
-                        height: 50,
-                        borderRadius: 10
-                    }}>
+                <Card containerStyle={{height: 50,borderRadius: 10}}>
                     <View
-                        style={{
-                            flexDirection: "row",
-                            justifyContent: "space-between"
-                        }}>
+                        style={styles.archivedrawer}>
                         <View style={{ top: -5 }}>
                             <TouchableOpacity
-                                onPress={() =>
-                                    this.props.navigation.dispatch(DrawerActions.openDrawer())
-                                }
-                            >
-                                <Image source={require("../assets/menuicon.png")}>
-                                </Image>
+                                onPress={() =>this.props.navigation.dispatch(DrawerActions.openDrawer())}>
+                                <Image source={require("../assets/menuicon.png")}></Image>
                             </TouchableOpacity>
                         </View>
-                        <Text style={{ fontSize: 22, right: 38, top: -4 }}>Archive</Text>
+                        <Text >Archive</Text>
                         <View style={styles.searchicon}>
                             <Image source={require("../assets/searchicon.png")}></Image>
                         </View>
                         <View
-                            style={{
-                                flexDirection: "row",
-                                justifyContent: "space-between"
-                            }}>
-                            <View style={{ right: 20 }}>
+                            style={styles.archivegrid}>
+                            <View>
                                 {!this.state.listOpen ? (
                                     <TouchableOpacity style={{ top: -5 }}>
                                         <Icon1

@@ -198,7 +198,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         right: 0,
         flex: 1,
-        position:'absolute',
+        position: 'absolute',
         // marginTop:50,
 
     },
@@ -210,26 +210,54 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         // right: 8,
     },
-/**
- * reminder css
- */
-reminderinput:{
-    backgroundColor: '#fbfcfc',
-    flexDirection: 'row',
-    justifyContent: 'space-around',
-    alignItems: 'center',
-    right: 0,
-    flex: 1,
-    position:'absolute',
-},
-reminderinput5:{
-    top: -5,
-    backgroundColor: '#fbfcfc',
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    
-},
+    /**
+     * reminder css
+     */
+    reminderinput: {
+        backgroundColor: '#fbfcfc',
+        flexDirection: 'row',
+        justifyContent: 'space-around',
+        alignItems: 'center',
+        right: 0,
+        flex: 1,
+        position: 'absolute',
+    },
+    reminderinput5: {
+        top: -5,
+        backgroundColor: '#fbfcfc',
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+
+    },
+    /**
+     * getarchivenote css
+     */
+    archivegrid: {
+        flexDirection: "row",
+        justifyContent: "space-between"
+    },
+    archivedrawer: {
+        flexDirection: "row",
+        justifyContent: "space-between"
+    },
+    /**
+     * gettrashnote css
+     */
+    trashdrawer: {
+        flexDirection: "row",
+        justifyContent: "space-between"
+    },
+    trashgrid: {
+        flexDirection: "row",
+        justifyContent: "space-between"
+    },
+
+
+
+
+
+
     /**
      *notes app.css  
      * */
@@ -256,7 +284,7 @@ reminderinput5:{
         alignItems: 'flex-start',
         flexDirection: 'column',
         justifyContent: 'space-between',
-        left:9
+        left: 9
     },
     icon: {
         alignItems: 'flex-start',
@@ -286,9 +314,9 @@ reminderinput5:{
      * getnote component css
      */
     getNoteCard: {
-         flexDirection: "row",
+        flexDirection: "row",
         justifyContent: "space-between",
-         flexWrap: "wrap",
+        flexWrap: "wrap",
     },
     /**
      * editcomponent css
@@ -303,10 +331,10 @@ reminderinput5:{
     noteData: {
         left: 10
     },
-    listAlign:{
+    listAlign: {
         width: "100%"
     },
-    gridAlign:{
+    gridAlign: {
         width: "50%"
     }
 });

@@ -77,21 +77,13 @@ export default class Trash extends Component {
         return (
             <View>
                 <ScrollView>
-                    <Card
-                        containerStyle={{
-                            height: 50,
-                            borderRadius: 10
-                        }}>
+                    <Card containerStyle={{height: 50,borderRadius: 10}}>
                         <View
-                            style={{
-                                flexDirection: "row",
-                                justifyContent: "space-between"}}>
+                            style={styles.trashdrawer}>
                             <View style={{ top: -5 }}>
                                 <TouchableOpacity
-                                    onPress={() =>
-                                        this.props.navigation.dispatch(DrawerActions.openDrawer())}>
-                                    <Image source={require("../assets/menuicon.png")}>
-                                    </Image>
+                                    onPress={() =>this.props.navigation.dispatch(DrawerActions.openDrawer())}>
+                                    <Image source={require("../assets/menuicon.png")}></Image>
                                 </TouchableOpacity>
                             </View>
                             <View>
@@ -101,11 +93,8 @@ export default class Trash extends Component {
                                 <Image source={require("../assets/searchicon.png")}></Image>
                             </View>
                             <View
-                                style={{
-                                    flexDirection: "row",
-                                    justifyContent: "space-between"
-                                }}>
-                                <View style={{ right: 20 }}>
+                                style={styles.trashgrid}>
+                                <View >
                                     {!this.state.listOpen ? (
                                         <TouchableOpacity style={{ top: -5 }}>
                                             <Icon1
