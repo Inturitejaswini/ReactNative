@@ -161,24 +161,15 @@ export class Notes extends React.Component {
             description: this.state.description,
             reminder: this.state.reminderDate,
             isDeleted: this.state.isDeleted,
-            // noteId: this.props.navigation.state.params.key,
-            reminder: this.state.reminderDate,
             isArchived: this.state.isArchived,
             isPined: this.state.isPined,
             color: this.state.color,
         };
-        // console.warn("note data", data);
         createNotes(data).then(response => {
             console.warn("response is coming to note component", response)
         });
         this.props.navigation.navigate("dashboard");
     };
-    // static navigationOptions = {
-    //     drawerLabel: "Notes",
-    //     drawerIcon: <Icon2 name="bulb1" size={20} />
-
-    // };
-   
 
     render() {
         return (
@@ -253,8 +244,7 @@ export class Notes extends React.Component {
                                         container: {
                                             justifyContent: "center",
                                             alignItems: "center"
-                                        }
-                                    }}>
+                                        }}}>
                                 </RBSheet1>
                             </TouchableOpacity>
                         </View>
@@ -271,13 +261,9 @@ export class Notes extends React.Component {
                                         container: {
                                             justifyContent: "center",
                                             alignItems: "center"
-                                        }
-                                    }}>
+                                        }}}>
                                     <View style={styles.deleteicons}>
-                                        <View style={{
-                                            flexDirection: "row",
-                                            top: 20
-                                        }}>
+                                        <View style={{flexDirection: "row",top: 20}}>
                                             <TouchableOpacity onPress={() => this.handleDelete()}>
                                                 <Icon0
                                                     name="delete"
@@ -286,28 +272,19 @@ export class Notes extends React.Component {
                                             </TouchableOpacity>
                                         </View>
                                         <View
-                                            style={{
-                                                flexDirection: "row",
-                                                top: 10
-                                            }}>
+                                            style={{flexDirection: "row", top: 10}}>
                                             <Icon2 name="sharealt" size={22} />
                                             <Text style={{ fontSize: 18, left: 20 }}>send</Text>
                                         </View>
                                         <View
-                                            style={{
-                                                flexDirection: "row",
-                                                top: 20
-                                            }}>
+                                            style={{ flexDirection: "row", top: 20}}>
                                             <Icon2 name="addusergroup" size={25} />
                                             <Text
                                                 style={{ fontSize: 18, left: 20 }}
                                                 onPress={() => { this.RBSheet1.open() }}>collaborator</Text>
                                         </View>
                                         <View
-                                            style={{
-                                                flexDirection: "row",
-                                                top: 30
-                                            }} >
+                                            style={{ flexDirection: "row", top: 30 }} >
                                             <Icon1 name="label-outline" size={25} />
                                             <Text
                                                 onPress={() => { this.RBSheet2.open(); }}

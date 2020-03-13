@@ -314,10 +314,7 @@ export class EditReminderComponent extends Component {
                                 data={colors}
                                 horizontal={true}
                                 renderItem={({ item }) => (
-                                    <View
-                                        style={{
-                                            marginTop: 10
-                                        }}>
+                                    <View style={{marginTop: 10}}>
                                         <IconButton
                                             style={{ backgroundColor: item.hexcode, borderRadius: 15 }}
                                             value={item.hexcode}
