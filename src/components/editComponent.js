@@ -255,7 +255,7 @@ export class EditComponent extends Component {
                         />
                     </View>
                     <Text style={{ fontWeight: "bold", left: 10 }}>
-                        {this.state.reminder}
+                        {this.state.reminderDate}
                     </Text>
                 </View>
                 <View

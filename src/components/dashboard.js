@@ -245,12 +245,7 @@ export class DashBoard extends React.Component {
               <ProgressBarAndroid
                 color="gray"
                 progress={0.9}
-                style={{
-                  flex: 1,
-                  flexDirection: "column",
-                  alignItems: "center",
-                  marginTop:200
-                }}/>
+                style={styles.progress}/>
             )}
         </ScrollView>
 

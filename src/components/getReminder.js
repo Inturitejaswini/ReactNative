@@ -60,16 +60,8 @@ export class ReminderComponent1 extends Component {
         });
         return (
             <View>
-                <Card
-                    containerStyle={{
-                        height: 50,
-                        borderRadius: 10
-                    }}>
-                    <View
-                        style={{
-                            flexDirection: "row",
-                            justifyContent: "space-between"
-                        }}>
+                <Card containerStyle={{height: 50,borderRadius: 10}}>
+                    <View style={{flexDirection: "row",justifyContent: "space-between"}}>
                         <View style={{ top: -5 }}>
                             <TouchableOpacity
                                 onPress={() =>
@@ -85,10 +77,7 @@ export class ReminderComponent1 extends Component {
                             <Image source={require("../assets/searchicon.png")}></Image>
                         </View>
                         <View
-                            style={{
-                                flexDirection: "row",
-                                justifyContent: "space-between"
-                            }}>
+                            style={{ flexDirection: "row",justifyContent: "space-between"}}>
                             <View style={{ right: 20 }}>
                                 {!this.state.listOpen ? (
                                     <TouchableOpacity style={{ top: -5 }}>
@@ -123,12 +112,7 @@ export class ReminderComponent1 extends Component {
                             <ProgressBarAndroid
                                 color="gray"
                                 progress={0.9}
-                                style={{
-                                    flex: 1,
-                                    flexDirection: "column",
-                                    alignItems: "center",
-                                    marginTop: 200
-                                }} />
+                                style={styles.progress} />
                         )}
                 </ScrollView>
                 {/* <View>

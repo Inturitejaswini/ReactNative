@@ -152,6 +152,8 @@ export class Notes extends React.Component {
         archiveNotes(data).then(res => {
             console.log("res in archive component", res);
         });
+        this.props.navigation.navigate("dashboard");
+
     };
     handleNote = () => {
         let data = {
@@ -211,7 +213,9 @@ export class Notes extends React.Component {
                             <ReminderComponent reminderProps={this.reminderData} ></ReminderComponent>
                         </View>
                         <View>
-                            <Icon name="md-archive" style={styles.archiveicon} size={22}></Icon>
+                            <Icon name="md-archive" 
+                            onPress={() => this.handleArchiveNote()}
+                            style={styles.archiveicon} size={22}></Icon>
                         </View>
                     </View>
                     <View style={styles.textinput} >
