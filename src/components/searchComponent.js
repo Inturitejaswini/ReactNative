@@ -18,37 +18,56 @@ import { View, Button, Text, TouchableOpacity, TextInput } from 'react-native'
 import styles from '../Styles';
 import Icon1 from "react-native-vector-icons/MaterialCommunityIcons";
 import { Divider } from 'react-native-paper';
-
+import { getNotes } from "../services/noteServices";
 export class SearchComponent extends Component {
     constructor() {
         super();
         this.state = {
-            searchOpen:false
+            listOpen: false,
+            open: false,
+            notes: [],
+            reminder: [],
+            dialogVisible: false,
+            visible: false,
+            searchOpen: false,
         }
     }
+    componentDidMount() {
+        this.getNotes();
+        // this.getImage();
+    }
+    getNotes = () => {
+        getNotes().then(res => {
+            console.log("res in get notes", res);
+            this.setState({
+                notes: res
+            });
+        });
+    };
     handleSearchArrow = async () => {
         await this.setState({
-          searchOpen: false
+            searchOpen: false
         });
         this.props.navigation.navigate('dashboard')
-      };
-      handleSearchValue = async value => {
+    };
+    handleSearchValue = async value => {
         console.log("search value", value);
         await this.setState({
-          searchValue: value
+            searchValue: value
         });
         console.warn("search after set state", this.state.searchValue);
-      };
+    };
     render() {
+       
         return (
             <View >
                 <View style={{ flexDirection: "row", alignItems: 'center' }}>
                     <View >
                         <TouchableOpacity onPress={() => { this.handleSearchArrow() }} >
-                        <Icon1
-                            name="arrow-left"
-                            size={25}/>
-                      </TouchableOpacity>
+                            <Icon1
+                                name="arrow-left"
+                                size={25} />
+                        </TouchableOpacity>
                     </View>
                     <View>
                         <TextInput
@@ -56,7 +75,7 @@ export class SearchComponent extends Component {
                             placeholder="search your notes...."
                             onChangeText={this.handleSearchValue} /></View>
                 </View>
-                <Divider type='horizontal' style={{height:2}}></Divider>
+                <Divider type='horizontal' style={{ height: 2 }}></Divider>
             </View>
         )
     }

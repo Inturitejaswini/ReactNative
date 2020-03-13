@@ -205,7 +205,6 @@ const styles = StyleSheet.create({
         right: 0,
         flex: 1,
         position: 'absolute',
-        // marginTop:50,
 
     },
     input5: {
