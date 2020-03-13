@@ -123,9 +123,7 @@ export class ArchiveComponent extends Component {
                 </Card>
                 {noteDetails.length > 0 ? (
                         <View>
-                            {/* <Text style={{ left: 25, fontWeight: "bold", top: 10 }}>PINED</Text> */}
                             <View style={styles.getNoteCard}>{pinNoteDetails}</View>
-                            {/* <Text style={{ left: 25, fontWeight: "bold", top: 10 }}>OTHERS</Text> */}
                             <View style={styles.getNoteCard}>{noteDetails}</View>
                         </View>
                     ) : (

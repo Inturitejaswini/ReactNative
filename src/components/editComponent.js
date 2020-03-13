@@ -61,7 +61,7 @@ export class EditComponent extends Component {
             labelValue: "",
             selectedLabels: "",
             labelData: [],
-            label: false
+            label: false,
 
         };
         this.reminderData = this.reminderData.bind(this);
@@ -132,11 +132,11 @@ export class EditComponent extends Component {
         };
         console.warn("label data", data);
         createLabels(data).then(res => {
-            console.log(" response from label data", res);
+            console.warn(" response from label data", res);
         });
     };
     handleSelectLabel = async (labelName) => {
-        console.log("id of label", labelName);
+        console.warn("id of label", labelName);
         await this.setState({
             selectedLabels: labelName
         });
@@ -255,7 +255,7 @@ export class EditComponent extends Component {
                         />
                     </View>
                     <Text style={{ fontWeight: "bold", left: 10 }}>
-                        {this.state.reminderDate}
+                        {this.state.reminder}
                     </Text>
                 </View>
                 <View
@@ -330,9 +330,9 @@ export class EditComponent extends Component {
                                             style={{ backgroundColor: item.hexcode, borderRadius: 15 }}
                                             value={item.hexcode}
                                             size={40}
-                                            onPress={() => this.handleColor(item.hexcode)} />
+                                            onPress={() => this.handleColor(item.hexcode)}/>
                                     </View>
-                                )} />
+                                )}/>
                         </View>
                     </RBSheet>
                 </View>

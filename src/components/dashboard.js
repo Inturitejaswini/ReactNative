@@ -24,14 +24,14 @@ import Icon0 from "react-native-vector-icons/AntDesign";
 import Icon4 from "react-native-vector-icons/AntDesign";
 import Icon6 from "react-native-vector-icons/MaterialIcons";
 import Icon7 from "react-native-vector-icons/Entypo";
-import { Avatar,Divider } from "react-native-elements";
+import { Avatar, Divider } from "react-native-elements";
 import Dialog from "react-native-dialog";
 import { Image } from 'react-native'
 import Icon2 from "react-native-vector-icons/AntDesign";
 import Icon1 from "react-native-vector-icons/MaterialCommunityIcons";
 import Icon3 from 'react-native-vector-icons/MaterialCommunityIcons'
 import { getNotes } from '../services/noteServices'
-import {userLogOut} from '../services/userServices'
+import { userLogOut } from '../services/userServices'
 import EditComponent from '../components/editComponent'
 import GetNoteComponent from "../components/getNoteComponent";
 import { ScrollView } from 'react-native-gesture-handler';
@@ -45,7 +45,8 @@ export class DashBoard extends React.Component {
       notes: [],
       reminder: [],
       dialogVisible: false,
-      visible: false
+      visible: false,
+      searchOpen: false,
 
     }
   }
@@ -66,7 +67,12 @@ export class DashBoard extends React.Component {
   handleNote = () => {
     this.props.navigation.navigate("notes");
   };
-
+  handleSearch = () => {
+    this.setState({
+      searchOpen: !this.state.searchOpen
+    });
+    console.log("search state---->", this.state.searchOpen);
+  }
   handleGridView() {
     this.setState({
       listOpen: !this.state.listOpen
@@ -91,12 +97,15 @@ export class DashBoard extends React.Component {
     drawerLabel: "Notes",
     drawerIcon: <Icon2 name="bulb1" size={20} />
 
-};
+  };
 
   render() {
     let Align = this.state.listOpen ? styles.listAlign : styles.gridAlign;
+    let pinCount = 0
+    let unPinCount = 0
     var noteDetails = this.state.notes.map(key => {
-      if (key.isPined !== true && key.isDeleted !== true&&key.isArchived!==true) {
+      if (key.isPined !== true && key.isDeleted !== true && key.isArchived !== true) {
+        unPinCount++
         return (
           <View style={Align}>
             <ScrollView>
@@ -106,7 +115,7 @@ export class DashBoard extends React.Component {
                     display: key,
                     key: key.id
                   })}>
-                <Card  containerStyle={{
+                <Card containerStyle={{
                   backgroundColor: key.color,
                   borderRadius: 10
                 }}>
@@ -124,18 +133,20 @@ export class DashBoard extends React.Component {
       }
     });
     let pinNoteDetails = this.state.notes.map(key => {
-      if (key.isPined === true&&key.isDeleted !== true&&key.isArchived!==true) {
+      if (key.isPined === true && key.isDeleted !== true && key.isArchived !== true) {
+        pinCount++;
         return (
           <View style={Align}>
             <TouchableOpacity
               onPress={() =>
                 this.props.navigation.navigate("editComponent", {
                   display: key,
-                  key: key.id})}>
+                  key: key.id
+                })}>
               <Card containerStyle={{
-                  backgroundColor: key.color,
-                  borderRadius: 10
-                }}>
+                backgroundColor: key.color,
+                borderRadius: 10
+              }}>
                 <Text > {key.title}</Text>
                 <Text> {key.description}</Text>
                 <Text > {key.reminder}</Text>
@@ -148,75 +159,85 @@ export class DashBoard extends React.Component {
     });
     return (
       <View style={styles.dashboardContainer}>
-          <Card style={styles.top} containerStyle={{ height: 50, borderRadius: 10 }}>
-            <View style={styles.appicons}>
-              <View style={styles.menuitem}>
-                <TouchableOpacity
-                  onPress={() => this.props.navigation.dispatch(DrawerActions.openDrawer())}>
-                  <Image source={require("../assets/menuicon.png")}>
-                  </Image>
+        <Card style={styles.top} containerStyle={{ height: 50, borderRadius: 10 }}>
+          <View style={styles.appicons}>
+            <View style={styles.menuitem}>
+              <TouchableOpacity
+                onPress={() => this.props.navigation.dispatch(DrawerActions.openDrawer())}>
+                <Image source={require("../assets/menuicon.png")}>
+                </Image>
+              </TouchableOpacity>
+            </View>
+            <View >
+              <Image source={require("../assets/keepicon.png")} style={styles.keepicon}></Image>
+            </View>
+            <View>
+              <Text style={styles.fundooText}>
+                <Text style={{ color: "red" }}>F</Text>
+                <Text style={{ color: "aqua" }}>u</Text>
+                <Text style={{ color: "blue" }}>n</Text>
+                <Text style={{ color: "darkGreen" }}>d</Text>
+                <Text style={{ color: "purple" }}>o</Text>
+                <Text style={{ color: "orange" }}>o</Text>
+                <Text style={{ color: "black" }}>Note</Text>
+              </Text>
+            </View>
+            <View style={styles.searchicon} >
+              <Image source={require("../assets/searchicon.png")}
+                onPress={() => this.handleSearch()}>
+              </Image>
+            </View>
+            <View >
+              {!this.state.listOpen ? (
+                <TouchableOpacity >
+                  <Icon1
+                    name="view-stream"
+                    size={30} onPress={() => this.handleGridView()} />
                 </TouchableOpacity>
-              </View>
-              <View >
-                <Image source={require("../assets/keepicon.png")} style={styles.keepicon}></Image>
-              </View>
-              <View>
-                <Text style={styles.fundooText}>FundooNote</Text>
-              </View>
-              <View style={styles.searchicon}>
-                <Image source={require("../assets/searchicon.png")}></Image>
-              </View>
-              <View >
-                {!this.state.listOpen ? (
-                  <TouchableOpacity >
-                    <Icon1
-                      name="view-stream"
+              ) : (
+                  <TouchableOpacity>
+                    <Icon
+                      name="grid"
                       size={30} onPress={() => this.handleGridView()} />
                   </TouchableOpacity>
-                ) : (
-                    <TouchableOpacity>
-                      <Icon
-                        name="grid"
-                        size={30} onPress={() => this.handleGridView()} />
-                    </TouchableOpacity>
-                  )}
-              </View>
-              <View style={{ top: -2 }}>
-                <View>
-                  <TouchableOpacity>
-                    <Icon3
-                     name="account-circle"
-                     size={40}
-                      rounded
-                      source={this.state.profile}
-                      activeOpacity={0.7}
-                      onPress={this.showDialog}
-                    />
-                  </TouchableOpacity>
-                  <Dialog.Container visible={this.state.dialogVisible}>
-                    <View style={{ flexDirection: "row", marginTop: -10 }}>
-                      <View>
-                        <Icon3
-                         name="account-circle"
-                         size={40}
-                          rounded
-                          source={this.state.profile}
-                          activeOpacity={0.7}
-                          onPress={this.handleProfile}
-                        />
-                      </View>
-                      <View style={{ left: 20 }}>
-                        <Text style={{ fontWeight: "bold" }}>
-                         Inturitejaswini
+                )}
+            </View>
+            <View style={{ top: -2 }}>
+              <View>
+                <TouchableOpacity>
+                  <Icon3
+                    name="account-circle"
+                    size={40}
+                    rounded
+                    source={this.state.profile}
+                    activeOpacity={0.7}
+                    onPress={this.showDialog}
+                  />
+                </TouchableOpacity>
+                <Dialog.Container visible={this.state.dialogVisible}>
+                  <View style={{ flexDirection: "row", marginTop: -10 }}>
+                    <View>
+                      <Icon3
+                        name="account-circle"
+                        size={40}
+                        rounded
+                        source={this.state.profile}
+                        activeOpacity={0.7}
+                        onPress={this.handleProfile}
+                      />
+                    </View>
+                    <View style={{ left: 20 }}>
+                      <Text style={{ fontWeight: "bold" }}>
+                        Inturitejaswini
                           </Text>
-                        <Text>chowdarytejaswini2gmail.com</Text>
-                      </View>
+                      <Text>chowdarytejaswini2gmail.com</Text>
                     </View>
-                    <View style={{ marginTop: 10 }}>
-                      <Dialog.Button label="Manage Your Google Account"></Dialog.Button>
-                    </View>
-                    <Divider style={{ marginTop: 15 }} />
-                    <View  style={{ left:70,flexDirection: "row"}}>
+                  </View>
+                  <View style={{ marginTop: 10 }}>
+                    <Dialog.Button label="Manage Your Google Account"></Dialog.Button>
+                  </View>
+                  <Divider style={{ marginTop: 15 }} />
+                  <View style={{ left: 70, flexDirection: "row" }}>
                     <Dialog.Button
                       label="Cancel"
                       onPress={this.handleCancel}
@@ -227,30 +248,30 @@ export class DashBoard extends React.Component {
                       label="Logout"
                       onPress={() => this.handleSignOut()}
                     />
-                    </View>
-                  </Dialog.Container>
-                </View>
+                  </View>
+                </Dialog.Container>
               </View>
             </View>
-          </Card>
-          <ScrollView>
+          </View>
+        </Card>
+        <ScrollView>
           {noteDetails.length > 0 ? (
             <View>
-            <Text style={{ left: 25, fontWeight: "bold",top:10 }}>PINED</Text>
-            <View style={styles.getNoteCard}>{pinNoteDetails}</View>
-            <Text style={{ left: 25, fontWeight: "bold",top:10 }}>OTHERS</Text>
-            <View style={styles.getNoteCard}>{noteDetails}</View>
-          </View>
-          ):(
+              <Text style={styles.carddetails}>PINED :{pinCount}</Text>
+              <View style={styles.getNoteCard}>{pinNoteDetails}</View>
+              <Text style={styles.notecarddetails}>OTHERS :{unPinCount}</Text>
+              <View style={styles.getNoteCard}>{noteDetails}</View>
+            </View>
+          ) : (
               <ProgressBarAndroid
                 color="gray"
                 progress={0.9}
-                style={styles.progress}/>
+                style={styles.progress} />
             )}
         </ScrollView>
 
-        {/* <Card style={styles.input4}
-          containerStyle={{ height: 50, borderRadius: 10,width:100}}> */}
+        <Card style={styles.input4}
+          containerStyle={{ height: 50, borderRadius: 10 }}>
           <View style={styles.input5}>
             <View >
               <Icon4 name="checksquareo" size={20} >
@@ -278,7 +299,7 @@ export class DashBoard extends React.Component {
               </TouchableOpacity>
             </View>
           </View>
-        {/* </Card> */}
+        </Card>
 
       </View>
     );

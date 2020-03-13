@@ -4,8 +4,8 @@ import { ScrollView, Text, View, TouchableOpacity } from "react-native";
 import { Card } from "react-native-elements";
 import styles from "../Styles";
 import { getNotes } from '../services/noteServices'
-import { Chip } from "react-native-paper";
-import Icon from "react-native-vector-icons/MaterialCommunityIcons";
+import { Chip, Divider } from "react-native-paper";
+import Icon from "react-native-vector-icons/AntDesign";
 export class CreateLabelComponent extends Component {
   constructor() {
     super();
@@ -14,8 +14,8 @@ export class CreateLabelComponent extends Component {
     };
   }
   static navigationOptions = {
-    drawerLabel: "Labels",
-    drawerIcon: <Icon name="label-outline" size={25}/>
+    drawerLabel: "CreateLabel",
+    drawerIcon: <Icon name="plus" size={25}/>
   };
   render() {
       return (

@@ -134,11 +134,11 @@ const styles = StyleSheet.create({
     /**
      * dashboard component app.css
      */
-    progress:{
-            flex: 1,
-            flexDirection: "column",
-            alignItems: "center",
-            marginTop: 200
+    progress: {
+        flex: 1,
+        flexDirection: "column",
+        alignItems: "center",
+        marginTop: 200
     },
     cardText: {
         fontSize: 30,
@@ -187,7 +187,7 @@ const styles = StyleSheet.create({
         marginLeft: 5
     },
     searchicon: {
-        marginLeft: 40
+        marginLeft: 20
     },
     grid: {
         right: -20,
@@ -209,13 +209,32 @@ const styles = StyleSheet.create({
 
     },
     input5: {
-        top: -15,
+        top: -5,
         backgroundColor: '#fbfcfc',
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center',
-        alignContent:'center',
         // right: 8,
+    },
+    cardCss: {
+        // flex: 1,
+        flexDirection: "row",
+        justifyContent: "space-between"
+    },
+    fundooText: {
+        fontSize: 20,
+        right: -1,
+        top: -4
+    },
+    carddetails: {
+        left: 25,
+        fontWeight: "bold",
+        top: 10
+    },
+    notecarddetails: {
+        left: 25,
+        fontWeight: "bold",
+        top: 10
     },
     /**
      * reminder css
@@ -227,7 +246,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         right: 0,
         flex: 1,
-        position:'absolute',
+        position: 'absolute',
     },
     reminderinput5: {
         top: -5,
