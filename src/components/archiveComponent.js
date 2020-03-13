@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { View, TextInput, Text, Image, TouchableOpacity, ScrollView } from "react-native";
+import { View, TextInput, Text, Image, TouchableOpacity, ScrollView ,ProgressBarAndroid} from "react-native";
 import Icon1 from "react-native-vector-icons/MaterialCommunityIcons";
 import Icon2 from "react-native-vector-icons/FontAwesome";
 import Icon from "react-native-vector-icons/Foundation";
@@ -61,7 +61,29 @@ export class ArchiveComponent extends Component {
                 );
             }
         });
-
+        let pinNoteDetails = this.state.notes.map(key => {
+            if (key.isPined === true&&key.isDeleted !== true&&key.isArchived!==true) {
+              return (
+                <View style={Align}>
+                  <TouchableOpacity
+                    onPress={() =>
+                      this.props.navigation.navigate("editTrash", {
+                        display: key,
+                        key: key.id})}>
+                    <Card containerStyle={{
+                        backgroundColor: key.color,
+                        borderRadius: 10
+                      }}>
+                      <Text > {key.title}</Text>
+                      <Text> {key.description}</Text>
+                      <Text > {key.reminder}</Text>
+                      <Text style={{ fontWeight: "bold" }}>{key.label}</Text>
+                    </Card>
+                  </TouchableOpacity>
+                </View>
+              );
+            }
+          });
         return (
             <ScrollView>
                 <Card containerStyle={{ height: 50, borderRadius: 10 }}>
@@ -99,7 +121,24 @@ export class ArchiveComponent extends Component {
                         </View>
                     </View>
                 </Card>
-                <View style={styles.getNoteCard}>{noteDetails}</View>
+                {noteDetails.length > 0 ? (
+                        <View>
+                            <Text style={{ left: 25, fontWeight: "bold", top: 10 }}>PINED</Text>
+                            <View style={styles.getNoteCard}>{pinNoteDetails}</View>
+                            <Text style={{ left: 25, fontWeight: "bold", top: 10 }}>OTHERS</Text>
+                            <View style={styles.getNoteCard}>{noteDetails}</View>
+                        </View>
+                    ) : (
+                            <ProgressBarAndroid
+                                color="gray"
+                                progress={0.9}
+                                style={{
+                                    flex: 1,
+                                    flexDirection: "column",
+                                    alignItems: "center",
+                                    marginTop: 200
+                                }} />
+                        )}
             </ScrollView>
         );
     }

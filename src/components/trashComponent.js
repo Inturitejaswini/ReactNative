@@ -1,8 +1,5 @@
 import React, { Component } from "react";
-import {
-  View, TextInput, Text, Image, TouchableOpacity,
-  ScrollView
-} from "react-native";
+import { View, TextInput, Text, Image, TouchableOpacity, ScrollView,ProgressBarAndroid} from "react-native";
 import Icon1 from "react-native-vector-icons/MaterialCommunityIcons";
 import Icon2 from "react-native-vector-icons/FontAwesome";
 import { Card } from "react-native-elements";
@@ -10,7 +7,7 @@ import styles from "../Styles";
 import { getNotes } from "../services/noteServices";
 import { DrawerActions } from "react-navigation-drawer";
 import Icona from "react-native-vector-icons/AntDesign"
-export  class Trash extends Component {
+export class Trash extends Component {
   constructor() {
     super();
     this.state = {
@@ -43,10 +40,10 @@ export  class Trash extends Component {
         return (
           <View style={Align}>
             <TouchableOpacity onPress={() =>
-                            this.props.navigation.navigate("editTrash", {
-                                display: key,
-                                key: key.id
-                            })}>
+              this.props.navigation.navigate("editTrash", {
+                display: key,
+                key: key.id
+              })}>
               <Card
                 containerStyle={{
                   backgroundColor: key.color,
@@ -62,18 +59,19 @@ export  class Trash extends Component {
       }
     });
     let pinNoteDetails = this.state.notes.map(key => {
-      if (key.isPined === true&&key.isDeleted !== true&&key.isArchived!==true) {
+      if (key.isPined === true && key.isDeleted !== true && key.isArchived !== true) {
         return (
           <View style={Align}>
             <TouchableOpacity
               onPress={() =>
                 this.props.navigation.navigate("editTrash", {
                   display: key,
-                  key: key.id})}>
+                  key: key.id
+                })}>
               <Card containerStyle={{
-                  backgroundColor: key.color,
-                  borderRadius: 10
-                }}>
+                backgroundColor: key.color,
+                borderRadius: 10
+              }}>
                 <Text > {key.title}</Text>
                 <Text> {key.description}</Text>
                 <Text > {key.reminder}</Text>
@@ -96,7 +94,7 @@ export  class Trash extends Component {
               </TouchableOpacity>
             </View>
             <View>
-              <Text style={{fontSize:30 ,top:-10}}>Delete </Text>
+              <Text style={{ fontSize: 30, top: -10 }}>Delete </Text>
             </View>
             <View style={styles.searchicon}>
               <Image source={require("../assets/searchicon.png")}></Image>
@@ -129,8 +127,22 @@ export  class Trash extends Component {
           </View>
         </Card>
         <ScrollView>
-          <View style={styles.getNoteCard}>{noteDetails}</View>
-          <View style={styles.getNoteCard}>{pinNoteDetails}</View>
+          {noteDetails.length > 0 ? (
+            <View>
+            <View style={styles.getNoteCard}>{noteDetails}</View>
+            <View style={styles.getNoteCard}>{pinNoteDetails}</View>
+            </View>
+          ) : (
+              <ProgressBarAndroid
+                color="gray"
+                progress={0.9}
+                style={{
+                  flex: 1,
+                  flexDirection: "column",
+                  alignItems: "center",
+                  marginTop: 200
+                }} />
+            )}
         </ScrollView>
         {/* <Card style={styles.reminderinput}
                     containerStyle={{  height: 50, borderRadius: 10}}>

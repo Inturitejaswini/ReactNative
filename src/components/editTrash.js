@@ -56,7 +56,7 @@ export class EditTrashComponent extends Component {
         };
         console.warn("delete after set state", data);
         deleteForever(data).then(res => {
-            console.warn("response in delete notes", res);
+            console.warn("response in deleteforever notes", res);
         });
     };
     handleRestore = async () => {
@@ -67,7 +67,7 @@ export class EditTrashComponent extends Component {
         };
         console.warn("delete after set state", data);
         restore(data).then(res => {
-            console.warn("response in delete notes", res);
+            console.warn("response in restore notes", res);
         });
         this.props.navigation.navigate("dashboard")
     };

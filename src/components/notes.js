@@ -35,10 +35,10 @@ import { Chip } from 'react-native-paper';
 import { getNotes } from '../services/noteServices'
 import { archiveNotes } from '../services/noteServices'
 import { deleteNotes } from '../services/noteServices'
-import { pinUnPinNotes } from '../services/noteServices'
+import { pinNotes } from '../services/noteServices'
+import { UnpinNotes } from '../services/noteServices'
 import { updateColor } from '../services/noteServices'
 const colors = [
-    // { name: "blue", hexcode: "#F5F5DC" }
     { name: "blue", hexcode: " #39a78e" },
     { name: "violet", hexcode: "#7DCEA0" },
     { name: "blue", hexcode: "#76D7C4" },
@@ -54,7 +54,6 @@ const colors = [
     { name: "salmon", hexcode: "#98AFC7" },
     { name: "mistyRose", hexcode: "#74a775" }
 ];
-// import ReminderComponent from '../components/remainder'
 export class Notes extends React.Component {
     constructor() {
         super();
@@ -74,17 +73,24 @@ export class Notes extends React.Component {
         }
         this.reminderData = this.reminderData.bind(this);
     }
-    // componentDidMount() {
-    //     this.getNotes();
-    //     // this.getImage();
-    //   }
-    //   getNotes = () => {
-    //     getNotes().then(res => {
-    //       this.setState({
-    //         notes: res.data.data.data
-    //       });
-    //     });
-    //   };
+    componentDidMount() {
+        this.getNotes();
+        // this.getImage();
+    }
+    getNotes = () => {
+        getNotes().then(res => {
+            this.setState({
+                notes: res.data.data.data,
+                title: this.props.navigation.state.params.display.title,
+                isDeleted: this.props.navigation.state.params.display.isDeleted,
+                description: this.props.navigation.state.params.display.description,
+                reminder: this.props.navigation.state.params.display.reminder,
+                isArchived: this.props.navigation.state.params.display.isArchived,
+                color: this.props.navigation.state.params.display.color,
+                labelValue: this.props.navigation.state.params.display.label,
+            });
+        });
+    };
     reminderData = (value) => {
         console.warn("dataaa---->", value);
         this.setState({
@@ -108,8 +114,6 @@ export class Notes extends React.Component {
     };
     handlePin = async () => {
         await this.setState({
-            // noteIdList: [this.props.navigation.state.params.key],
-            isPined: !this.state.isPined,
             isPined: true
         });
         let data = {
@@ -117,10 +121,22 @@ export class Notes extends React.Component {
             isPined: this.state.isPined,
         }
         console.warn("log of pined", data);
-        pinUnPinNotes(data).then(res => {
+        pinNotes(data).then(res => {
             console.warn("response in pin notes", res);
         });
-        // this.props.navigation.navigate("dashboard");
+    };
+    handleUnPin = async () => {
+        await this.setState({
+            isPined: false
+        });
+        let data = {
+            noteIdList: [this.props.navigation.state.params.key],
+            isPined: this.state.isPined,
+        }
+        console.warn("log of pined", data);
+        UnpinNotes(data).then(res => {
+            console.warn("response in unpin notes", res);
+        });
     };
     handleDelete = async () => {
         await this.setState({ isDeleted: true })
@@ -134,7 +150,6 @@ export class Notes extends React.Component {
         deleteNotes(data).then(res => {
             console.warn("response in delete notes", res);
         });
-        this.props.navigation.navigate("dashboard");
     };
     handleArchiveNote = async () => {
         await this.setState({ isArchived: true })
@@ -146,7 +161,6 @@ export class Notes extends React.Component {
         archiveNotes(data).then(res => {
             console.log("res in archive component", res);
         });
-        this.props.navigation.navigate("dashboard");
     };
     handleNote = () => {
         let data = {
@@ -171,21 +185,8 @@ export class Notes extends React.Component {
     //     drawerIcon: <Icon2 name="bulb1" size={20} />
 
     // };
-    // componentDidMount() {
-    //     // console.warn("key------>", this.props.navigation.state.params.display);
-    //     this.setState({
-    //         title: this.props.navigation.state.params.display.title,
-    //         isDeleted: this.props.navigation.state.params.display.isDeleted,
-    //         description: this.props.navigation.state.params.display.description,
-    //         reminder: this.props.navigation.state.params.display.reminder,
-    //         isArchived: this.props.navigation.state.params.display.isArchived,
-    //         color: this.props.navigation.state.params.display.color,
-    //         labelValue: this.props.navigation.state.params.display.label,
-
-
-    //     })
-    // }
    
+
     render() {
         return (
             <View>
@@ -200,14 +201,16 @@ export class Notes extends React.Component {
                     </View>
                     <View style={styles.icons} >
                         <View>
-                            <TouchableOpacity onPress={() => this.handlePin()}>
-                                {!this.state.pined ? (
+                            <TouchableOpacity >
+                                {!this.state.isPined ? (
                                     <Icon3
+                                        onPress={() => this.handlePin()}
                                         name="pushpino"
                                         size={25}
                                     />
                                 ) : (
                                         <Icon3
+                                            onPress={() => this.handleUnPin()}
                                             name="pushpin"
                                             size={25} />
                                     )}
@@ -278,7 +281,8 @@ export class Notes extends React.Component {
                                     <View style={styles.deleteicons}>
                                         <View style={{
                                             flexDirection: "row",
-                                            top: 20}}>
+                                            top: 20
+                                        }}>
                                             <TouchableOpacity onPress={() => this.handleDelete()}>
                                                 <Icon0
                                                     name="delete"
@@ -321,7 +325,8 @@ export class Notes extends React.Component {
                                                 renderItem={({ item }) => (
                                                     <View
                                                         style={{
-                                                            marginTop: 30}}>
+                                                            marginTop: 30
+                                                        }}>
                                                         <IconButton
                                                             style={{ backgroundColor: item.hexcode, borderRadius: 15, left: -12 }}
                                                             value={item.hexcode}

@@ -14,7 +14,8 @@ import styles from "../Styles";
 import { editNotes } from '../services/noteServices'
 import { archiveNotes } from '../services/noteServices'
 import { deleteNotes } from '../services/noteServices'
-import { pinUnPinNotes } from '../services/noteServices'
+import { pinNotes } from '../services/noteServices'
+import {UnpinNotes} from '../services/noteServices'
 import { updateColor } from '../services/noteServices'
 import { createLabels } from '../services/noteServices'
 import ReminderComponent from '../components/remainder'
@@ -81,8 +82,21 @@ export class EditReminderComponent extends Component {
             isPined: this.state.isPined,
         }
         console.warn("log of pined", data);
-        pinUnPinNotes(data).then(res => {
+        pinNotes(data).then(res => {
             console.warn("response in pin notes", res);
+        });
+    };
+    handleUnPin = async () => {
+        await this.setState({
+            isPined: false
+        });
+        let data = {
+            noteIdList: [this.props.navigation.state.params.key],
+            isPined: this.state.isPined,
+        }
+        console.warn("log of pined", data);
+        UnpinNotes(data).then(res => {
+            console.warn("response in unpin notes", res);
         });
     };
     handleDelete = async () => {
@@ -213,15 +227,17 @@ export class EditReminderComponent extends Component {
                             onPress={() => { this.handleEditCard() }} />
                     </View>
                     <View style={styles.editIcons}>
-                        <View>
-                            <TouchableOpacity onPress={() => this.handlePin()}>
+                    <View>
+                            <TouchableOpacity >
                                 {!this.state.isPined ? (
                                     <Icon5
+                                    onPress={() => this.handlePin()}
                                         name="pushpino"
                                         size={25}
                                     />
                                 ) : (
                                         <Icon5
+                                        onPress={() => this.handleUnPin()}
                                             name="pushpin"
                                             size={25} />
                                     )}
