@@ -209,11 +209,12 @@ const styles = StyleSheet.create({
 
     },
     input5: {
-        top: -5,
+        top: -15,
         backgroundColor: '#fbfcfc',
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center',
+        alignContent:'center',
         // right: 8,
     },
     /**

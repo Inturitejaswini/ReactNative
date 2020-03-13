@@ -249,8 +249,8 @@ export class DashBoard extends React.Component {
             )}
         </ScrollView>
 
-        <Card style={styles.input4}
-          containerStyle={{ height: 50, borderRadius: 10}}>
+        {/* <Card style={styles.input4}
+          containerStyle={{ height: 50, borderRadius: 10,width:100}}> */}
           <View style={styles.input5}>
             <View >
               <Icon4 name="checksquareo" size={20} >
@@ -278,7 +278,7 @@ export class DashBoard extends React.Component {
               </TouchableOpacity>
             </View>
           </View>
-        </Card>
+        {/* </Card> */}
 
       </View>
     );
