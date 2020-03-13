@@ -13,6 +13,8 @@ import Trash from './components/trashComponent'
 import ArchiveComponent from './components/archiveComponent'
 import ReminderComponent1 from './components/getReminder'
 import EditReminderComponent from './components/editReminder'
+import EditArchiveComponent from './components/editArchive'
+import EditTrashComponent from './components/editTrash'
 const AppNavigation = createStackNavigator(
     {
         login: {
@@ -95,6 +97,18 @@ const AppNavigation = createStackNavigator(
         },
         editReminder:{
             screen:EditReminderComponent,
+            navigationOptions:{
+                header:null
+            }
+        },
+        editArchive:{
+            screen:EditArchiveComponent,
+            navigationOptions:{
+                header:null
+            }
+        },
+        editTrash:{
+            screen:EditTrashComponent,
             navigationOptions:{
                 header:null
             }

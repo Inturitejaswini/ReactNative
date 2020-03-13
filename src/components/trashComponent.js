@@ -17,7 +17,7 @@ import Icona from "react-native-vector-icons/AntDesign"
 // import Icon4 from "react-native-vector-icons/AntDesign";
 // import Icon6 from "react-native-vector-icons/MaterialIcons";
 // import Icon7 from "react-native-vector-icons/Entypo";
-export default class Trash extends Component {
+export  class Trash extends Component {
   constructor() {
     super();
     this.state = {
@@ -49,7 +49,11 @@ export default class Trash extends Component {
       if (key.isDeleted == true) {
         return (
           <View style={Align}>
-            <TouchableOpacity>
+            <TouchableOpacity onPress={() =>
+                            this.props.navigation.navigate("editTrash", {
+                                display: key,
+                                key: key.id
+                            })}>
               <Card
                 containerStyle={{
                   backgroundColor: key.color,
@@ -146,3 +150,4 @@ export default class Trash extends Component {
     );
   }
 }
+export default Trash
