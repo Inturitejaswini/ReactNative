@@ -81,13 +81,6 @@ export class Notes extends React.Component {
         getNotes().then(res => {
             this.setState({
                 notes: res.data.data.data,
-                title: this.props.navigation.state.params.display.title,
-                isDeleted: this.props.navigation.state.params.display.isDeleted,
-                description: this.props.navigation.state.params.display.description,
-                reminder: this.props.navigation.state.params.display.reminder,
-                isArchived: this.props.navigation.state.params.display.isArchived,
-                color: this.props.navigation.state.params.display.color,
-                labelValue: this.props.navigation.state.params.display.label,
             });
         });
     };
@@ -143,8 +136,6 @@ export class Notes extends React.Component {
         let data = {
             noteIdList: [this.props.navigation.state.params.key],
             isDeleted: this.state.isDeleted
-            // delete: this.state.delete,
-            // key: this.props.navigation.state.params.key
         };
         console.warn("delete after set state", data);
         deleteNotes(data).then(res => {

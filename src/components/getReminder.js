@@ -58,30 +58,6 @@ export class ReminderComponent1 extends Component {
                 );
             }
         });
-        let pinNoteDetails = this.state.notes.map(key => {
-            if (key.isPined === true && key.isDeleted !== true && key.isArchived !== true) {
-                return (
-                    <View style={Align}>
-                        <TouchableOpacity
-                            onPress={() =>
-                                this.props.navigation.navigate("editTrash", {
-                                    display: key,
-                                    key: key.id
-                                })}>
-                            <Card containerStyle={{
-                                backgroundColor: key.color,
-                                borderRadius: 10
-                            }}>
-                                <Text > {key.title}</Text>
-                                <Text> {key.description}</Text>
-                                <Text > {key.reminder}</Text>
-                                <Text style={{ fontWeight: "bold" }}>{key.label}</Text>
-                            </Card>
-                        </TouchableOpacity>
-                    </View>
-                );
-            }
-        });
         return (
             <View>
                 <Card
@@ -141,9 +117,6 @@ export class ReminderComponent1 extends Component {
                 <ScrollView>
                     {noteDetails.length > 0 ? (
                         <View>
-                            <Text style={{ left: 25, fontWeight: "bold", top: 10 }}>PINED</Text>
-                            <View style={styles.getNoteCard}>{pinNoteDetails}</View>
-                            <Text style={{ left: 25, fontWeight: "bold", top: 10 }}>OTHERS</Text>
                             <View style={styles.getNoteCard}>{noteDetails}</View>
                         </View>
                     ) : (

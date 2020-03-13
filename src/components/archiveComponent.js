@@ -67,7 +67,7 @@ export class ArchiveComponent extends Component {
                 <View style={Align}>
                   <TouchableOpacity
                     onPress={() =>
-                      this.props.navigation.navigate("editTrash", {
+                      this.props.navigation.navigate("editArchive", {
                         display: key,
                         key: key.id})}>
                     <Card containerStyle={{
@@ -123,9 +123,9 @@ export class ArchiveComponent extends Component {
                 </Card>
                 {noteDetails.length > 0 ? (
                         <View>
-                            <Text style={{ left: 25, fontWeight: "bold", top: 10 }}>PINED</Text>
+                            {/* <Text style={{ left: 25, fontWeight: "bold", top: 10 }}>PINED</Text> */}
                             <View style={styles.getNoteCard}>{pinNoteDetails}</View>
-                            <Text style={{ left: 25, fontWeight: "bold", top: 10 }}>OTHERS</Text>
+                            {/* <Text style={{ left: 25, fontWeight: "bold", top: 10 }}>OTHERS</Text> */}
                             <View style={styles.getNoteCard}>{noteDetails}</View>
                         </View>
                     ) : (

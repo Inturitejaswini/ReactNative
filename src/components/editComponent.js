@@ -195,26 +195,7 @@ export class EditComponent extends Component {
             labelValue: this.props.navigation.state.params.display.labelValue
         })
     }
-    // componentWillMount() {
-    //     getLabels().then(response => {
-    //       console.log("res in label notes", response);
-    //       this.setState({
-    //         labelData: response
-    //       });
-    //       console.log("label data after setting state", this.state.labelData);
-    //     });
-    //   }
     render() {
-        // let labelDetails = this.state.labelData.map(key1 => {
-        //     console.log("key in label component---->", key1.data().label);
-        //     return (
-        //         <View>
-        //             <CheckBox
-        //                 title={key1.data().label}
-        //                 onPress={() => this.handleSelectLabel(key1.data().label)} />
-        //         </View>
-        //     );
-        // });
         return (
             <View style={{
                 backgroundColor: this.state.color,

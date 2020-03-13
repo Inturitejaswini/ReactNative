@@ -178,7 +178,7 @@ export class EditTrashComponent extends Component {
                             }}>
                             <TouchableOpacity onPress={() => this.handleDeleteForever()}>
                             <Icon2 name="delete-forever" size={22} />
-                            <Text style={{ fontSize: 18, left: 20 }}>DeleteForever</Text>
+                            <Text style={{ fontSize: 18, left: 40,top:-20 }}>DeleteForever</Text>
                             </TouchableOpacity>
                         </View>
                         <View>
