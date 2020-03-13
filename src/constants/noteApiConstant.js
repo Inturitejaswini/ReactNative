@@ -7,5 +7,8 @@ var noteConfigApi={
     pinUnPinNotes:"/notes/pinUnpinNotes",
     colorNotes:"/notes/changesColorNotes",
     addLabel:"/noteLabels",
+    deleteForever:"/notes/deleteForeverNotes",
+    restoreNotes:"/notes/deleteForeverNotes",
+    unarchiveNotes:"/notes/archiveNotes"
 }             
 export default noteConfigApi

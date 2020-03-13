@@ -50,6 +50,17 @@ export async function archiveNotes(data){
     return res
 }
 
+export async function UnArchiveNotes(data){
+    let AccessToken = await AsyncStorage.getItem('@storage_Key')
+    console.warn("token is coming to unarchivecomponent",AccessToken)
+    let res = axios.post(Config.REACT_APP_BASE_URL+noteConfigApi.unarchiveNotes,data,
+        {
+            headers: {
+                Authorization:AccessToken
+            }
+        })
+    return res
+}
 export async function deleteNotes(data){
     let AccessToken = await AsyncStorage.getItem('@storage_Key')
     console.warn("token is coming to deletecomponent",AccessToken)
@@ -98,3 +109,27 @@ export async function createLabels(data){
     return res
 }
 
+
+export async function deleteForever(data){
+    let AccessToken = await AsyncStorage.getItem('@storage_Key')
+    console.warn("token is coming to deleteforever",AccessToken)
+    let res = axios.post(Config.REACT_APP_BASE_URL+noteConfigApi.deleteForever,data,
+        {
+            headers: {
+                Authorization:AccessToken
+            }
+        })
+    return res
+}
+
+export async function restore(data){
+    let AccessToken = await AsyncStorage.getItem('@storage_Key')
+    console.warn("token is coming to restorenotes",AccessToken)
+    let res = axios.post(Config.REACT_APP_BASE_URL+noteConfigApi.restoreNotes,data,
+        {
+            headers: {
+                Authorization:AccessToken
+            }
+        })
+    return res
+}

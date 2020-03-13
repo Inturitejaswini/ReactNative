@@ -1,23 +1,15 @@
 import React, { Component } from "react";
-import Icon from "react-native-vector-icons/MaterialIcons";
 import Icon1 from "react-native-vector-icons/MaterialCommunityIcons";
-import Icon2 from "react-native-vector-icons/AntDesign";
-import Icon3 from "react-native-vector-icons/Foundation";
+import Icon2 from "react-native-vector-icons/MaterialCommunityIcons";
 import Icon4 from "react-native-vector-icons/FontAwesome";
-import Icon0 from "react-native-vector-icons/AntDesign";
-import Icon5 from "react-native-vector-icons/AntDesign";
+import Icon0 from "react-native-vector-icons/MaterialCommunityIcons";
 import RBSheet from "react-native-raw-bottom-sheet";
-import RBSheet1 from "react-native-raw-bottom-sheet";
-import RBSheet2 from "react-native-raw-bottom-sheet";
 import { IconButton, Colors } from "react-native-paper";
 import styles from "../Styles";
 import { editNotes } from '../services/noteServices'
-import { archiveNotes } from '../services/noteServices'
-import { deleteNotes } from '../services/noteServices'
-import { pinUnPinNotes } from '../services/noteServices'
+import { deleteForever } from '../services/noteServices'
 import { updateColor } from '../services/noteServices'
-import { createLabels } from '../services/noteServices'
-import ReminderComponent from '../components/remainder'
+import {restore} from '../services/noteServices'
 import {
     ScrollView,
     Text,
@@ -56,16 +48,28 @@ export class EditTrashComponent extends Component {
         };
     }
    
-    handleDelete = async () => {
+    handleDeleteForever = async () => {
         await this.setState({ isDeleted: true })
         let data = {
             noteIdList: [this.props.navigation.state.params.key],
             isDeleted: this.state.isDeleted
         };
         console.warn("delete after set state", data);
-        deleteNotes(data).then(res => {
+        deleteForever(data).then(res => {
             console.warn("response in delete notes", res);
         });
+    };
+    handleRestore = async () => {
+        await this.setState({ isDeleted: false })
+        let data = {
+            noteIdList: [this.props.navigation.state.params.key],
+            isDeleted: this.state.isDeleted
+        };
+        console.warn("delete after set state", data);
+        restore(data).then(res => {
+            console.warn("response in delete notes", res);
+        });
+        this.props.navigation.navigate("dashboard")
     };
     handleEditCard = () => {
         let data = {
@@ -73,6 +77,7 @@ export class EditTrashComponent extends Component {
             description: this.state.description,
             noteId: this.props.navigation.state.params.key,
             color: this.state.color,
+            isDeleted:this.state.isDeleted
         };
         console.warn("editnote data", data);
         editNotes(data).then(res => {
@@ -145,7 +150,7 @@ export class EditTrashComponent extends Component {
                         onPress={() => { this.RBSheet.open() }} />
                     <RBSheet
                         ref={ref => { this.RBSheet = ref }}
-                        height={230}
+                        height={150}
                         duration={250}
                         customStyles={{
                             container: {
@@ -158,11 +163,11 @@ export class EditTrashComponent extends Component {
                             left: 10,
                             marginTop: 18
                         }}>
-                            <TouchableOpacity onPress={() => this.handleDelete()}>
+                            <TouchableOpacity onPress={() => this.handleRestore()}>
                                 <Icon0
-                                    name="delete"
+                                    name="restore-clock"
                                     size={20} />
-                                <Text style={{ fontSize: 18, left: 38, top: -20 }}>Delete</Text>
+                                <Text style={{ fontSize: 18, left: 38, top: -20 }}>Restore</Text>
                             </TouchableOpacity>
                         </View>
                         <View
@@ -171,8 +176,10 @@ export class EditTrashComponent extends Component {
                                 left: 10,
                                 // marginTop: 18
                             }}>
-                            <Icon2 name="sharealt" size={22} />
-                            <Text style={{ fontSize: 18, left: 20 }}>send</Text>
+                            <TouchableOpacity onPress={() => this.handleDeleteForever()}>
+                            <Icon2 name="delete-forever" size={22} />
+                            <Text style={{ fontSize: 18, left: 20 }}>DeleteForever</Text>
+                            </TouchableOpacity>
                         </View>
                         <View>
                             <FlatList

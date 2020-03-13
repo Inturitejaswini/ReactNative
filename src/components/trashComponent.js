@@ -3,20 +3,13 @@ import {
   View, TextInput, Text, Image, TouchableOpacity,
   ScrollView
 } from "react-native";
-// import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import Icon1 from "react-native-vector-icons/MaterialCommunityIcons";
 import Icon2 from "react-native-vector-icons/FontAwesome";
-// import Icon from "react-native-vector-icons/Foundation";
 import { Card } from "react-native-elements";
 import styles from "../Styles";
 import { getNotes } from "../services/noteServices";
 import { DrawerActions } from "react-navigation-drawer";
 import Icona from "react-native-vector-icons/AntDesign"
-// import Icon5 from "react-native-vector-icons/Entypo";
-// import Icon0 from "react-native-vector-icons/AntDesign";
-// import Icon4 from "react-native-vector-icons/AntDesign";
-// import Icon6 from "react-native-vector-icons/MaterialIcons";
-// import Icon7 from "react-native-vector-icons/Entypo";
 export  class Trash extends Component {
   constructor() {
     super();
@@ -68,7 +61,29 @@ export  class Trash extends Component {
         );
       }
     });
-
+    let pinNoteDetails = this.state.notes.map(key => {
+      if (key.isPined === true&&key.isDeleted !== true&&key.isArchived!==true) {
+        return (
+          <View style={Align}>
+            <TouchableOpacity
+              onPress={() =>
+                this.props.navigation.navigate("editTrash", {
+                  display: key,
+                  key: key.id})}>
+              <Card containerStyle={{
+                  backgroundColor: key.color,
+                  borderRadius: 10
+                }}>
+                <Text > {key.title}</Text>
+                <Text> {key.description}</Text>
+                <Text > {key.reminder}</Text>
+                <Text style={{ fontWeight: "bold" }}>{key.label}</Text>
+              </Card>
+            </TouchableOpacity>
+          </View>
+        );
+      }
+    });
     return (
       <View>
         <Card containerStyle={{ height: 50, borderRadius: 10 }}>
@@ -115,6 +130,7 @@ export  class Trash extends Component {
         </Card>
         <ScrollView>
           <View style={styles.getNoteCard}>{noteDetails}</View>
+          <View style={styles.getNoteCard}>{pinNoteDetails}</View>
         </ScrollView>
         {/* <Card style={styles.reminderinput}
                     containerStyle={{  height: 50, borderRadius: 10}}>

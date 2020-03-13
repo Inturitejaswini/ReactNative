@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import Icon from "react-native-vector-icons/MaterialIcons";
 import Icon1 from "react-native-vector-icons/MaterialCommunityIcons";
 import Icon2 from "react-native-vector-icons/AntDesign";
-import Icon3 from "react-native-vector-icons/Foundation";
+import Icon3 from "react-native-vector-icons/MaterialIcons";
 import Icon4 from "react-native-vector-icons/FontAwesome";
 import Icon0 from "react-native-vector-icons/AntDesign";
 import Icon5 from "react-native-vector-icons/AntDesign";
@@ -12,7 +12,7 @@ import RBSheet2 from "react-native-raw-bottom-sheet";
 import { IconButton, Colors } from "react-native-paper";
 import styles from "../Styles";
 import { editNotes } from '../services/noteServices'
-import { archiveNotes } from '../services/noteServices'
+import { UnArchiveNotes } from '../services/noteServices'
 import { deleteNotes } from '../services/noteServices'
 import { pinUnPinNotes } from '../services/noteServices'
 import { updateColor } from '../services/noteServices'
@@ -96,16 +96,17 @@ export class EditArchiveComponent extends Component {
             console.warn("response in delete notes", res);
         });
     };
-    handleArchiveNote = async () => {
-        await this.setState({ isArchived: true })
+    handleUnArchiveNote = async () => {
+        await this.setState({ isArchived: false })
         console.log("archive data", this.state.isArchived);
         let data = {
             noteIdList: [this.props.navigation.state.params.key],
             isArchived: this.state.isArchived
         };
-        archiveNotes(data).then(res => {
-            console.log("res in archive component", res);
+        UnArchiveNotes(data).then(res => {
+            console.log("res in unarchive component", res);
         });
+        this.props.navigation.navigate("dashboard")
     };
     handleLabelDone = async () => {
         await this.setState({ label: true })
@@ -230,9 +231,9 @@ export class EditArchiveComponent extends Component {
                         </View>
                         <View style={{ left: 20 }}>
                             <Icon3
-                                name="archive"
+                                name="unarchive"
                                 size={25}
-                                onPress={() => this.handleArchiveNote()} />
+                                onPress={() => this.handleUnArchiveNote()} />
                         </View>
                     </View>
                 </View>
