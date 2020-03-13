@@ -134,11 +134,11 @@ const styles = StyleSheet.create({
     /**
      * dashboard component app.css
      */
-    progress: {
-        flex: 1,
-        flexDirection: "column",
-        alignItems: "center",
-        marginTop: 200
+    progress:{
+            flex: 1,
+            flexDirection: "column",
+            alignItems: "center",
+            marginTop: 200
     },
     cardText: {
         fontSize: 30,
@@ -226,7 +226,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         right: 0,
         flex: 1,
-        position: 'absolute',
+        position:'absolute',
     },
     reminderinput5: {
         top: -5,

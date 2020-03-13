@@ -270,10 +270,7 @@ export class EditReminderComponent extends Component {
                         duration={250}
                         customStyles={{
                             container: {
-                                flexDirection: "column",
-                                // bottom:45
-                            }
-                        }}>
+                                flexDirection: "column"}}}>
                         <View style={{
                             flexDirection: "row",
                             left: 10,
@@ -296,15 +293,10 @@ export class EditReminderComponent extends Component {
                             <Text style={{ fontSize: 18, left: 20 }}>send</Text>
                         </View>
                         <View
-                            style={{
-                                flexDirection: "row",
-                                left: 10,
-                                marginTop: 18
-                            }}>
+                            style={{flexDirection: "row",left: 10,marginTop: 18}}>
                             <Icon2 name="addusergroup" size={25} />
                             <Text
-                                style={{ fontSize: 18, left: 20 }}
-                                onPress={() => { this.RBSheet1.open() }}>collaborator</Text>
+                                style={{ fontSize: 18, left: 20 }}>collaborator</Text>
                         </View>
                         <View
                             style={{
