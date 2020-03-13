@@ -237,6 +237,17 @@ const styles = StyleSheet.create({
         top: 10
     },
     /**
+     * search css
+     */
+textinput:{
+        height: 40,
+        fontSize: 18,
+        right: 20,
+        top: -10
+},
+
+
+    /**
      * reminder css
      */
     reminderinput: {

@@ -71,7 +71,7 @@ export class DashBoard extends React.Component {
     this.setState({
       searchOpen: !this.state.searchOpen
     });
-    console.log("search state---->", this.state.searchOpen);
+    this.props.navigation.navigate('searchComponent')
   }
   handleGridView() {
     this.setState({
@@ -183,9 +183,10 @@ export class DashBoard extends React.Component {
               </Text>
             </View>
             <View style={styles.searchicon} >
-              <Image source={require("../assets/searchicon.png")}
-                onPress={() => this.handleSearch()}>
+              <TouchableOpacity onPress={() => {this.handleSearch()}}>
+              <Image source={require("../assets/searchicon.png")}>
               </Image>
+              </TouchableOpacity>
             </View>
             <View >
               {!this.state.listOpen ? (
@@ -242,8 +243,6 @@ export class DashBoard extends React.Component {
                       label="Cancel"
                       onPress={this.handleCancel}
                     />
-                    {/* </View>
-                    <View style={{ right:50}}> */}
                     <Dialog.Button
                       label="Logout"
                       onPress={() => this.handleSignOut()}

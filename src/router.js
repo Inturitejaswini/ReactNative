@@ -15,6 +15,7 @@ import ReminderComponent1 from './components/getReminder'
 import EditReminderComponent from './components/editReminder'
 import EditArchiveComponent from './components/editArchive'
 import EditTrashComponent from './components/editTrash'
+import SearchComponent from './components/searchComponent'
 const AppNavigation = createStackNavigator(
     {
         login: {
@@ -109,6 +110,12 @@ const AppNavigation = createStackNavigator(
         },
         editTrash:{
             screen:EditTrashComponent,
+            navigationOptions:{
+                header:null
+            }
+        },
+        searchComponent:{
+            screen:SearchComponent,
             navigationOptions:{
                 header:null
             }
