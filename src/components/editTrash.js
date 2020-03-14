@@ -60,7 +60,7 @@ export class EditTrashComponent extends Component {
         });
     };
     handleRestore = async () => {
-        await this.setState({ isDeleted: false })
+        await this.setState({ isDeleted: true })
         let data = {
             noteIdList: [this.props.navigation.state.params.key],
             isDeleted: this.state.isDeleted

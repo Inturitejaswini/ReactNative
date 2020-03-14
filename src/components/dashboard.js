@@ -16,7 +16,7 @@ import * as React from 'react';
 import { Appbar, Toolbar } from 'react-native-paper';
 import styles from '../Styles';
 import { DrawerActions } from 'react-navigation-drawer';
-import { View, Text, TouchableOpacity, ProgressBarAndroid } from 'react-native';
+import { View, Text, TouchableOpacity, ProgressBarAndroid,TextInput} from 'react-native';
 import { Card } from "react-native-elements";
 import Icon from "react-native-vector-icons/Entypo";
 import Icon5 from "react-native-vector-icons/Entypo";
@@ -47,6 +47,7 @@ export class DashBoard extends React.Component {
       dialogVisible: false,
       visible: false,
       searchOpen: false,
+      
 
     }
   }
