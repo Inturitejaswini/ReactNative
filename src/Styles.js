@@ -304,16 +304,24 @@ const styles = StyleSheet.create({
         flexDirection: "row",
         justifyContent: "space-between"
     },
+    delete: {
+        flexDirection: "row",
+        justifyContent: "space-between"
+    },
     trashgrid: {
         flexDirection: "row",
         justifyContent: "space-between"
     },
-
-
-
-
-
-
+    deletesearchicon: {
+        flexDirection: "row",
+        justifyContent: "space-between",
+        alignItems: 'center',
+        top: -5
+    },
+    deletesearchicon1: {
+        top: -5,
+        right: 30
+    },
     /**
      *notes app.css  
      * */

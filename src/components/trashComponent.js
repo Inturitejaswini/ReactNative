@@ -87,8 +87,8 @@ export class Trash extends Component {
     return (
       <View>
         <Card containerStyle={{ height: 50, borderRadius: 10 }}>
-          <View
-            style={styles.trashdrawer}>
+          <View style={styles.trashdrawer}>
+            <View style={styles.delete}>
             <View style={{ top: -5 }}>
               <TouchableOpacity
                 onPress={() => this.props.navigation.dispatch(DrawerActions.openDrawer())}>
@@ -98,12 +98,13 @@ export class Trash extends Component {
             <View>
               <Text style={{ fontSize: 30, top: -10 }}>Delete </Text>
             </View>
-            <View style={styles.searchicon}>
+            </View>
+            <View style={styles.deletesearchicon}>
+            <View style={styles.deletesearchicon1}>
               <Image source={require("../assets/searchicon.png")}></Image>
             </View>
             <View
               style={styles.trashgrid}>
-              <View >
                 {!this.state.listOpen ? (
                   <TouchableOpacity style={{ top: -5 }}>
                     <Icon1
@@ -124,7 +125,7 @@ export class Trash extends Component {
                       />
                     </TouchableOpacity>
                   )}
-              </View>
+            </View>
             </View>
           </View>
         </Card>
