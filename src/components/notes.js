@@ -20,13 +20,16 @@ import styles from '../Styles';
 import { TextInput, ScrollView, } from 'react-native-gesture-handler';
 import RBSheet from "react-native-raw-bottom-sheet";
 import RBSheet1 from "react-native-raw-bottom-sheet";
+import RBSheet2 from "react-native-raw-bottom-sheet";
 import ReminderComponent from './remainder'
+import Iconc from "react-native-vector-icons/Entypo";
 import Icon0 from "react-native-vector-icons/AntDesign";
 import Icon2 from "react-native-vector-icons/AntDesign";
 import Icon1 from "react-native-vector-icons/MaterialCommunityIcons";
 import Icon9 from "react-native-vector-icons/AntDesign";
 import Icon10 from "react-native-vector-icons/Feather";
 import Icon3 from "react-native-vector-icons/AntDesign";
+import { Divider } from 'react-native-paper';
 import IconM from 'react-native-vector-icons/MaterialCommunityIcons'
 import { createNotes } from '../services/noteServices'
 import Icon from "react-native-vector-icons/Ionicons";
@@ -38,6 +41,7 @@ import { deleteNotes } from '../services/noteServices'
 import { pinNotes } from '../services/noteServices'
 import { UnpinNotes } from '../services/noteServices'
 import { updateColor } from '../services/noteServices'
+import { noteCollaborator } from '../services/noteServices'
 const colors = [
     { name: "blue", hexcode: " #39a78e" },
     { name: "violet", hexcode: "#7DCEA0" },
@@ -70,6 +74,9 @@ export class Notes extends React.Component {
             labelValue: "",
             selectedLabels: "",
             labelData: [],
+            value: [],
+            searchedMail: "",
+            users:[]
         }
         this.reminderData = this.reminderData.bind(this);
     }
@@ -164,14 +171,62 @@ export class Notes extends React.Component {
             isArchived: this.state.isArchived,
             isPined: this.state.isPined,
             color: this.state.color,
+            Collaborators: this.state.Collaborators
         };
         createNotes(data).then(response => {
             console.warn("response is coming to note component", response)
         });
         this.props.navigation.navigate("dashboard");
     };
-
+    handleCrossicon() {
+        this.RBSheet.close();
+        this.RBSheet2.close();
+        let data = {
+            selectedMail: this.state.selectedEmail,
+            noteIdList: [this.props.navigation.state.params.key],
+        };
+        console.warn(" selected mail", data);
+        noteCollaborator(data).then(res => {
+            console.warn("res in collaborator", res);
+            this.setState({
+                Value: res
+            });
+            console.warn("email result", this.state.Value);
+        });
+    }
+    handleClickMail = async email => {
+        console.log("selected email", email);
+        await this.setState({
+            searchedMail: email
+        });
+    };
+    handleSave = mail => {
+        console.warn("mail", mail);
+        this.setState({
+            selectedEmail: mail
+        });
+        console.warn("selected email", this.state.selectedEmail);
+    };
     render() {
+        let userDetails = this.state.users.map(key => {
+        return (
+          <Text
+            style={{ left: 80, top: 30, fontSize: 18 }}
+            onPress={() => this.handleClickMail(key.data().email)}
+          >
+            {key.data().email}
+          </Text>
+        );
+      });
+      let collaborateDetails = this.state.value.map(collabaratekey => {
+        // console.log("key in collaborator", key.email);
+        return (
+          <Text style={{}}>
+            <Icon1 name="account-circle" size={35} color="gray" />
+            {collabaratekey.email}
+          </Text>
+        );
+      });
         return (
             <View>
                 <ScrollView>
@@ -204,9 +259,9 @@ export class Notes extends React.Component {
                             <ReminderComponent reminderProps={this.reminderData} ></ReminderComponent>
                         </View>
                         <View>
-                            <Icon name="md-archive" 
-                            onPress={() => this.handleArchiveNote()}
-                            style={styles.archiveicon} size={22}></Icon>
+                            <Icon name="md-archive"
+                                onPress={() => this.handleArchiveNote()}
+                                style={styles.archiveicon} size={22}></Icon>
                         </View>
                     </View>
                     <View style={styles.textinput} >
@@ -229,6 +284,7 @@ export class Notes extends React.Component {
                                     {this.state.reminderDate}
                                 </Chip>
                             </TouchableOpacity>}
+                            <Text>{collaborateDetails}</Text>
                     </View>
                     <View style={styles.plusicon}>
                         <View>
@@ -244,7 +300,8 @@ export class Notes extends React.Component {
                                         container: {
                                             justifyContent: "center",
                                             alignItems: "center"
-                                        }}}>
+                                        }
+                                    }}>
                                 </RBSheet1>
                             </TouchableOpacity>
                         </View>
@@ -255,15 +312,16 @@ export class Notes extends React.Component {
                                     ref={ref => {
                                         this.RBSheet = ref;
                                     }}
-                                    height={200}
+                                    height={220}
                                     duration={250}
                                     customStyles={{
                                         container: {
                                             justifyContent: "center",
                                             alignItems: "center"
-                                        }}}>
+                                        }
+                                    }}>
                                     <View style={styles.deleteicons}>
-                                        <View style={{flexDirection: "row",top: 20}}>
+                                        <View style={{ flexDirection: "row", top: 20 }}>
                                             <TouchableOpacity onPress={() => this.handleDelete()}>
                                                 <Icon0
                                                     name="delete"
@@ -272,22 +330,20 @@ export class Notes extends React.Component {
                                             </TouchableOpacity>
                                         </View>
                                         <View
-                                            style={{flexDirection: "row", top: 10}}>
+                                            style={{ flexDirection: "row", top: 10 }}>
                                             <Icon2 name="sharealt" size={22} />
                                             <Text style={{ fontSize: 18, left: 20 }}>send</Text>
                                         </View>
-                                        <View
-                                            style={{ flexDirection: "row", top: 20}}>
-                                            <Icon2 name="addusergroup" size={25} />
-                                            <Text
-                                                style={{ fontSize: 18, left: 20 }}
-                                                onPress={() => { this.RBSheet1.open() }}>collaborator</Text>
+                                        <View style={{ flexDirection: "row", top: 20 }}>
+                                            <TouchableOpacity onPress={() => { this.RBSheet2.open() }}>
+                                                <Icon2 name="addusergroup" size={25} />
+                                                <Text style={{ fontSize: 18, left: 40, top: -20 }} >collaborator</Text>
+                                            </TouchableOpacity>
                                         </View>
                                         <View
                                             style={{ flexDirection: "row", top: 30 }} >
                                             <Icon1 name="label-outline" size={25} />
                                             <Text
-                                                onPress={() => { this.RBSheet2.open(); }}
                                                 style={{ fontSize: 18, left: 20 }}>Labels</Text>
                                         </View>
                                         <View>
@@ -312,6 +368,58 @@ export class Notes extends React.Component {
                                 </RBSheet>
                             </TouchableOpacity>
                         </View>
+                    </View>
+                    <View>
+                        <TouchableOpacity onPress={() => { this.RBSheet2.open() }}>
+                            <RBSheet2
+                                ref={ref => {
+                                    this.RBSheet2 = ref;
+                                }}
+                                height={620}
+                                duration={250}
+                                customStyles={{
+                                    container: {
+                                        flexDirection: "column"
+                                    }}}>
+                                <View
+                                    style={styles.collaboratorcontainer}>
+                                    <TouchableOpacity>
+                                        <Iconc name="cross" size={35}
+                                            onPress={() => this.handleCrossicon(this.state.searchedMail)} />
+                                    </TouchableOpacity>
+                                    <Text style={styles.collaboratortext}>Collaborators</Text>
+                                    <Text style={styles.savebtn}
+                                        onPress={() => this.handleSave(this.state.searchedMail)}>Save</Text>
+                                </View>
+                                <Divider type='horizontal' style={{ height: 2 }}></Divider>
+                                <View style={styles.accounticon}>
+                                    <Icon1 name="account-circle" size={45} color="gray" />
+                                    <Text style={styles.mailtext}>
+                                        chowdarytejaswini2@gmail.com
+                                       </Text>
+                                </View>
+                                <View style={styles.accountcircle}>
+                                    <Icon1 name="account-circle-outline" size={45} color="gray" />
+                                    <TextInput
+                                        style={styles.Textinput}
+                                        placeholder="enter the mail to share..."
+                                        value={this.state.searchValue}
+                                        onChangeText={this.handleSearchValue}/>
+
+                                </View>
+                                <View>
+                                    <Text
+                                        style={{
+                                            top: 25,
+                                            left: 80,
+                                            fontSize: 18,
+                                            fontWeight: "bold"}}>
+                                        {this.state.searchedMail}
+                                    </Text>
+                                    {userDetails}
+                                </View>
+                            </RBSheet2>
+                        </TouchableOpacity>
                     </View>
                     {/* </Card> */}
                 </ScrollView>

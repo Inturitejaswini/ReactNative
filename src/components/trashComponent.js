@@ -39,6 +39,7 @@ export class Trash extends Component {
       if (key.isDeleted == true) {
         return (
           <View style={Align}>
+            <ScrollView>
             <TouchableOpacity onPress={() =>
               this.props.navigation.navigate("editTrash", {
                 display: key,
@@ -54,6 +55,7 @@ export class Trash extends Component {
                 <Text> {key.reminder}</Text>
               </Card>
             </TouchableOpacity>
+            </ScrollView>
           </View>
         );
       }

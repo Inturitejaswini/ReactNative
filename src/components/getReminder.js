@@ -4,6 +4,7 @@ import Icon1 from "react-native-vector-icons/MaterialCommunityIcons";
 import Icon2 from "react-native-vector-icons/FontAwesome";
 import { Card } from "react-native-elements";
 import styles from "../Styles";
+import { Divider } from 'react-native-elements';
 import { getNotes } from "../services/noteServices";
 import { DrawerActions } from "react-navigation-drawer";
 export class ReminderComponent1 extends Component {
@@ -17,7 +18,8 @@ export class ReminderComponent1 extends Component {
     }
     static navigationOptions = {
         drawerLabel: "Reminder",
-        drawerIcon: <Icon1 name="bell-plus-outline" size={20} />
+        drawerIcon: <Icon1 name="bell-plus-outline" size={20}></Icon1>
+       
     };
     componentDidMount() {
         getNotes().then(res => {
@@ -39,6 +41,7 @@ export class ReminderComponent1 extends Component {
             if (key.reminder.length !== 0) {
                 return (
                     <View style={Align}>
+                        <ScrollView>
                         <TouchableOpacity onPress={() =>
                             this.props.navigation.navigate("editReminder", {
                                 display: key,
@@ -54,6 +57,7 @@ export class ReminderComponent1 extends Component {
                                 <Text> {key.reminder}</Text>
                             </Card>
                         </TouchableOpacity>
+                        </ScrollView>
                     </View>
                 );
             }
@@ -62,6 +66,7 @@ export class ReminderComponent1 extends Component {
             <View>
                 <Card containerStyle={{height: 50,borderRadius: 10}}>
                     <View style={{flexDirection: "row",justifyContent: "space-between"}}>
+                        <View style={styles.remindertext}>
                         <View style={{ top: -5 }}>
                             <TouchableOpacity
                                 onPress={() =>
@@ -73,14 +78,14 @@ export class ReminderComponent1 extends Component {
                         <View>
                             <Text style={{ fontSize: 30, top: -10 }}>Reminder </Text>
                         </View>
-                        <View style={styles.searchicon}>
+                        </View>
+                        <View  style={styles.remindersearch}>
+                        <View style={styles.remindersearch1}>
                             <Image source={require("../assets/searchicon.png")}></Image>
                         </View>
-                        <View
-                            style={{ flexDirection: "row",justifyContent: "space-between"}}>
-                            <View style={{ right: 20 }}>
+                            <View >
                                 {!this.state.listOpen ? (
-                                    <TouchableOpacity style={{ top: -5 }}>
+                                    <TouchableOpacity>
                                         <Icon1
                                             name="view-stream"
                                             size={32}
@@ -89,7 +94,7 @@ export class ReminderComponent1 extends Component {
                                             }} />
                                     </TouchableOpacity>
                                 ) : (
-                                        <TouchableOpacity style={{ top: -4 }}>
+                                        <TouchableOpacity >
                                             <Icon2
                                                 name="th-large"
                                                 size={25}

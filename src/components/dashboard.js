@@ -32,8 +32,6 @@ import Icon1 from "react-native-vector-icons/MaterialCommunityIcons";
 import Icon3 from 'react-native-vector-icons/MaterialCommunityIcons'
 import { getNotes } from '../services/noteServices'
 import { userLogOut } from '../services/userServices'
-import EditComponent from '../components/editComponent'
-import GetNoteComponent from "../components/getNoteComponent";
 import { ScrollView } from 'react-native-gesture-handler';
 export class DashBoard extends React.Component {
   constructor() {
@@ -163,6 +161,7 @@ export class DashBoard extends React.Component {
         <Card style={styles.top} containerStyle={{ height: 50, borderRadius: 10 }}>
           <View style={styles.appicons}>
             <View style={styles.menuitem}>
+            <View >
               <TouchableOpacity
                 onPress={() => this.props.navigation.dispatch(DrawerActions.openDrawer())}>
                 <Image source={require("../assets/menuicon.png")}>
@@ -172,8 +171,8 @@ export class DashBoard extends React.Component {
             <View >
               <Image source={require("../assets/keepicon.png")} style={styles.keepicon}></Image>
             </View>
-            <View>
-              <Text style={styles.fundooText}>
+            <View  containerStyle={{left:10 }}>
+              <Text>
                 <Text style={{ color: "red" }}>F</Text>
                 <Text style={{ color: "aqua" }}>u</Text>
                 <Text style={{ color: "blue" }}>n</Text>
@@ -183,13 +182,15 @@ export class DashBoard extends React.Component {
                 <Text style={{ color: "black" }}>Note</Text>
               </Text>
             </View>
-            <View style={styles.searchicon} >
+            </View>
+            <View  style={styles.searchicon}>
+            <View style={styles.search}>
               <TouchableOpacity onPress={() => {this.handleSearch()}}>
               <Image source={require("../assets/searchicon.png")}>
               </Image>
               </TouchableOpacity>
             </View>
-            <View >
+            <View style={styles.grid}>
               {!this.state.listOpen ? (
                 <TouchableOpacity >
                   <Icon1
@@ -251,6 +252,7 @@ export class DashBoard extends React.Component {
                   </View>
                 </Dialog.Container>
               </View>
+            </View>
             </View>
           </View>
         </Card>

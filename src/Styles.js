@@ -10,9 +10,7 @@ const styles = StyleSheet.create({
         backgroundColor: '#d6dbdf',
         display: 'flex'
     },
-    cardContainer: {
 
-    },
     input: {
         padding: 10,
         borderWidth: 1,
@@ -168,7 +166,11 @@ const styles = StyleSheet.create({
 
     },
     menuitem: {
-        marginLeft: 5
+        // marginLeft: 5
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        flexDirection: 'row',
+        // bottom:30
     },
     keepicon: {
         marginLeft: 5,
@@ -184,18 +186,22 @@ const styles = StyleSheet.create({
         top: -10
     },
     fundooText: {
-        marginLeft: 5
+        left: 5
     },
     searchicon: {
-        marginLeft: 20
+        flexDirection: 'row',
+        justifyContent: 'space-around',
+        alignItems: 'center',
+        left: -6
     },
-    grid: {
-        right: -20,
-        top: -1,
+    search: {
+        right: 15,
+        // top: -1,
 
     },
-    accounticon: {
-        marginLeft: 60,
+    grid: {
+        // marginLeft: 60,
+        right: 7
     },
     input4: {
         backgroundColor: '#fbfcfc',
@@ -238,12 +244,12 @@ const styles = StyleSheet.create({
     /**
      * search css
      */
-textinput:{
+    textinput: {
         height: 40,
         fontSize: 18,
         right: 20,
         top: -10
-},
+    },
 
 
     /**
@@ -265,6 +271,20 @@ textinput:{
         justifyContent: 'space-between',
         alignItems: 'center',
 
+    },
+    remindertext: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+
+    },
+    remindersearch: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        top: -8
+    },
+    remindersearch1: {
+        right: 30
     },
     /**
      * getarchivenote css
@@ -304,8 +324,10 @@ textinput:{
     },
     plusicon: {
         justifyContent: 'space-between',
+        alignItems: 'center',
         flexDirection: 'row',
-        marginTop: 420
+        marginTop: 420,
+        // left:10
 
     },
     icons: {
@@ -340,11 +362,12 @@ textinput:{
         marginLeft: 20,
         marginTop: 20
     },
-    // moreicons: {
+    // moreicon: {
     //     flex: 1,
     //     justifyContent: 'space-around',
     //     alignItems: 'center',
-    //     alignContent:'flex-start'
+    //     alignContent:'flex-start',
+    //     left:140
     // },
     /**
      * getnote component css
@@ -372,6 +395,71 @@ textinput:{
     },
     gridAlign: {
         width: "50%"
+    },
+    /**
+     * collaborator css
+     */
+    savebtn: {
+        fontWeight: "bold",
+        fontSize: 20,
+        right: 15,
+        top: 7
+    },
+    collaboratortext: {
+        top: 7,
+        fontSize: 19,
+        right: 60
+    },
+    accounticon: {
+        flexDirection: "row",
+        top: 30,
+        left: 20
+    },
+    mailtext: {
+        fontWeight: "bold",
+        margin: 15,
+        fontSize: 17
+    },
+    accountcircle: {
+        flexDirection: "row",
+        top: 35,
+        left: 20
+    },
+    collaboratorcontainer: {
+        flexDirection: "row",
+        justifyContent: "space-between",
+        margin: 7
+    },
+    Textinput: {
+        fontSize: 18,
+        left: 10
+    },
+    /**
+     * editlabel
+     */
+    editlabeltext: {
+        top: 7,
+        fontSize: 19,
+        // right: -20
+        left: -180
+    },
+    crossicon: {
+        left: 15,
+    },
+    editTextinput: {
+        fontSize: 18,
+        fontWeight: "bold",
+        left: 2,
+        top: -2
+    },
+    doneicon: {
+        left: -8,
+    },
+    editcrossicon: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'space-between'
     }
+
 });
 export default styles

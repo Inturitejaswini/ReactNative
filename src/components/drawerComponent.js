@@ -28,21 +28,23 @@ const Drawer = createDrawerNavigator({
     Remainder: {
         screen: ReminderComponent1
     },
-    createLabel:{
-        screen:CreateLabelComponent
+    createLabel: {
+        screen: CreateLabelComponent
     },
-    trashComponent:{
-        screen:Trash
+    trashComponent: {
+        screen: Trash
     },
-    archiveComponent:{
-        screen:ArchiveComponent
+    archiveComponent: {
+        screen: ArchiveComponent
     }
 },
-{
+    {
         drawerWidth: 300,
         drawerPosition: "left",
         contentOptions: {
+
         }
-    }
+    },
+
 )
 export default drawer = createAppContainer(Drawer);

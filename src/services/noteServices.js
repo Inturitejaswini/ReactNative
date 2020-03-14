@@ -145,3 +145,15 @@ export async function restore(data){
         })
     return res
 }
+
+export async function noteCollaborator(data){
+    let AccessToken = await AsyncStorage.getItem('@storage_Key')
+    console.warn("token is coming to collaboratornotes",AccessToken)
+    let res = axios.post(Config.REACT_APP_BASE_URL+noteConfigApi.notecollaborator,data,
+        {
+            headers: {
+                Authorization:AccessToken
+            }
+        })
+    return res
+}

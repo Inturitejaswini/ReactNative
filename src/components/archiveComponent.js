@@ -65,6 +65,7 @@ export class ArchiveComponent extends Component {
             if (key.isPined === true&&key.isDeleted !== true&&key.isArchived!==true) {
               return (
                 <View style={Align}>
+                    <ScrollView>
                   <TouchableOpacity
                     onPress={() =>
                       this.props.navigation.navigate("editArchive", {
@@ -80,6 +81,7 @@ export class ArchiveComponent extends Component {
                       <Text style={{ fontWeight: "bold" }}>{key.label}</Text>
                     </Card>
                   </TouchableOpacity>
+                  </ScrollView>
                 </View>
               );
             }

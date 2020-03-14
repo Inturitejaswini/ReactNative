@@ -49,7 +49,7 @@ export class EditTrashComponent extends Component {
     }
    
     handleDeleteForever = async () => {
-        await this.setState({ isDeleted: true })
+        await this.setState({ isDeleted: false })
         let data = {
             noteIdList: [this.props.navigation.state.params.key],
             isDeleted: this.state.isDeleted
