@@ -120,7 +120,7 @@ export class EditArchiveComponent extends Component {
         UnArchiveNotes(data).then(res => {
             console.log("res in unarchive component", res);
         });
-        this.props.navigation.navigate("dashboard")
+        // this.props.navigation.navigate("dashboard")
     };
     handleLabelDone = async () => {
         await this.setState({ label: true })

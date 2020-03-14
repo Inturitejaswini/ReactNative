@@ -75,9 +75,9 @@ export class ArchiveComponent extends Component {
                         backgroundColor: key.color,
                         borderRadius: 10,
                       }}>
-                      <Text > {key.title}</Text>
+                      <Text> {key.title}</Text>
                       <Text> {key.description}</Text>
-                      <Text > {key.reminder}</Text>
+                      <Text> {key.reminder}</Text>
                       <Text style={{ fontWeight: "bold" }}>{key.label}</Text>
                     </Card>
                   </TouchableOpacity>
