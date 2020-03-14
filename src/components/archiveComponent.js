@@ -89,37 +89,37 @@ export class ArchiveComponent extends Component {
         return (
             <ScrollView>
                 <Card containerStyle={{ height: 50, borderRadius: 10 }}>
-                    <View
-                        style={styles.archivedrawer}>
+                    <View style={styles.archivedrawer}>
+                        <View style={styles.archivedrawer1}>
                         <View style={{ top: -5 }}>
                             <TouchableOpacity
                                 onPress={() => this.props.navigation.dispatch(DrawerActions.openDrawer())}>
                                 <Image source={require("../assets/menuicon.png")}></Image>
                             </TouchableOpacity>
                         </View>
-                        <Text style={{ fontSize: 30, top: -10 }}>Archive</Text>
-                        <View style={styles.searchicon}>
+                       <View><Text style={{ fontSize: 30, top: -10 }}>Archive</Text></View> 
+                       </View>
+                       <View style={styles.archivesearchicon}>
+                        <View style={styles.archive}>
                             <Image source={require("../assets/searchicon.png")}></Image>
                         </View>
-                        <View
-                            style={styles.archivegrid}>
-                            <View>
+                        <View  style={styles.archivegrid}>
                                 {!this.state.listOpen ? (
-                                    <TouchableOpacity style={{ top: -5 }}>
+                                    <TouchableOpacity >
                                         <Icon1
                                             name="view-stream"
                                             size={32}
                                             onPress={() => { this.handleGridView() }} />
                                     </TouchableOpacity>
                                 ) : (
-                                        <TouchableOpacity style={{ top: -4 }}>
+                                        <TouchableOpacity>
                                             <Icon2
                                                 name="th-large"
                                                 size={25}
                                                 onPress={() => { this.handleGridView() }} />
                                         </TouchableOpacity>
                                     )}
-                            </View>
+                        </View>
                         </View>
                     </View>
                 </Card>

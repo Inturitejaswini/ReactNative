@@ -297,6 +297,19 @@ const styles = StyleSheet.create({
         flexDirection: "row",
         justifyContent: "space-between"
     },
+    archivedrawer1: {
+        flexDirection: "row",
+        justifyContent: "space-between"
+    },
+    archivesearchicon: {
+        flexDirection: "row",
+        justifyContent: "space-between",
+        alignItems: 'center',
+        bottom: 10
+    },
+    archive: {
+        right: 30
+    },
     /**
      * gettrashnote css
      */
