@@ -255,10 +255,10 @@ export class Notes extends React.Component {
                                     )}
                             </TouchableOpacity>
                         </View>
-                        <View>
+                        <View style={styles.icons1}>
                             <ReminderComponent reminderProps={this.reminderData} ></ReminderComponent>
                         </View>
-                        <View>
+                        <View style={styles.icons2}>
                             <Icon name="md-archive"
                                 onPress={() => this.handleArchiveNote()}
                                 style={styles.archiveicon} size={22}></Icon>

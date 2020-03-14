@@ -352,11 +352,17 @@ const styles = StyleSheet.create({
 
     },
     icons: {
-        alignItems: 'flex-start',
-        justifyContent: 'space-around',
+        alignItems: 'center',
+        justifyContent: 'flex-end',
         flexDirection: 'row',
         marginTop: -20,
-        marginLeft: 70
+        right: 60
+    },
+    icons1: {
+        left: 20
+    },
+    icons2: {
+        left: 40
     },
     deleteicons: {
         flex: 2,
@@ -383,13 +389,7 @@ const styles = StyleSheet.create({
         marginLeft: 20,
         marginTop: 20
     },
-    // moreicon: {
-    //     flex: 1,
-    //     justifyContent: 'space-around',
-    //     alignItems: 'center',
-    //     alignContent:'flex-start',
-    //     left:140
-    // },
+
     /**
      * getnote component css
      */
