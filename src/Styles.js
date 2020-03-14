@@ -347,6 +347,10 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between',
         alignItems: 'center',
         flexDirection: 'row',
+        right: 0,
+        flex: 1,
+        // position: 'absolute',
+
         marginTop: 420,
         // left:10
 
