@@ -19,14 +19,7 @@ import {UnpinNotes} from '../services/noteServices'
 import { updateColor } from '../services/noteServices'
 import { createLabels } from '../services/noteServices'
 import ReminderComponent from '../components/remainder'
-import {
-    ScrollView,
-    Text,
-    TextInput,
-    View,
-    FlatList,
-    TouchableOpacity
-} from "react-native";
+import {ScrollView,Text,TextInput,View,FlatList,TouchableOpacity} from "react-native";
 const colors = [
     // { name: "blue", hexcode: "#F5F5DC" }
     { name: "blue", hexcode: " #39a78e" },
