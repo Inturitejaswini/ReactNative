@@ -487,7 +487,56 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'space-between'
+    },
+    /**
+     * search component css
+     */
+    searchcard: {
+        width: 150,
+        top: 20,
+        height: 150,
+        left: 10,
+        backgroundColor: '#0000FF'
+    },
+    bell: {
+        color: '#FFFFFF',
+        fontSize: 30,
+        left: 55,
+        top: 55
+    },
+    bellText: {
+        color: '#FFFFFF',
+        fontSize: 15,
+        left: 40,
+        top: 65
+    },
+    checklist:{
+        color: '#FFFFFF',
+        fontSize: 30,
+        left: 55,
+        top: 55 
+    },
+    checklisttext:{
+        color: '#FFFFFF',
+        fontSize: 15,
+        left: 55,
+        top: 65
+    },
+    listcard:{
+        width: 150,
+        top: 20,
+        height: 150,
+        left: 10,
+        backgroundColor: '#0000FF'
+    },
+    cards:{
+        flexDirection: "row",
+        justifyContent: "space-evenly",
+        flexWrap: "wrap", 
+    },
+    typetext:{
+        top:10,
+        left:10
     }
-
 });
 export default styles

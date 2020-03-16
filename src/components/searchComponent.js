@@ -17,8 +17,10 @@ import React, { Component } from 'react'
 import { View, Button, Text, TouchableOpacity, TextInput } from 'react-native'
 import styles from '../Styles';
 import Icon1 from "react-native-vector-icons/MaterialCommunityIcons";
-import { Divider } from 'react-native-paper';
+import { Divider, Card } from 'react-native-paper';
+import Icon2 from "react-native-vector-icons/MaterialCommunityIcons";
 import { getNotes } from "../services/noteServices";
+import Icon4 from "react-native-vector-icons/AntDesign";
 export class SearchComponent extends Component {
     constructor() {
         super();
@@ -58,7 +60,7 @@ export class SearchComponent extends Component {
         console.warn("search after set state", this.state.searchValue);
     };
     render() {
-       
+
         return (
             <View >
                 <View style={{ flexDirection: "row", alignItems: 'center' }}>
@@ -76,6 +78,28 @@ export class SearchComponent extends Component {
                             onChangeText={this.handleSearchValue} /></View>
                 </View>
                 <Divider type='horizontal' style={{ height: 2 }}></Divider>
+                <View style={styles.typetext}>
+                    <Text>Types</Text>
+                </View>
+                <View style={styles.cards}>
+                    <View>
+                        <TouchableOpacity>
+                            <Card style={styles.searchcard} onPress={() =>
+                                this.props.navigation.navigate('getReminder')}>
+                                <Icon2 name="bell-plus-outline" size={20} style={styles.bell} />
+                                <Text style={styles.bellText}>Reminders</Text>
+                            </Card>
+                        </TouchableOpacity>
+                    </View>
+                    <View>
+                        <TouchableOpacity>
+                            <Card style={styles.listcard}>
+                                <Icon4 name="checksquareo" size={20} style={styles.checklist} />
+                                <Text style={styles.checklisttext}>Lists</Text>
+                            </Card>
+                        </TouchableOpacity>
+                    </View>
+                </View>
             </View>
         )
     }
