@@ -76,7 +76,7 @@ export async function deleteNotes(data){
 export async function pinNotes(data){
     let AccessToken = await AsyncStorage.getItem('@storage_Key')
     console.warn("token is coming to pincomponent",AccessToken)
-    let res = axios.post(Config.REACT_APP_BASE_URL+noteConfigApi.pinUnPinNotes,data,
+    let res = axios.post(Config.REACT_APP_BASE_URL+noteConfigApi.pinNotes,data,
         {
             headers: {
                 Authorization:AccessToken
