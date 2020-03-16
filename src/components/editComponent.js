@@ -11,6 +11,7 @@ import RBSheet1 from "react-native-raw-bottom-sheet";
 import RBSheet2 from "react-native-raw-bottom-sheet";
 import { IconButton, Colors } from "react-native-paper";
 import styles from "../Styles";
+import { Chip } from 'react-native-paper';
 import { editNotes } from '../services/noteServices'
 import { archiveNotes } from '../services/noteServices'
 import { deleteNotes } from '../services/noteServices'
@@ -19,6 +20,7 @@ import {UnpinNotes} from '../services/noteServices'
 import { updateColor } from '../services/noteServices'
 import { createLabels } from '../services/noteServices'
 import ReminderComponent from '../components/remainder'
+import IconM from 'react-native-vector-icons/MaterialCommunityIcons'
 import {ScrollView,Text,TextInput,View,FlatList,TouchableOpacity} from "react-native";
 const colors = [
     // { name: "blue", hexcode: "#F5F5DC" }
@@ -153,7 +155,7 @@ export class EditComponent extends Component {
             isArchived: this.state.isArchived,
             isPined: this.state.isPined,
             color: this.state.color,
-            labelValue: this.state.labelValue
+            // labelValue: this.state.labelValue
         };
         console.warn("editnote data", data);
         editNotes(data).then(res => {
@@ -182,7 +184,7 @@ export class EditComponent extends Component {
             title: this.props.navigation.state.params.display.title,
             isDeleted: this.props.navigation.state.params.display.isDeleted,
             description: this.props.navigation.state.params.display.description,
-            reminder: this.props.navigation.state.params.display.reminder,
+            reminder: this.props.navigation.state.params.display.reminderDate,
             isArchived: this.props.navigation.state.params.display.isArchived,
             color: this.props.navigation.state.params.display.color,
             labelValue: this.props.navigation.state.params.display.labelValue
@@ -247,9 +249,13 @@ export class EditComponent extends Component {
                             onChangeText={description => this.setState({ description })}
                         />
                     </View>
-                    <Text style={{ fontWeight: "bold", left: 10 }}>
-                        {this.state.reminder}
-                    </Text>
+                    {this.state.reminderDate.length > 1 &&
+                            <TouchableOpacity>
+                                <Chip style={styles.chip}>
+                                    <IconM name="clock-outline" size={15} color="black" />
+                                    {this.state.reminderDate}
+                                </Chip>
+                            </TouchableOpacity>}
                 </View>
                 <View
                     style={{ top: 400, left: 340 }}>

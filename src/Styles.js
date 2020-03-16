@@ -132,6 +132,9 @@ const styles = StyleSheet.create({
     /**
      * dashboard component app.css
      */
+    fundootext: {
+        fontSize: 20
+    },
     progress: {
         flex: 1,
         flexDirection: "column",
@@ -510,53 +513,53 @@ const styles = StyleSheet.create({
         left: 40,
         top: 65
     },
-    checklist:{
+    checklist: {
         color: '#FFFFFF',
         fontSize: 30,
         left: 55,
-        top: 55 
+        top: 55
     },
-    checklisttext:{
+    checklisttext: {
         color: '#FFFFFF',
         fontSize: 15,
         left: 55,
         top: 65
     },
-    listcard:{
+    listcard: {
         width: 150,
         top: 20,
         height: 150,
         left: 10,
         backgroundColor: '#0000FF'
     },
-    cards:{
+    cards: {
         flexDirection: "row",
         justifyContent: "space-evenly",
         // flexWrap: "wrap", 
     },
-    typetext:{
-        top:10,
-        left:10
+    typetext: {
+        top: 10,
+        left: 10
     },
-    labeltext:{
-        flex:1,
-        top:25,
-        left:10
+    labeltext: {
+        flex: 1,
+        top: 25,
+        left: 10
     },
-    labelcard:{
+    labelcard: {
         width: 150,
         top: 45,
         height: 150,
         left: 30,
-        backgroundColor: '#999999'  
+        backgroundColor: '#999999'
     },
-    labelicon:{
+    labelicon: {
         color: '#FFFFFF',
         fontSize: 30,
         left: 55,
-        top: 55 
+        top: 55
     },
-    labeltext1:{
+    labeltext1: {
         color: '#FFFFFF',
         fontSize: 15,
         left: 53,

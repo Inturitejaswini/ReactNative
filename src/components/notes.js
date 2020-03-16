@@ -384,11 +384,11 @@ export class Notes extends React.Component {
                                     style={styles.collaboratorcontainer}>
                                     <TouchableOpacity>
                                         <Iconc name="cross" size={35}
-                                            onPress={() => this.handleCrossicon(this.state.searchedMail)} />
+                                            onPress={() => this.handleCrossicon()} />
                                     </TouchableOpacity>
                                     <Text style={styles.collaboratortext}>Collaborators</Text>
                                     <Text style={styles.savebtn}
-                                        onPress={() => this.handleSave(this.state.searchedMail)}>Save</Text>
+                                        onPress={() => this.handleSave()}>Save</Text>
                                 </View>
                                 <Divider type='horizontal' style={{ height: 2 }}></Divider>
                                 <View style={styles.accounticon}>
@@ -405,17 +405,6 @@ export class Notes extends React.Component {
                                         value={this.state.searchValue}
                                         onChangeText={this.handleSearchValue}/>
 
-                                </View>
-                                <View>
-                                    <Text
-                                        style={{
-                                            top: 25,
-                                            left: 80,
-                                            fontSize: 18,
-                                            fontWeight: "bold"}}>
-                                        {this.state.searchedMail}
-                                    </Text>
-                                    {/* {userDetails} */}
                                 </View>
                             </RBSheet2>
                         </TouchableOpacity>

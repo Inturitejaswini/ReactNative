@@ -171,8 +171,8 @@ export class DashBoard extends React.Component {
             <View >
               <Image source={require("../assets/keepicon.png")} style={styles.keepicon}></Image>
             </View>
-            <View  containerStyle={{left:10 }}>
-              <Text>
+            <View  containerStyle={{left:10}}>
+              <Text style={styles.fundootext}>
                 <Text style={{ color: "red" }}>F</Text>
                 <Text style={{ color: "aqua" }}>u</Text>
                 <Text style={{ color: "blue" }}>n</Text>
