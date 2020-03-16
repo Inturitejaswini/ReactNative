@@ -474,7 +474,7 @@ const styles = StyleSheet.create({
     editTextinput: {
         fontSize: 18,
         fontWeight: "bold",
-        left: 2,
+        left: -27,
         top: -2
     },
     doneicon: {

@@ -36,7 +36,7 @@ export class CreateLabelComponent extends Component {
         <View >
           <TextInput
             style={styles.editTextinput}
-            placeholder="enter the mail to share..."
+            placeholder="Createnew label"
             value={this.state.searchValue}
             onChangeText={this.handleSearchValue}
           />
