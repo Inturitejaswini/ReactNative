@@ -355,6 +355,9 @@ const styles = StyleSheet.create({
         // left:10
 
     },
+    chip: {
+        width: 120
+    },
     icons: {
         alignItems: 'center',
         justifyContent: 'flex-end',

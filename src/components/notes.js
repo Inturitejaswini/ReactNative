@@ -278,12 +278,12 @@ export class Notes extends React.Component {
                         </View>
                         {this.state.reminderDate.length > 1 &&
                             <TouchableOpacity>
-                                <Chip>
+                                <Chip style={styles.chip}>
                                     <IconM name="clock-outline" size={15} color="black" />
                                     {this.state.reminderDate}
                                 </Chip>
                             </TouchableOpacity>}
-                            <Text>{collaborateDetails}</Text>
+                            {/* <Text>{collaborateDetails}</Text> */}
                     </View>
                     <View style={styles.plusicon}>
                         <View>
@@ -360,7 +360,7 @@ export class Notes extends React.Component {
                                                             size={60}
                                                             onPress={() => this.handleColor(item.hexcode)} />
                                                     </View>
-                                                )} />
+                                                )}/>
                                         </View>
                                     </View>
 
@@ -415,7 +415,7 @@ export class Notes extends React.Component {
                                             fontWeight: "bold"}}>
                                         {this.state.searchedMail}
                                     </Text>
-                                    {userDetails}
+                                    {/* {userDetails} */}
                                 </View>
                             </RBSheet2>
                         </TouchableOpacity>
