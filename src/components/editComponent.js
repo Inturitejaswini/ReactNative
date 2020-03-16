@@ -184,7 +184,7 @@ export class EditComponent extends Component {
             title: this.props.navigation.state.params.display.title,
             isDeleted: this.props.navigation.state.params.display.isDeleted,
             description: this.props.navigation.state.params.display.description,
-            reminder: this.props.navigation.state.params.display.reminderDate,
+            reminder: this.props.navigation.state.params.display.reminder,
             isArchived: this.props.navigation.state.params.display.isArchived,
             color: this.props.navigation.state.params.display.color,
             labelValue: this.props.navigation.state.params.display.labelValue
@@ -253,7 +253,7 @@ export class EditComponent extends Component {
                             <TouchableOpacity>
                                 <Chip style={styles.chip}>
                                     <IconM name="clock-outline" size={15} color="black" />
-                                    {this.state.reminderDate}
+                                    {this.state.reminder}
                                 </Chip>
                             </TouchableOpacity>}
                 </View>
