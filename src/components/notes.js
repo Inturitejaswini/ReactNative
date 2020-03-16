@@ -266,7 +266,6 @@ export class Notes extends React.Component {
                                     {this.state.reminderDate}
                                 </Chip>
                             </TouchableOpacity>}
-                            {/* <Text>{collaborateDetails}</Text> */}
                     </View>
                     <View style={styles.plusicon}>
                         <View>
