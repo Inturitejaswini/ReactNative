@@ -4,7 +4,7 @@ var noteConfigApi={
     editNotes:"/notes/updateNotes",
     archiveNotes:"/notes/archiveNotes",
     deleteNotes:"/notes/trashNotes",
-    pinUnPinNotes:"/notes/pinUnpinNotes",
+    pinNotes:"/notes/pinUnpinNotes",
     UnPinNotes:"/notes/pinUnpinNotes",
     colorNotes:"/notes/changesColorNotes",
     addLabel:"/noteLabels",
