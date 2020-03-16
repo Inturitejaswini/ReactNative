@@ -532,11 +532,35 @@ const styles = StyleSheet.create({
     cards:{
         flexDirection: "row",
         justifyContent: "space-evenly",
-        flexWrap: "wrap", 
+        // flexWrap: "wrap", 
     },
     typetext:{
         top:10,
         left:10
+    },
+    labeltext:{
+        flex:1,
+        top:25,
+        left:10
+    },
+    labelcard:{
+        width: 150,
+        top: 45,
+        height: 150,
+        left: 30,
+        backgroundColor: '#999999'  
+    },
+    labelicon:{
+        color: '#FFFFFF',
+        fontSize: 30,
+        left: 55,
+        top: 55 
+    },
+    labeltext1:{
+        color: '#FFFFFF',
+        fontSize: 15,
+        left: 53,
+        top: 65
     }
 });
 export default styles

@@ -21,6 +21,8 @@ import { Divider, Card } from 'react-native-paper';
 import Icon2 from "react-native-vector-icons/MaterialCommunityIcons";
 import { getNotes } from "../services/noteServices";
 import Icon4 from "react-native-vector-icons/AntDesign";
+import Icon from "react-native-vector-icons/MaterialCommunityIcons";
+
 export class SearchComponent extends Component {
     constructor() {
         super();
@@ -100,6 +102,17 @@ export class SearchComponent extends Component {
                         </TouchableOpacity>
                     </View>
                 </View>
+                <View style={styles.labeltext}>
+                    <Text>Labels</Text>
+                </View>
+                <View>
+                        <TouchableOpacity>
+                            <Card style={styles.labelcard}>
+                                <Icon name="label-outline" size={20} style={styles.labelicon} />
+                                <Text style={styles.labeltext1}>Labels</Text>
+                            </Card>
+                        </TouchableOpacity>
+                    </View>
             </View>
         )
     }
