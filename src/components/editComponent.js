@@ -193,13 +193,13 @@ export class EditComponent extends Component {
         })
     }
     render() {
-        let labelDetails = this.state.labelData.map(labelkey => {
-            console.warn("key in label component---->", labelkey.data().label);
+        let labelDetails = this.state.labelData.map(key => {
+            console.warn("key in label component---->",key.data().label);
             return (
                 <View>
                     <CheckBox
-                        title={labelkey.data().label}
-                        onPress={() => this.handleSelection(labelkey.data().label)}
+                        title={key.data().label}
+                        onPress={() => this.handleSelection(key.data().label)}
                     />
                 </View>
             );
