@@ -194,39 +194,8 @@ export class Notes extends React.Component {
             console.warn("email result", this.state.Value);
         });
     }
-    handleClickMail = async email => {
-        console.log("selected email", email);
-        await this.setState({
-            searchedMail: email
-        });
-    };
-    handleSave = mail => {
-        console.warn("mail", mail);
-        this.setState({
-            selectedEmail: mail
-        });
-        console.warn("selected email", this.state.selectedEmail);
-    };
+    
     render() {
-        let userDetails = this.state.users.map(key => {
-        return (
-          <Text
-            style={{ left: 80, top: 30, fontSize: 18 }}
-            onPress={() => this.handleClickMail(key.data().email)}
-          >
-            {key.data().email}
-          </Text>
-        );
-      });
-      let collaborateDetails = this.state.value.map(collabaratekey => {
-        // console.log("key in collaborator", key.email);
-        return (
-          <Text style={{}}>
-            <Icon1 name="account-circle" size={35} color="gray" />
-            {collabaratekey.email}
-          </Text>
-        );
-      });
         return (
             <View>
                 <ScrollView>
