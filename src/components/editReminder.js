@@ -29,7 +29,7 @@ import {
 } from "react-native";
 const colors = [
     // { name: "blue", hexcode: "#F5F5DC" }
-    { name: "blue", hexcode: " #39a78e" },
+    { name: "blue", hexcode: " #b8abb9" },
     { name: "violet", hexcode: "#7DCEA0" },
     { name: "blue", hexcode: "#76D7C4" },
     { name: "orange", hexcode: "#5499C7" },

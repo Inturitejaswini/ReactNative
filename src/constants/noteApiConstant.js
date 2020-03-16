@@ -11,6 +11,7 @@ var noteConfigApi={
     deleteForever:"/notes/deleteForeverNotes",
     restoreNotes:"/notes/deleteForeverNotes",
     unarchiveNotes:"/notes/archiveNotes",
-    notecollaborator:"/notes/%7B%225e688eddad53b700227c581c%22%7D/AddcollaboratorsNotes"
+    notecollaborator:"/notes/%7B%225e688eddad53b700227c581c%22%7D/AddcollaboratorsNotes",
+    getLabels:"/noteLabels/getNoteLabelList"
 }             
 export default noteConfigApi

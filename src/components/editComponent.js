@@ -16,15 +16,15 @@ import { editNotes } from '../services/noteServices'
 import { archiveNotes } from '../services/noteServices'
 import { deleteNotes } from '../services/noteServices'
 import { pinNotes } from '../services/noteServices'
-import {UnpinNotes} from '../services/noteServices'
+import { UnpinNotes } from '../services/noteServices'
 import { updateColor } from '../services/noteServices'
 import { createLabels } from '../services/noteServices'
 import ReminderComponent from '../components/remainder'
 import IconM from 'react-native-vector-icons/MaterialCommunityIcons'
-import {ScrollView,Text,TextInput,View,FlatList,TouchableOpacity} from "react-native";
+import { ScrollView, Text, TextInput, View, FlatList, TouchableOpacity } from "react-native";
 const colors = [
     // { name: "blue", hexcode: "#F5F5DC" }
-    { name: "blue", hexcode: " #39a78e" },
+    { name: "blue", hexcode: " #b8abb9" },
     { name: "violet", hexcode: "#7DCEA0" },
     { name: "blue", hexcode: "#76D7C4" },
     { name: "orange", hexcode: "#5499C7" },
@@ -51,7 +51,7 @@ export class EditComponent extends Component {
             isArchived: false,
             isPined: false,
             key: '',
-            key1:'',
+            key1: '',
             colors: false,
             labelValue: "",
             selectedLabels: "",
@@ -130,6 +130,7 @@ export class EditComponent extends Component {
             console.warn(" response from label data", res);
         });
     };
+    
     handleSelectLabel = async (labelName) => {
         console.warn("id of label", labelName);
         await this.setState({
@@ -140,7 +141,7 @@ export class EditComponent extends Component {
     handleLabelArrow = async (labelValue) => {
         this.RBSheet2.close();
         this.RBSheet.close();
-       await this.setState({
+        await this.setState({
             labelValue: labelValue
         });
         console.warn("labelValue", this.state.labelValue);
@@ -155,7 +156,7 @@ export class EditComponent extends Component {
             isArchived: this.state.isArchived,
             isPined: this.state.isPined,
             color: this.state.color,
-            // labelValue: this.state.labelValue
+            labelValue: this.state.labelValue
         };
         console.warn("editnote data", data);
         editNotes(data).then(res => {
@@ -187,10 +188,22 @@ export class EditComponent extends Component {
             reminder: this.props.navigation.state.params.display.reminder,
             isArchived: this.props.navigation.state.params.display.isArchived,
             color: this.props.navigation.state.params.display.color,
+            isPined: this.props.navigation.state.params.display.isPined,
             labelValue: this.props.navigation.state.params.display.labelValue
         })
     }
     render() {
+        let labelDetails = this.state.labelData.map(labelkey => {
+            console.warn("key in label component---->", labelkey.data().label);
+            return (
+                <View>
+                    <CheckBox
+                        title={labelkey.data().label}
+                        onPress={() => this.handleSelection(labelkey.data().label)}
+                    />
+                </View>
+            );
+        });
         return (
             <View style={{
                 backgroundColor: this.state.color,
@@ -207,13 +220,13 @@ export class EditComponent extends Component {
                             <TouchableOpacity >
                                 {!this.state.isPined ? (
                                     <Icon5
-                                    onPress={() => this.handlePin()}
+                                        onPress={() => this.handlePin()}
                                         name="pushpino"
                                         size={25}
                                     />
                                 ) : (
                                         <Icon5
-                                        onPress={() => this.handleUnPin()}
+                                            onPress={() => this.handleUnPin()}
                                             name="pushpin"
                                             size={25} />
                                     )}
@@ -250,12 +263,15 @@ export class EditComponent extends Component {
                         />
                     </View>
                     {this.state.reminderDate.length > 1 &&
-                            <TouchableOpacity>
-                                <Chip style={styles.chip}>
-                                    <IconM name="clock-outline" size={15} color="black" />
-                                    {this.state.reminder}
-                                </Chip>
-                            </TouchableOpacity>}
+                        <TouchableOpacity>
+                            <Chip style={styles.chip}>
+                                <IconM name="clock-outline" size={15} color="black" />
+                                {this.state.reminder}
+                            </Chip>
+                        </TouchableOpacity>}
+                    <Text style={{ fontWeight: "bold", left: 10 }}>
+                        {this.state.labelValue}
+                    </Text>
                 </View>
                 <View
                     style={{ top: 400, left: 340 }}>
@@ -302,8 +318,7 @@ export class EditComponent extends Component {
                             }}>
                             <Icon2 name="addusergroup" size={25} />
                             <Text
-                                style={{ fontSize: 18, left: 20 }}
-                                onPress={() => { this.RBSheet1.open() }}>collaborator</Text>
+                                style={{ fontSize: 18, left: 20 }}>collaborator</Text>
                         </View>
                         <View
                             style={{
@@ -329,9 +344,9 @@ export class EditComponent extends Component {
                                             style={{ backgroundColor: item.hexcode, borderRadius: 15 }}
                                             value={item.hexcode}
                                             size={40}
-                                            onPress={() => this.handleColor(item.hexcode)}/>
+                                            onPress={() => this.handleColor(item.hexcode)} />
                                     </View>
-                                )}/>
+                                )} />
                         </View>
                     </RBSheet>
                 </View>
@@ -376,7 +391,7 @@ export class EditComponent extends Component {
                                     }} />
                             </View>
                         </View>
-                        {/* <ScrollView>{labelDetails}</ScrollView> */}
+                        <ScrollView>{labelDetails}</ScrollView>
                     </RBSheet2>
                 </View>
             </View>

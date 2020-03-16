@@ -157,3 +157,14 @@ export async function noteCollaborator(data){
         })
     return res
 }
+export async function getAllLabels(data){
+    let AccessToken = await AsyncStorage.getItem('@storage_Key')
+    console.warn("token is coming to collaboratornotes",AccessToken)
+    let res = axios.get(Config.REACT_APP_BASE_URL+noteConfigApi.getLabels,data,
+        {
+            headers: {
+                Authorization:AccessToken
+            }
+        })
+    return res
+}

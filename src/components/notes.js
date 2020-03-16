@@ -76,7 +76,7 @@ export class Notes extends React.Component {
             labelData: [],
             value: [],
             searchedMail: "",
-            users:[]
+            users: []
         }
         this.reminderData = this.reminderData.bind(this);
     }
@@ -200,20 +200,19 @@ export class Notes extends React.Component {
     //         searchedMail: email
     //     });
     // };
-    handleSave = async(mail) => {
+    handleSave = async (mail) => {
         console.warn("mail", mail);
-       await this.setState({
+        await this.setState({
             selectedEmail: mail
         });
         console.warn("selected email", this.state.selectedEmail);
     };
     render() {
- 
         return (
-            <View>
+            <View style={{
+                backgroundColor: this.state.color,
+                height: "100%"}}>
                 <ScrollView>
-                    {/* <Card > */}
-
                     <View>
                         <TouchableOpacity onPress={() => this.handleNote()}>
                             <Image source={require("../assets/goback.png")}
@@ -342,7 +341,7 @@ export class Notes extends React.Component {
                                                             size={60}
                                                             onPress={() => this.handleColor(item.hexcode)} />
                                                     </View>
-                                                )}/>
+                                                )} />
                                         </View>
                                     </View>
                                 </RBSheet>
@@ -360,7 +359,8 @@ export class Notes extends React.Component {
                                 customStyles={{
                                     container: {
                                         flexDirection: "column"
-                                    }}}>
+                                    }
+                                }}>
                                 <View
                                     style={styles.collaboratorcontainer}>
                                     <TouchableOpacity>
@@ -384,7 +384,7 @@ export class Notes extends React.Component {
                                         style={styles.Textinput}
                                         placeholder="enter the mail to share..."
                                         value={this.state.searchValue}
-                                        onChangeText={this.handleSearchValue}/>
+                                        onChangeText={this.handleSearchValue} />
 
                                 </View>
                             </RBSheet2>

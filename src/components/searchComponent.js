@@ -20,7 +20,7 @@ import Icon1 from "react-native-vector-icons/MaterialCommunityIcons";
 import { Divider, Card } from 'react-native-paper';
 import Icon2 from "react-native-vector-icons/MaterialCommunityIcons";
 import { getNotes } from "../services/noteServices";
-import Icon4 from "react-native-vector-icons/AntDesign";
+import Icon4 from "react-native-vector-icons/Ionicons";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 
 export class SearchComponent extends Component {
@@ -95,9 +95,10 @@ export class SearchComponent extends Component {
                     </View>
                     <View>
                         <TouchableOpacity>
-                            <Card style={styles.listcard}>
-                                <Icon4 name="checksquareo" size={20} style={styles.checklist} />
-                                <Text style={styles.checklisttext}>Lists</Text>
+                            <Card style={styles.listcard} onPress={() =>
+                                this.props.navigation.navigate('archiveComponent')}>
+                                <Icon4 name="md-archive" size={20} style={styles.checklist} />
+                                <Text style={styles.checklisttext}>Archive</Text>
                             </Card>
                         </TouchableOpacity>
                     </View>

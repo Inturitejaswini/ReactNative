@@ -363,9 +363,10 @@ const styles = StyleSheet.create({
     },
     icons: {
         alignItems: 'center',
-        justifyContent: 'flex-end',
+        justifyContent: 'space-evenly',
         flexDirection: 'row',
         marginTop: -20,
+        left:10,
         right: 60
     },
     icons1: {
@@ -522,7 +523,7 @@ const styles = StyleSheet.create({
     checklisttext: {
         color: '#FFFFFF',
         fontSize: 15,
-        left: 55,
+        left: 47,
         top: 65
     },
     listcard: {

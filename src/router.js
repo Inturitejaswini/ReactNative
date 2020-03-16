@@ -16,6 +16,7 @@ import EditReminderComponent from './components/editReminder'
 import EditArchiveComponent from './components/editArchive'
 import EditTrashComponent from './components/editTrash'
 import SearchComponent from './components/searchComponent'
+import GetLabelComponent from './components/getLabelComponent'
 const AppNavigation = createStackNavigator(
     {
         login: {
@@ -120,7 +121,12 @@ const AppNavigation = createStackNavigator(
                 header:null
             }
         },
-       
+       getLabelComponent:{
+           screen:GetLabelComponent,
+           navigationOptions:{
+               header:null
+           }
+       }
     },
     {
         initialRouteName: "drawerComponent"
