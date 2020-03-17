@@ -379,9 +379,7 @@ export class EditComponent extends Component {
                         duration={250}
                         customStyles={{
                             container: {
-                                flexDirection: "column"
-                            }
-                        }}>
+                                flexDirection: "column"}}}>
                         <View style={styles.selectedLabels}>
                             <View>
                                 <TouchableOpacity
