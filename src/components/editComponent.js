@@ -12,14 +12,7 @@ import RBSheet2 from "react-native-raw-bottom-sheet";
 import { IconButton, Colors, Divider } from "react-native-paper";
 import styles from "../Styles";
 import { Chip } from 'react-native-paper';
-import { editNotes } from '../services/noteServices'
-import { archiveNotes } from '../services/noteServices'
-import { deleteNotes } from '../services/noteServices'
-import { pinNotes } from '../services/noteServices'
-import { UnpinNotes } from '../services/noteServices'
-import { updateColor } from '../services/noteServices'
-import { createLabels } from '../services/noteServices'
-import { getAllLabels } from '../services/noteServices'
+import { editNotes ,archiveNotes,deleteNotes,pinNotes,UnpinNotes,updateColor,createLabels,getAllLabels} from '../services/noteServices'
 import ReminderComponent from '../components/remainder'
 import IconM from 'react-native-vector-icons/MaterialCommunityIcons'
 import { ScrollView, Text, TextInput, View, FlatList, TouchableOpacity, CheckBox } from "react-native";
@@ -29,7 +22,7 @@ const colors = [
     { name: "violet", hexcode: "#7DCEA0" },
     { name: "blue", hexcode: "#76D7C4" },
     { name: "orange", hexcode: "#5499C7" },
-    { name: "beige", hexcode: "#79d4e7" },
+    { name: "beige", hexcode: "#79d4e7" },  
     { name: "golden", hexcode: "#EC7063" },
     { name: "lightorange", hexcode: "#E59866" },
     { name: "skyblue", hexcode: "#d3a625" },
@@ -131,8 +124,10 @@ export class EditComponent extends Component {
         await this.setState({ label: true })
         console.warn("label Data", this.state.label);
         let data = {
-            noteIdList: [this.props.navigation.state.params.key],
-            label: this.state.label
+            label: this.state.labelName,
+            id:this.props.noteId,
+            userId: this.state.userId,
+            isDeleted: false
         };
         console.warn("label data", data);
         createLabels(data).then(res => {

@@ -594,6 +594,10 @@ const styles = StyleSheet.create({
     },
     labelcheckbox:{
         right:30
+    },
+    labeledit:{
+        right:30,
+        fontSize:20
     }
 });
 export default styles

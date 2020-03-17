@@ -15,7 +15,7 @@
 ******************************************************************************/
 import React, { Component } from 'react'
 import { View, Button, Text } from 'react-native'
-import { Image, TouchableOpacity, FlatList } from 'react-native'
+import { Image, TouchableOpacity, FlatList ,CheckBox} from 'react-native'
 import styles from '../Styles';
 import { TextInput, ScrollView, } from 'react-native-gesture-handler';
 import RBSheet from "react-native-raw-bottom-sheet";
@@ -23,6 +23,8 @@ import RBSheet1 from "react-native-raw-bottom-sheet";
 import RBSheet2 from "react-native-raw-bottom-sheet";
 import RBSheet3 from "react-native-raw-bottom-sheet";
 import ReminderComponent from './remainder'
+import Icon13 from "react-native-vector-icons/MaterialIcons";
+import Icon12 from "react-native-vector-icons/MaterialCommunityIcons";
 import Iconc from "react-native-vector-icons/Entypo";
 import Icon0 from "react-native-vector-icons/AntDesign";
 import Icon2 from "react-native-vector-icons/AntDesign";
@@ -36,15 +38,7 @@ import { createNotes } from '../services/noteServices'
 import Icon from "react-native-vector-icons/Ionicons";
 import { IconButton } from 'react-native-paper';
 import { Chip } from 'react-native-paper';
-import { getNotes } from '../services/noteServices'
-import { archiveNotes } from '../services/noteServices'
-import { deleteNotes } from '../services/noteServices'
-import { pinNotes } from '../services/noteServices'
-import { UnpinNotes } from '../services/noteServices'
-import { updateColor } from '../services/noteServices'
-import { createLabels } from '../services/noteServices'
-import { noteCollaborator } from '../services/noteServices'
-import { getAllLabels } from '../services/noteServices'
+import { getNotes ,getAllLabels,deleteNotes,pinNotes,UnpinNotes,updateColor,createLabels,noteCollaborator} from '../services/noteServices'
 const colors = [
     { name: "blue", hexcode: " #39a78e" },
     { name: "violet", hexcode: "#7DCEA0" },
@@ -86,7 +80,7 @@ export class Notes extends React.Component {
     }
     componentDidMount() {
         this.getNotes();
-        this.getLabel();
+        this.getLabels()
     }
     getNotes = () => {
         getNotes().then(res => {
@@ -95,14 +89,12 @@ export class Notes extends React.Component {
             });
         });
     };
-    getLabel = () => {
-        getAllLabels().then(response => {
-            console.warn("res in label notes", response);
-            this.setState({
-                labelData: response
-            });
-            console.warn("getlabel data state", this.state.labelData);
-        });
+    getLabels() {
+        getAllLabels().then(async res => {
+            console.warn("res in getting labels", res.data.data.details)
+            console.warn("res in getting labels", res)
+            await this.setState({ labelData: res.data.data.details })
+        })
     }
     reminderData = (value) => {
         console.warn("dataaa---->", value);
@@ -233,8 +225,15 @@ export class Notes extends React.Component {
             console.warn(" response from label data", res);
         });
     };
-    handleLabelArrow = async (labelValue) => {
-        this.RBSheet2.close();
+    handleSelection = async (labelName) => {
+        console.warn("id of label", labelName);
+        await this.setState({
+            selectedLabels: labelName
+        });
+        console.warn("label  setstate", this.state.selectedLabels);
+    };
+    handleLabelArrow =  async (labelValue) => {
+        this.RBSheet3.close();
         this.RBSheet.close();
         await this.setState({
             labelValue: labelValue
@@ -242,17 +241,20 @@ export class Notes extends React.Component {
         console.warn("labelValue", this.state.labelValue);
     };
     render() {
-        // console.warn("to get labels", this.state.labelData)
-        // let labelDetails = this.state.labelData.map(labelkey => {
-        //     console.warn("key in label component---->", labelkey.data().label);
-        //     return (
-        //         <View>
-        //             <CheckBox
-        //                 title={labelkey.data().label}
-        //                 onPress={() => this.handleSelection(labelkey.data().label)}/>
-        //         </View>
-        //     );
-        // });
+        console.warn("to get labels", this.state.labelData)
+        let labelDetails = this.state.labelData.map(labelkey => {
+            console.warn("key in label component---->", labelkey.label);
+            return (
+                <View style={styles.labels}>
+                    <Icon12 name="label-outline" size={25} />
+                    <Text style={styles.labeltex}>{labelkey.label}</Text>
+                    <CheckBox
+                    style={styles.labelcheckbox}
+                        title={labelkey.label}
+                        onPress={() => this.handleSelection(labelkey.label)} />
+                </View>
+            );
+        });
         return (
             <View style={{
                 backgroundColor: this.state.color,
@@ -465,7 +467,7 @@ export class Notes extends React.Component {
                                     />
                                 </View>
                                 <View>
-                                    <Icon
+                                    <Icon13
                                         style={styles.done}
                                         name="done"
                                         size={25}
