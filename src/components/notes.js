@@ -21,6 +21,7 @@ import { TextInput, ScrollView, } from 'react-native-gesture-handler';
 import RBSheet from "react-native-raw-bottom-sheet";
 import RBSheet1 from "react-native-raw-bottom-sheet";
 import RBSheet2 from "react-native-raw-bottom-sheet";
+import RBSheet3 from "react-native-raw-bottom-sheet";
 import ReminderComponent from './remainder'
 import Iconc from "react-native-vector-icons/Entypo";
 import Icon0 from "react-native-vector-icons/AntDesign";
@@ -41,7 +42,9 @@ import { deleteNotes } from '../services/noteServices'
 import { pinNotes } from '../services/noteServices'
 import { UnpinNotes } from '../services/noteServices'
 import { updateColor } from '../services/noteServices'
+import { createLabels } from '../services/noteServices'
 import { noteCollaborator } from '../services/noteServices'
+import { getAllLabels } from '../services/noteServices'
 const colors = [
     { name: "blue", hexcode: " #39a78e" },
     { name: "violet", hexcode: "#7DCEA0" },
@@ -74,6 +77,7 @@ export class Notes extends React.Component {
             labelValue: "",
             selectedLabels: "",
             labelData: [],
+            label: false,
             value: [],
             searchedMail: "",
             users: []
@@ -82,7 +86,7 @@ export class Notes extends React.Component {
     }
     componentDidMount() {
         this.getNotes();
-        // this.getImage();
+        this.getLabel();
     }
     getNotes = () => {
         getNotes().then(res => {
@@ -91,6 +95,15 @@ export class Notes extends React.Component {
             });
         });
     };
+    getLabel = () => {
+        getAllLabels().then(response => {
+            console.warn("res in label notes", response);
+            this.setState({
+                labelData: response
+            });
+            console.warn("getlabel data state", this.state.labelData);
+        });
+    }
     reminderData = (value) => {
         console.warn("dataaa---->", value);
         this.setState({
@@ -171,6 +184,7 @@ export class Notes extends React.Component {
             isArchived: this.state.isArchived,
             isPined: this.state.isPined,
             color: this.state.color,
+            label: this.state.label
             // Collaborators: this.state.Collaborators
         };
         createNotes(data).then(response => {
@@ -207,11 +221,43 @@ export class Notes extends React.Component {
         });
         console.warn("selected email", this.state.selectedEmail);
     };
+    handleLabelDone = async () => {
+        await this.setState({ label: true })
+        console.warn("label Data", this.state.label);
+        let data = {
+            noteIdList: [this.props.navigation.state.params.key],
+            label: this.state.label
+        };
+        console.warn("label data", data);
+        createLabels(data).then(res => {
+            console.warn(" response from label data", res);
+        });
+    };
+    handleLabelArrow = async (labelValue) => {
+        this.RBSheet2.close();
+        this.RBSheet.close();
+        await this.setState({
+            labelValue: labelValue
+        });
+        console.warn("labelValue", this.state.labelValue);
+    };
     render() {
+        // console.warn("to get labels", this.state.labelData)
+        // let labelDetails = this.state.labelData.map(labelkey => {
+        //     console.warn("key in label component---->", labelkey.data().label);
+        //     return (
+        //         <View>
+        //             <CheckBox
+        //                 title={labelkey.data().label}
+        //                 onPress={() => this.handleSelection(labelkey.data().label)}/>
+        //         </View>
+        //     );
+        // });
         return (
             <View style={{
                 backgroundColor: this.state.color,
-                height: "100%"}}>
+                height: "100%"
+            }}>
                 <ScrollView>
                     <View>
                         <TouchableOpacity onPress={() => this.handleNote()}>
@@ -320,11 +366,11 @@ export class Notes extends React.Component {
                                                 <Text style={{ fontSize: 18, left: 40, top: -20 }} >collaborator</Text>
                                             </TouchableOpacity>
                                         </View>
-                                        <View
-                                            style={{ flexDirection: "row", top: 30 }} >
+                                        <View style={{ flexDirection: "row", top: 30 }} >
+                                            <TouchableOpacity onPress={() => { this.RBSheet3.open() }}>                                             
                                             <Icon1 name="label-outline" size={25} />
-                                            <Text
-                                                style={{ fontSize: 18, left: 20 }}>Labels</Text>
+                                                <Text style={{ fontSize: 18, left: 20 }}>Labels</Text>
+                                            </TouchableOpacity>
                                         </View>
                                         <View>
                                             <FlatList
@@ -389,6 +435,48 @@ export class Notes extends React.Component {
                                 </View>
                             </RBSheet2>
                         </TouchableOpacity>
+                    </View>
+
+                    <View>
+                        <RBSheet3
+                            ref={ref => {
+                                this.RBSheet3 = ref;
+                            }}
+                            height={620}
+                            duration={250}
+                            customStyles={{
+                                container: {
+                                    flexDirection: "column"
+                                }
+                            }}>
+                            <View style={styles.selectedLabels}>
+                                <View>
+                                    <TouchableOpacity
+                                        onPress={() => this.handleLabelArrow(this.state.selectedLabels)}>
+                                        <Icon1 name="arrow-left" size={25} />
+                                    </TouchableOpacity>
+                                </View>
+                                <View>
+                                    <TextInput
+                                        style={styles.labeltext2}
+                                        placeholder="Enter label name"
+                                        value={this.state.label}
+                                        onChangeText={label => this.setState({ label })}
+                                    />
+                                </View>
+                                <View>
+                                    <Icon
+                                        style={styles.done}
+                                        name="done"
+                                        size={25}
+                                        onPress={() => {
+                                            this.handleLabelDone();
+                                        }} />
+                                </View>
+                            </View>
+                            <Divider style={styles.divider}></Divider>
+                            {/* <ScrollView>{labelDetails}</ScrollView> */}
+                        </RBSheet3>
                     </View>
                     {/* </Card> */}
                 </ScrollView>

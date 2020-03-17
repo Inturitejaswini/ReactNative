@@ -19,10 +19,10 @@ import { pinNotes } from '../services/noteServices'
 import { UnpinNotes } from '../services/noteServices'
 import { updateColor } from '../services/noteServices'
 import { createLabels } from '../services/noteServices'
-// import { getAllLabels } from '../services/noteServices'
+import { getAllLabels } from '../services/noteServices'
 import ReminderComponent from '../components/remainder'
 import IconM from 'react-native-vector-icons/MaterialCommunityIcons'
-import { ScrollView, Text, TextInput, View, FlatList, TouchableOpacity } from "react-native";
+import { ScrollView, Text, TextInput, View, FlatList, TouchableOpacity, CheckBox } from "react-native";
 const colors = [
     // { name: "blue", hexcode: "#F5F5DC" }
     { name: "blue", hexcode: " #b8abb9" },
@@ -131,7 +131,7 @@ export class EditComponent extends Component {
         await this.setState({ label: true })
         console.warn("label Data", this.state.label);
         let data = {
-            // noteIdList: [this.props.navigation.state.params.key],
+            noteIdList: [this.props.navigation.state.params.key],
             label: this.state.label
         };
         console.warn("label data", data);
@@ -199,6 +199,10 @@ export class EditComponent extends Component {
     //     });
     // }
     componentDidMount() {
+        this.handledetails();
+        this.getLabels()
+    }
+    handledetails() {
         this.setState({
             title: this.props.navigation.state.params.display.title,
             isDeleted: this.props.navigation.state.params.display.isDeleted,
@@ -210,19 +214,28 @@ export class EditComponent extends Component {
             label: this.props.navigation.state.params.display.label
         })
     }
+    getLabels() {
+        getAllLabels().then(async res => {
+            console.warn("res in getting labels", res.data.data.details)
+            console.warn("res in getting labels", res)
+            await this.setState({ labelData: res.data.data.details })
+        })
+    }
     render() {
-        // console.warn("to get labels", this.state.labelData)
-        // let labelDetails = this.state.labelData.map(labelkey => {
-        //     console.warn("key in label component---->", labelkey.label);
-        //     return (
-        //         <View>
-        //             <CheckBox
-        //                 title={labelkey.label}
-        //                 onPress={() => this.handleSelection(labelkey.label)}
-        //             />
-        //         </View>
-        //     );
-        // });
+        console.warn("to get labels", this.state.labelData)
+        let labelDetails = this.state.labelData.map(labelkey => {
+            console.warn("key in label component---->", labelkey.label);
+            return (
+                <View style={styles.labels}>
+                    <Icon1 name="label-outline" size={25} />
+                    <Text style={styles.labeltex}>{labelkey.label}</Text>
+                    <CheckBox
+                    style={styles.labelcheckbox}
+                        title={labelkey.label}
+                        onPress={() => this.handleSelection(labelkey.label)} />
+                </View>
+            );
+        });
         return (
             <View style={{
                 backgroundColor: this.state.color,
@@ -348,7 +361,7 @@ export class EditComponent extends Component {
                             }} >
                             <Icon1 name="label-outline" size={25} />
                             <Text
-                                onPress={() => { this.RBSheet2.open(); }}
+                                onPress={() => { this.RBSheet2.open() }}
                                 style={{ fontSize: 18, left: 20 }}>Labels</Text>
                         </View>
                         <View>
@@ -379,7 +392,9 @@ export class EditComponent extends Component {
                         duration={250}
                         customStyles={{
                             container: {
-                                flexDirection: "column"}}}>
+                                flexDirection: "column"
+                            }
+                        }}>
                         <View style={styles.selectedLabels}>
                             <View>
                                 <TouchableOpacity
@@ -406,9 +421,10 @@ export class EditComponent extends Component {
                             </View>
                         </View>
                         <Divider style={styles.divider}></Divider>
-                        {/* <ScrollView>{labelDetails}</ScrollView> */}
+                        <ScrollView>{labelDetails}</ScrollView>
                     </RBSheet2>
                 </View>
+
             </View>
 
         );

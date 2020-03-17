@@ -579,6 +579,21 @@ const styles = StyleSheet.create({
     },
     divider:{
         height:2
+    },
+    /**
+     * label componnt css
+     */
+    labels:{
+        flexDirection:'row',
+        justifyContent:'space-between',
+        alignItems:'center'
+    },
+    labeltex:{
+        right:100,
+        alignContent:'stretch'
+    },
+    labelcheckbox:{
+        right:30
     }
 });
 export default styles
