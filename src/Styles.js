@@ -565,6 +565,20 @@ const styles = StyleSheet.create({
         fontSize: 15,
         left: 53,
         top: 65
+    },
+    selectedLabels:{
+        flexDirection:'row',
+        justifyContent:'space-between',
+        alignItems:'center'
+    },
+    labeltext2:{
+        right:50
+    },
+    done:{
+        right:10
+    },
+    divider:{
+        height:2
     }
 });
 export default styles

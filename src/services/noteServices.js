@@ -5,7 +5,7 @@ import AsyncStorage from '@react-native-community/async-storage'
 
 export async function createNotes(data) {
     let AccessToken = await AsyncStorage.getItem('@storage_Key')
-    console.warn("token is coming",AccessToken)
+    console.warn("token is coming to createnotes",AccessToken)
     let res = axios.post(Config.REACT_APP_BASE_URL + noteConfigApi.noteAdd, data,
         {
             headers: {
@@ -16,7 +16,7 @@ export async function createNotes(data) {
 }
 export async function getNotes(){
     let AccessToken = await AsyncStorage.getItem('@storage_Key')
-    console.warn("token is coming",AccessToken)
+    console.warn("token is coming to getnote ",AccessToken)
     let res = axios.get(Config.REACT_APP_BASE_URL + noteConfigApi.getNotes,
         {
             headers: {
@@ -109,15 +109,16 @@ export async function updateColor(data){
     return res
 }
 
-export async function createLabels(data){
+export async function createLabels(){
     let AccessToken = await AsyncStorage.getItem('@storage_Key')
     console.warn("token is coming to labelcomponent",AccessToken)
-    let res = axios.post(Config.REACT_APP_BASE_URL+noteConfigApi.addLabel,data,
+    let res = axios.post(Config.REACT_APP_BASE_URL+noteConfigApi.addLabel,
         {
             headers: {
                 Authorization:AccessToken
             }
         })
+        console.warn("labels are coming",res)
     return res
 }
 
@@ -157,14 +158,27 @@ export async function noteCollaborator(data){
         })
     return res
 }
-export async function getAllLabels(data){
+export async function getAllLabels(){
     let AccessToken = await AsyncStorage.getItem('@storage_Key')
-    console.warn("token is coming to collaboratornotes",AccessToken)
-    let res = axios.get(Config.REACT_APP_BASE_URL+noteConfigApi.getLabels,data,
+    console.warn("token is coming to getalllabels",AccessToken)
+    let res = axios.get(Config.REACT_APP_BASE_URL+noteConfigApi.getLabels,
         {
             headers: {
                 Authorization:AccessToken
             }
         })
+    console.warn("getlabels are coming",res)
     return res
 }
+
+// export async function updateReminder(data){
+//     let AccessToken = await AsyncStorage.getItem('@storage_Key')
+//     console.warn("token is coming to updateremindernotes",AccessToken)
+//     let res = axios.post(Config.REACT_APP_BASE_URL+noteConfigApi.updateReminder,data,
+//         {
+//             headers: {
+//                 Authorization:AccessToken
+//             }
+//         })
+//     return res
+// }

@@ -9,7 +9,7 @@ import Icon5 from "react-native-vector-icons/AntDesign";
 import RBSheet from "react-native-raw-bottom-sheet";
 import RBSheet1 from "react-native-raw-bottom-sheet";
 import RBSheet2 from "react-native-raw-bottom-sheet";
-import { IconButton, Colors } from "react-native-paper";
+import { IconButton, Colors, Divider } from "react-native-paper";
 import styles from "../Styles";
 import { Chip } from 'react-native-paper';
 import { editNotes } from '../services/noteServices'
@@ -19,6 +19,7 @@ import { pinNotes } from '../services/noteServices'
 import { UnpinNotes } from '../services/noteServices'
 import { updateColor } from '../services/noteServices'
 import { createLabels } from '../services/noteServices'
+// import { getAllLabels } from '../services/noteServices'
 import ReminderComponent from '../components/remainder'
 import IconM from 'react-native-vector-icons/MaterialCommunityIcons'
 import { ScrollView, Text, TextInput, View, FlatList, TouchableOpacity } from "react-native";
@@ -61,12 +62,20 @@ export class EditComponent extends Component {
         };
         this.reminderData = this.reminderData.bind(this);
     }
-    reminderData = (value) => {
+    reminderData = async (value) => {
         console.warn("dataaa---->", value);
-        this.setState({
+        await this.setState({
             reminderDate: value
         });
-        console.warn("date and time ", this.state.reminderDate);
+        // console.warn("date and time ", this.state.reminderDate);
+        // let data = {
+        //     noteIdList: [this.props.navigation.state.params.key],
+        //     reminderDate: this.state.reminderDate
+        // }
+        // console.warn('reminder update',this.state.reminderDate)
+        // updateReminder(data).then(res=>{
+        //     console.warn("response from update reminder",res)
+        // })
     };
     handlePin = async () => {
         await this.setState({
@@ -122,7 +131,7 @@ export class EditComponent extends Component {
         await this.setState({ label: true })
         console.warn("label Data", this.state.label);
         let data = {
-            noteIdList: [this.props.navigation.state.params.key],
+            // noteIdList: [this.props.navigation.state.params.key],
             label: this.state.label
         };
         console.warn("label data", data);
@@ -130,8 +139,8 @@ export class EditComponent extends Component {
             console.warn(" response from label data", res);
         });
     };
-    
-    handleSelectLabel = async (labelName) => {
+
+    handleSelection = async (labelName) => {
         console.warn("id of label", labelName);
         await this.setState({
             selectedLabels: labelName
@@ -156,7 +165,7 @@ export class EditComponent extends Component {
             isArchived: this.state.isArchived,
             isPined: this.state.isPined,
             color: this.state.color,
-            labelValue: this.state.labelValue
+            label: this.state.label
         };
         console.warn("editnote data", data);
         editNotes(data).then(res => {
@@ -180,34 +189,45 @@ export class EditComponent extends Component {
             console.warn(" response from  color updation", res)
         });
     };
+    // componentWillMount() {
+    //     getAllLabels().then(response => {
+    //         console.warn("res in label notes", response);
+    //         this.setState({
+    //             labelData: response
+    //         });
+    //         console.warn("getlabel data state", this.state.labelData);
+    //     });
+    // }
     componentDidMount() {
         this.setState({
             title: this.props.navigation.state.params.display.title,
             isDeleted: this.props.navigation.state.params.display.isDeleted,
             description: this.props.navigation.state.params.display.description,
-            reminder: this.props.navigation.state.params.display.reminder,
+            reminder: this.props.navigation.state.params.display.reminderDate,
             isArchived: this.props.navigation.state.params.display.isArchived,
             color: this.props.navigation.state.params.display.color,
             isPined: this.props.navigation.state.params.display.isPined,
-            labelValue: this.props.navigation.state.params.display.labelValue
+            label: this.props.navigation.state.params.display.label
         })
     }
     render() {
-        let labelDetails = this.state.labelData.map(key => {
-            console.warn("key in label component---->",key.data().label);
-            return (
-                <View>
-                    <CheckBox
-                        title={key.data().label}
-                        onPress={() => this.handleSelection(key.data().label)}
-                    />
-                </View>
-            );
-        });
+        // console.warn("to get labels", this.state.labelData)
+        // let labelDetails = this.state.labelData.map(labelkey => {
+        //     console.warn("key in label component---->", labelkey.label);
+        //     return (
+        //         <View>
+        //             <CheckBox
+        //                 title={labelkey.label}
+        //                 onPress={() => this.handleSelection(labelkey.label)}
+        //             />
+        //         </View>
+        //     );
+        // });
         return (
             <View style={{
                 backgroundColor: this.state.color,
-                height: "100%"}}>
+                height: "100%"
+            }}>
                 <View style={{ flexDirection: "row", margin: 10 }}>
                     <View style={{ width: "60%" }}>
                         <Icon1
@@ -362,7 +382,7 @@ export class EditComponent extends Component {
                                 flexDirection: "column"
                             }
                         }}>
-                        <View style={{ flexDirection: "row", margin: 10 }}>
+                        <View style={styles.selectedLabels}>
                             <View>
                                 <TouchableOpacity
                                     onPress={() => this.handleLabelArrow(this.state.selectedLabels)}>
@@ -371,19 +391,15 @@ export class EditComponent extends Component {
                             </View>
                             <View>
                                 <TextInput
-                                    style={{
-                                        height: 40,
-                                        fontSize: 18,
-                                        left: 30,
-                                        marginTop: -3
-                                    }}
+                                    style={styles.labeltext2}
                                     placeholder="Enter label name"
                                     value={this.state.label}
                                     onChangeText={label => this.setState({ label })}
                                 />
                             </View>
-                            <View style={{ left: 150 }}>
+                            <View>
                                 <Icon
+                                    style={styles.done}
                                     name="done"
                                     size={25}
                                     onPress={() => {
@@ -391,7 +407,8 @@ export class EditComponent extends Component {
                                     }} />
                             </View>
                         </View>
-                        <ScrollView>{labelDetails}</ScrollView>
+                        <Divider style={styles.divider}></Divider>
+                        {/* <ScrollView>{labelDetails}</ScrollView> */}
                     </RBSheet2>
                 </View>
             </View>

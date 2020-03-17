@@ -171,7 +171,7 @@ export class Notes extends React.Component {
             isArchived: this.state.isArchived,
             isPined: this.state.isPined,
             color: this.state.color,
-            Collaborators: this.state.Collaborators
+            // Collaborators: this.state.Collaborators
         };
         createNotes(data).then(response => {
             console.warn("response is coming to note component", response)

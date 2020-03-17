@@ -1,12 +1,12 @@
 import React, { Component } from "react";
 import { View, Text, IconButton, TextInput } from "react-native";
 import styles from '../Styles';
-// import { colabarateNote } from "../services/noteServices";
 import { ScrollView, TouchableOpacity } from "react-native-gesture-handler";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import Icon1 from "react-native-vector-icons/Entypo";
 import Icon2 from "react-native-vector-icons/MaterialIcons";
 import { Divider } from 'react-native-paper';
+// import { getAllLabels } from "../services/noteServices";
 export class CreateLabelComponent extends Component {
   constructor() {
     super();
@@ -38,14 +38,13 @@ export class CreateLabelComponent extends Component {
             style={styles.editTextinput}
             placeholder="Createnew label"
             value={this.state.searchValue}
-            onChangeText={this.handleSearchValue}
-          />
+            onChangeText={this.handleSearchValue}/>
           </View>
           <View>
           <Icon2
            style={styles.doneicon}
             name="done"
-            size={25} />
+            size={25}/>
         </View>
         </View>
         <Divider type='horizontal' style={{ height: 2 }}></Divider>

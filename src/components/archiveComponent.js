@@ -62,7 +62,7 @@ export class ArchiveComponent extends Component {
             }
         });
         let pinNoteDetails = this.state.notes.map(key => {
-            if (key.isPined === true&&key.isDeleted !== true&&key.isArchived!==true) {
+            if (key.isPined == true&&key.isDeleted !== true&&key.isArchived==true) {
               return (
                 <View style={Align}>
                     <ScrollView>

@@ -18,8 +18,7 @@ export class ReminderComponent1 extends Component {
     }
     static navigationOptions = {
         drawerLabel: "Reminder",
-        drawerIcon: <Icon1 name="bell-plus-outline" size={20}></Icon1>
-       
+        drawerIcon: <Icon1 name="bell-plus-outline" size={20}></Icon1>    
     };
     componentDidMount() {
         getNotes().then(res => {
