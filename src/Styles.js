@@ -593,15 +593,16 @@ const styles = StyleSheet.create({
      */
     labels: {
         flexDirection: 'row',
-        justifyContent: 'space-between',
-        alignItems: 'center'
+        // justifyContent: 'space-between',
+        // alignItems: 'center'
     },
     labeltex: {
         right: 100,
         alignContent: 'stretch'
     },
     labelcheckbox: {
-        right: 30
+        // right: 30
+        width:'100%'
     },
     labeledit: {
         right: 30,

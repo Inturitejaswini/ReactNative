@@ -16,7 +16,8 @@ import { Chip } from 'react-native-paper';
 import { editNotes, archiveNotes, deleteNotes, pinNotes, UnpinNotes, updateColor, createLabels, getAllLabels } from '../services/noteServices'
 import ReminderComponent from '../components/remainder'
 import IconM from 'react-native-vector-icons/MaterialCommunityIcons'
-import { ScrollView, Text, TextInput, View, FlatList, TouchableOpacity, CheckBox } from "react-native";
+import { ScrollView, Text, TextInput, View, FlatList, TouchableOpacity } from "react-native";
+import { CheckBox } from 'react-native-elements'
 const colors = [
     // { name: "blue", hexcode: "#F5F5DC" }
     { name: "blue", hexcode: " #b8abb9" },
@@ -34,6 +35,7 @@ const colors = [
     { name: "salmon", hexcode: "#98AFC7" },
     { name: "mistyRose", hexcode: "#74a775" }
 ];
+var tempCheckValues = [];
 export class EditComponent extends Component {
     constructor() {
         super();
@@ -51,8 +53,10 @@ export class EditComponent extends Component {
             labelValue: "",
             selectedLabels: "",
             labelData: [],
+            checkBox: [],
+            checked: false,
             label: false,
-            labelName:""
+            labelName: ""
 
         };
         this.reminderData = this.reminderData.bind(this);
@@ -127,7 +131,8 @@ export class EditComponent extends Component {
         console.warn("label Data", this.state.label);
         let data = {
             label: this.state.label,
-            isDeleted: false        
+            id: this.state.id,
+            isDeleted: false
         };
         console.warn("label data", data);
         createLabels(data).then(res => {
@@ -162,8 +167,8 @@ export class EditComponent extends Component {
             color: this.state.color,
             labelValue: this.state.label
         };
-        console.warn("editnote data", data);12
-        
+        console.warn("editnote data", data); 12
+
         editNotes(data).then(res => {
             console.warn("response from edit note data", res);
             this.setState({
@@ -209,16 +214,17 @@ export class EditComponent extends Component {
         })
     }
     render() {
-        let labelDetails=[];
-         labelDetails = this.state.labelData.map(labelkey => {
+        let labelDetails = [];
+        labelDetails = this.state.labelData.map(labelkey => {
+            { tempCheckValues[labelkey.id] = false }
             return (
                 <View style={styles.labels}>
-                    <Icon1 name="label-outline" size={25} />
-                    <Text style={styles.labeltex}>{labelkey.label}</Text>
                     <CheckBox
                         style={styles.labelcheckbox}
                         title={labelkey.label}
-                        onPress={() => this.handleSelection(labelkey.label)} />
+                        checked={this.state.checkBox[labelkey.id]}
+                        onPress={() => this.handleSelection(labelkey.label, labelkey.id, this.state.checkBox[labelkey.id])}>
+                    </CheckBox>
                 </View>
             );
         });
@@ -291,7 +297,6 @@ export class EditComponent extends Component {
                                 {this.state.reminder}
                             </Chip>
                         </TouchableOpacity>}
-
                 </View>
                 <View
                     style={{ top: 400, left: 340 }}>
@@ -307,7 +312,8 @@ export class EditComponent extends Component {
                             container: {
                                 flexDirection: "column",
                                 // bottom:45
-                            }}}>
+                            }
+                        }}>
                         <View style={{
                             flexDirection: "row",
                             left: 10,
@@ -365,7 +371,7 @@ export class EditComponent extends Component {
                                             size={40}
                                             onPress={() => this.handleColor(item.hexcode)} />
                                     </View>
-                                )}/>
+                                )} />
                         </View>
                     </RBSheet>
                 </View>
@@ -379,7 +385,8 @@ export class EditComponent extends Component {
                         customStyles={{
                             container: {
                                 flexDirection: "column"
-                            }}}>
+                            }
+                        }}>
                         <View style={styles.selectedLabels}>
                             <View>
                                 <TouchableOpacity
@@ -409,7 +416,7 @@ export class EditComponent extends Component {
                         <View>
                             <TouchableOpacity onPress={this.handleLabelDone} style={styles.done}>
                                 <View >
-                                    <Iconp name="plus" size={23} color="#5499C7"/>
+                                    <Iconp name="plus" size={23} color="#5499C7" />
                                 </View>
                                 <View style={styles.labelText}>
                                     <Text style={{ fontWeight: "800", fontSize: 15 }}>Create :" {this.state.labelName} "</Text>
