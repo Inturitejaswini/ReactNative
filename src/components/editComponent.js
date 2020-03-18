@@ -6,13 +6,14 @@ import Icon3 from "react-native-vector-icons/Foundation";
 import Icon4 from "react-native-vector-icons/FontAwesome";
 import Icon0 from "react-native-vector-icons/AntDesign";
 import Icon5 from "react-native-vector-icons/AntDesign";
+import Iconp from 'react-native-vector-icons/Feather'
 import RBSheet from "react-native-raw-bottom-sheet";
 import RBSheet1 from "react-native-raw-bottom-sheet";
 import RBSheet2 from "react-native-raw-bottom-sheet";
 import { IconButton, Colors, Divider } from "react-native-paper";
 import styles from "../Styles";
 import { Chip } from 'react-native-paper';
-import { editNotes ,archiveNotes,deleteNotes,pinNotes,UnpinNotes,updateColor,createLabels,getAllLabels} from '../services/noteServices'
+import { editNotes, archiveNotes, deleteNotes, pinNotes, UnpinNotes, updateColor, createLabels, getAllLabels } from '../services/noteServices'
 import ReminderComponent from '../components/remainder'
 import IconM from 'react-native-vector-icons/MaterialCommunityIcons'
 import { ScrollView, Text, TextInput, View, FlatList, TouchableOpacity, CheckBox } from "react-native";
@@ -22,7 +23,7 @@ const colors = [
     { name: "violet", hexcode: "#7DCEA0" },
     { name: "blue", hexcode: "#76D7C4" },
     { name: "orange", hexcode: "#5499C7" },
-    { name: "beige", hexcode: "#79d4e7" },  
+    { name: "beige", hexcode: "#79d4e7" },
     { name: "golden", hexcode: "#EC7063" },
     { name: "lightorange", hexcode: "#E59866" },
     { name: "skyblue", hexcode: "#d3a625" },
@@ -51,6 +52,7 @@ export class EditComponent extends Component {
             selectedLabels: "",
             labelData: [],
             label: false,
+            labelName:""
 
         };
         this.reminderData = this.reminderData.bind(this);
@@ -124,10 +126,8 @@ export class EditComponent extends Component {
         await this.setState({ label: true })
         console.warn("label Data", this.state.label);
         let data = {
-            label: this.state.labelName,
-            id:this.props.noteId,
-            userId: this.state.userId,
-            isDeleted: false
+            label: this.state.label,
+            isDeleted: false        
         };
         console.warn("label data", data);
         createLabels(data).then(res => {
@@ -136,11 +136,11 @@ export class EditComponent extends Component {
     };
 
     handleSelection = async (labelName) => {
-        console.warn("id of label", labelName);
+        console.warn(" label name", labelName);
         await this.setState({
             selectedLabels: labelName
         });
-        console.warn("label  setstate", this.state.selectedLabels);
+        console.warn("label setstate", this.state.selectedLabels);
     };
     handleLabelArrow = async (labelValue) => {
         this.RBSheet2.close();
@@ -160,9 +160,10 @@ export class EditComponent extends Component {
             isArchived: this.state.isArchived,
             isPined: this.state.isPined,
             color: this.state.color,
-            label: this.state.label
+            labelValue: this.state.label
         };
-        console.warn("editnote data", data);
+        console.warn("editnote data", data);12
+        
         editNotes(data).then(res => {
             console.warn("response from edit note data", res);
             this.setState({
@@ -184,15 +185,6 @@ export class EditComponent extends Component {
             console.warn(" response from  color updation", res)
         });
     };
-    // componentWillMount() {
-    //     getAllLabels().then(response => {
-    //         console.warn("res in label notes", response);
-    //         this.setState({
-    //             labelData: response
-    //         });
-    //         console.warn("getlabel data state", this.state.labelData);
-    //     });
-    // }
     componentDidMount() {
         this.handledetails();
         this.getLabels()
@@ -206,26 +198,25 @@ export class EditComponent extends Component {
             isArchived: this.props.navigation.state.params.display.isArchived,
             color: this.props.navigation.state.params.display.color,
             isPined: this.props.navigation.state.params.display.isPined,
-            label: this.props.navigation.state.params.display.label
+            labelValue: this.props.navigation.state.params.display.label
         })
     }
     getLabels() {
         getAllLabels().then(async res => {
-            console.warn("res in getting labels", res.data.data.details)
-            console.warn("res in getting labels", res)
-            await this.setState({ labelData: res.data.data.details })
+            await this.setState({
+                labelData: res.data.data.details
+            })
         })
     }
     render() {
-        console.warn("to get labels", this.state.labelData)
-        let labelDetails = this.state.labelData.map(labelkey => {
-            console.warn("key in label component---->", labelkey.label);
+        let labelDetails=[];
+         labelDetails = this.state.labelData.map(labelkey => {
             return (
                 <View style={styles.labels}>
                     <Icon1 name="label-outline" size={25} />
                     <Text style={styles.labeltex}>{labelkey.label}</Text>
                     <CheckBox
-                    style={styles.labelcheckbox}
+                        style={styles.labelcheckbox}
                         title={labelkey.label}
                         onPress={() => this.handleSelection(labelkey.label)} />
                 </View>
@@ -290,6 +281,9 @@ export class EditComponent extends Component {
                             onChangeText={description => this.setState({ description })}
                         />
                     </View>
+                    <Text style={{ fontWeight: "bold", left: 10 }}>
+                        {this.state.labelValue}
+                    </Text>
                     {this.state.reminderDate.length > 1 &&
                         <TouchableOpacity>
                             <Chip style={styles.chip}>
@@ -297,9 +291,7 @@ export class EditComponent extends Component {
                                 {this.state.reminder}
                             </Chip>
                         </TouchableOpacity>}
-                    <Text style={{ fontWeight: "bold", left: 10 }}>
-                        {this.state.labelValue}
-                    </Text>
+
                 </View>
                 <View
                     style={{ top: 400, left: 340 }}>
@@ -315,8 +307,7 @@ export class EditComponent extends Component {
                             container: {
                                 flexDirection: "column",
                                 // bottom:45
-                            }
-                        }}>
+                            }}}>
                         <View style={{
                             flexDirection: "row",
                             left: 10,
@@ -374,7 +365,7 @@ export class EditComponent extends Component {
                                             size={40}
                                             onPress={() => this.handleColor(item.hexcode)} />
                                     </View>
-                                )} />
+                                )}/>
                         </View>
                     </RBSheet>
                 </View>
@@ -388,8 +379,7 @@ export class EditComponent extends Component {
                         customStyles={{
                             container: {
                                 flexDirection: "column"
-                            }
-                        }}>
+                            }}}>
                         <View style={styles.selectedLabels}>
                             <View>
                                 <TouchableOpacity
@@ -401,11 +391,11 @@ export class EditComponent extends Component {
                                 <TextInput
                                     style={styles.labeltext2}
                                     placeholder="Enter label name"
-                                    value={this.state.label}
-                                    onChangeText={label => this.setState({ label })}
+                                    value={this.state.labelName}
+                                    onChangeText={labelName => this.setState({ labelName })}
                                 />
                             </View>
-                            <View>
+                            {/* <View>
                                 <Icon
                                     style={styles.done}
                                     name="done"
@@ -413,9 +403,19 @@ export class EditComponent extends Component {
                                     onPress={() => {
                                         this.handleLabelDone();
                                     }} />
-                            </View>
+                            </View> */}
                         </View>
                         <Divider style={styles.divider}></Divider>
+                        <View>
+                            <TouchableOpacity onPress={this.handleLabelDone} style={styles.done}>
+                                <View >
+                                    <Iconp name="plus" size={23} color="#5499C7"/>
+                                </View>
+                                <View style={styles.labelText}>
+                                    <Text style={{ fontWeight: "800", fontSize: 15 }}>Create :" {this.state.labelName} "</Text>
+                                </View>
+                            </TouchableOpacity>
+                        </View>
                         <ScrollView>{labelDetails}</ScrollView>
                     </RBSheet2>
                 </View>

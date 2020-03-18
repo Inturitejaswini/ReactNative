@@ -346,18 +346,18 @@ const styles = StyleSheet.create({
         marginTop: 10,
         marginLeft: 20
     },
-    plusicon: {
-        justifyContent: 'space-between',
-        alignItems: 'center',
-        flexDirection: 'row',
-        right: 0,
-        flex: 1,
-        // position: 'absolute',
+    // plusicon: {
+    //     justifyContent: 'space-between',
+    //     alignItems: 'center',
+    //     flexDirection: 'row',
+    //     right: 0,
+    //     flex: 1,
+    //     // position: 'absolute',
 
-        marginTop: 420,
-        // left:10
+    //     // top: -190,
+    //     // left:10
 
-    },
+    // },
     chip: {
         width: 120
     },
@@ -366,7 +366,7 @@ const styles = StyleSheet.create({
         justifyContent: 'space-evenly',
         flexDirection: 'row',
         marginTop: -20,
-        left:10,
+        left: 10,
         right: 60
     },
     icons1: {
@@ -566,38 +566,46 @@ const styles = StyleSheet.create({
         left: 53,
         top: 65
     },
-    selectedLabels:{
-        flexDirection:'row',
-        justifyContent:'space-between',
-        alignItems:'center'
+    selectedLabels: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center'
     },
-    labeltext2:{
-        right:50
+    labeltext2: {
+        right: 150
     },
-    done:{
-        right:10
+    done: {
+        flexDirection: 'row',
+        // right:-50,
+        justifyContent: 'space-between'
     },
-    divider:{
-        height:2
+    divider: {
+        height: 2
+    },
+    labelText: {
+        // right: 280,
+        position:'absolute',
+        left:30,
+        top:2
     },
     /**
      * label componnt css
      */
-    labels:{
-        flexDirection:'row',
-        justifyContent:'space-between',
-        alignItems:'center'
+    labels: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center'
     },
-    labeltex:{
-        right:100,
-        alignContent:'stretch'
+    labeltex: {
+        right: 100,
+        alignContent: 'stretch'
     },
-    labelcheckbox:{
-        right:30
+    labelcheckbox: {
+        right: 30
     },
-    labeledit:{
-        right:30,
-        fontSize:20
+    labeledit: {
+        right: 30,
+        fontSize: 20
     }
 });
 export default styles

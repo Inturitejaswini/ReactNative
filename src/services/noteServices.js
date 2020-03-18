@@ -118,7 +118,7 @@ export async function createLabels(){
                 Authorization:AccessToken
             }
         })
-        console.warn("createlabels are coming",res)
+        // console.warn("createlabels are coming",res)
     return res
 }
 
@@ -167,7 +167,7 @@ export async function getAllLabels(){
                 Authorization:AccessToken
             }
         })
-    console.warn("getlabels are coming",res)
+    // console.warn("getlabels are coming",res)
     return res
 }
 

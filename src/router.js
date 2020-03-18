@@ -126,7 +126,7 @@ const AppNavigation = createStackNavigator(
            navigationOptions:{
                header:null
            }
-       }
+       },
     },
     {
         initialRouteName: "drawerComponent"

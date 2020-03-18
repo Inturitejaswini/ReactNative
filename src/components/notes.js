@@ -15,13 +15,14 @@
 ******************************************************************************/
 import React, { Component } from 'react'
 import { View, Button, Text } from 'react-native'
-import { Image, TouchableOpacity, FlatList ,CheckBox} from 'react-native'
+import { Image, TouchableOpacity, FlatList, CheckBox } from 'react-native'
 import styles from '../Styles';
 import { TextInput, ScrollView, } from 'react-native-gesture-handler';
 import RBSheet from "react-native-raw-bottom-sheet";
 import RBSheet1 from "react-native-raw-bottom-sheet";
 import RBSheet2 from "react-native-raw-bottom-sheet";
 import RBSheet3 from "react-native-raw-bottom-sheet";
+import Iconp from 'react-native-vector-icons/Feather'
 import ReminderComponent from './remainder'
 import Icon13 from "react-native-vector-icons/MaterialIcons";
 import Icon12 from "react-native-vector-icons/MaterialCommunityIcons";
@@ -38,7 +39,7 @@ import { createNotes } from '../services/noteServices'
 import Icon from "react-native-vector-icons/Ionicons";
 import { IconButton } from 'react-native-paper';
 import { Chip } from 'react-native-paper';
-import { getNotes ,getAllLabels,deleteNotes,pinNotes,UnpinNotes,updateColor,createLabels,noteCollaborator} from '../services/noteServices'
+import { getNotes, getAllLabels, deleteNotes, pinNotes, UnpinNotes, updateColor, createLabels, noteCollaborator } from '../services/noteServices'
 const colors = [
     { name: "blue", hexcode: " #39a78e" },
     { name: "violet", hexcode: "#7DCEA0" },
@@ -91,9 +92,9 @@ export class Notes extends React.Component {
     };
     getLabels() {
         getAllLabels().then(async res => {
-            console.warn("res in getting labels", res.data.data.details)
-            console.warn("res in getting labels", res)
-            await this.setState({ labelData: res.data.data.details })
+            await this.setState({
+                labelData: res.data.data.details
+            })
         })
     }
     reminderData = (value) => {
@@ -226,13 +227,13 @@ export class Notes extends React.Component {
         });
     };
     handleSelection = async (labelName) => {
-        console.warn("id of label", labelName);
+        // console.warn("id of label", labelName);
         await this.setState({
             selectedLabels: labelName
         });
-        console.warn("label  setstate", this.state.selectedLabels);
+        // console.warn("label  setstate", this.state.selectedLabels);
     };
-    handleLabelArrow =  async (labelValue) => {
+    handleLabelArrow = async (labelValue) => {
         this.RBSheet3.close();
         this.RBSheet.close();
         await this.setState({
@@ -241,15 +242,15 @@ export class Notes extends React.Component {
         console.warn("labelValue", this.state.labelValue);
     };
     render() {
-        console.warn("to get labels", this.state.labelData)
+        // console.warn("to get labels", this.state.labelData)
         let labelDetails = this.state.labelData.map(labelkey => {
-            console.warn("key in label component---->", labelkey.label);
+            // console.warn("key in label component---->", labelkey.label);
             return (
                 <View style={styles.labels}>
                     <Icon12 name="label-outline" size={25} />
                     <Text style={styles.labeltex}>{labelkey.label}</Text>
                     <CheckBox
-                    style={styles.labelcheckbox}
+                        style={styles.labelcheckbox}
                         title={labelkey.label}
                         onPress={() => this.handleSelection(labelkey.label)} />
                 </View>
@@ -313,8 +314,11 @@ export class Notes extends React.Component {
                                     {this.state.reminderDate}
                                 </Chip>
                             </TouchableOpacity>}
+                        <Text style={{ fontWeight: "bold", left: 10 }}>
+                            {this.state.labelValue}
+                        </Text>
                     </View>
-                    <View style={styles.plusicon}>
+                    <View style={{ justifyContent: 'space-between', flexDirection: 'row', marginTop: 400 }}>
                         <View>
                             <TouchableOpacity onPress={() => { this.RBSheet1.open() }}>
                                 <Icon9 name="plussquareo" size={20} ></Icon9>
@@ -335,12 +339,12 @@ export class Notes extends React.Component {
                         </View>
                         <View>
                             <TouchableOpacity onPress={() => { this.RBSheet.open() }}>
-                                <Icon10 name="more-vertical" style={styles.moreicon} size={20}></Icon10>
+                                <Icon10 name="more-vertical" size={20}></Icon10>
                                 <RBSheet
                                     ref={ref => {
                                         this.RBSheet = ref;
                                     }}
-                                    height={220}
+                                    height={200}
                                     duration={250}
                                     customStyles={{
                                         container: {
@@ -368,10 +372,10 @@ export class Notes extends React.Component {
                                                 <Text style={{ fontSize: 18, left: 40, top: -20 }} >collaborator</Text>
                                             </TouchableOpacity>
                                         </View>
-                                        <View style={{ flexDirection: "row", top: 30 }} >
-                                            <TouchableOpacity onPress={() => { this.RBSheet3.open() }}>                                             
-                                            <Icon1 name="label-outline" size={25} />
-                                                <Text style={{ fontSize: 18, left: 20 }}>Labels</Text>
+                                        <View style={{ flexDirection: "row", top: 10 }} >
+                                            <TouchableOpacity onPress={() => { this.RBSheet3.open() }}>
+                                                <Icon1 name="label-outline" size={25} />
+                                                <Text style={{ fontSize: 18, left: 40, bottom: 25 }}>Labels</Text>
                                             </TouchableOpacity>
                                         </View>
                                         <View>
@@ -381,7 +385,7 @@ export class Notes extends React.Component {
                                                 renderItem={({ item }) => (
                                                     <View
                                                         style={{
-                                                            marginTop: 30
+                                                            marginTop: 1
                                                         }}>
                                                         <IconButton
                                                             style={{ backgroundColor: item.hexcode, borderRadius: 15, left: -12 }}
@@ -462,24 +466,26 @@ export class Notes extends React.Component {
                                     <TextInput
                                         style={styles.labeltext2}
                                         placeholder="Enter label name"
-                                        value={this.state.label}
-                                        onChangeText={label => this.setState({ label })}
+                                        value={this.state.labelName}
+                                        onChangeText={labelName => this.setState({ labelName })}
                                     />
-                                </View>
-                                <View>
-                                    <Icon13
-                                        style={styles.done}
-                                        name="done"
-                                        size={25}
-                                        onPress={() => {
-                                            this.handleLabelDone();
-                                        }} />
                                 </View>
                             </View>
                             <Divider style={styles.divider}></Divider>
-                            {/* <ScrollView>{labelDetails}</ScrollView> */}
+                            <View>
+                                <TouchableOpacity onPress={this.handleLabelDone} style={styles.done}>
+                                    <View >
+                                        <Iconp name="plus" size={23} color="#5499C7" />
+                                    </View>
+                                    <View style={styles.labelText}>
+                                        <Text style={{ fontWeight: "800", fontSize: 15 }}>Create :" {this.state.labelName} "</Text>
+                                    </View>
+                                </TouchableOpacity>
+                            </View>
+                            <ScrollView>{labelDetails}</ScrollView>
                         </RBSheet3>
                     </View>
+
                     {/* </Card> */}
                 </ScrollView>
             </View>

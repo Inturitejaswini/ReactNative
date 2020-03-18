@@ -17,7 +17,6 @@ export class CreateLabelComponent extends Component {
       selectedLabels: "",
       labelData: [],
       label: false,
-
     };
   }
   static navigationOptions = {
@@ -25,44 +24,44 @@ export class CreateLabelComponent extends Component {
     drawerIcon: <Icon name="plus" size={25} />,
   };
   handleSelection = async (labelName) => {
-    console.warn("id of label", labelName);
+    // console.warn("id of label", labelName);
     await this.setState({
-        selectedLabels: labelName
+      selectedLabels: labelName
     });
-    console.warn("label  setstate", this.state.selectedLabels);
-};
-componentDidMount() {
-  // this.handledetails();
-  this.getLabels()
-}
-getLabels() {
-  getAllLabels().then(async res => {
-      console.warn("res in getting labels", res.data.data.details)
-      console.warn("res in getting labels", res)
-      await this.setState({ labelData: res.data.data.details })
-  })
-}
-handlearrow=()=>{
-  this.props.navigation.navigate('dashboard')
-}
+    // console.warn("label  setstate", this.state.selectedLabels);
+  };
+  componentDidMount() {
+    // this.handledetails();
+    this.getLabels()
+  }
+  getLabels() {
+    getAllLabels().then(async res => {
+      await this.setState({
+        labelData: res.data.data.details
+      })
+    })
+  }
+  handlearrow = () => {
+    this.props.navigation.navigate('dashboard')
+  }
   render() {
-    console.warn("to get labels", this.state.labelData)
+    // console.warn("to get labels", this.state.labelData)
     let labelDetails = this.state.labelData.map(labelkey => {
-        console.warn("key in label component---->", labelkey.label);
-        return (
-            <View style={styles.labels}>
-                <Icon6 name="label-outline" size={25} />
-                <Text style={styles.labeltex}>{labelkey.label}</Text>
-                <TouchableOpacity>
-                <Icon7 name="edit"  style={styles.labeledit}></Icon7>
-                </TouchableOpacity>
-            </View>
-        );
+      // console.warn("key in label component---->", labelkey.label);
+      return (
+        <View style={styles.labels}>
+          <Icon6 name="label-outline" size={25} />
+          <Text style={styles.labeltex}>{labelkey.label}</Text>
+          <TouchableOpacity>
+            <Icon7 name="edit" style={styles.labeledit}></Icon7>
+          </TouchableOpacity>
+        </View>
+      );
     });
     return (
+      // <ScrollView>
       <View>
-        <View
-          style={styles.collaboratorcontainer}>
+        <View style={styles.collaboratorcontainer}>
           <TouchableOpacity onPress={this.handlearrow}>
             <Icon name="arrow-left" size={35} />
           </TouchableOpacity>
@@ -70,26 +69,27 @@ handlearrow=()=>{
         </View>
         <Divider type='horizontal' style={{ height: 2 }}></Divider>
         <View style={styles.editcrossicon}>
-        <View style={styles.crossicon}>
-          <Icon1 name="cross" size={25} />
-        </View>
-        <View >
-          <TextInput
-            style={styles.editTextinput}
-            placeholder="Createnew label"
-            value={this.state.searchValue}
-            onChangeText={this.handleSearchValue}/>
+          <View style={styles.crossicon}>
+            <Icon1 name="cross" size={25} />
+          </View>
+          <View >
+            <TextInput
+              style={styles.editTextinput}
+              placeholder="Createnew label"
+              value={this.state.searchValue}
+              onChangeText={this.handleSearchValue} />
           </View>
           <View>
-          <Icon2
-           style={styles.doneicon}
-            name="done"
-            size={25}/>
-        </View>
+            <Icon2
+              style={styles.doneicon}
+              name="done"
+              size={25} />
+          </View>
         </View>
         <Divider type='horizontal' style={{ height: 2 }}></Divider>
         <ScrollView>{labelDetails}</ScrollView>
       </View>
+      // </ScrollView>
     )
   }
 }
