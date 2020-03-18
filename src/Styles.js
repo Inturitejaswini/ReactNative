@@ -607,6 +607,9 @@ const styles = StyleSheet.create({
     labeledit: {
         right: 30,
         fontSize: 20
+    },
+    labelchip:{
+        width:100
     }
 });
 export default styles

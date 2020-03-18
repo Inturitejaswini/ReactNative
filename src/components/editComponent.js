@@ -35,7 +35,7 @@ const colors = [
     { name: "salmon", hexcode: "#98AFC7" },
     { name: "mistyRose", hexcode: "#74a775" }
 ];
-var tempCheckValues = [];
+var CheckValue = [];
 export class EditComponent extends Component {
     constructor() {
         super();
@@ -216,7 +216,7 @@ export class EditComponent extends Component {
     render() {
         let labelDetails = [];
         labelDetails = this.state.labelData.map(labelkey => {
-            { tempCheckValues[labelkey.id] = false }
+             CheckValue[labelkey.id] = false 
             return (
                 <View style={styles.labels}>
                     <CheckBox
@@ -287,14 +287,18 @@ export class EditComponent extends Component {
                             onChangeText={description => this.setState({ description })}
                         />
                     </View>
-                    <Text style={{ fontWeight: "bold", left: 10 }}>
-                        {this.state.labelValue}
-                    </Text>
+                    {/* <Text style={{ fontWeight: "bold", left: 10 }}> */}
+                    {this.state.labelValue.length > 1 &&
+                        <Chip style={styles.labelchip}>
+                            {this.state.labelValue}
+                        </Chip>
+                    }
+                    {/* </Text> */}
                     {this.state.reminderDate.length > 1 &&
                         <TouchableOpacity>
                             <Chip style={styles.chip}>
                                 <IconM name="clock-outline" size={15} color="black" />
-                                {this.state.reminder}
+                                {this.state.reminderDate}
                             </Chip>
                         </TouchableOpacity>}
                 </View>

@@ -14,8 +14,7 @@
 * @since :-2-03-2020
 ******************************************************************************/
 import React, { Component } from 'react'
-import { View, Button, Text } from 'react-native'
-import { Image, TouchableOpacity, FlatList, CheckBox } from 'react-native'
+import { View, Button, Text,Image, TouchableOpacity, FlatList } from 'react-native'
 import styles from '../Styles';
 import { TextInput, ScrollView, } from 'react-native-gesture-handler';
 import RBSheet from "react-native-raw-bottom-sheet";
@@ -39,7 +38,9 @@ import { createNotes } from '../services/noteServices'
 import Icon from "react-native-vector-icons/Ionicons";
 import { IconButton } from 'react-native-paper';
 import { Chip } from 'react-native-paper';
+import {CheckBox} from 'react-native-elements'
 import { getNotes, getAllLabels, deleteNotes, pinNotes, UnpinNotes, updateColor, createLabels, noteCollaborator } from '../services/noteServices'
+var CheckValue = [];
 const colors = [
     { name: "blue", hexcode: " #39a78e" },
     { name: "violet", hexcode: "#7DCEA0" },
@@ -75,7 +76,9 @@ export class Notes extends React.Component {
             label: false,
             value: [],
             searchedMail: "",
-            users: []
+            users: [],
+            checkBox: [],
+            checked: false,
         }
         this.reminderData = this.reminderData.bind(this);
     }
@@ -242,17 +245,17 @@ export class Notes extends React.Component {
         console.warn("labelValue", this.state.labelValue);
     };
     render() {
-        // console.warn("to get labels", this.state.labelData)
-        let labelDetails = this.state.labelData.map(labelkey => {
-            // console.warn("key in label component---->", labelkey.label);
+        let labelDetails = [];
+        labelDetails = this.state.labelData.map(labelkey => {
+            CheckValue[labelkey.id] = false 
             return (
                 <View style={styles.labels}>
-                    <Icon12 name="label-outline" size={25} />
-                    <Text style={styles.labeltex}>{labelkey.label}</Text>
                     <CheckBox
                         style={styles.labelcheckbox}
                         title={labelkey.label}
-                        onPress={() => this.handleSelection(labelkey.label)} />
+                        checked={this.state.checkBox[labelkey.id]}
+                        onPress={() => this.handleSelection(labelkey.label, labelkey.id, this.state.checkBox[labelkey.id])}>
+                    </CheckBox>
                 </View>
             );
         });

@@ -121,8 +121,8 @@ export class DashBoard extends React.Component {
                   <View>
                     <Text>{key.title}</Text>
                     <Text>{key.description}</Text>
-                    <Text style={{ fontWeight: "bold" }}>{key.reminder}</Text>
-                    <Text style={{ fontWeight: "bold" }}>{key.label}</Text>
+                    <Text>{key.reminder}</Text>
+                    <Text>{key.labelValue}</Text>
                   </View>
                 </Card>
               </TouchableOpacity>
@@ -146,10 +146,10 @@ export class DashBoard extends React.Component {
                 backgroundColor: key.color,
                 borderRadius: 10
               }}>
-                <Text > {key.title}</Text>
+                <Text> {key.title}</Text>
                 <Text> {key.description}</Text>
-                <Text style={{ fontWeight: "bold" }}> {key.reminder}</Text>
-                <Text style={{ fontWeight: "bold" }}>{key.label}</Text>
+                <Text> {key.reminder}</Text>
+                <Text>{key.labelValue}</Text>
               </Card>
             </TouchableOpacity>
           </View>
