@@ -287,13 +287,9 @@ export class EditComponent extends Component {
                             onChangeText={description => this.setState({ description })}
                         />
                     </View>
-                    {/* <Text style={{ fontWeight: "bold", left: 10 }}> */}
-                    {this.state.labelValue.length > 1 &&
-                        <Chip style={styles.labelchip}>
+                    <Text style={{ fontWeight: "bold", left: 10 }}>
                             {this.state.labelValue}
-                        </Chip>
-                    }
-                    {/* </Text> */}
+                    </Text>
                     {this.state.reminderDate.length > 1 &&
                         <TouchableOpacity>
                             <Chip style={styles.chip}>

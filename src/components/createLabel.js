@@ -24,14 +24,11 @@ export class CreateLabelComponent extends Component {
     drawerIcon: <Icon name="plus" size={25} />,
   };
   handleSelection = async (labelName) => {
-    // console.warn("id of label", labelName);
     await this.setState({
       selectedLabels: labelName
     });
-    // console.warn("label  setstate", this.state.selectedLabels);
   };
   componentDidMount() {
-    // this.handledetails();
     this.getLabels()
   }
   getLabels() {
@@ -45,9 +42,7 @@ export class CreateLabelComponent extends Component {
     this.props.navigation.navigate('dashboard')
   }
   render() {
-    // console.warn("to get labels", this.state.labelData)
     let labelDetails = this.state.labelData.map(labelkey => {
-      // console.warn("key in label component---->", labelkey.label);
       return (
         <View style={styles.labels}>
           <Icon6 name="label-outline" size={25} />
@@ -59,7 +54,6 @@ export class CreateLabelComponent extends Component {
       );
     });
     return (
-      // <ScrollView>
       <View>
         <View style={styles.collaboratorcontainer}>
           <TouchableOpacity onPress={this.handlearrow}>
@@ -89,7 +83,6 @@ export class CreateLabelComponent extends Component {
         <Divider type='horizontal' style={{ height: 2 }}></Divider>
         <ScrollView>{labelDetails}</ScrollView>
       </View>
-      // </ScrollView>
     )
   }
 }
