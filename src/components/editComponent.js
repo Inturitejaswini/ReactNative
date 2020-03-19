@@ -309,9 +309,7 @@ export class EditComponent extends Component {
                         customStyles={{
                             container: {
                                 flexDirection: "column",
-                                // bottom:45
-                            }
-                        }}>
+                            }}}>
                         <View style={{
                             flexDirection: "row",
                             left: 10,

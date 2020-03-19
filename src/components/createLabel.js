@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { ScrollView, Text, TextInput, View, FlatList, TouchableOpacity, CheckBox } from "react-native";
+import { ScrollView, Text, TextInput, View, FlatList, TouchableOpacity } from "react-native";
 import styles from '../Styles';
 // import { ScrollView } from "react-native-gesture-handler";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
@@ -9,6 +9,8 @@ import Icon6 from "react-native-vector-icons/MaterialCommunityIcons";
 import Icon7 from "react-native-vector-icons/Entypo";
 import { Divider } from 'react-native-paper';
 import { getAllLabels } from '../services/noteServices'
+import { CheckBox } from 'react-native-elements'
+var CheckValue = [];
 export class CreateLabelComponent extends Component {
   constructor() {
     super();
@@ -16,7 +18,10 @@ export class CreateLabelComponent extends Component {
       labelValue: "",
       selectedLabels: "",
       labelData: [],
+      checkBox: [],
+      checked: false,
       label: false,
+      labelName: ""
     };
   }
   static navigationOptions = {
@@ -42,14 +47,17 @@ export class CreateLabelComponent extends Component {
     this.props.navigation.navigate('dashboard')
   }
   render() {
-    let labelDetails = this.state.labelData.map(labelkey => {
+    let labelDetails = [];
+    labelDetails = this.state.labelData.map(labelkey => {
+      CheckValue[labelkey.id] = false
       return (
         <View style={styles.labels}>
-          <Icon6 name="label-outline" size={25} />
-          <Text style={styles.labeltex}>{labelkey.label}</Text>
-          <TouchableOpacity>
-            <Icon7 name="edit" style={styles.labeledit}></Icon7>
-          </TouchableOpacity>
+          <CheckBox
+            style={styles.labelcheckbox}
+            title={labelkey.label}
+            checked={this.state.checkBox[labelkey.id]}
+            onPress={() => this.handleSelection(labelkey.label, labelkey.id, this.state.checkBox[labelkey.id])}>
+          </CheckBox>
         </View>
       );
     });
