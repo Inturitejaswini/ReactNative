@@ -171,14 +171,15 @@ export async function getAllLabels(){
     return res
 }
 
-// export async function updateReminder(data){
-//     let AccessToken = await AsyncStorage.getItem('@storage_Key')
-//     console.warn("token is coming to updateremindernotes",AccessToken)
-//     let res = axios.post(Config.REACT_APP_BASE_URL+noteConfigApi.updateReminder,data,
-//         {
-//             headers: {
-//                 Authorization:AccessToken
-//             }
-//         })
-//     return res
-// }
+export async function reminderUpdate(data){
+    let AccessToken = await AsyncStorage.getItem('@storage_Key')
+    console.warn("token is coming to getalllabels",AccessToken)
+    let res = axios.get(Config.REACT_APP_BASE_URL+noteConfigApi.updateReminder,data,
+        {
+            headers: {
+                Authorization:AccessToken
+            }
+        })
+    // console.warn("getlabels are coming",res)
+    return res
+}

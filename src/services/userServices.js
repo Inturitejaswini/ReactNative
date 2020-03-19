@@ -23,3 +23,17 @@ export function userLogOut(data){
     return axios.post(Config.REACT_APP_BASE_URL+configApi.signOut,data)
 
 }
+
+
+export async function uploadProfile(){
+    let AccessToken = await AsyncStorage.getItem('@storage_Key')
+    console.warn("token is coming to updateprofile",AccessToken)
+    let res = axios.post(Config.REACT_APP_BASE_URL+configApi.profileUpdate,
+        {
+            headers: {
+                Authorization:AccessToken
+            }
+        })
+        console.warn("response coming",res)
+    return res
+}

@@ -33,6 +33,8 @@ import Icon3 from 'react-native-vector-icons/MaterialCommunityIcons'
 import { getNotes } from '../services/noteServices'
 import { userLogOut } from '../services/userServices'
 import { ScrollView } from 'react-native-gesture-handler';
+import ImagePicker from 'react-native-image-picker';
+import {uploadProfile} from '../services/userServices'
 export class DashBoard extends React.Component {
   constructor() {
     super();
@@ -45,14 +47,14 @@ export class DashBoard extends React.Component {
       dialogVisible: false,
       visible: false,
       searchOpen: false,
-      labelValue:[]
-      
-
+      labelValue:[],
+      fileData:"",
+      filePath:"",
+      fileUri:""
     }
   }
   componentDidMount() {
     this.getNotes();
-    // this.getImage();
   }
   getNotes = () => {
     getNotes().then(res => {
@@ -61,6 +63,49 @@ export class DashBoard extends React.Component {
       });
     });
   };
+  handleProfile=()=>{
+    const options = {
+      title: "Select Avatar",
+      customButtons: [
+        { name: 'customOptionKey', title: 'Choose Photo from Custom Option' },
+      ],
+      storageOptions: {
+        skipBackup: true,
+        path: "images"
+      }
+    }
+    ImagePicker.showImagePicker(options, (response) => {
+      console.warn('Response = ', response);  
+      if (response.didCancel) {
+        console.warn('User cancelled image picker',response.didCancel);
+      } else if (response.error) {
+        console.warn('ImagePicker Error: ', response.error);
+      } else if (response.customButton) {
+        console.warn('User tapped custom button: ', response.customButton);
+      } else {
+        const source = {
+           uri: response.uri 
+          };
+          console.warn('response', JSON.stringify(response));
+        this.setState({
+          filePath: response,
+          fileData: response.data,
+          fileUri: response.uri
+        });
+        uploadProfile(source).then(async res => {
+            console.warn("res in uploading image", res);
+            await this.setState({
+              resImage: res
+            });
+            console.warn("resImage", resImage);
+          })
+          .catch(err => {
+            console.warn  ("err in uploading image", err);
+          });
+      }
+    });
+  }
+
   openDrawer = () => {
     this.setState({ openDrawer: !this.state.openDrawer })
   }
@@ -98,6 +143,7 @@ export class DashBoard extends React.Component {
     drawerIcon: <Icon2 name="bulb1" size={20} />
 
   };
+  
 
   render() {
     let Align = this.state.listOpen ? styles.listAlign : styles.gridAlign;
@@ -224,7 +270,7 @@ export class DashBoard extends React.Component {
                         name="account-circle"
                         size={40}
                         rounded
-                        source={this.state.profile}
+                        source={this.state.fileData}
                         activeOpacity={0.7}
                         onPress={this.handleProfile}
                       />

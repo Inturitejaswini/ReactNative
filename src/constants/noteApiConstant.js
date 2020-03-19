@@ -7,7 +7,7 @@ var noteConfigApi={
     pinNotes:"/notes/pinUnpinNotes",
     UnPinNotes:"/notes/pinUnpinNotes",
     colorNotes:"/notes/changesColorNotes",
-    // updateReminder:"/notes/addUpdateReminderNotes",
+    updateReminder:"/notes/addUpdateReminderNotes",
     addLabel:"/noteLabels",
     deleteForever:"/notes/deleteForeverNotes",
     restoreNotes:"/notes/deleteForeverNotes",

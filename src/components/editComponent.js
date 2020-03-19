@@ -13,7 +13,7 @@ import RBSheet2 from "react-native-raw-bottom-sheet";
 import { IconButton, Colors, Divider } from "react-native-paper";
 import styles from "../Styles";
 import { Chip } from 'react-native-paper';
-import { editNotes, archiveNotes, deleteNotes, pinNotes, UnpinNotes, updateColor, createLabels, getAllLabels } from '../services/noteServices'
+import { editNotes, archiveNotes, deleteNotes, pinNotes, UnpinNotes, updateColor, createLabels, getAllLabels,reminderUpdate } from '../services/noteServices'
 import ReminderComponent from '../components/remainder'
 import IconM from 'react-native-vector-icons/MaterialCommunityIcons'
 import { ScrollView, Text, TextInput, View, FlatList, TouchableOpacity } from "react-native";
@@ -61,21 +61,19 @@ export class EditComponent extends Component {
         };
         this.reminderData = this.reminderData.bind(this);
     }
-    reminderData = async (value) => {
-        console.warn("dataaa---->", value);
-        await this.setState({
-            reminderDate: value
-        });
-        // console.warn("date and time ", this.state.reminderDate);
-        // let data = {
-        //     noteIdList: [this.props.navigation.state.params.key],
-        //     reminderDate: this.state.reminderDate
-        // }
-        // console.warn('reminder update',this.state.reminderDate)
-        // updateReminder(data).then(res=>{
-        //     console.warn("response from update reminder",res)
-        // })
-    };
+    reminderData = async (reminderDate) => {
+        await this.setState({ reminderDate: reminderDate })
+        const data = {
+            noteIdList: [this.props.navigation.state.params.key],
+            reminder: this.state.reminderDate
+        }
+        reminderUpdate(data).then(res => {
+            console.warn("reminderUpdate", data)
+        })
+            .catch(err => {
+                console.warn("error in updating reminder", err)
+            })
+    }
     handlePin = async () => {
         await this.setState({
             isPined: true
@@ -238,7 +236,7 @@ export class EditComponent extends Component {
                         <Icon1
                             name="arrow-left"
                             size={25}
-                            onPress={() => { this.handleEditCard() }} />
+                            onPress={() => {this.handleEditCard()}}/>
                     </View>
                     <View style={styles.editIcons}>
                         <View>
@@ -258,13 +256,13 @@ export class EditComponent extends Component {
                             </TouchableOpacity>
                         </View>
                         <View>
-                            <ReminderComponent reminderProps={this.reminderData} ></ReminderComponent>
+                            <ReminderComponent reminderProps={this.reminderData}></ReminderComponent>
                         </View>
                         <View style={{ left: 20 }}>
                             <Icon3
                                 name="archive"
                                 size={25}
-                                onPress={() => this.handleArchiveNote()} />
+                                onPress={() => this.handleArchiveNote()}/>
                         </View>
                     </View>
                 </View>
