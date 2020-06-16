@@ -13,28 +13,20 @@
  *  @since          :24-0-2020
  ******************************************************************************/
 import * as React from 'react';
-import { Appbar, Toolbar } from 'react-native-paper';
 import styles from '../Styles';
 import { DrawerActions } from 'react-navigation-drawer';
-import { View, Text, TouchableOpacity, ProgressBarAndroid,TextInput} from 'react-native';
+import { View, Text, TouchableOpacity, ProgressBarAndroid, Image } from 'react-native';
 import { Card } from "react-native-elements";
-import Icon from "react-native-vector-icons/Entypo";
-import Icon5 from "react-native-vector-icons/Entypo";
-import Icon0 from "react-native-vector-icons/AntDesign";
-import Icon4 from "react-native-vector-icons/AntDesign";
+import { Icon, Icon5, Icon7 } from "react-native-vector-icons/Entypo";
+import { Icon0, Icon4, Icon2 } from "react-native-vector-icons/AntDesign";
 import Icon6 from "react-native-vector-icons/MaterialIcons";
-import Icon7 from "react-native-vector-icons/Entypo";
 import { Avatar, Divider } from "react-native-elements";
 import Dialog from "react-native-dialog";
-import { Image } from 'react-native'
-import Icon2 from "react-native-vector-icons/AntDesign";
-import Icon1 from "react-native-vector-icons/MaterialCommunityIcons";
-import Icon3 from 'react-native-vector-icons/MaterialCommunityIcons'
+import { Icon1, Icon3 } from "react-native-vector-icons/MaterialCommunityIcons";
 import { getNotes } from '../services/noteServices'
-import { userLogOut } from '../services/userServices'
+import { userLogOut, uploadProfile } from '../services/userServices'
 import { ScrollView } from 'react-native-gesture-handler';
 import ImagePicker from 'react-native-image-picker';
-import {uploadProfile} from '../services/userServices'
 export class DashBoard extends React.Component {
   constructor() {
     super();
@@ -47,10 +39,10 @@ export class DashBoard extends React.Component {
       dialogVisible: false,
       visible: false,
       searchOpen: false,
-      labelValue:[],
-      fileData:"",
-      filePath:"",
-      fileUri:""
+      labelValue: [],
+      fileData: "",
+      filePath: "",
+      fileUri: ""
     }
   }
   componentDidMount() {
@@ -63,7 +55,7 @@ export class DashBoard extends React.Component {
       });
     });
   };
-  handleProfile=()=>{
+  handleProfile = () => {
     const options = {
       title: "Select Avatar",
       customButtons: [
@@ -75,32 +67,24 @@ export class DashBoard extends React.Component {
       }
     }
     ImagePicker.showImagePicker(options, (response) => {
-      console.warn('Response = ', response);  
       if (response.didCancel) {
-        console.warn('User cancelled image picker',response.didCancel);
       } else if (response.error) {
-        console.warn('ImagePicker Error: ', response.error);
       } else if (response.customButton) {
-        console.warn('User tapped custom button: ', response.customButton);
       } else {
         const source = {
-           uri: response.uri 
-          };
-          console.warn('response', JSON.stringify(response));
+          uri: response.uri
+        };
         this.setState({
           filePath: response,
           fileData: response.data,
           fileUri: response.uri
         });
         uploadProfile(source).then(async res => {
-            console.warn("res in uploading image", res);
-            await this.setState({
-              resImage: res
-            });
-            console.warn("resImage", resImage);
-          })
+          await this.setState({
+            resImage: res
+          });
+        })
           .catch(err => {
-            console.warn  ("err in uploading image", err);
           });
       }
     });
@@ -122,7 +106,6 @@ export class DashBoard extends React.Component {
     this.setState({
       listOpen: !this.state.listOpen
     });
-    console.log("listView response", this.state.listOpen);
   }
   showDialog = () => {
     this.setState({ dialogVisible: true });
@@ -131,9 +114,7 @@ export class DashBoard extends React.Component {
     this.setState({ dialogVisible: false });
   };
   handleSignOut = () => {
-    console.log("signout");
     userLogOut().then(response => {
-      console.log("response in signout", response);
     });
     this.props.navigation.navigate("login");
     this.setState({ dialogVisible: false });
@@ -143,7 +124,6 @@ export class DashBoard extends React.Component {
     drawerIcon: <Icon2 name="bulb1" size={20} />
 
   };
-  
 
   render() {
     let Align = this.state.listOpen ? styles.listAlign : styles.gridAlign;
@@ -163,7 +143,8 @@ export class DashBoard extends React.Component {
                   })}>
                 <Card containerStyle={{
                   backgroundColor: key.color,
-                  borderRadius: 10}}>
+                  borderRadius: 10
+                }}>
                   <View>
                     <Text>{key.title}</Text>
                     <Text>{key.description}</Text>
@@ -207,98 +188,98 @@ export class DashBoard extends React.Component {
         <Card style={styles.top} containerStyle={{ height: 50, borderRadius: 10 }}>
           <View style={styles.appicons}>
             <View style={styles.menuitem}>
-            <View >
-              <TouchableOpacity
-                onPress={() => this.props.navigation.dispatch(DrawerActions.openDrawer())}>
-                <Image source={require("../assets/menuicon.png")}>
-                </Image>
-              </TouchableOpacity>
-            </View>
-            <View >
-              <Image source={require("../assets/keepicon.png")} style={styles.keepicon}></Image>
-            </View>
-            <View  containerStyle={{left:10}}>
-              <Text style={styles.fundootext}>
-                <Text style={{ color: "red" }}>F</Text>
-                <Text style={{ color: "aqua" }}>u</Text>
-                <Text style={{ color: "blue" }}>n</Text>
-                <Text style={{ color: "darkGreen" }}>d</Text>
-                <Text style={{ color: "purple" }}>o</Text>
-                <Text style={{ color: "orange" }}>o</Text>
-                <Text style={{ color: "black" }}>Note</Text>
-              </Text>
-            </View>
-            </View>
-            <View  style={styles.searchicon}>
-            <View style={styles.search}>
-              <TouchableOpacity onPress={() => {this.handleSearch()}}>
-              <Image source={require("../assets/searchicon.png")}>
-              </Image>
-              </TouchableOpacity>
-            </View>
-            <View style={styles.grid}>
-              {!this.state.listOpen ? (
-                <TouchableOpacity >
-                  <Icon1
-                    name="view-stream"
-                    size={30} onPress={() => this.handleGridView()} />
+              <View >
+                <TouchableOpacity
+                  onPress={() => this.props.navigation.dispatch(DrawerActions.openDrawer())}>
+                  <Image source={require("../assets/menuicon.png")}>
+                  </Image>
                 </TouchableOpacity>
-              ) : (
-                  <TouchableOpacity>
-                    <Icon
-                      name="grid"
-                      size={30} onPress={() => this.handleGridView()} />
-                  </TouchableOpacity>
-                )}
-            </View>
-            <View style={{ top: -2 }}>
-              <View>
-                <TouchableOpacity>
-                  <Icon3
-                    name="account-circle"
-                    size={40}
-                    rounded
-                    source={this.state.profile}
-                    activeOpacity={0.7}
-                    onPress={this.showDialog}
-                  />
-                </TouchableOpacity>
-                <Dialog.Container visible={this.state.dialogVisible}>
-                  <View style={{ flexDirection: "row", marginTop: -10 }}>
-                    <View>
-                      <Icon3
-                        name="account-circle"
-                        size={40}
-                        rounded
-                        source={this.state.fileData}
-                        activeOpacity={0.7}
-                        onPress={this.handleProfile}
-                      />
-                    </View>
-                    <View style={{ left: 20 }}>
-                      <Text style={{ fontWeight: "bold" }}>
-                        Inturitejaswini
-                          </Text>
-                      <Text>chowdarytejaswini2gmail.com</Text>
-                    </View>
-                  </View>
-                  <View style={{ marginTop: 10 }}>
-                    <Dialog.Button label="Manage Your Google Account"></Dialog.Button>
-                  </View>
-                  <Divider style={{ marginTop: 15 }} />
-                  <View style={{ left: 70, flexDirection: "row" }}>
-                    <Dialog.Button
-                      label="Cancel"
-                      onPress={this.handleCancel}
-                    />
-                    <Dialog.Button
-                      label="Logout"
-                      onPress={() => this.handleSignOut()}
-                    />
-                  </View>
-                </Dialog.Container>
+              </View>
+              <View >
+                <Image source={require("../assets/keepicon.png")} style={styles.keepicon}></Image>
+              </View>
+              <View containerStyle={{ left: 10 }}>
+                <Text style={styles.fundootext}>
+                  <Text style={{ color: "red" }}>F</Text>
+                  <Text style={{ color: "aqua" }}>u</Text>
+                  <Text style={{ color: "blue" }}>n</Text>
+                  <Text style={{ color: "darkGreen" }}>d</Text>
+                  <Text style={{ color: "purple" }}>o</Text>
+                  <Text style={{ color: "orange" }}>o</Text>
+                  <Text style={{ color: "black" }}>Note</Text>
+                </Text>
               </View>
             </View>
+            <View style={styles.searchicon}>
+              <View style={styles.search}>
+                <TouchableOpacity onPress={() => { this.handleSearch() }}>
+                  <Image source={require("../assets/searchicon.png")}>
+                  </Image>
+                </TouchableOpacity>
+              </View>
+              <View style={styles.grid}>
+                {!this.state.listOpen ? (
+                  <TouchableOpacity >
+                    <Icon1
+                      name="view-stream"
+                      size={30} onPress={() => this.handleGridView()} />
+                  </TouchableOpacity>
+                ) : (
+                    <TouchableOpacity>
+                      <Icon
+                        name="grid"
+                        size={30} onPress={() => this.handleGridView()} />
+                    </TouchableOpacity>
+                  )}
+              </View>
+              <View >
+                <View>
+                  <TouchableOpacity>
+                    <Icon3
+                      name="account-circle"
+                      size={40}
+                      rounded
+                      source={this.state.profile}
+                      activeOpacity={0.7}
+                      onPress={this.showDialog}
+                    />
+                  </TouchableOpacity>
+                  <Dialog.Container visible={this.state.dialogVisible}>
+                    <View style={{ flexDirection: "row", marginTop: -10 }}>
+                      <View>
+                        <Icon3
+                          name="account-circle"
+                          size={40}
+                          rounded
+                          source={this.state.fileData}
+                          activeOpacity={0.7}
+                          onPress={this.handleProfile}
+                        />
+                      </View>
+                      <View style={{ left: 20 }}>
+                        <Text style={{ fontWeight: "bold" }}>
+                          Inturitejaswini
+                          </Text>
+                        <Text>chowdarytejaswini2gmail.com</Text>
+                      </View>
+                    </View>
+                    <View style={{ marginTop: 10 }}>
+                      <Dialog.Button label="Manage Your Google Account"></Dialog.Button>
+                    </View>
+                    <Divider style={{ marginTop: 15 }} />
+                    <View style={{ left: 70, flexDirection: "row" }}>
+                      <Dialog.Button
+                        label="Cancel"
+                        onPress={this.handleCancel}
+                      />
+                      <Dialog.Button
+                        label="Logout"
+                        onPress={() => this.handleSignOut()}
+                      />
+                    </View>
+                  </Dialog.Container>
+                </View>
+              </View>
             </View>
           </View>
         </Card>
@@ -318,8 +299,7 @@ export class DashBoard extends React.Component {
             )}
         </ScrollView>
 
-        <Card style={styles.input4}
-          containerStyle={{ height: 50, borderRadius: 10 }}>
+        <Card style={styles.input4}>
           <View style={styles.input5}>
             <View >
               <Icon4 name="checksquareo" size={20} >
