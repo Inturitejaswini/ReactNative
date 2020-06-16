@@ -273,11 +273,11 @@ export class Notes extends React.Component {
                                     {this.state.reminderDate}
                                 </Chip>
                             </TouchableOpacity>}
-                        <Text style={{ fontWeight: "bold", left: 10 }}>
+                        <Text style={styles.labelValue}>
                             {this.state.labelValue}
                         </Text>
                     </View>
-                    <View style={{ justifyContent: 'space-between', flexDirection: 'row', marginTop: 400 }}>
+                    <View style={styles.rbsheet1}>
                         <View>
                             <TouchableOpacity onPress={() => { this.RBSheet1.open() }}>
                                 <Icon9 name="plussquareo" size={20} ></Icon9>
@@ -309,19 +309,18 @@ export class Notes extends React.Component {
                                         container: {
                                             justifyContent: "center",
                                             alignItems: "center"
-                                        }
-                                    }}>
+                                        }}}>
                                     <View style={styles.deleteicons}>
-                                        <View style={{ flexDirection: "row", top: 20 }}>
+                                        <View style={styles.delete1}>
                                             <TouchableOpacity onPress={() => this.handleDelete()}>
                                                 <Icon0
                                                     name="delete"
                                                     size={20} />
-                                                <Text style={{ fontSize: 18, left: 39, top: -20 }}>Delete</Text>
+                                                <Text style={styles.deleteText}>Delete</Text>
                                             </TouchableOpacity>
                                         </View>
                                         <View
-                                            style={{ flexDirection: "row", top: 10 }}>
+                                            style={styles.send}>
                                             <Icon2 name="sharealt" size={22} />
                                             <Text style={styles.send}>send</Text>
                                         </View>
