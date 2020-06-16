@@ -14,20 +14,20 @@
 * @since :-2-03-2020
 ******************************************************************************/
 import React, { Component } from 'react'
-import { View, Button, Text,Image, TouchableOpacity, FlatList } from 'react-native'
+import { View, Button, Text, Image, TouchableOpacity, FlatList } from 'react-native'
 import styles from '../Styles';
 import { TextInput, ScrollView, } from 'react-native-gesture-handler';
-import {RBSheet,RBSheet1,RBSheet2,RBSheet3} from "react-native-raw-bottom-sheet";
+import { RBSheet, RBSheet1, RBSheet2, RBSheet3 } from "react-native-raw-bottom-sheet";
 import Iconp from 'react-native-vector-icons/Feather'
 import ReminderComponent from './remainder'
 import Iconc from "react-native-vector-icons/Entypo";
-import {Icon0,Icon2,Icon9,Icon3} from "react-native-vector-icons/AntDesign";
-import {Icon1,IconM} from "react-native-vector-icons/MaterialCommunityIcons";
+import { Icon0, Icon2, Icon9, Icon3 } from "react-native-vector-icons/AntDesign";
+import { Icon1, IconM } from "react-native-vector-icons/MaterialCommunityIcons";
 import Icon10 from "react-native-vector-icons/Feather";
-import { Divider,IconButton,Chip} from 'react-native-paper';
+import { Divider, IconButton, Chip } from 'react-native-paper';
 import Icon from "react-native-vector-icons/Ionicons";
-import {CheckBox} from 'react-native-elements'
-import { getNotes, getAllLabels, deleteNotes, pinNotes, UnpinNotes, updateColor, createLabels, noteCollaborator,createNotes } from '../services/noteServices'
+import { CheckBox } from 'react-native-elements'
+import { getNotes, getAllLabels, deleteNotes, pinNotes, UnpinNotes, updateColor, createLabels, noteCollaborator, createNotes } from '../services/noteServices'
 var CheckValue = [];
 const colors = [
     { name: "blue", hexcode: " #39a78e" },
@@ -93,8 +93,8 @@ export class Notes extends React.Component {
             reminderDate: value
         });
     };
-    handleColor = async (color) => {
-        await this.setState({
+    handleColor = (color) => {
+        this.setState({
             color: color
         });
         let data = {
@@ -104,8 +104,8 @@ export class Notes extends React.Component {
         updateColor(data).then(res => {
         });
     };
-    handlePin = async () => {
-        await this.setState({
+    handlePin = () => {
+        this.setState({
             isPined: true
         });
         let data = {
@@ -115,8 +115,8 @@ export class Notes extends React.Component {
         pinNotes(data).then(res => {
         });
     };
-    handleUnPin = async () => {
-        await this.setState({
+    handleUnPin = () => {
+        this.setState({
             isPined: false
         });
         let data = {
@@ -126,8 +126,8 @@ export class Notes extends React.Component {
         UnpinNotes(data).then(res => {
         });
     };
-    handleDelete = async () => {
-        await this.setState({ isDeleted: true })
+    handleDelete = () => {
+        this.setState({ isDeleted: true })
         let data = {
             noteIdList: [this.props.navigation.state.params.key],
             isDeleted: this.state.isDeleted
@@ -174,13 +174,13 @@ export class Notes extends React.Component {
             });
         });
     }
-    handleSave = async (mail) => {
-        await this.setState({
+    handleSave = (mail) => {
+        this.setState({
             selectedEmail: mail
         });
     };
-    handleLabelDone = async () => {
-        await this.setState({ label: true })
+    handleLabelDone = () => {
+        this.setState({ label: true })
         let data = {
             noteIdList: [this.props.navigation.state.params.key],
             label: this.state.label
@@ -188,8 +188,8 @@ export class Notes extends React.Component {
         createLabels(data).then(res => {
         });
     };
-    handleSelection = async (labelName) => {
-        await this.setState({
+    handleSelection = (labelName) => {
+        this.setState({
             selectedLabels: labelName
         });
     };
@@ -203,7 +203,7 @@ export class Notes extends React.Component {
     render() {
         let labelDetails = [];
         labelDetails = this.state.labelData.map(labelkey => {
-            CheckValue[labelkey.id] = false 
+            CheckValue[labelkey.id] = false
             return (
                 <View style={styles.labels}>
                     <CheckBox
@@ -309,7 +309,8 @@ export class Notes extends React.Component {
                                         container: {
                                             justifyContent: "center",
                                             alignItems: "center"
-                                        }}}>
+                                        }
+                                    }}>
                                     <View style={styles.deleteicons}>
                                         <View style={styles.delete1}>
                                             <TouchableOpacity onPress={() => this.handleDelete()}>
@@ -408,7 +409,8 @@ export class Notes extends React.Component {
                             customStyles={{
                                 container: {
                                     flexDirection: "column"
-                                }}}>
+                                }
+                            }}>
                             <View style={styles.selectedLabels}>
                                 <View>
                                     <TouchableOpacity
