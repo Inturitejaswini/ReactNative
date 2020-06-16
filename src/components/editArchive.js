@@ -92,6 +92,7 @@ export class EditArchiveComponent extends Component {
         UnArchiveNotes(data).then(res => {
         });
     };
+    
     handleLabelDone =  () => {
         this.setState({ label: true })
         let data = {
