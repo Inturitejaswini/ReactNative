@@ -17,29 +17,17 @@ import React, { Component } from 'react'
 import { View, Button, Text,Image, TouchableOpacity, FlatList } from 'react-native'
 import styles from '../Styles';
 import { TextInput, ScrollView, } from 'react-native-gesture-handler';
-import RBSheet from "react-native-raw-bottom-sheet";
-import RBSheet1 from "react-native-raw-bottom-sheet";
-import RBSheet2 from "react-native-raw-bottom-sheet";
-import RBSheet3 from "react-native-raw-bottom-sheet";
+import {RBSheet,RBSheet1,RBSheet2,RBSheet3} from "react-native-raw-bottom-sheet";
 import Iconp from 'react-native-vector-icons/Feather'
 import ReminderComponent from './remainder'
-import Icon13 from "react-native-vector-icons/MaterialIcons";
-import Icon12 from "react-native-vector-icons/MaterialCommunityIcons";
 import Iconc from "react-native-vector-icons/Entypo";
-import Icon0 from "react-native-vector-icons/AntDesign";
-import Icon2 from "react-native-vector-icons/AntDesign";
-import Icon1 from "react-native-vector-icons/MaterialCommunityIcons";
-import Icon9 from "react-native-vector-icons/AntDesign";
+import {Icon0,Icon2,Icon9,Icon3} from "react-native-vector-icons/AntDesign";
+import {Icon1,IconM} from "react-native-vector-icons/MaterialCommunityIcons";
 import Icon10 from "react-native-vector-icons/Feather";
-import Icon3 from "react-native-vector-icons/AntDesign";
-import { Divider } from 'react-native-paper';
-import IconM from 'react-native-vector-icons/MaterialCommunityIcons'
-import { createNotes } from '../services/noteServices'
+import { Divider,IconButton,Chip} from 'react-native-paper';
 import Icon from "react-native-vector-icons/Ionicons";
-import { IconButton } from 'react-native-paper';
-import { Chip } from 'react-native-paper';
 import {CheckBox} from 'react-native-elements'
-import { getNotes, getAllLabels, deleteNotes, pinNotes, UnpinNotes, updateColor, createLabels, noteCollaborator } from '../services/noteServices'
+import { getNotes, getAllLabels, deleteNotes, pinNotes, UnpinNotes, updateColor, createLabels, noteCollaborator,createNotes } from '../services/noteServices'
 var CheckValue = [];
 const colors = [
     { name: "blue", hexcode: " #39a78e" },
@@ -101,14 +89,11 @@ export class Notes extends React.Component {
         })
     }
     reminderData = (value) => {
-        console.warn("dataaa---->", value);
         this.setState({
             reminderDate: value
         });
-        console.warn("date and time ", this.state.reminderDate);
     };
     handleColor = async (color) => {
-        console.warn("colors-------->", color);
         await this.setState({
             color: color
         });
@@ -116,9 +101,7 @@ export class Notes extends React.Component {
             noteIdList: [this.props.navigation.state.params.key],
             color: this.state.color,
         };
-        console.warn("data of updateColor", data);
         updateColor(data).then(res => {
-            console.warn(" response in color updation", res)
         });
     };
     handlePin = async () => {
@@ -129,9 +112,7 @@ export class Notes extends React.Component {
             noteIdList: [this.props.navigation.state.params.key],
             isPined: this.state.isPined,
         }
-        console.warn("log of pined", data);
         pinNotes(data).then(res => {
-            console.warn("response in pin notes", res);
         });
     };
     handleUnPin = async () => {
@@ -142,9 +123,7 @@ export class Notes extends React.Component {
             noteIdList: [this.props.navigation.state.params.key],
             isPined: this.state.isPined,
         }
-        console.warn("log of pined", data);
         UnpinNotes(data).then(res => {
-            console.warn("response in unpin notes", res);
         });
     };
     handleDelete = async () => {
@@ -153,20 +132,16 @@ export class Notes extends React.Component {
             noteIdList: [this.props.navigation.state.params.key],
             isDeleted: this.state.isDeleted
         };
-        console.warn("delete after set state", data);
         deleteNotes(data).then(res => {
-            console.warn("response in delete notes", res);
         });
     };
     handleArchiveNote = async () => {
         await this.setState({ isArchived: true })
-        console.log("archive data", this.state.isArchived);
         let data = {
             noteIdList: [this.props.navigation.state.params.key],
             isArchived: this.state.isArchived
         };
         archiveNotes(data).then(res => {
-            console.log("res in archive component", res);
         });
         this.props.navigation.navigate("dashboard");
 
@@ -181,10 +156,8 @@ export class Notes extends React.Component {
             isPined: this.state.isPined,
             color: this.state.color,
             label: this.state.label
-            // Collaborators: this.state.Collaborators
         };
         createNotes(data).then(response => {
-            console.warn("response is coming to note component", response)
         });
         this.props.navigation.navigate("dashboard");
     };
@@ -195,46 +168,30 @@ export class Notes extends React.Component {
             selectedMail: this.state.selectedEmail,
             noteIdList: [this.props.navigation.state.params.key],
         };
-        console.warn(" selected mail", data);
         noteCollaborator(data).then(res => {
-            console.warn("res in collaborator", res);
             this.setState({
                 Value: res
             });
-            console.warn("email result", this.state.Value);
         });
     }
-    // handleClickMail = async email => {
-    //     console.log("selected email", email);
-    //     await this.setState({
-    //         searchedMail: email
-    //     });
-    // };
     handleSave = async (mail) => {
-        console.warn("mail", mail);
         await this.setState({
             selectedEmail: mail
         });
-        console.warn("selected email", this.state.selectedEmail);
     };
     handleLabelDone = async () => {
         await this.setState({ label: true })
-        console.warn("label Data", this.state.label);
         let data = {
             noteIdList: [this.props.navigation.state.params.key],
             label: this.state.label
         };
-        console.warn("label data", data);
         createLabels(data).then(res => {
-            console.warn(" response from label data", res);
         });
     };
     handleSelection = async (labelName) => {
-        // console.warn("id of label", labelName);
         await this.setState({
             selectedLabels: labelName
         });
-        // console.warn("label  setstate", this.state.selectedLabels);
     };
     handleLabelArrow = async (labelValue) => {
         this.RBSheet3.close();
@@ -242,7 +199,6 @@ export class Notes extends React.Component {
         await this.setState({
             labelValue: labelValue
         });
-        console.warn("labelValue", this.state.labelValue);
     };
     render() {
         let labelDetails = [];
@@ -367,18 +323,18 @@ export class Notes extends React.Component {
                                         <View
                                             style={{ flexDirection: "row", top: 10 }}>
                                             <Icon2 name="sharealt" size={22} />
-                                            <Text style={{ fontSize: 18, left: 20 }}>send</Text>
+                                            <Text style={styles.send}>send</Text>
                                         </View>
-                                        <View style={{ flexDirection: "row", top: 20 }}>
+                                        <View style={styles.collaboratorIcon}>
                                             <TouchableOpacity onPress={() => { this.RBSheet2.open() }}>
                                                 <Icon2 name="addusergroup" size={25} />
-                                                <Text style={{ fontSize: 18, left: 40, top: -20 }} >collaborator</Text>
+                                                <Text style={styles.collaboratortext} >collaborator</Text>
                                             </TouchableOpacity>
                                         </View>
-                                        <View style={{ flexDirection: "row", top: 10 }} >
+                                        <View style={styles.labelIcon} >
                                             <TouchableOpacity onPress={() => { this.RBSheet3.open() }}>
                                                 <Icon1 name="label-outline" size={25} />
-                                                <Text style={{ fontSize: 18, left: 40, bottom: 25 }}>Labels</Text>
+                                                <Text style={styles.labels}>Labels</Text>
                                             </TouchableOpacity>
                                         </View>
                                         <View>
@@ -386,10 +342,7 @@ export class Notes extends React.Component {
                                                 data={colors}
                                                 horizontal={true}
                                                 renderItem={({ item }) => (
-                                                    <View
-                                                        style={{
-                                                            marginTop: 1
-                                                        }}>
+                                                    <View>
                                                         <IconButton
                                                             style={{ backgroundColor: item.hexcode, borderRadius: 15, left: -12 }}
                                                             value={item.hexcode}
@@ -426,7 +379,7 @@ export class Notes extends React.Component {
                                     <Text style={styles.savebtn}
                                         onPress={() => this.handleSave()}>Save</Text>
                                 </View>
-                                <Divider type='horizontal' style={{ height: 2 }}></Divider>
+                                <Divider type='horizontal' style={styles.height}></Divider>
                                 <View style={styles.accounticon}>
                                     <Icon1 name="account-circle" size={45} color="gray" />
                                     <Text style={styles.mailtext}>
@@ -456,8 +409,7 @@ export class Notes extends React.Component {
                             customStyles={{
                                 container: {
                                     flexDirection: "column"
-                                }
-                            }}>
+                                }}}>
                             <View style={styles.selectedLabels}>
                                 <View>
                                     <TouchableOpacity
@@ -481,15 +433,13 @@ export class Notes extends React.Component {
                                         <Iconp name="plus" size={23} color="#5499C7" />
                                     </View>
                                     <View style={styles.labelText}>
-                                        <Text style={{ fontWeight: "800", fontSize: 15 }}>Create :" {this.state.labelName} "</Text>
+                                        <Text style={styles.createLabel1}>Create :" {this.state.labelName} "</Text>
                                     </View>
                                 </TouchableOpacity>
                             </View>
                             <ScrollView>{labelDetails}</ScrollView>
                         </RBSheet3>
                     </View>
-
-                    {/* </Card> */}
                 </ScrollView>
             </View>
         )
