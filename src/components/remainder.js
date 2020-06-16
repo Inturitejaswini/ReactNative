@@ -1,8 +1,8 @@
 import React, { Component } from "react";
-import {Button,View,Text,Card,TouchableOpacity,Picker} from "react-native";
+import { Button, View, Text, Card, TouchableOpacity, Picker } from "react-native";
 import styles from "../Styles";
 import DateTimePicker from "react-native-modal-datetime-picker";
-import {  Divider } from "react-native-elements";
+import { Divider } from "react-native-elements";
 import Icon1 from "react-native-vector-icons/MaterialCommunityIcons";
 import Dialog from "react-native-dialog";
 export default class ReminderComponent extends Component {
@@ -31,12 +31,10 @@ export default class ReminderComponent extends Component {
 
   handleSave = async () => {
     let value = this.state.date + " " + this.state.time;
-    // console.log("value", value);
     await this.setState({
       reminderValue: value,
       dialogVisible: false
     });
-    // console.warn("reminder value", this.state.reminderValue);
     this.props.reminderProps(this.state.reminderValue);
   };
   showDatePicker = () => {
@@ -52,25 +50,19 @@ export default class ReminderComponent extends Component {
     this.setState({ isTimePickerVisible: false });
   };
   handleDatePicked = date => {
-    // console.warn("A date has been picked: ", date);
     let date1 = "" + date;
     let dateFormat = date1.slice(4, 10);
     this.setState({
       date: dateFormat
     });
-    // console.warn("date after state", this.state.date);
-
     this.hideDatePicker();
   };
   handleTimePicked = time => {
-    // console.warn("A time has been picked: ", time);
     let Time1 = "" + time;
     let timeFormat = Time1.slice(16, 21);
     this.setState({
       time: timeFormat
     });
-    // console.warn("time after state", this.state.time);
-
     this.hideTimePicker();
   };
   updateUser = user => {
@@ -79,14 +71,14 @@ export default class ReminderComponent extends Component {
   static navigationOptions = {
     drawerLabel: "Reminder",
     drawerIcon: <Icon1 name="bell-plus-outline" size={20} />
-};
+  };
   render() {
     return (
       <View>
         <TouchableOpacity>
-          <Icon1 name="bell-plus-outline" size={25} 
-          onPress={this.showDialog} 
-          style={styles.alerticon}/>
+          <Icon1 name="bell-plus-outline" size={25}
+            onPress={this.showDialog}
+            style={styles.alerticon} />
         </TouchableOpacity>
         <Dialog.Container visible={this.state.dialogVisible}>
           <Dialog.Title>Add reminder</Dialog.Title>
@@ -101,7 +93,7 @@ export default class ReminderComponent extends Component {
           <DateTimePicker
             isVisible={this.state.isDatePickerVisible}
             onConfirm={this.handleDatePicked}
-            onCancel={this.hideDatePicker}/>
+            onCancel={this.hideDatePicker} />
           <Divider />
           <TouchableOpacity onPress={this.showTimePicker}>
             <Picker
@@ -115,7 +107,7 @@ export default class ReminderComponent extends Component {
             mode="Time"
             isVisible={this.state.isTimePickerVisible}
             onConfirm={this.handleTimePicked}
-            onCancel={this.hideTimePicker}/>
+            onCancel={this.hideTimePicker} />
           <Dialog.Button label="Cancel" onPress={this.handleCancel} />
           <Dialog.Button label="save" onPress={this.handleSave} />
         </Dialog.Container>
