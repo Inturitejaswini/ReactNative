@@ -1,12 +1,9 @@
 import React, { Component } from "react";
-import { ScrollView, Text, TextInput, View, FlatList, TouchableOpacity } from "react-native";
+import { ScrollView, Text, TextInput, View, TouchableOpacity } from "react-native";
 import styles from '../Styles';
-// import { ScrollView } from "react-native-gesture-handler";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import Icon1 from "react-native-vector-icons/Entypo";
 import Icon2 from "react-native-vector-icons/MaterialIcons";
-import Icon6 from "react-native-vector-icons/MaterialCommunityIcons";
-import Icon7 from "react-native-vector-icons/Entypo";
 import { Divider } from 'react-native-paper';
 import { getAllLabels } from '../services/noteServices'
 import { CheckBox } from 'react-native-elements'
