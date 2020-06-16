@@ -196,7 +196,7 @@ export class EditComponent extends Component {
                         onPress={() => this.handleSelection(labelkey.label, labelkey.id, this.state.checkBox[labelkey.id])}>
                     </CheckBox>
                 </View>
-            );
+            )
         });
         return (
             <View style={{
@@ -319,7 +319,7 @@ export class EditComponent extends Component {
                                             size={40}
                                             onPress={() => this.handleColor(item.hexcode)} />
                                     </View>
-                                )} />
+                                )}/>
                         </View>
                     </RBSheet>
                 </View>
@@ -365,7 +365,6 @@ export class EditComponent extends Component {
                         <ScrollView>{labelDetails}</ScrollView>
                     </RBSheet2>
                 </View>
-
             </View>
 
         );
