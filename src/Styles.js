@@ -367,18 +367,11 @@ const styles = StyleSheet.create({
         marginTop: 10,
         marginLeft: 20
     },
-    // plusicon: {
-    //     justifyContent: 'space-between',
-    //     alignItems: 'center',
-    //     flexDirection: 'row',
-    //     right: 0,
-    //     flex: 1,
-    //     // position: 'absolute',
-
-    //     // top: -190,
-    //     // left:10
-
-    // },
+    rbsheet1:{
+        justifyContent: 'space-between', 
+        flexDirection: 'row', 
+        marginTop: 400
+    },
     chip: {
         width: 120
     },
@@ -724,6 +717,18 @@ const styles = StyleSheet.create({
     },
     getNoteReminder:{
         fontWeight: "bold" 
+    },
+    /**
+     * search component css
+     */
+    searchInput:{
+        height: 40, 
+        fontSize: 20, 
+        right: -20
+    },
+    searchView:{
+        flexDirection: "row", 
+        alignItems: 'center'
     }
 
 });
