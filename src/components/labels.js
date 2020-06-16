@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { View, Text, TouchableOpacity, TextInput, AsyncStorage } from 'react-native'
-import {CheckBox} from 'react-native-elements'
+import { CheckBox } from 'react-native-elements'
 import styles from "../Styles";
 import Icon from 'react-native-vector-icons/Feather'
 import { createLabel, getAllLabels } from '../services/noteServices'
@@ -12,65 +12,66 @@ export default class Labels extends Component {
             labelName: "",
             userId: '',
             allLables: [],
-            checked:false,
-            labelIdArray:[],
-            selectedLabels:[],
-            checkBoxChecked:[],
-            selectedLabelsId:[],
+            checked: false,
+            labelIdArray: [],
+            selectedLabels: [],
+            checkBoxChecked: [],
+            selectedLabelsId: [],
         }
     }
     handleAddLabel = async () => {
         this.setState({ userId: userId })
         const data = {
             label: this.state.labelName,
-            id:this.props.noteId,
+            id: this.props.noteId,
             userId: this.state.userId,
             isDeleted: false
         }
         createLabel(data).then(res => {
             this.getLabels()
         }).catch(err => {
-            })
+        })
     }
     componentDidMount() {
         this.getLabels()
     }
-    getLabels(){
-    getAllLabels().then(async res => {
-        await this.setState({ allLables: res.data.data.details })
-    }).catch(err => {
-    })
-}
-    checkBoxChanged(id,label, value) {
-       this.state.selectedLabels.push(label)
-       this.state.selectedLabelsId.push(id)
+    getLabels() {
+        getAllLabels().then(async res => {
+            await this.setState({ allLables: res.data.data.details })
+        }).catch(err => {
+        })
+    }
+    checkBoxChanged(id, label, value) {
+        this.state.selectedLabels.push(label)
+        this.state.selectedLabelsId.push(id)
         this.setState({
-          checkBoxChecked: tempCheckValues
+            checkBoxChecked: tempCheckValues
         })
         var tempCheckBoxChecked = this.state.checkBoxChecked;
-        tempCheckBoxChecked[id] = !value;  
+        tempCheckBoxChecked[id] = !value;
         this.setState({
-          checkBoxChecked: tempCheckBoxChecked
+            checkBoxChecked: tempCheckBoxChecked
         })
-      }
-      handleCloseLabels(labels,id){
-         this.props.handleCloseLabels(labels,id)
+    }
+    handleCloseLabels(labels, id) {
+        this.props.handleCloseLabels(labels, id)
     }
     render() {
-        let labelsToDisplay=[];
+        let labelsToDisplay = [];
         labelsToDisplay = this.state.allLables.map(item => {
             { tempCheckValues[item.id] = false }
             return (
-                    <CheckBox
-                        title={item.label}
-                        checked={this.state.checkBoxChecked[item.id]}
-                        onPress={() => this.checkBoxChanged(item.id,item.label, this.state.checkBoxChecked[item.id])}
-                    />)})
+                <CheckBox
+                    title={item.label}
+                    checked={this.state.checkBoxChecked[item.id]}
+                    onPress={() => this.checkBoxChanged(item.id, item.label, this.state.checkBoxChecked[item.id])}
+                />)
+        })
         return (
             <View>
                 <View style={styles.labelHeaderContainer}>
                     <View style={styles.arrowIconContainer}>
-                        <TouchableOpacity onPress={()=>{this.handleCloseLabels(this.state.selectedLabels,this.state.selectedLabelsId)}}>
+                        <TouchableOpacity onPress={() => { this.handleCloseLabels(this.state.selectedLabels, this.state.selectedLabelsId) }}>
                             <Icon name="arrow-left" size={25} color="black" />
                         </TouchableOpacity>
                     </View>
