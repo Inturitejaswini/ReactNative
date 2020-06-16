@@ -1,34 +1,16 @@
 import React, { Component } from "react";
 import Icon from "react-native-vector-icons/MaterialIcons";
 import Icon1 from "react-native-vector-icons/MaterialCommunityIcons";
-import Icon2 from "react-native-vector-icons/AntDesign";
+import { Icon2, Icon0, Icon5 } from "react-native-vector-icons/AntDesign";
 import Icon3 from "react-native-vector-icons/Foundation";
 import Icon4 from "react-native-vector-icons/FontAwesome";
-import Icon0 from "react-native-vector-icons/AntDesign";
-import Icon5 from "react-native-vector-icons/AntDesign";
-import RBSheet from "react-native-raw-bottom-sheet";
-import RBSheet1 from "react-native-raw-bottom-sheet";
-import RBSheet2 from "react-native-raw-bottom-sheet";
-import { IconButton, Colors } from "react-native-paper";
+import { RBSheet, RBSheet2 } from "react-native-raw-bottom-sheet";
+import { IconButton } from "react-native-paper";
 import styles from "../Styles";
-import { editNotes } from '../services/noteServices'
-import { archiveNotes } from '../services/noteServices'
-import { deleteNotes } from '../services/noteServices'
-import { pinNotes } from '../services/noteServices'
-import {UnpinNotes} from '../services/noteServices'
-import { updateColor } from '../services/noteServices'
-import { createLabels } from '../services/noteServices'
+import { editNotes, archiveNotes, deleteNotes, pinNotes, UnpinNotes, updateColor, createLabels } from '../services/noteServices'
 import ReminderComponent from '../components/remainder'
-import {
-    ScrollView,
-    Text,
-    TextInput,
-    View,
-    FlatList,
-    TouchableOpacity
-} from "react-native";
+import { Text, TextInput, View, FlatList, TouchableOpacity } from "react-native";
 const colors = [
-    // { name: "blue", hexcode: "#F5F5DC" }
     { name: "blue", hexcode: " #b8abb9" },
     { name: "violet", hexcode: "#7DCEA0" },
     { name: "blue", hexcode: "#76D7C4" },
@@ -56,7 +38,7 @@ export class EditReminderComponent extends Component {
             isArchived: false,
             isPined: false,
             key: '',
-            key1:'',
+            key1: '',
             colors: false,
             labelValue: "",
             selectedLabels: "",
@@ -67,65 +49,54 @@ export class EditReminderComponent extends Component {
         this.reminderData = this.reminderData.bind(this);
     }
     reminderData = (value) => {
-        console.warn("dataaa---->", value);
         this.setState({
             reminderDate: value
         });
-        console.warn("date and time ", this.state.reminderDate);
     };
-    handlePin = async () => {
-        await this.setState({
+    handlePin = () => {
+         this.setState({
             isPined: true
         });
         let data = {
             noteIdList: [this.props.navigation.state.params.key],
             isPined: this.state.isPined,
         }
-        console.warn("log of pined", data);
         pinNotes(data).then(res => {
-            console.warn("response in pin notes", res);
         });
     };
-    handleUnPin = async () => {
-        await this.setState({
+    handleUnPin = () => {
+         this.setState({
             isPined: false
         });
         let data = {
             noteIdList: [this.props.navigation.state.params.key],
             isPined: this.state.isPined,
         }
-        console.warn("log of pined", data);
         UnpinNotes(data).then(res => {
-            console.warn("response in unpin notes", res);
         });
     };
-    handleDelete = async () => {
-        await this.setState({ isDeleted: true })
+    handleDelete =  () => {
+         this.setState({ isDeleted: true })
         let data = {
             noteIdList: [this.props.navigation.state.params.key],
             isDeleted: this.state.isDeleted
         };
-        console.warn("delete after set state", data);
         deleteNotes(data).then(res => {
-            console.warn("response in delete notes", res);
         });
         this.props.navigation.navigate("dashboard");
     };
-    handleArchiveNote = async () => {
-        await this.setState({ isArchived: true })
-        console.log("archive data", this.state.isArchived);
+    handleArchiveNote =  () => {
+         this.setState({ isArchived: true })
         let data = {
             noteIdList: [this.props.navigation.state.params.key],
             isArchived: this.state.isArchived
         };
         archiveNotes(data).then(res => {
-            console.log("res in archive component", res);
         });
         this.props.navigation.navigate("dashboard");
     };
-    handleLabelDone = async () => {
-        await this.setState({ label: true })
-        console.warn("label Data", this.state.label);
+    handleLabelDone =  () => {
+         this.setState({ label: true })
         let data = {
             noteIdList: [this.props.navigation.state.params.key],
             label: this.state.label
@@ -140,15 +111,13 @@ export class EditReminderComponent extends Component {
         await this.setState({
             selectedLabels: labelName
         });
-        console.warn("label  setstate", this.state.selectedLabels);
     };
     handleLabelArrow = async (labelValue) => {
         this.RBSheet2.close();
         this.RBSheet.close();
-       await this.setState({
+        await this.setState({
             labelValue: labelValue
         });
-        console.warn("labelValue", this.state.labelValue);
     };
     handleEditCard = () => {
         let data = {
@@ -164,7 +133,6 @@ export class EditReminderComponent extends Component {
         };
         console.warn("editnote data", data);
         editNotes(data).then(res => {
-            console.warn("response from edit note data", res);
             this.setState({
                 color: res.color
             })
@@ -179,9 +147,7 @@ export class EditReminderComponent extends Component {
             noteIdList: [this.props.navigation.state.params.key],
             color: this.state.color,
         };
-        console.warn("data of updateColor", data);
         updateColor(data).then(res => {
-            console.warn(" response from  color updation", res)
         });
     };
     componentDidMount() {
@@ -195,30 +161,31 @@ export class EditReminderComponent extends Component {
             labelValue: this.props.navigation.state.params.display.labelValue
         })
     }
-    render() { 
+    render() {
         return (
             <View style={{
                 backgroundColor: this.state.color,
-                height: "100%"}}>
-                <View style={{ flexDirection: "row", margin: 10 }}>
-                    <View style={{ width: "60%" }}>
+                height: "100%"
+            }}>
+                <View >
+                    <View style={styles.arrowLeft}>
                         <Icon1
                             name="arrow-left"
                             size={25}
                             onPress={() => { this.handleEditCard() }} />
                     </View>
                     <View style={styles.editIcons}>
-                    <View>
+                        <View>
                             <TouchableOpacity >
                                 {!this.state.isPined ? (
                                     <Icon5
-                                    onPress={() => this.handlePin()}
+                                        onPress={() => this.handlePin()}
                                         name="pushpino"
                                         size={25}
                                     />
                                 ) : (
                                         <Icon5
-                                        onPress={() => this.handleUnPin()}
+                                            onPress={() => this.handleUnPin()}
                                             name="pushpin"
                                             size={25} />
                                     )}
@@ -227,7 +194,7 @@ export class EditReminderComponent extends Component {
                         <View>
                             <ReminderComponent reminderProps={this.reminderData} ></ReminderComponent>
                         </View>
-                        <View style={{ left: 20 }}>
+                        <View style={styles.archive}>
                             <Icon3
                                 name="archive"
                                 size={25}
@@ -238,28 +205,26 @@ export class EditReminderComponent extends Component {
                 <View style={styles.noteData}>
                     <View>
                         <TextInput
-                            style={{ height: 60, fontSize: 22, left: 20 }}
                             placeholder="Tittle"
                             defaultValue={this.props.navigation.state.params.display.title}
                             onChangeText={title => this.setState({ title })}
                             value={this.state.title}
                         />
                     </View>
-                    <View style={{ marginTop: -10, left: 23 }}>
+                    <View style={styles.description}>
                         <TextInput
-                            style={{ height: 60, fontSize: 17 }}
                             placeholder="note"
                             defaultValue={this.props.navigation.state.params.display.description}
                             value={this.state.description}
                             onChangeText={description => this.setState({ description })}
                         />
                     </View>
-                    <Text style={{ fontWeight: "bold", left: 10 }}>
+                    <Text style={styles.reminder}>
                         {this.state.reminder}
                     </Text>
                 </View>
                 <View
-                    style={{ top: 400, left: 340 }}>
+                    style={styles.elipsis}>
                     <Icon4
                         name="ellipsis-v"
                         size={25}
@@ -270,7 +235,9 @@ export class EditReminderComponent extends Component {
                         duration={250}
                         customStyles={{
                             container: {
-                                flexDirection: "column"}}}>
+                                flexDirection: "column"
+                            }
+                        }}>
                         <View style={{
                             flexDirection: "row",
                             left: 10,
@@ -280,41 +247,31 @@ export class EditReminderComponent extends Component {
                                 <Icon0
                                     name="delete"
                                     size={20} />
-                                <Text style={{ fontSize: 18, left: 38, top: -20 }}>Delete</Text>
+                                <Text style={styles.delete}>Delete</Text>
                             </TouchableOpacity>
                         </View>
                         <View
-                            style={{
-                                flexDirection: "row",
-                                left: 10,
-                                // marginTop: 18
-                            }}>
+                            style={styles.sendIcon}>
                             <Icon2 name="sharealt" size={22} />
-                            <Text style={{ fontSize: 18, left: 20 }}>send</Text>
+                            <Text>send</Text>
                         </View>
                         <View
-                            style={{flexDirection: "row",left: 10,marginTop: 18}}>
+                            style={styles.collboratotIcon}>
                             <Icon2 name="addusergroup" size={25} />
-                            <Text
-                                style={{ fontSize: 18, left: 20 }}>collaborator</Text>
+                            <Text>collaborator</Text>
                         </View>
                         <View
-                            style={{
-                                flexDirection: "row",
-                                left: 10,
-                                marginTop: 18
-                            }} >
+                            style={styles.labelIcon} >
                             <Icon1 name="label-outline" size={25} />
                             <Text
-                                onPress={() => { this.RBSheet2.open(); }}
-                                style={{ fontSize: 18, left: 20 }}>Labels</Text>
+                                onPress={() => { this.RBSheet2.open(); }}>Labels</Text>
                         </View>
                         <View>
                             <FlatList
                                 data={colors}
                                 horizontal={true}
                                 renderItem={({ item }) => (
-                                    <View style={{marginTop: 10}}>
+                                    <View style={{ marginTop: 10 }}>
                                         <IconButton
                                             style={{ backgroundColor: item.hexcode, borderRadius: 15 }}
                                             value={item.hexcode}
@@ -337,7 +294,7 @@ export class EditReminderComponent extends Component {
                                 flexDirection: "column"
                             }
                         }}>
-                        <View style={{ flexDirection: "row", margin: 10 }}>
+                        <View style={styles.labelArrow}>
                             <View>
                                 <TouchableOpacity
                                     onPress={() => this.handleLabelArrow(this.state.selectedLabels)}>
@@ -346,18 +303,13 @@ export class EditReminderComponent extends Component {
                             </View>
                             <View>
                                 <TextInput
-                                    style={{
-                                        height: 40,
-                                        fontSize: 18,
-                                        left: 30,
-                                        marginTop: -3
-                                    }}
+                                    style={styles.labelTextinput}
                                     placeholder="Enter label name"
                                     value={this.state.label}
                                     onChangeText={label => this.setState({ label })}
                                 />
                             </View>
-                            <View style={{ left: 150 }}>
+                            <View style={styles.done}>
                                 <Icon
                                     name="done"
                                     size={25}
@@ -366,7 +318,6 @@ export class EditReminderComponent extends Component {
                                     }} />
                             </View>
                         </View>
-                        {/* <ScrollView>{labelDetails}</ScrollView> */}
                     </RBSheet2>
                 </View>
             </View>

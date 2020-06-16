@@ -610,6 +610,16 @@ const styles = StyleSheet.create({
     },
     labelchip:{
         width:100
+    },
+    labelArrow:{
+        flexDirection: "row",
+         margin: 10
+    },
+    labelTextinput:{
+        height: 40,
+        fontSize: 18,
+        left: 30,
+        marginTop: -3
     }
 });
 export default styles
