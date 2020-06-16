@@ -332,6 +332,11 @@ const styles = StyleSheet.create({
         flexDirection: "row",
         justifyContent: "space-between"
     },
+    deleteText:{
+        fontSize: 18, 
+        left: 39, 
+        top: -20
+    },
     delete: {
         flexDirection: "row",
         justifyContent: "space-between"
