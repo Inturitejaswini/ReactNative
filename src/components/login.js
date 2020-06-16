@@ -14,10 +14,9 @@
 ******************************************************************************/
 
 import React, { Component } from 'react'
-import { View, Button, Text, Alert } from 'react-native'
+import { View, Button, Text, Image } from 'react-native'
 import { Card } from 'react-native-elements';
 import styles from '../Styles';
-import { Image } from 'react-native';
 import { login } from '../services/userServices'
 import AsyncStorage from '@react-native-community/async-storage'
 import Snackbar from "react-native-snackbar-component";
@@ -31,11 +30,11 @@ export class LoginComponent extends Component {
             snackIsVisible: false
         }
     }
-    handleemail = async (event) => {
-        await this.setState({ email: event });
+    handleEmail = (event) => {
+        this.setState({ email: event });
     };
-    handlepassword = async (event) => {
-        await this.setState({ password: event });
+    handlePassword = (event) => {
+        this.setState({ password: event });
     };
     handleLogin = async () => {
         if (this.state.email === "") {
@@ -51,13 +50,9 @@ export class LoginComponent extends Component {
                 email: this.state.email,
                 password: this.state.password,
             }
-            console.warn("new user datails", user);
             login(user).then(async response => {
-                console.warn("response coming to userlogin", response.data.id)
-                let Id = await AsyncStorage.setItem('@storage_Key',response.data.id);
-                console.warn("token id", Id)
+                let Id = await AsyncStorage.setItem('@storage_Key', response.data.id);
                 let AccessToken = await AsyncStorage.getItem('@storage_Key')
-                console.warn("token is coming", AccessToken)
                 this.props.navigation.navigate('dashboard')
             }
             )
@@ -89,19 +84,15 @@ export class LoginComponent extends Component {
                         <Image source={require("../assets/accounticon.png")}
                             style={styles.accounticon1}></Image>
                     </View>
-                    {/* <Snackbar
-                     visible={this.state.snackbarOpen}>
-                        {this.state.snackbarMessage}
-                  </Snackbar> */}
                     <TextInput
                         value={this.state.email}
-                        onChangeText={this.handleemail}
+                        onChangeText={this.handleEmail}
                         placeholder={'Username'}
                         style={styles.input}>
                     </TextInput>
                     <TextInput
                         value={this.state.password}
-                        onChangeText={this.handlepassword}
+                        onChangeText={this.handlePassword}
                         placeholder={'Password'}
                         secureTextEntry={true}
                         style={styles.input}>
