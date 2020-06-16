@@ -289,6 +289,18 @@ const styles = StyleSheet.create({
     remindersearch1: {
         right: 30
     },
+    reminder:{
+        fontSize: 30, 
+        top: -10
+    },
+    drawerReminder:{
+        flexDirection: "row",
+        justifyContent: "space-between"
+    },
+    getReminderCard:{
+        height: 50,
+        borderRadius: 10
+    },
     /**
      * getarchivenote css
      */
@@ -584,9 +596,33 @@ const styles = StyleSheet.create({
     },
     labelText: {
         // right: 280,
-        position:'absolute',
-        left:30,
-        top:2
+        position: 'absolute',
+        left: 30,
+        top: 2
+    },
+    createLabel1:{
+        fontWeight: "800",
+         fontSize: 15 
+    },
+    height:{
+        height: 2
+    },
+    labels:{
+        fontSize: 18, 
+        left: 40, 
+        bottom: 25 
+    },
+    labelIcon:{
+        flexDirection: "row",
+        top: 10
+    },
+    collaboratorIcon:{
+        flexDirection: "row",
+        top: 20 
+    },
+    send:{
+        fontSize: 18, 
+        left: 20 
     },
     /**
      * label componnt css
@@ -602,24 +638,78 @@ const styles = StyleSheet.create({
     },
     labelcheckbox: {
         // right: 30
-        width:'100%'
+        width: '100%'
     },
     labeledit: {
         right: 30,
         fontSize: 20
     },
-    labelchip:{
-        width:100
+    labelchip: {
+        width: 100
     },
-    labelArrow:{
+    labelArrow: {
         flexDirection: "row",
-         margin: 10
+        margin: 10
     },
-    labelTextinput:{
+    labelTextinput: {
         height: 40,
         fontSize: 18,
         left: 30,
         marginTop: -3
+    },
+    done: {
+        left: 150
+    },
+    allowLeft: {
+        flexDirection: "row",
+        margin: 10
+    },
+    title: {
+        height: 60,
+        fontSize: 22,
+        left: 20
+    },
+    note: {
+        marginTop: -10,
+        left: 23
+    },
+    elipsis: {
+        top: 400,
+        left: 340
+    },
+    restore: {
+        fontSize: 18,
+        left: 38,
+        top: -20
+    },
+    deleteForever: {
+        flexDirection: "row",
+        left: 10,
+    },
+    deleteForeverText:{
+        fontSize: 18, 
+        left: 40,
+        top:-20
+    },
+    colorBtn:{
+        marginTop: 10
+    },
+    hexaColor:{
+        backgroundColor: item.hexcode,
+         borderRadius: 15 
+    },
+    labelData1:{
+        fontWeight: "bold"
+    },
+    labelDetails:{
+        flexDirection: "column"
+    },
+    getNoteTitle:{
+        fontWeight: "bold"
+    },
+    getNoteReminder:{
+        fontWeight: "bold" 
     }
+
 });
 export default styles

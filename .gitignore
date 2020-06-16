@@ -34,11 +34,16 @@ local.properties
 node_modules/
 npm-debug.log
 yarn-error.log
+
+#ditenv environment variables file
 .env
 
 # BUCK
 buck-out/
-\.buckd/
+.buckconfig.local
+.buckd/
+.buckversion
+.fakebuckversion
 *.keystore
 !debug.keystore
 
