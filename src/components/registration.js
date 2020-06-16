@@ -35,22 +35,22 @@ export class RegisterComponent extends Component {
         }
     }
     x
-    handlefirstName = async (event) => {
+    handleFirstName = async (event) => {
             this.setState({ firstName: event });
     };
-    handlelastName = async (event) => {
+    handleLastName = async (event) => {
             this.setState({ lastName: event });
     };
-    handlephoneNumber = async (event) => {
+    handlePhoneNumber = async (event) => {
             this.setState({ phoneNumber: event });
     };
-    handleemail = async (event) => {
+    handleEmail = async (event) => {
             this.setState({ email: event });
     };
-    handlepassword = async (event) => {
+    handlePassword = async (event) => {
             this.setState({ password: event });
     };
-    handleregister = () => {
+    handleRegister = () => {
         if (this.state.firstName === "") {
             this.setState({
               snackIsVisible: !this.state.snackIsVisible
@@ -121,38 +121,38 @@ export class RegisterComponent extends Component {
                     </Snackbar>
                     <TextInput
                         value={this.state.firstName}
-                        onChangeText={this.handlefirstName}
+                        onChangeText={this.handleFirstName}
                         placeholder={'Firstname'}
                         style={styles.input1}>
                     </TextInput>
                     <TextInput
                         value={this.state.lastName}
-                        onChangeText={this.handlelastName}
+                        onChangeText={this.handleLastName}
                         placeholder={'Lastname'}
                         style={styles.input1}>
                     </TextInput>
                     <TextInput
                         value={this.state.phoneNumber}
-                        onChangeText={this.handlephoneNumber}
+                        onChangeText={this.handlePhoneNumber}
                         placeholder={'Phonenumber'}
                         style={styles.input1}>
                     </TextInput>
                     <TextInput
                         value={this.state.email}
-                        onChangeText={this.handleemail}
+                        onChangeText={this.handleEmail}
                         placeholder={'Email'}
                         style={styles.input1}>
                     </TextInput>
                     <TextInput
                         value={this.state.password}
-                        onChangeText={this.handlepassword}
+                        onChangeText={this.handlePassword}
                         secureTextEntry={true}
                         placeholder={'Password'}
                         style={styles.input1}>
                     </TextInput>
                     <View style={styles.registerbtn}>
                         <Button
-                            onPress={this.handleregister}
+                            onPress={this.handleRegister}
                             title="Register"
                             color="#00B0FF"/>
                     </View>
