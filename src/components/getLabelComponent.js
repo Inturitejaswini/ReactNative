@@ -1,12 +1,12 @@
 import React, { Component } from "react";
-import { View, Text, ScrollView } from "react-native";
+import { Text, ScrollView } from "react-native";
 import { getAllLabels } from "../services/noteServices";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
-export  class GetLabelComponent extends Component {
+export class GetLabelComponent extends Component {
   constructor() {
     super();
-    this.state = { 
-        labelData: [] 
+    this.state = {
+      labelData: []
     };
   }
 
@@ -16,16 +16,13 @@ export  class GetLabelComponent extends Component {
   };
   componentDidMount() {
     getAllLabels().then(response => {
-      console.warn("res in label notes", response);
       this.setState({
         labelData: response.data.data
       });
-      console.warn("label data after setting state", this.state.labelData);
     });
   }
   render() {
     let labelDetails = this.state.labelData.map(labelkey => {
-      console.log("key in label component---->", labelkey.data().label);
       return (
         <Text style={{ fontWeight: "bold" }}>{labelkey.data().label}</Text>
       );
