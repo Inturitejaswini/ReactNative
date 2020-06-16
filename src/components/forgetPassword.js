@@ -15,8 +15,7 @@
 
 import React, { Component } from 'react'
 import { View, Button, Text, Alert } from 'react-native'
-// import Icon from 'react-native-vector-icons/FontAwesome';
-import {forget} from '../services/userServices'
+import { forget } from '../services/userServices'
 import { Card } from 'react-native-elements';
 import styles from '../Styles';
 import Snackbar from "react-native-snackbar-component";
@@ -30,62 +29,60 @@ export class Forget extends Component {
 
         }
     }
-    handleemail = event => {
+    handleEmail = event => {
         console.warn(event)
-        this.setState({ email: event});
+        this.setState({ email: event });
     };
 
     handleForget = () => {
         if (this.state.email === "") {
             this.setState({
-              snackIsVisible: !this.state.snackIsVisible
+                snackIsVisible: !this.state.snackIsVisible
             });
-        }else{
-        const user = {
-            email:this.state.email
-        }
-        forget(user).then((response) => {
-        console.warn("response coming to forgotpassword", response)
-        })
-    };
-}
+        } else {
+            const user = {
+                email: this.state.email
+            }
+            forget(user).then((response) => {
+            })
+        };
+    }
     render() {
         return (
             <View style={styles.forgotContainer}>
-                 <Snackbar  
+                <Snackbar
                     style={styles.snackbar}
                     visible={this.state.snackIsVisible}
                     textMessage="enter the requirements"
-                    actionHandler={()=>{
+                    actionHandler={() => {
                         alert("fill the correct email");
                         this.setState({
-                            snackIsVisible:!this.state.snackIsVisible
+                            snackIsVisible: !this.state.snackIsVisible
                         });
                     }}
                     actionText="lets go"
-                    distanceCallback={distance=>{
-                        this.setState({distance:distance});
-                        }}>
-                    {/* enter valid email and password */}
-                    </Snackbar>
-              <Card style={styles.cardContainer1}>
-                <View >
-                    <Text style={styles.Text3}>ForgotPassword</Text>
-                </View>
-                <TextInput
-                    value={this.state.email}
-                    onChangeText={this.handleemail}
-                    placeholder={'email'}
-                    style={styles.input3}>
-                </TextInput>
-                <View style={styles.forgotbtn1}>
-                    <Button
-                        onPress={this.handleForget}
-                        title="Submit"
-                        color="#00B0FF"
-                    />
-                </View>
-              </Card>
+                    distanceCallback={distance => {
+                        this.setState({ distance: distance });
+                    }}>
+                </Snackbar>
+                <Card style={styles.cardContainer1}>
+                    <View >
+                        <Text style={styles.Text3}>ForgotPassword</Text>
+                    </View>
+                    <TextInput
+                        value={this.state.email}
+                        onChangeText={this.handleEmail}
+                        placeholder={'email'}
+                        style={styles.input3}>
+                    </TextInput>
+                    <View style={styles.forgotbtn1}>
+                        <Button
+                            onPress={this.handleForget}
+                            title="Submit"
+                            color="#00B0FF"
+                        />
+                    </View>
+                </Card>
             </View>
         )
     }
