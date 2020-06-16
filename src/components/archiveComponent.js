@@ -1,6 +1,8 @@
 import React, { Component } from "react";
-import { View, Text, Image, TouchableOpacity, ScrollView, ProgressBarAndroid } from "react-native";
-import { Icon1, Icon2, Icon } from "react-native-vector-icons";
+import { View,Text, Image, TouchableOpacity, ScrollView ,ProgressBarAndroid} from "react-native";
+import Icon1 from "react-native-vector-icons/MaterialCommunityIcons";
+import Icon2 from "react-native-vector-icons/FontAwesome";
+import Icon from "react-native-vector-icons/Foundation";
 import { Card } from "react-native-elements";
 import styles from "../Styles";
 import { getNotes } from "../services/noteServices";
@@ -56,49 +58,48 @@ export class ArchiveComponent extends Component {
             }
         });
         let pinNoteDetails = this.state.notes.map(key => {
-            if (key.isPined == true && key.isDeleted !== true && key.isArchived == true) {
-                return (
-                    <View style={Align}>
-                        <ScrollView>
-                            <TouchableOpacity
-                                onPress={() =>
-                                    this.props.navigation.navigate("editArchive", {
-                                        display: key,
-                                        key: key.id
-                                    })}>
-                                <Card containerStyle={{
-                                    backgroundColor: key.color,
-                                    borderRadius: 10,
-                                }}>
-                                    <Text> {key.title}</Text>
-                                    <Text> {key.description}</Text>
-                                    <Text> {key.reminder}</Text>
-                                    <Text style={{ fontWeight: "bold" }}>{key.label}</Text>
-                                </Card>
-                            </TouchableOpacity>
-                        </ScrollView>
-                    </View>
-                );
+            if (key.isPined == true&&key.isDeleted !== true&&key.isArchived==true) {
+              return (
+                <View style={Align}>
+                    <ScrollView>
+                  <TouchableOpacity
+                    onPress={() =>
+                      this.props.navigation.navigate("editArchive", {
+                        display: key,
+                        key: key.id})}>
+                    <Card containerStyle={{
+                        backgroundColor: key.color,
+                        borderRadius: 10,
+                      }}>
+                      <Text> {key.title}</Text>
+                      <Text> {key.description}</Text>
+                      <Text> {key.reminder}</Text>
+                      <Text style={{ fontWeight: "bold" }}>{key.label}</Text>
+                    </Card>
+                  </TouchableOpacity>
+                  </ScrollView>
+                </View>
+              );
             }
-        });
+          });
         return (
             <ScrollView>
                 <Card containerStyle={{ height: 50, borderRadius: 10 }}>
                     <View style={styles.archivedrawer}>
                         <View style={styles.archivedrawer1}>
-                            <View style={{ top: -5 }}>
-                                <TouchableOpacity
-                                    onPress={() => this.props.navigation.dispatch(DrawerActions.openDrawer())}>
-                                    <Image source={require("../assets/menuicon.png")}></Image>
-                                </TouchableOpacity>
-                            </View>
-                            <View><Text style={{ fontSize: 30, top: -10 }}>Archive</Text></View>
+                        <View style={{ top: -5 }}>
+                            <TouchableOpacity
+                                onPress={() => this.props.navigation.dispatch(DrawerActions.openDrawer())}>
+                                <Image source={require("../assets/menuicon.png")}></Image>
+                            </TouchableOpacity>
                         </View>
-                        <View style={styles.archivesearchicon}>
-                            <View style={styles.archive}>
-                                <Image source={require("../assets/searchicon.png")}></Image>
-                            </View>
-                            <View style={styles.archivegrid}>
+                       <View><Text style={{ fontSize: 30, top: -10 }}>Archive</Text></View> 
+                       </View>
+                       <View style={styles.archivesearchicon}>
+                        <View style={styles.archive}>
+                            <Image source={require("../assets/searchicon.png")}></Image>
+                        </View>
+                        <View  style={styles.archivegrid}>
                                 {!this.state.listOpen ? (
                                     <TouchableOpacity >
                                         <Icon1
@@ -114,26 +115,26 @@ export class ArchiveComponent extends Component {
                                                 onPress={() => { this.handleGridView() }} />
                                         </TouchableOpacity>
                                     )}
-                            </View>
+                        </View>
                         </View>
                     </View>
                 </Card>
                 {noteDetails.length > 0 ? (
-                    <View>
-                        <View style={styles.getNoteCard}>{pinNoteDetails}</View>
-                        <View style={styles.getNoteCard}>{noteDetails}</View>
-                    </View>
-                ) : (
-                        <ProgressBarAndroid
-                            color="gray"
-                            progress={0.9}
-                            style={{
-                                flex: 1,
-                                flexDirection: "column",
-                                alignItems: "center",
-                                marginTop: 200
-                            }} />
-                    )}
+                        <View>
+                            <View style={styles.getNoteCard}>{pinNoteDetails}</View>
+                            <View style={styles.getNoteCard}>{noteDetails}</View>
+                        </View>
+                    ) : (
+                            <ProgressBarAndroid
+                                color="gray"
+                                progress={0.9}
+                                style={{
+                                    flex: 1,
+                                    flexDirection: "column",
+                                    alignItems: "center",
+                                    marginTop: 200
+                                }} />
+                        )}
             </ScrollView>
         );
     }
