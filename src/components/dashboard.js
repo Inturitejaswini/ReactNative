@@ -143,8 +143,7 @@ export class DashBoard extends React.Component {
                   })}>
                 <Card containerStyle={{
                   backgroundColor: key.color,
-                  borderRadius: 10
-                }}>
+                  borderRadius: 10}}>
                   <View>
                     <Text>{key.title}</Text>
                     <Text>{key.description}</Text>
