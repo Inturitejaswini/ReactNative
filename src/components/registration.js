@@ -35,19 +35,19 @@ export class RegisterComponent extends Component {
         }
     }
     x
-    handleFirstName = async (event) => {
+    handleFirstName = (event) => {
             this.setState({ firstName: event });
     };
-    handleLastName = async (event) => {
+    handleLastName =  (event) => {
             this.setState({ lastName: event });
     };
-    handlePhoneNumber = async (event) => {
+    handlePhoneNumber = (event) => {
             this.setState({ phoneNumber: event });
     };
-    handleEmail = async (event) => {
+    handleEmail = (event) => {
             this.setState({ email: event });
     };
-    handlePassword = async (event) => {
+    handlePassword = (event) => {
             this.setState({ password: event });
     };
     handleRegister = () => {
@@ -105,9 +105,7 @@ export class RegisterComponent extends Component {
               actionText="let's go"
               distanceCallback={distance => {
                 this.setState({ distance: distance });
-              }}
-            />
-                {/* <ScrollView style={styles.scrole}> */}
+              }}/>
                 <Card style={styles.cardContainer1}>
                     <View >
                         <Text style={styles.Text1}>Registration</Text>
@@ -163,8 +161,6 @@ export class RegisterComponent extends Component {
                             color="#00B0FF"/>
                     </View>
                 </Card>
-                
-                {/* </ScrollView> */}
             </View>
         )
     }
