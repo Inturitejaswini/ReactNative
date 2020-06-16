@@ -20,10 +20,6 @@ export default class Labels extends Component {
         }
     }
     handleAddLabel = async () => {
-        let userId = await AsyncStorage.getItem("userId")
-        console.log('====================================');
-        console.log(this.props.noteId,"noteId in labels");
-        console.log('====================================');
         this.setState({ userId: userId })
         const data = {
             label: this.state.labelName,
@@ -32,11 +28,8 @@ export default class Labels extends Component {
             isDeleted: false
         }
         createLabel(data).then(res => {
-            console.warn("res in creating label", res.data)
-            console.log("res in creating label", res)
             this.getLabels()
         }).catch(err => {
-                console.log("err in create label", err)
             })
     }
     componentDidMount() {
@@ -44,36 +37,23 @@ export default class Labels extends Component {
     }
     getLabels(){
     getAllLabels().then(async res => {
-        console.warn("res in getting labels", res.data.data.details)
-        console.log("res in getting labels", res)
         await this.setState({ allLables: res.data.data.details })
     }).catch(err => {
-        console.warn("err in getting labels", err)
-        console.log("err in getting labels", err)
-
     })
 }
     checkBoxChanged(id,label, value) {
-        console.warn("val in func",value)
-        console.warn("id in func",id)
-        console.warn("label in func",label)
        this.state.selectedLabels.push(label)
        this.state.selectedLabelsId.push(id)
         this.setState({
           checkBoxChecked: tempCheckValues
         })
-        console.warn("label",this.state.checkBoxChecked)
         var tempCheckBoxChecked = this.state.checkBoxChecked;
         tempCheckBoxChecked[id] = !value;  
         this.setState({
           checkBoxChecked: tempCheckBoxChecked
         })
-        console.log("state label",this.state.checkBoxChecked)
-        console.log("state label",this.state.selectedLabels)
-        console.log("state label",this.state.selectedLabelsId)
       }
       handleCloseLabels(labels,id){
-        console.log("labels",labels,"id",id)
          this.props.handleCloseLabels(labels,id)
     }
     render() {
@@ -85,9 +65,7 @@ export default class Labels extends Component {
                         title={item.label}
                         checked={this.state.checkBoxChecked[item.id]}
                         onPress={() => this.checkBoxChanged(item.id,item.label, this.state.checkBoxChecked[item.id])}
-                    />
-            )
-        })
+                    />)})
         return (
             <View>
                 <View style={styles.labelHeaderContainer}>
@@ -108,7 +86,7 @@ export default class Labels extends Component {
                             <Icon name="plus" size={23} color="#FFA500" />
                         </View>
                         <View style={styles.labelTextContainer}>
-                            <Text style={{ fontWeight: "800", fontSize: 15 }}>Create "{this.state.labelName}"</Text>
+                            <Text style={styles.createLabel1}>Create "{this.state.labelName}"</Text>
                         </View>
                     </TouchableOpacity>
                 </View>
