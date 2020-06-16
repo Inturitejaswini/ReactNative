@@ -1,25 +1,12 @@
 import React, { Component } from "react";
-import Icon1 from "react-native-vector-icons/MaterialCommunityIcons";
-import Icon2 from "react-native-vector-icons/MaterialCommunityIcons";
+import { Icon1, Icon2, Icon0 } from "react-native-vector-icons/MaterialCommunityIcons";
 import Icon4 from "react-native-vector-icons/FontAwesome";
-import Icon0 from "react-native-vector-icons/MaterialCommunityIcons";
 import RBSheet from "react-native-raw-bottom-sheet";
 import { IconButton, Colors } from "react-native-paper";
 import styles from "../Styles";
-import { editNotes } from '../services/noteServices'
-import { deleteForever } from '../services/noteServices'
-import { updateColor } from '../services/noteServices'
-import {restore} from '../services/noteServices'
-import {
-    ScrollView,
-    Text,
-    TextInput,
-    View,
-    FlatList,
-    TouchableOpacity
-} from "react-native";
+import { editNotes, deleteForever, updateColor, restore } from '../services/noteServices'
+import { Text, TextInput, View, FlatList, TouchableOpacity } from "react-native";
 const colors = [
-    // { name: "blue", hexcode: "#F5F5DC" }
     { name: "blue", hexcode: " #b8abb9" },
     { name: "violet", hexcode: "#7DCEA0" },
     { name: "blue", hexcode: "#76D7C4" },
@@ -47,16 +34,14 @@ export class EditTrashComponent extends Component {
 
         };
     }
-   
+
     handleDeleteForever = async () => {
         await this.setState({ isDeleted: false })
         let data = {
             noteIdList: [this.props.navigation.state.params.key],
             isDeleted: this.state.isDeleted
         };
-        console.warn("delete after set state", data);
         deleteForever(data).then(res => {
-            console.warn("response in deleteforever notes", res);
         });
     };
     handleRestore = async () => {
@@ -65,9 +50,7 @@ export class EditTrashComponent extends Component {
             noteIdList: [this.props.navigation.state.params.key],
             isDeleted: this.state.isDeleted
         };
-        console.warn("delete after set state", data);
         restore(data).then(res => {
-            console.warn("response in restore notes", res);
         });
         this.props.navigation.navigate("dashboard")
     };
@@ -77,11 +60,9 @@ export class EditTrashComponent extends Component {
             description: this.state.description,
             noteId: this.props.navigation.state.params.key,
             color: this.state.color,
-            isDeleted:this.state.isDeleted
+            isDeleted: this.state.isDeleted
         };
-        console.warn("editnote data", data);
         editNotes(data).then(res => {
-            console.warn("response from edit note data", res);
             this.setState({
                 color: res.color
             })
@@ -96,9 +77,7 @@ export class EditTrashComponent extends Component {
             noteIdList: [this.props.navigation.state.params.key],
             color: this.state.color,
         };
-        console.warn("data of updateColor", data);
         updateColor(data).then(res => {
-            console.warn(" response from  color updation", res)
         });
     };
     componentDidMount() {
@@ -113,28 +92,26 @@ export class EditTrashComponent extends Component {
         return (
             <View style={{
                 backgroundColor: this.state.color,
-                height: "100%"}}>
-                <View style={{ flexDirection: "row", margin: 10 }}>
-                    <View style={{ width: "60%" }}>
-                        <Icon1
-                            name="arrow-left"
-                            size={25}
-                            onPress={() => { this.handleEditCard() }} />
-                    </View>
+                height: "100%"
+            }}>
+                <View style={styles.arrowLeft}>
+                    <Icon1
+                        name="arrow-left"
+                        size={25}
+                        onPress={() => { this.handleEditCard() }} />
                 </View>
                 <View style={styles.noteData}>
                     <View>
                         <TextInput
-                            style={{ height: 60, fontSize: 22, left: 20 }}
+                            style={styles.title}
                             placeholder="Tittle"
                             defaultValue={this.props.navigation.state.params.display.title}
                             onChangeText={title => this.setState({ title })}
                             value={this.state.title}
                         />
                     </View>
-                    <View style={{ marginTop: -10, left: 23 }}>
+                    <View style={styles.note}>
                         <TextInput
-                            style={{ height: 60, fontSize: 17 }}
                             placeholder="note"
                             defaultValue={this.props.navigation.state.params.display.description}
                             value={this.state.description}
@@ -143,7 +120,7 @@ export class EditTrashComponent extends Component {
                     </View>
                 </View>
                 <View
-                    style={{ top: 400, left: 340 }}>
+                    style={styles.elipsis}>
                     <Icon4
                         name="ellipsis-v"
                         size={25}
@@ -155,7 +132,6 @@ export class EditTrashComponent extends Component {
                         customStyles={{
                             container: {
                                 flexDirection: "column",
-                                // bottom:45
                             }
                         }}>
                         <View style={{
@@ -167,18 +143,14 @@ export class EditTrashComponent extends Component {
                                 <Icon0
                                     name="restore-clock"
                                     size={20} />
-                                <Text style={{ fontSize: 18, left: 38, top: -20 }}>Restore</Text>
+                                <Text style={styles.restor}>Restore</Text>
                             </TouchableOpacity>
                         </View>
                         <View
-                            style={{
-                                flexDirection: "row",
-                                left: 10,
-                                // marginTop: 18
-                            }}>
+                            style={styles.deleteForever}>
                             <TouchableOpacity onPress={() => this.handleDeleteForever()}>
-                            <Icon2 name="delete-forever" size={22} />
-                            <Text style={{ fontSize: 18, left: 40,top:-20 }}>DeleteForever</Text>
+                                <Icon2 name="delete-forever" size={22} />
+                                <Text style={styles.deleteForeverText}>DeleteForever</Text>
                             </TouchableOpacity>
                         </View>
                         <View>
@@ -187,11 +159,12 @@ export class EditTrashComponent extends Component {
                                 horizontal={true}
                                 renderItem={({ item }) => (
                                     <View
-                                        style={{
-                                            marginTop: 10
-                                        }}>
+                                        style={styles.colorBtn}>
                                         <IconButton
-                                            style={{ backgroundColor: item.hexcode, borderRadius: 15 }}
+                                            style={{
+                                                backgroundColor: item.hexcode,
+                                                borderRadius: 15
+                                            }}
                                             value={item.hexcode}
                                             size={40}
                                             onPress={() => this.handleColor(item.hexcode)} />
