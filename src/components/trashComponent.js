@@ -24,14 +24,12 @@ export class Trash extends Component {
       this.setState({
         notes: res.data.data.data
       });
-      console.warn("getNotes data", this.state.notes);
     });
   }
   handleGridView() {
     this.setState({
       listOpen: !this.state.listOpen
     });
-    console.warn("response from listview", this.state.listOpen);
   }
   render() {
     let Align = this.state.listOpen ? styles.listAlign : styles.gridAlign;
@@ -96,7 +94,7 @@ export class Trash extends Component {
               </TouchableOpacity>
             </View>
             <View>
-              <Text style={{ fontSize: 30, top: -10 }}>Delete </Text>
+              <Text style={styles.delete}>Delete </Text>
             </View>
             </View>
             <View style={styles.deletesearchicon}>
@@ -106,7 +104,7 @@ export class Trash extends Component {
             <View
               style={styles.trashgrid}>
                 {!this.state.listOpen ? (
-                  <TouchableOpacity style={{ top: -5 }}>
+                  <TouchableOpacity>
                     <Icon1
                       name="view-stream"
                       size={32}
@@ -115,7 +113,7 @@ export class Trash extends Component {
                       }} />
                   </TouchableOpacity>
                 ) : (
-                    <TouchableOpacity style={{ top: -4 }}>
+                    <TouchableOpacity>
                       <Icon2
                         name="th-large"
                         size={25}
@@ -142,36 +140,6 @@ export class Trash extends Component {
                 style={styles.progress}/>
             )}
         </ScrollView>
-        {/* <Card style={styles.reminderinput}
-                    containerStyle={{  height: 50, borderRadius: 10}}>
-                    <View style={styles.reminderinput5}>
-                        <View >
-                            <Icon4 name="checksquareo" size={20} >
-                            </Icon4>
-                        </View>
-                        <View >
-                            <Icon5 name="brush" size={20}>
-                            </Icon5>
-                        </View>
-                        <View >
-                            <Icon6 name="keyboard-voice" size={20}>
-                            </Icon6>
-                        </View>
-                        <View >
-                            <Icon7 name="image" size={20}>
-                            </Icon7>
-                        </View>
-                        <View>
-                            <TouchableOpacity  >
-                                <Icon0
-                                    name="pluscircleo"
-                                    size={30}
-                                    onPress={() => this.handleNote()}
-                                />
-                            </TouchableOpacity>
-                        </View>
-                    </View>
-                </Card> */}
       </View>
     );
   }
