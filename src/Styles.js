@@ -624,6 +624,12 @@ const styles = StyleSheet.create({
         fontSize: 18, 
         left: 20 
     },
+    progress:{
+        flex: 1,
+        flexDirection: "column",
+        alignItems: "center",
+        marginTop: 200
+    },
     /**
      * label componnt css
      */
