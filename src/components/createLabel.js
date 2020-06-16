@@ -66,7 +66,7 @@ export class CreateLabelComponent extends Component {
           </TouchableOpacity>
           <Text style={styles.editlabeltext}>Edit labels</Text>
         </View>
-        <Divider type='horizontal' style={{ height: 2 }}></Divider>
+        <Divider type='horizontal' style={styles.height}></Divider>
         <View style={styles.editcrossicon}>
           <View style={styles.crossicon}>
             <Icon1 name="cross" size={25} />
@@ -85,7 +85,7 @@ export class CreateLabelComponent extends Component {
               size={25} />
           </View>
         </View>
-        <Divider type='horizontal' style={{ height: 2 }}></Divider>
+        <Divider type='horizontal' style={styles.height}></Divider>
         <ScrollView>{labelDetails}</ScrollView>
       </View>
     )
