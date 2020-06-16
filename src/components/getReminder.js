@@ -1,10 +1,9 @@
 import React, { Component } from "react";
-import {View,TextInput,Text,Image,TouchableOpacity,ScrollView,ProgressBarAndroid} from "react-native";
+import { View, Text, Image, TouchableOpacity, ScrollView, ProgressBarAndroid } from "react-native";
 import Icon1 from "react-native-vector-icons/MaterialCommunityIcons";
 import Icon2 from "react-native-vector-icons/FontAwesome";
 import { Card } from "react-native-elements";
 import styles from "../Styles";
-import { Divider } from 'react-native-elements';
 import { getNotes } from "../services/noteServices";
 import { DrawerActions } from "react-navigation-drawer";
 export class ReminderComponent1 extends Component {
@@ -18,21 +17,19 @@ export class ReminderComponent1 extends Component {
     }
     static navigationOptions = {
         drawerLabel: "Reminder",
-        drawerIcon: <Icon1 name="bell-plus-outline" size={20}></Icon1>    
+        drawerIcon: <Icon1 name="bell-plus-outline" size={20}></Icon1>
     };
     componentDidMount() {
         getNotes().then(res => {
             this.setState({
                 notes: res.data.data.data
             });
-            console.log("getNotes data", this.state.notes);
         });
     }
     handleGridView() {
         this.setState({
             listOpen: !this.state.listOpen
         });
-        console.warn("response from listview", this.state.listOpen);
     }
     render() {
         let Align = this.state.listOpen ? styles.listAlign : styles.gridAlign;
@@ -41,21 +38,21 @@ export class ReminderComponent1 extends Component {
                 return (
                     <View style={Align}>
                         <ScrollView>
-                        <TouchableOpacity onPress={() =>
-                            this.props.navigation.navigate("editReminder", {
-                                display: key,
-                                key: key.id
-                            })}>
-                            <Card
-                                containerStyle={{
-                                    backgroundColor: key.color,
-                                    borderRadius: 10
-                                }}>
-                                <Text> {key.title}</Text>
-                                <Text> {key.description}</Text>
-                                <Text> {key.reminder}</Text>
-                            </Card>
-                        </TouchableOpacity>
+                            <TouchableOpacity onPress={() =>
+                                this.props.navigation.navigate("editReminder", {
+                                    display: key,
+                                    key: key.id
+                                })}>
+                                <Card
+                                    containerStyle={{
+                                        backgroundColor: key.color,
+                                        borderRadius: 10
+                                    }}>
+                                    <Text> {key.title}</Text>
+                                    <Text> {key.description}</Text>
+                                    <Text> {key.reminder}</Text>
+                                </Card>
+                            </TouchableOpacity>
                         </ScrollView>
                     </View>
                 );
@@ -63,25 +60,24 @@ export class ReminderComponent1 extends Component {
         });
         return (
             <View>
-                <Card containerStyle={{height: 50,borderRadius: 10}}>
-                    <View style={{flexDirection: "row",justifyContent: "space-between"}}>
+                <Card style={styles.getReminderCard}>
+                    <View style={styles.drawerReminder}>
                         <View style={styles.remindertext}>
-                        <View style={{ top: -5 }}>
-                            <TouchableOpacity
-                                onPress={() =>
-                                    this.props.navigation.dispatch(DrawerActions.openDrawer())}>
-                                <Image source={require("../assets/menuicon.png")}>
-                                </Image>
-                            </TouchableOpacity>
+                            <View>
+                                <TouchableOpacity
+                                    onPress={() => this.props.navigation.dispatch(DrawerActions.openDrawer())}>
+                                    <Image source={require("../assets/menuicon.png")}>
+                                    </Image>
+                                </TouchableOpacity>
+                            </View>
+                            <View>
+                                <Text style={styles.reminder}>Reminder </Text>
+                            </View>
                         </View>
-                        <View>
-                            <Text style={{ fontSize: 30, top: -10 }}>Reminder </Text>
-                        </View>
-                        </View>
-                        <View  style={styles.remindersearch}>
-                        <View style={styles.remindersearch1}>
-                            <Image source={require("../assets/searchicon.png")}></Image>
-                        </View>
+                        <View style={styles.remindersearch}>
+                            <View style={styles.remindersearch1}>
+                                <Image source={require("../assets/searchicon.png")}></Image>
+                            </View>
                             <View >
                                 {!this.state.listOpen ? (
                                     <TouchableOpacity>
@@ -119,38 +115,6 @@ export class ReminderComponent1 extends Component {
                                 style={styles.progress} />
                         )}
                 </ScrollView>
-                {/* <View>
-                    <Card style={styles.reminderinput}
-                        containerStyle={{ height: 50, borderRadius: 10 }}>
-                        <View style={styles.reminderinput5}>
-                            <View >
-                                <Icon4 name="checksquareo" size={20} >
-                                </Icon4>
-                            </View>
-                            <View >
-                                <Icon5 name="brush" size={20}>
-                                </Icon5>
-                            </View>
-                            <View >
-                                <Icon6 name="keyboard-voice" size={20}>
-                                </Icon6>
-                            </View>
-                            <View >
-                                <Icon7 name="image" size={20}>
-                                </Icon7>
-                            </View>
-                            <View>
-                                <TouchableOpacity  >
-                                    <Icon0
-                                        name="pluscircleo"
-                                        size={30}
-                                        onPress={() => this.handleNote()}
-                                    />
-                                </TouchableOpacity>
-                            </View>
-                        </View>
-                    </Card>
-                </View> */}
             </View>
         );
     }
