@@ -6,17 +6,17 @@ import DashBoard from './components/dashboard'
 import Notes from './components/notes'
 import CreateLabelComponent from './components/createLabel'
 import ReminderComponent from './components/remainder'
-import GetNoteComponent from './components/getNoteComponent'
-import drawerComponent from './components/drawerComponent'
-import EditComponent from './components/editComponent'
-import Trash from './components/trashComponent'
-import ArchiveComponent from './components/archiveComponent'
+import GetNoteComponent from './components/getNote'
+import drawerComponent from './components/drawer'
+import EditComponent from './components/edit'
+import Trash from './components/trash'
+import ArchiveComponent from './components/archive'
 import ReminderComponent1 from './components/getReminder'
 import EditReminderComponent from './components/editReminder'
 import EditArchiveComponent from './components/editArchive'
 import EditTrashComponent from './components/editTrash'
-import SearchComponent from './components/searchComponent'
-import GetLabelComponent from './components/getLabelComponent'
+import SearchComponent from './components/search'
+import GetLabelComponent from './components/getLabel'
 const AppNavigation = createStackNavigator(
     {
         login: {
@@ -37,7 +37,7 @@ const AppNavigation = createStackNavigator(
                 header: null
             }
         },
-        drawerComponent: {
+        drawer: {
             screen: drawerComponent,
             navigationOptions: {
                 header: null
@@ -61,13 +61,13 @@ const AppNavigation = createStackNavigator(
                 header: null
             }
         },
-        getNoteComponent: {
+        getNote: {
             screen: GetNoteComponent,
             navigationOptions: {
                 header: null
             }
         },
-        editComponent: {
+        edit: {
             screen: EditComponent,
             navigationOptions: {
                 header: null
@@ -79,13 +79,13 @@ const AppNavigation = createStackNavigator(
                 header: null
             }
         },
-        trashComponent: {
+        trash: {
             screen: Trash,
             navigationOptions: {
                 header: null
             }
         },
-        archiveComponent: {
+        archive: {
             screen: ArchiveComponent,
             navigationOptions: {
                 header: null
@@ -115,13 +115,13 @@ const AppNavigation = createStackNavigator(
                 header: null
             }
         },
-        searchComponent: {
+        search: {
             screen: SearchComponent,
             navigationOptions: {
                 header: null
             }
         },
-        getLabelComponent: {
+        getLabel: {
             screen: GetLabelComponent,
             navigationOptions: {
                 header: null

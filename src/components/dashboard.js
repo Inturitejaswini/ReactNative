@@ -100,7 +100,7 @@ export class DashBoard extends React.Component {
     this.setState({
       searchOpen: !this.state.searchOpen
     });
-    this.props.navigation.navigate('searchComponent')
+    this.props.navigation.navigate('search')
   }
   handleGridView() {
     this.setState({
@@ -137,7 +137,7 @@ export class DashBoard extends React.Component {
             <ScrollView>
               <TouchableOpacity
                 onPress={() =>
-                  this.props.navigation.navigate('editComponent', {
+                  this.props.navigation.navigate('edit', {
                     display: key,
                     key: key.id
                   })}>
@@ -164,7 +164,7 @@ export class DashBoard extends React.Component {
           <View style={Align}>
             <TouchableOpacity
               onPress={() =>
-                this.props.navigation.navigate("editComponent", {
+                this.props.navigation.navigate("edit", {
                   display: key,
                   key: key.id
                 })}>

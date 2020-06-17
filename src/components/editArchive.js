@@ -131,7 +131,7 @@ export class EditArchiveComponent extends Component {
                 color: res.color
             })
         });
-        this.props.navigation.navigate("archiveComponent");
+        this.props.navigation.navigate("archive");
     };
     handleColor =(color) => {
         this.setState({

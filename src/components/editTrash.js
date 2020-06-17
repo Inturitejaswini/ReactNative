@@ -67,7 +67,7 @@ export class EditTrashComponent extends Component {
                 color: res.color
             })
         });
-        this.props.navigation.navigate("trashComponent");
+        this.props.navigation.navigate("trash");
     };
     handleColor = async (color) => {
         await this.setState({

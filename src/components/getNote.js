@@ -36,7 +36,7 @@ export class GetNoteComponent extends Component {
           <ScrollView>
             <TouchableOpacity
               onPress={() =>
-                this.props.navigation.navigate("editComponent", {
+                this.props.navigation.navigate("edit", {
                   display: key,
                   key: key.id
                 })}>
