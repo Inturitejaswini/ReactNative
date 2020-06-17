@@ -61,72 +61,72 @@ const AppNavigation = createStackNavigator(
                 header: null
             }
         },
-        getNoteComponent:{
-            screen:GetNoteComponent,
-            navigationOptions:{
-                header:null
+        getNoteComponent: {
+            screen: GetNoteComponent,
+            navigationOptions: {
+                header: null
             }
         },
-        editComponent:{
-            screen:EditComponent,
-            navigationOptions:{
-                header:null
+        editComponent: {
+            screen: EditComponent,
+            navigationOptions: {
+                header: null
             }
         },
-        createLabel:{
-            screen:CreateLabelComponent,
-            navigationOptions:{
-                header:null
+        createLabel: {
+            screen: CreateLabelComponent,
+            navigationOptions: {
+                header: null
             }
         },
-        trashComponent:{
-            screen:Trash,
-            navigationOptions:{
-                header:null
+        trashComponent: {
+            screen: Trash,
+            navigationOptions: {
+                header: null
             }
         },
-        archiveComponent:{
-            screen:ArchiveComponent,
-            navigationOptions:{
-                header:null
+        archiveComponent: {
+            screen: ArchiveComponent,
+            navigationOptions: {
+                header: null
             }
         },
-        getReminder:{
-            screen:ReminderComponent1,
-            navigationOptions:{
-                header:null
+        getReminder: {
+            screen: ReminderComponent1,
+            navigationOptions: {
+                header: null
             }
         },
-        editReminder:{
-            screen:EditReminderComponent,
-            navigationOptions:{
-                header:null
+        editReminder: {
+            screen: EditReminderComponent,
+            navigationOptions: {
+                header: null
             }
         },
-        editArchive:{
-            screen:EditArchiveComponent,
-            navigationOptions:{
-                header:null
+        editArchive: {
+            screen: EditArchiveComponent,
+            navigationOptions: {
+                header: null
             }
         },
-        editTrash:{
-            screen:EditTrashComponent,
-            navigationOptions:{
-                header:null
+        editTrash: {
+            screen: EditTrashComponent,
+            navigationOptions: {
+                header: null
             }
         },
-        searchComponent:{
-            screen:SearchComponent,
-            navigationOptions:{
-                header:null
+        searchComponent: {
+            screen: SearchComponent,
+            navigationOptions: {
+                header: null
             }
         },
-       getLabelComponent:{
-           screen:GetLabelComponent,
-           navigationOptions:{
-               header:null
-           }
-       },
+        getLabelComponent: {
+            screen: GetLabelComponent,
+            navigationOptions: {
+                header: null
+            }
+        },
     },
     {
         initialRouteName: "drawerComponent"
