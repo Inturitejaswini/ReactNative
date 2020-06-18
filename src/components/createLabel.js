@@ -40,7 +40,7 @@ export class CreateLabelComponent extends Component {
       })
     })
   }
-  handlearrow = () => {
+  handleArrow = () => {
     this.props.navigation.navigate('dashboard')
   }
   render() {
@@ -61,7 +61,7 @@ export class CreateLabelComponent extends Component {
     return (
       <View>
         <View style={styles.collaboratorcontainer}>
-          <TouchableOpacity onPress={this.handlearrow}>
+          <TouchableOpacity onPress={this.handleArrow}>
             <Icon name="arrow-left" size={35} />
           </TouchableOpacity>
           <Text style={styles.editlabeltext}>Edit labels</Text>
