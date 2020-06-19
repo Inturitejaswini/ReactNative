@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import { View, Text, Image, TouchableOpacity, ScrollView, ProgressBarAndroid } from "react-native";
-import Icon1 from "react-native-vector-icons/MaterialCommunityIcons";
-import Icon2 from "react-native-vector-icons/FontAwesome";
-import Icon from "react-native-vector-icons/Foundation";
+import ViewStreamIcon from "react-native-vector-icons/MaterialCommunityIcons";
+import LargeIcon from "react-native-vector-icons/FontAwesome";
+import ArchiveIcon from "react-native-vector-icons/Foundation";
 import { Card } from "react-native-elements";
 import styles from "../Styles";
 import { getNotes } from "../services/noteServices";
@@ -18,7 +18,7 @@ export class ArchiveComponent extends Component {
     }
     static navigationOptions = {
         drawerLabel: "Archive",
-        drawerIcon: <Icon name="archive" size={20} />
+        drawerIcon: <ArchiveIcon name="archive" size={20} />
     };
     componentDidMount() {
         getNotes().then(res => {
@@ -69,13 +69,12 @@ export class ArchiveComponent extends Component {
                                         key: key.id
                                     })}>
                                 <Card containerStyle={{
-                                    backgroundColor: key.color,
-                                    borderRadius: 10,
+                                    backgroundColor: key.color
                                 }}>
                                     <Text> {key.title}</Text>
                                     <Text> {key.description}</Text>
                                     <Text> {key.reminder}</Text>
-                                    <Text style={{ fontWeight: "bold" }}>{key.label}</Text>
+                                    <Text >{key.label}</Text>
                                 </Card>
                             </TouchableOpacity>
                         </ScrollView>
@@ -85,7 +84,7 @@ export class ArchiveComponent extends Component {
         });
         return (
             <ScrollView>
-                <Card containerStyle={{ height: 50, borderRadius: 10 }}>
+                <Card>
                     <View style={styles.archivedrawer}>
                         <View style={styles.archivedrawer1}>
                             <View>
@@ -103,14 +102,14 @@ export class ArchiveComponent extends Component {
                             <View style={styles.archivegrid}>
                                 {!this.state.listOpen ? (
                                     <TouchableOpacity >
-                                        <Icon1
+                                        <ViewStreamIcon
                                             name="view-stream"
                                             size={32}
                                             onPress={() => { this.handleGridView() }} />
                                     </TouchableOpacity>
                                 ) : (
                                         <TouchableOpacity>
-                                            <Icon2
+                                            <LargeIcon
                                                 name="th-large"
                                                 size={25}
                                                 onPress={() => { this.handleGridView() }} />
