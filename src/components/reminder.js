@@ -3,7 +3,7 @@ import { Button, View, Text, Card, TouchableOpacity, Picker } from "react-native
 import styles from "../Styles";
 import DateTimePicker from "react-native-modal-datetime-picker";
 import { Divider } from "react-native-elements";
-import Icon1 from "react-native-vector-icons/MaterialCommunityIcons";
+import ReminderIcon from "react-native-vector-icons/MaterialCommunityIcons";
 import Dialog from "react-native-dialog";
 export default class ReminderComponent extends Component {
   constructor(props) {
@@ -29,9 +29,9 @@ export default class ReminderComponent extends Component {
     this.setState({ dialogVisible: false });
   };
 
-  handleSave = async () => {
+  handleSave = () => {
     let value = this.state.date + " " + this.state.time;
-    await this.setState({
+     this.setState({
       reminderValue: value,
       dialogVisible: false
     });
@@ -70,7 +70,7 @@ export default class ReminderComponent extends Component {
   };
   static navigationOptions = {
     drawerLabel: "Reminder",
-    drawerIcon: <Icon1 name="bell-plus-outline" size={20} />
+    drawerIcon: <ReminderIcon name="bell-plus-outline" size={20} />
   };
   render() {
     return (
