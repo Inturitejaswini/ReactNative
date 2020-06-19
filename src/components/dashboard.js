@@ -17,12 +17,12 @@ import styles from '../Styles';
 import { DrawerActions } from 'react-navigation-drawer';
 import { View, Text, TouchableOpacity, ProgressBarAndroid, Image } from 'react-native';
 import { Card } from "react-native-elements";
-import { Icon, Icon5, Icon7 } from "react-native-vector-icons/Entypo";
-import { Icon0, Icon4, Icon2 } from "react-native-vector-icons/AntDesign";
-import Icon6 from "react-native-vector-icons/MaterialIcons";
+import { GridIcon, BrushIcon, ImageIcon } from "react-native-vector-icons/Entypo";
+import { PlusCircleIcon, CheckSquare, BulbIcon } from "react-native-vector-icons/AntDesign";
+import KeyboardVoice from "react-native-vector-icons/MaterialIcons";
 import { Avatar, Divider } from "react-native-elements";
 import Dialog from "react-native-dialog";
-import { Icon1, Icon3 } from "react-native-vector-icons/MaterialCommunityIcons";
+import { ViewStreamIcon, AccountCircleIcon } from "react-native-vector-icons/MaterialCommunityIcons";
 import { getNotes } from '../services/noteServices'
 import { userLogOut, uploadProfile } from '../services/userServices'
 import { ScrollView } from 'react-native-gesture-handler';
@@ -79,8 +79,8 @@ export class DashBoard extends React.Component {
           fileData: response.data,
           fileUri: response.uri
         });
-        uploadProfile(source).then(async res => {
-          await this.setState({
+        uploadProfile(source).then(res => {
+          this.setState({
             resImage: res
           });
         })
@@ -121,7 +121,7 @@ export class DashBoard extends React.Component {
   };
   static navigationOptions = {
     drawerLabel: "Notes",
-    drawerIcon: <Icon2 name="bulb1" size={20} />
+    drawerIcon: <BulbIcon name="bulb" size={20} />
 
   };
 
@@ -143,7 +143,8 @@ export class DashBoard extends React.Component {
                   })}>
                 <Card containerStyle={{
                   backgroundColor: key.color,
-                  borderRadius: 10}}>
+                  borderRadius: 10
+                }}>
                   <View>
                     <Text>{key.title}</Text>
                     <Text>{key.description}</Text>
@@ -219,13 +220,13 @@ export class DashBoard extends React.Component {
               <View style={styles.grid}>
                 {!this.state.listOpen ? (
                   <TouchableOpacity >
-                    <Icon1
+                    <ViewStreamIcon
                       name="view-stream"
                       size={30} onPress={() => this.handleGridView()} />
                   </TouchableOpacity>
                 ) : (
                     <TouchableOpacity>
-                      <Icon
+                      <GridIcon
                         name="grid"
                         size={30} onPress={() => this.handleGridView()} />
                     </TouchableOpacity>
@@ -234,7 +235,7 @@ export class DashBoard extends React.Component {
               <View >
                 <View>
                   <TouchableOpacity>
-                    <Icon3
+                    <AccountCircleIcon
                       name="account-circle"
                       size={40}
                       rounded
@@ -246,7 +247,7 @@ export class DashBoard extends React.Component {
                   <Dialog.Container visible={this.state.dialogVisible}>
                     <View style={{ flexDirection: "row", marginTop: -10 }}>
                       <View>
-                        <Icon3
+                        <AccountCircleIcon
                           name="account-circle"
                           size={40}
                           rounded
@@ -255,18 +256,18 @@ export class DashBoard extends React.Component {
                           onPress={this.handleProfile}
                         />
                       </View>
-                      <View style={{ left: 20 }}>
-                        <Text style={{ fontWeight: "bold" }}>
+                      <View>
+                        <Text>
                           Inturitejaswini
                           </Text>
                         <Text>chowdarytejaswini2gmail.com</Text>
                       </View>
                     </View>
-                    <View style={{ marginTop: 10 }}>
+                    <View>
                       <Dialog.Button label="Manage Your Google Account"></Dialog.Button>
                     </View>
-                    <Divider style={{ marginTop: 15 }} />
-                    <View style={{ left: 70, flexDirection: "row" }}>
+                    <Divider />
+                    <View>
                       <Dialog.Button
                         label="Cancel"
                         onPress={this.handleCancel}
@@ -301,24 +302,24 @@ export class DashBoard extends React.Component {
         <Card style={styles.input4}>
           <View style={styles.input5}>
             <View >
-              <Icon4 name="checksquareo" size={20} >
-              </Icon4>
+              <CheckSquare name="checksquareo" size={20} >
+              </CheckSquare>
             </View>
             <View >
-              <Icon5 name="brush" size={20}>
-              </Icon5>
+              <BrushIcon name="brush" size={20}>
+              </BrushIcon>
             </View>
             <View >
-              <Icon6 name="keyboard-voice" size={20}>
-              </Icon6>
+              <KeyboardVoice name="keyboard-voice" size={20}>
+              </KeyboardVoice>
             </View>
             <View >
-              <Icon7 name="image" size={20}>
-              </Icon7>
+              <ImageIcon name="image" size={20}>
+              </ImageIcon>
             </View>
             <View>
               <TouchableOpacity  >
-                <Icon0
+                <PlusCircleIcon
                   name="pluscircleo"
                   size={30}
                   onPress={() => this.handleNote()}
