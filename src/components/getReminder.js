@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { View, Text, Image, TouchableOpacity, ScrollView, ProgressBarAndroid } from "react-native";
-import Icon1 from "react-native-vector-icons/MaterialCommunityIcons";
-import Icon2 from "react-native-vector-icons/FontAwesome";
+import ReminderIcon from "react-native-vector-icons/MaterialCommunityIcons";
+import ThLargeIcon from "react-native-vector-icons/FontAwesome";
 import { Card } from "react-native-elements";
 import styles from "../Styles";
 import { getNotes } from "../services/noteServices";
@@ -17,7 +17,7 @@ export class ReminderComponent1 extends Component {
     }
     static navigationOptions = {
         drawerLabel: "Reminder",
-        drawerIcon: <Icon1 name="bell-plus-outline" size={20}></Icon1>
+        drawerIcon: <ReminderIcon name="bell-plus-outline" size={20}></ReminderIcon>
     };
     componentDidMount() {
         getNotes().then(res => {
@@ -81,7 +81,7 @@ export class ReminderComponent1 extends Component {
                             <View >
                                 {!this.state.listOpen ? (
                                     <TouchableOpacity>
-                                        <Icon1
+                                        <ReminderIcon
                                             name="view-stream"
                                             size={32}
                                             onPress={() => {
@@ -90,7 +90,7 @@ export class ReminderComponent1 extends Component {
                                     </TouchableOpacity>
                                 ) : (
                                         <TouchableOpacity >
-                                            <Icon2
+                                            <ThLargeIcon
                                                 name="th-large"
                                                 size={25}
                                                 onPress={() => {
