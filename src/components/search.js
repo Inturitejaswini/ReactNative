@@ -16,10 +16,10 @@
 import React, { Component } from 'react'
 import { View, Button, Text, TouchableOpacity, TextInput } from 'react-native'
 import styles from '../Styles';
-import { Icon1, Icon2, Icon } from "react-native-vector-icons/MaterialCommunityIcons";
+import { ArrowLeftIcon, BellPlusIcon, LabelIcon } from "react-native-vector-icons/MaterialCommunityIcons";
 import { Divider, Card } from 'react-native-paper';
 import { getNotes } from "../services/noteServices";
-import Icon4 from "react-native-vector-icons/Ionicons";
+import ArchiveIcon from "react-native-vector-icons/Ionicons";
 export class SearchComponent extends Component {
     constructor() {
         super();
@@ -61,7 +61,7 @@ export class SearchComponent extends Component {
                 <View style={styles.searchView}>
                     <View >
                         <TouchableOpacity onPress={() => { this.handleSearchArrow() }} >
-                            <Icon1
+                            <ArrowLeftIcon
                                 name="arrow-left"
                                 size={25} />
                         </TouchableOpacity>
@@ -73,7 +73,7 @@ export class SearchComponent extends Component {
                             onChangeText={this.handleSearchValue} />
                     </View>
                 </View>
-                <Divider type='horizontal' style={{ height: 2 }}></Divider>
+                <Divider type='horizontal' style={styles.height}></Divider>
                 <View style={styles.typetext}>
                     <Text>Types</Text>
                 </View>
@@ -82,7 +82,7 @@ export class SearchComponent extends Component {
                         <TouchableOpacity>
                             <Card style={styles.searchcard} onPress={() =>
                                 this.props.navigation.navigate('getReminder')}>
-                                <Icon2 name="bell-plus-outline" size={20} style={styles.bell} />
+                                <BellPlusIcon name="bell-plus-outline" size={20} style={styles.bell} />
                                 <Text style={styles.bellText}>Reminders</Text>
                             </Card>
                         </TouchableOpacity>
@@ -91,7 +91,7 @@ export class SearchComponent extends Component {
                         <TouchableOpacity>
                             <Card style={styles.listcard} onPress={() =>
                                 this.props.navigation.navigate('archiveComponent')}>
-                                <Icon4 name="md-archive" size={20} style={styles.checklist} />
+                                <ArchiveIcon name="md-archive" size={20} style={styles.checklist} />
                                 <Text style={styles.checklisttext}>Archive</Text>
                             </Card>
                         </TouchableOpacity>
@@ -103,7 +103,7 @@ export class SearchComponent extends Component {
                 <View>
                     <TouchableOpacity>
                         <Card style={styles.labelcard}>
-                            <Icon name="label-outline" size={20} style={styles.labelicon} />
+                            <LabelIcon name="label-outline" size={20} style={styles.labelicon} />
                             <Text style={styles.labeltext1}>Labels</Text>
                         </Card>
                     </TouchableOpacity>
