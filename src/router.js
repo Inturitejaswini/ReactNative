@@ -5,7 +5,7 @@ import Forget from './screens/forgetPassword'
 import DashBoard from './components/dashboard'
 import Notes from './components/notes'
 import CreateLabelComponent from './components/createLabel'
-import ReminderComponent from './components/remainder'
+import ReminderComponent from './components/reminder'
 import GetNoteComponent from './components/getNote'
 import drawerComponent from './components/drawer'
 import EditComponent from './components/edit'
@@ -55,7 +55,7 @@ const AppNavigation = createStackNavigator(
                 header: null
             }
         },
-        remainder: {
+        reminder: {
             screen: ReminderComponent,
             navigationOptions: {
                 header: null
