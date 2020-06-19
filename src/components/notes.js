@@ -18,14 +18,14 @@ import { View, Button, Text, Image, TouchableOpacity, FlatList } from 'react-nat
 import styles from '../Styles';
 import { TextInput, ScrollView, } from 'react-native-gesture-handler';
 import { RBSheet, RBSheet1, RBSheet2, RBSheet3 } from "react-native-raw-bottom-sheet";
-import Iconp from 'react-native-vector-icons/Feather'
+import PlusIconSquare from 'react-native-vector-icons/Feather'
 import ReminderComponent from './remainder'
-import Iconc from "react-native-vector-icons/Entypo";
-import { Icon0, Icon2, Icon9, Icon3 } from "react-native-vector-icons/AntDesign";
-import { Icon1, IconM } from "react-native-vector-icons/MaterialCommunityIcons";
-import Icon10 from "react-native-vector-icons/Feather";
+import CrossIcon from "react-native-vector-icons/Entypo";
+import { DeletIcon, ShareAltIcon, PlusIcon, PushPinIcon, LabelIcon } from "react-native-vector-icons/AntDesign";
+import { AccountIcon, ClockIcon } from "react-native-vector-icons/MaterialCommunityIcons";
+import MoreIcon from "react-native-vector-icons/Feather";
 import { Divider, IconButton, Chip } from 'react-native-paper';
-import Icon from "react-native-vector-icons/Ionicons";
+import ArchiveIcon from "react-native-vector-icons/Ionicons";
 import { CheckBox } from 'react-native-elements'
 import { getNotes, getAllLabels, deleteNotes, pinNotes, UnpinNotes, updateColor, createLabels, noteCollaborator, createNotes } from '../services/noteServices'
 var CheckValue = [];
@@ -82,8 +82,8 @@ export class Notes extends React.Component {
         });
     };
     getLabels() {
-        getAllLabels().then(async res => {
-            await this.setState({
+        getAllLabels().then(res => {
+            this.setState({
                 labelData: res.data.data.details
             })
         })
@@ -102,6 +102,7 @@ export class Notes extends React.Component {
             color: this.state.color,
         };
         updateColor(data).then(res => {
+            return res
         });
     };
     handlePin = () => {
@@ -113,6 +114,7 @@ export class Notes extends React.Component {
             isPined: this.state.isPined,
         }
         pinNotes(data).then(res => {
+            return res
         });
     };
     handleUnPin = () => {
@@ -124,6 +126,7 @@ export class Notes extends React.Component {
             isPined: this.state.isPined,
         }
         UnpinNotes(data).then(res => {
+            return res
         });
     };
     handleDelete = () => {
@@ -133,15 +136,17 @@ export class Notes extends React.Component {
             isDeleted: this.state.isDeleted
         };
         deleteNotes(data).then(res => {
+            return res
         });
     };
-    handleArchiveNote = async () => {
-        await this.setState({ isArchived: true })
+    handleArchiveNote = () => {
+        this.setState({ isArchived: true })
         let data = {
             noteIdList: [this.props.navigation.state.params.key],
             isArchived: this.state.isArchived
         };
         archiveNotes(data).then(res => {
+            return res
         });
         this.props.navigation.navigate("dashboard");
 
@@ -157,7 +162,8 @@ export class Notes extends React.Component {
             color: this.state.color,
             label: this.state.label
         };
-        createNotes(data).then(response => {
+        createNotes(data).then(res => {
+            return res
         });
         this.props.navigation.navigate("dashboard");
     };
@@ -186,6 +192,7 @@ export class Notes extends React.Component {
             label: this.state.label
         };
         createLabels(data).then(res => {
+            return res
         });
     };
     handleSelection = (labelName) => {
@@ -193,10 +200,10 @@ export class Notes extends React.Component {
             selectedLabels: labelName
         });
     };
-    handleLabelArrow = async (labelValue) => {
+    handleLabelArrow = (labelValue) => {
         this.RBSheet3.close();
         this.RBSheet.close();
-        await this.setState({
+        this.setState({
             labelValue: labelValue
         });
     };
@@ -217,8 +224,7 @@ export class Notes extends React.Component {
         });
         return (
             <View style={{
-                backgroundColor: this.state.color,
-                height: "100%"
+                backgroundColor: this.state.color
             }}>
                 <ScrollView>
                     <View>
@@ -231,13 +237,13 @@ export class Notes extends React.Component {
                         <View>
                             <TouchableOpacity >
                                 {!this.state.isPined ? (
-                                    <Icon3
+                                    <PushPinIcon
                                         onPress={() => this.handlePin()}
                                         name="pushpino"
                                         size={25}
                                     />
                                 ) : (
-                                        <Icon3
+                                        <PushPinIcon
                                             onPress={() => this.handleUnPin()}
                                             name="pushpin"
                                             size={25} />
@@ -248,9 +254,9 @@ export class Notes extends React.Component {
                             <ReminderComponent reminderProps={this.reminderData} ></ReminderComponent>
                         </View>
                         <View style={styles.icons2}>
-                            <Icon name="md-archive"
+                            <ArchiveIcon name="md-archive"
                                 onPress={() => this.handleArchiveNote()}
-                                style={styles.archiveicon} size={22}></Icon>
+                                style={styles.archiveicon} size={22}></ArchiveIcon>
                         </View>
                     </View>
                     <View style={styles.textinput} >
@@ -269,7 +275,7 @@ export class Notes extends React.Component {
                         {this.state.reminderDate.length > 1 &&
                             <TouchableOpacity>
                                 <Chip style={styles.chip}>
-                                    <IconM name="clock-outline" size={15} color="black" />
+                                    <ClockIcon name="clock-outline" size={15} color="black" />
                                     {this.state.reminderDate}
                                 </Chip>
                             </TouchableOpacity>}
@@ -280,7 +286,7 @@ export class Notes extends React.Component {
                     <View style={styles.rbsheet1}>
                         <View>
                             <TouchableOpacity onPress={() => { this.RBSheet1.open() }}>
-                                <Icon9 name="plussquareo" size={20} ></Icon9>
+                                <PlusIcon name="plussquareo" size={20} ></PlusIcon>
                                 <RBSheet1
                                     ref={ref => {
                                         this.RBSheet1 = ref;
@@ -298,7 +304,7 @@ export class Notes extends React.Component {
                         </View>
                         <View>
                             <TouchableOpacity onPress={() => { this.RBSheet.open() }}>
-                                <Icon10 name="more-vertical" size={20}></Icon10>
+                                <MoreIcon name="more-vertical" size={20}></MoreIcon>
                                 <RBSheet
                                     ref={ref => {
                                         this.RBSheet = ref;
@@ -314,7 +320,7 @@ export class Notes extends React.Component {
                                     <View style={styles.deleteicons}>
                                         <View style={styles.delete1}>
                                             <TouchableOpacity onPress={() => this.handleDelete()}>
-                                                <Icon0
+                                                <DeletIcon
                                                     name="delete"
                                                     size={20} />
                                                 <Text style={styles.deleteText}>Delete</Text>
@@ -322,18 +328,18 @@ export class Notes extends React.Component {
                                         </View>
                                         <View
                                             style={styles.send}>
-                                            <Icon2 name="sharealt" size={22} />
+                                            <ShareAltIcon name="sharealt" size={22} />
                                             <Text style={styles.send}>send</Text>
                                         </View>
                                         <View style={styles.collaboratorIcon}>
                                             <TouchableOpacity onPress={() => { this.RBSheet2.open() }}>
-                                                <Icon2 name="addusergroup" size={25} />
+                                                <ShareAltIcon name="addusergroup" size={25} />
                                                 <Text style={styles.collaboratortext} >collaborator</Text>
                                             </TouchableOpacity>
                                         </View>
                                         <View style={styles.labelIcon} >
                                             <TouchableOpacity onPress={() => { this.RBSheet3.open() }}>
-                                                <Icon1 name="label-outline" size={25} />
+                                                <LabelIcon name="label-outline" size={25} />
                                                 <Text style={styles.labels}>Labels</Text>
                                             </TouchableOpacity>
                                         </View>
@@ -344,7 +350,7 @@ export class Notes extends React.Component {
                                                 renderItem={({ item }) => (
                                                     <View>
                                                         <IconButton
-                                                            style={{ backgroundColor: item.hexcode, borderRadius: 15, left: -12 }}
+                                                            style={{ backgroundColor: item.hexcode }}
                                                             value={item.hexcode}
                                                             size={60}
                                                             onPress={() => this.handleColor(item.hexcode)} />
@@ -372,7 +378,7 @@ export class Notes extends React.Component {
                                 <View
                                     style={styles.collaboratorcontainer}>
                                     <TouchableOpacity>
-                                        <Iconc name="cross" size={35}
+                                        <CrossIcon name="cross" size={35}
                                             onPress={() => this.handleCrossicon()} />
                                     </TouchableOpacity>
                                     <Text style={styles.collaboratortext}>Collaborators</Text>
@@ -381,13 +387,13 @@ export class Notes extends React.Component {
                                 </View>
                                 <Divider type='horizontal' style={styles.height}></Divider>
                                 <View style={styles.accounticon}>
-                                    <Icon1 name="account-circle" size={45} color="gray" />
+                                    <AccountIcon name="account-circle" size={45} color="gray" />
                                     <Text style={styles.mailtext}>
                                         chowdarytejaswini2@gmail.com
                                        </Text>
                                 </View>
                                 <View style={styles.accountcircle}>
-                                    <Icon1 name="account-circle-outline" size={45} color="gray" />
+                                    <AccountIcon name="account-circle-outline" size={45} color="gray" />
                                     <TextInput
                                         style={styles.Textinput}
                                         placeholder="enter the mail to share..."
@@ -431,7 +437,7 @@ export class Notes extends React.Component {
                             <View>
                                 <TouchableOpacity onPress={this.handleLabelDone} style={styles.done}>
                                     <View >
-                                        <Iconp name="plus" size={23} color="#5499C7" />
+                                        <PlusIconSquare name="plus" size={23} color="#5499C7" />
                                     </View>
                                     <View style={styles.labelText}>
                                         <Text style={styles.createLabel1}>Create :" {this.state.labelName} "</Text>
