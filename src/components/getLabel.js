@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Text, ScrollView } from "react-native";
 import { getAllLabels } from "../services/noteServices";
-import Icon from "react-native-vector-icons/MaterialCommunityIcons";
+import LabelIcon from "react-native-vector-icons/MaterialCommunityIcons";
 import styles from "../Styles";
 export class GetLabelComponent extends Component {
   constructor() {
@@ -13,7 +13,7 @@ export class GetLabelComponent extends Component {
 
   static navigationOptions = {
     drawerLabel: "Labels",
-    drawerIcon: <Icon name="label-outline" size={25} />
+    drawerIcon: <LabelIcon name="label-outline" size={25} />
   };
   componentDidMount() {
     getAllLabels().then(response => {
