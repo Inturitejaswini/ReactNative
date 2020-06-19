@@ -1,14 +1,14 @@
 import React, { Component } from "react";
-import {Icon,Icon3} from "react-native-vector-icons/MaterialIcons";
-import Icon1 from "react-native-vector-icons/MaterialCommunityIcons";
-import {Icon2,Icon0,Icon5} from "react-native-vector-icons/AntDesign";
-import Icon4 from "react-native-vector-icons/FontAwesome";
-import {RBSheet,RBSheet2} from "react-native-raw-bottom-sheet";
+import { DoneIcon, UnArchiveIcon } from "react-native-vector-icons/MaterialIcons";
+import ArrowLeft from "react-native-vector-icons/MaterialCommunityIcons";
+import { ShareAltIcon, DeleteIcon, PushPinIcon } from "react-native-vector-icons/AntDesign";
+import ElipsisIcon from "react-native-vector-icons/FontAwesome";
+import { RBSheet, RBSheet2 } from "react-native-raw-bottom-sheet";
 import { IconButton } from "react-native-paper";
 import styles from "../Styles";
-import { editNotes,UnArchiveNotes,deleteNotes,pinNotes,UnpinNotes,updateColor,createLabels} from '../services/noteServices'
+import { editNotes, UnArchiveNotes, deleteNotes, pinNotes, UnpinNotes, updateColor, createLabels } from '../services/noteServices'
 import ReminderComponent from '../components/remainder'
-import {Text, TextInput, View,FlatList,TouchableOpacity} from "react-native";
+import { Text, TextInput, View, FlatList, TouchableOpacity } from "react-native";
 const colors = [
     { name: "blue", hexcode: " #39a78e" },
     { name: "violet", hexcode: "#7DCEA0" },
@@ -37,7 +37,7 @@ export class EditArchiveComponent extends Component {
             isArchived: false,
             isPined: false,
             key: '',
-            key1:'',
+            key1: '',
             colors: false,
             labelValue: "",
             selectedLabels: "",
@@ -52,8 +52,8 @@ export class EditArchiveComponent extends Component {
             reminderDate: value
         });
     };
-    handlePin =  () => {
-         this.setState({
+    handlePin = () => {
+        this.setState({
             isPined: true
         });
         let data = {
@@ -61,10 +61,11 @@ export class EditArchiveComponent extends Component {
             isPined: this.state.isPined,
         }
         pinNotes(data).then(res => {
-        });
+            return res
+        })
     };
-    handleUnPin =  () => {
-         this.setState({
+    handleUnPin = () => {
+        this.setState({
             isPined: false
         });
         let data = {
@@ -72,35 +73,39 @@ export class EditArchiveComponent extends Component {
             isPined: this.state.isPined,
         }
         UnpinNotes(data).then(res => {
-        });
+            return res
+        })
     };
-    handleDelete =  () => {
-         this.setState({ isDeleted: true })
+    handleDelete = () => {
+        this.setState({ isDeleted: true })
         let data = {
             noteIdList: [this.props.navigation.state.params.key],
             isDeleted: this.state.isDeleted
         };
         deleteNotes(data).then(res => {
-        });
+            return res
+        })
     };
     handleUnArchiveNote = () => {
-         this.setState({ isArchived: false })
+        this.setState({ isArchived: false })
         let data = {
             noteIdList: [this.props.navigation.state.params.key],
             isArchived: this.state.isArchived
         };
         UnArchiveNotes(data).then(res => {
-        });
+            return res
+        })
     };
-    
-    handleLabelDone =  () => {
+
+    handleLabelDone = () => {
         this.setState({ label: true })
         let data = {
             noteIdList: [this.props.navigation.state.params.key],
             label: this.state.label
         };
         createLabels(data).then(res => {
-        });
+            return res
+        })
     };
     handleSelectLabel = (labelName) => {
         this.setState({
@@ -133,7 +138,7 @@ export class EditArchiveComponent extends Component {
         });
         this.props.navigation.navigate("archive");
     };
-    handleColor =(color) => {
+    handleColor = (color) => {
         this.setState({
             color: color
         });
@@ -142,7 +147,8 @@ export class EditArchiveComponent extends Component {
             color: this.state.color,
         };
         updateColor(data).then(res => {
-        });
+            return res
+        })
     };
     componentDidMount() {
         this.setState({
@@ -158,27 +164,27 @@ export class EditArchiveComponent extends Component {
     render() {
         return (
             <View style={{
-                backgroundColor: this.state.color,
-                height: "100%"}}>
+                backgroundColor: this.state.color
+            }}>
                 <View style={styles.view}>
                     <View>
-                        <Icon1
+                        <ArrowLeft
                             name="arrow-left"
                             size={25}
                             onPress={() => { this.handleEditCard() }} />
                     </View>
                     <View style={styles.editIcons}>
-                    <View>
+                        <View>
                             <TouchableOpacity >
                                 {!this.state.isPined ? (
-                                    <Icon5
-                                    onPress={() => this.handlePin()}
+                                    <PushPinIcon
+                                        onPress={() => this.handlePin()}
                                         name="pushpino"
                                         size={25}
                                     />
                                 ) : (
-                                        <Icon5
-                                        onPress={() => this.handleUnPin()}
+                                        <PushPinIcon
+                                            onPress={() => this.handleUnPin()}
                                             name="pushpin"
                                             size={25} />
                                     )}
@@ -188,7 +194,7 @@ export class EditArchiveComponent extends Component {
                             <ReminderComponent reminderProps={this.reminderData} ></ReminderComponent>
                         </View>
                         <View style={styles.unarchive}>
-                            <Icon3
+                            <UnArchiveIcon
                                 name="unarchive"
                                 size={25}
                                 onPress={() => this.handleUnArchiveNote()} />
@@ -217,7 +223,7 @@ export class EditArchiveComponent extends Component {
                     </Text>
                 </View>
                 <View>
-                    <Icon4
+                    <ElipsisIcon
                         name="ellipsis-v"
                         size={25}
                         onPress={() => { this.RBSheet.open() }} />
@@ -232,24 +238,24 @@ export class EditArchiveComponent extends Component {
                         }}>
                         <View style={styles.delete}>
                             <TouchableOpacity onPress={() => this.handleDelete()}>
-                                <Icon0
+                                <DeleteIcon
                                     name="delete"
                                     size={20} />
                                 <Text>Delete</Text>
                             </TouchableOpacity>
                         </View>
                         <View>
-                            <Icon2 name="sharealt" size={22} />
+                            <ShareAltIcon name="sharealt" size={22} />
                             <Text style={styles.send}>send</Text>
                         </View>
                         <View
                             style={styles.collaborator}>
-                            <Icon2 name="addusergroup" size={25} />
+                            <ShareAltIcon name="addusergroup" size={25} />
                             <Text style={styles.collaboratorText}
                                 onPress={() => { this.RBSheet1.open() }}>collaborator</Text>
                         </View>
                         <View>
-                            <Icon1 name="label-outline" size={25} />
+                            <LabelIcon name="label-outline" size={25} />
                             <Text
                                 onPress={() => { this.RBSheet2.open(); }}>Labels</Text>
                         </View>
@@ -284,11 +290,11 @@ export class EditArchiveComponent extends Component {
                                 flexDirection: "column"
                             }
                         }}>
-                        <View style={{ flexDirection: "row", margin: 10 }}>
+                        <View style={styles.ArrowLeft}>
                             <View>
                                 <TouchableOpacity
                                     onPress={() => this.handleLabelArrow(this.state.selectedLabels)}>
-                                    <Icon1 name="arrow-left" size={25} />
+                                    <ArrowLeft name="arrow-left" size={25} />
                                 </TouchableOpacity>
                             </View>
                             <View>
@@ -300,11 +306,12 @@ export class EditArchiveComponent extends Component {
                                 />
                             </View>
                             <View>
-                                <Icon
+                                <DoneIcon
                                     name="done"
                                     size={25}
                                     onPress={() => {
-                                        this.handleLabelDone();}} />
+                                        this.handleLabelDone();
+                                    }} />
                             </View>
                         </View>
                     </RBSheet2>
