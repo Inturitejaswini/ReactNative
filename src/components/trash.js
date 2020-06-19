@@ -1,12 +1,12 @@
 import React, { Component } from "react";
 import { View, TextInput, Text, Image, TouchableOpacity, ScrollView,ProgressBarAndroid} from "react-native";
-import Icon1 from "react-native-vector-icons/MaterialCommunityIcons";
-import Icon2 from "react-native-vector-icons/FontAwesome";
+import ViewStreamIcon from "react-native-vector-icons/MaterialCommunityIcons";
+import ThLargeIcon from "react-native-vector-icons/FontAwesome";
 import { Card } from "react-native-elements";
 import styles from "../Styles";
 import { getNotes } from "../services/noteServices";
 import { DrawerActions } from "react-navigation-drawer";
-import Icona from "react-native-vector-icons/AntDesign"
+import DeleteIcon from "react-native-vector-icons/AntDesign"
 export class Trash extends Component {
   constructor() {
     super();
@@ -17,7 +17,7 @@ export class Trash extends Component {
   }
   static navigationOptions = {
     drawerLabel: "Delete",
-    drawerIcon: <Icona name="delete" size={20} />
+    drawerIcon: <DeleteIcon name="delete" size={20} />
   };
   componentDidMount() {
     getNotes().then(res => {
@@ -75,7 +75,7 @@ export class Trash extends Component {
                 <Text > {key.title}</Text>
                 <Text> {key.description}</Text>
                 <Text > {key.reminder}</Text>
-                <Text style={{ fontWeight: "bold" }}>{key.label}</Text>
+                <Text >{key.label}</Text>
               </Card>
             </TouchableOpacity>
           </View>
@@ -84,10 +84,10 @@ export class Trash extends Component {
     });
     return (
       <View>
-        <Card containerStyle={{ height: 50, borderRadius: 10 }}>
+        <Card style={styles.trashCard}>
           <View style={styles.trashdrawer}>
             <View style={styles.delete}>
-            <View style={{ top: -5 }}>
+            <View>
               <TouchableOpacity
                 onPress={() => this.props.navigation.dispatch(DrawerActions.openDrawer())}>
                 <Image source={require("../assets/menuicon.png")}></Image>
@@ -105,7 +105,7 @@ export class Trash extends Component {
               style={styles.trashgrid}>
                 {!this.state.listOpen ? (
                   <TouchableOpacity>
-                    <Icon1
+                    <ViewStreamIcon
                       name="view-stream"
                       size={32}
                       onPress={() => {
@@ -114,7 +114,7 @@ export class Trash extends Component {
                   </TouchableOpacity>
                 ) : (
                     <TouchableOpacity>
-                      <Icon2
+                      <ThLargeIcon
                         name="th-large"
                         size={25}
                         onPress={() => {

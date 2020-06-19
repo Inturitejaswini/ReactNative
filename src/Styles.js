@@ -734,6 +734,10 @@ const styles = StyleSheet.create({
         flexDirection: "row",
         left: 10,
         marginTop: 18
+    },
+    trashCard:{
+        height: 50, 
+        borderRadius: 10
     }
 
 });
