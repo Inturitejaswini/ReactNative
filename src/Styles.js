@@ -729,6 +729,11 @@ const styles = StyleSheet.create({
     searchView:{
         flexDirection: "row", 
         alignItems: 'center'
+    },
+    deleteIcon:{
+        flexDirection: "row",
+        left: 10,
+        marginTop: 18
     }
 
 });

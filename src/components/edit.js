@@ -1,9 +1,9 @@
 import React, { Component } from "react";
-import { Icon1, IconM } from "react-native-vector-icons/MaterialCommunityIcons";
-import { Icon2, Icon0, Icon5 } from "react-native-vector-icons/AntDesign";
-import Icon3 from "react-native-vector-icons/Foundation";
-import Icon4 from "react-native-vector-icons/FontAwesome";
-import Iconp from 'react-native-vector-icons/Feather'
+import { ArrowLeftIcon, ClockOutlineIcon } from "react-native-vector-icons/MaterialCommunityIcons";
+import { SharealtIcon, DeleteIcon, PushPinIcon, LabelOutlineIcon } from "react-native-vector-icons/AntDesign";
+import ArchiveIcon from "react-native-vector-icons/Foundation";
+import ElipsisIcon from "react-native-vector-icons/FontAwesome";
+import PlusIcon from 'react-native-vector-icons/Feather'
 import { RBSheet, RBSheet2 } from "react-native-raw-bottom-sheet";
 import { IconButton, Divider, Chip } from "react-native-paper";
 import styles from "../Styles";
@@ -60,9 +60,8 @@ export class EditComponent extends Component {
             reminder: this.state.reminderDate
         }
         reminderUpdate(data).then(res => {
-        })
-            .catch(err => {
-            })
+            return res
+        }).catch(err => alert(err))
     }
     handlePin = () => {
         this.setState({
@@ -73,7 +72,8 @@ export class EditComponent extends Component {
             isPined: this.state.isPined,
         }
         pinNotes(data).then(res => {
-        });
+            return res
+        }).catch(err => alert(err))
     };
     handleUnPin = () => {
         this.setState({
@@ -84,7 +84,8 @@ export class EditComponent extends Component {
             isPined: this.state.isPined,
         }
         UnpinNotes(data).then(res => {
-        });
+            return res
+        }).catch(err => alert(err))
     };
     handleDelete = () => {
         this.setState({ isDeleted: true })
@@ -93,7 +94,8 @@ export class EditComponent extends Component {
             isDeleted: this.state.isDeleted
         };
         deleteNotes(data).then(res => {
-        });
+            return res
+        }).catch(err => alert(err))
         this.props.navigation.navigate("dashboard");
     };
     handleArchiveNote = () => {
@@ -103,7 +105,8 @@ export class EditComponent extends Component {
             isArchived: this.state.isArchived
         };
         archiveNotes(data).then(res => {
-        });
+            return res
+        }).catch(err => alert(err))
         this.props.navigation.navigate("dashboard");
     };
     handleLabelDone = () => {
@@ -114,7 +117,8 @@ export class EditComponent extends Component {
             isDeleted: false
         };
         createLabels(data).then(res => {
-        });
+            return res
+        }).catch(err => alert(err))
     };
 
     handleSelection = (labelName) => {
@@ -141,7 +145,6 @@ export class EditComponent extends Component {
             color: this.state.color,
             labelValue: this.state.label
         };
-
         editNotes(data).then(res => {
             this.setState({
                 color: res.color
@@ -158,7 +161,8 @@ export class EditComponent extends Component {
             color: this.state.color,
         };
         updateColor(data).then(res => {
-        });
+            return res
+        }).catch(err => alert(err))
     };
     componentDidMount() {
         this.handledetails();
@@ -177,8 +181,8 @@ export class EditComponent extends Component {
         })
     }
     getLabels() {
-        getAllLabels().then(async res => {
-            await this.setState({
+        getAllLabels().then(res => {
+            this.setState({
                 labelData: res.data.data.details
             })
         })
@@ -200,12 +204,10 @@ export class EditComponent extends Component {
         });
         return (
             <View style={{
-                backgroundColor: this.state.color,
-                height: "100%"
-            }}>
+                backgroundColor: this.state.color}}>
                 <View>
                     <View style={styles.arrowLeft}>
-                        <Icon1
+                        <ArrowLeftIcon
                             name="arrow-left"
                             size={25}
                             onPress={() => { this.handleEditCard() }} />
@@ -214,13 +216,13 @@ export class EditComponent extends Component {
                         <View>
                             <TouchableOpacity >
                                 {!this.state.isPined ? (
-                                    <Icon5
+                                    <PushPinIcon
                                         onPress={() => this.handlePin()}
                                         name="pushpino"
                                         size={25}
                                     />
                                 ) : (
-                                        <Icon5
+                                        <PushPinIcon
                                             onPress={() => this.handleUnPin()}
                                             name="pushpin"
                                             size={25} />
@@ -231,7 +233,7 @@ export class EditComponent extends Component {
                             <ReminderComponent reminderProps={this.reminderData}></ReminderComponent>
                         </View>
                         <View style={styles.archive}>
-                            <Icon3
+                            <ArchiveIcon
                                 name="archive"
                                 size={25}
                                 onPress={() => this.handleArchiveNote()} />
@@ -261,13 +263,13 @@ export class EditComponent extends Component {
                     {this.state.reminderDate.length > 1 &&
                         <TouchableOpacity>
                             <Chip style={styles.chip}>
-                                <IconM name="clock-outline" size={15} color="black" />
+                                <ClockOutlineIcon name="clock-outline" size={15} color="black" />
                                 {this.state.reminderDate}
                             </Chip>
                         </TouchableOpacity>}
                 </View>
                 <View>
-                    <Icon4
+                    <ElipsisIcon
                         name="ellipsis-v"
                         size={25}
                         onPress={() => { this.RBSheet.open() }} />
@@ -280,13 +282,9 @@ export class EditComponent extends Component {
                                 flexDirection: "column",
                             }
                         }}>
-                        <View style={{
-                            flexDirection: "row",
-                            left: 10,
-                            marginTop: 18
-                        }}>
+                        <View style={styles.deleteIcon}>
                             <TouchableOpacity onPress={() => this.handleDelete()}>
-                                <Icon0
+                                <DeleteIcon
                                     name="delete"
                                     size={20} />
                                 <Text style={styles.delete}>Delete</Text>
@@ -294,17 +292,17 @@ export class EditComponent extends Component {
                         </View>
                         <View
                             style={styles.sendIcon}>
-                            <Icon2 name="sharealt" size={22} />
+                            <SharealtIcon name="sharealt" size={22} />
                             <Text style={styles.send}>send</Text>
                         </View>
                         <View
                             style={styles.collaborator}>
-                            <Icon2 name="addusergroup" size={25} />
+                            <AddusergroupIcon name="addusergroup" size={25} />
                             <Text>collaborator</Text>
                         </View>
                         <View
                             style={styles.labelIcon} >
-                            <Icon1 name="label-outline" size={25} />
+                            <LabelOutlineIcon name="label-outline" size={25} />
                             <Text onPress={() => { this.RBSheet2.open() }}>Labels</Text>
                         </View>
                         <View>
@@ -319,7 +317,7 @@ export class EditComponent extends Component {
                                             size={40}
                                             onPress={() => this.handleColor(item.hexcode)} />
                                     </View>
-                                )}/>
+                                )} />
                         </View>
                     </RBSheet>
                 </View>
@@ -339,7 +337,7 @@ export class EditComponent extends Component {
                             <View>
                                 <TouchableOpacity
                                     onPress={() => this.handleLabelArrow(this.state.selectedLabels)}>
-                                    <Icon1 name="arrow-left" size={25} />
+                                    <ArrowLeftIcon name="arrow-left" size={25} />
                                 </TouchableOpacity>
                             </View>
                             <View>
@@ -355,7 +353,7 @@ export class EditComponent extends Component {
                         <View>
                             <TouchableOpacity onPress={this.handleLabelDone} style={styles.done}>
                                 <View >
-                                    <Iconp name="plus" size={23} color="#5499C7" />
+                                    <PlusIcon name="plus" size={23} color="#5499C7" />
                                 </View>
                                 <View style={styles.labelText}>
                                     <Text style={styles.labelName}>Create :" {this.state.labelName} "</Text>
