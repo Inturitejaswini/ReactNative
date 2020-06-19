@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import { Icon1, Icon2, Icon0 } from "react-native-vector-icons/MaterialCommunityIcons";
-import Icon4 from "react-native-vector-icons/FontAwesome";
+import { ArrowLeft, DeleteForeverIcon, RestoreIcon } from "react-native-vector-icons/MaterialCommunityIcons";
+import ElipsisIcon from "react-native-vector-icons/FontAwesome";
 import RBSheet from "react-native-raw-bottom-sheet";
 import { IconButton, Colors } from "react-native-paper";
 import styles from "../Styles";
@@ -35,22 +35,24 @@ export class EditTrashComponent extends Component {
         };
     }
 
-    handleDeleteForever = async () => {
-        await this.setState({ isDeleted: false })
+    handleDeleteForever = () => {
+        this.setState({ isDeleted: false })
         let data = {
             noteIdList: [this.props.navigation.state.params.key],
             isDeleted: this.state.isDeleted
         };
         deleteForever(data).then(res => {
+            return res
         });
     };
-    handleRestore = async () => {
-        await this.setState({ isDeleted: true })
+    handleRestore = () => {
+        this.setState({ isDeleted: true })
         let data = {
             noteIdList: [this.props.navigation.state.params.key],
             isDeleted: this.state.isDeleted
         };
         restore(data).then(res => {
+            return res
         });
         this.props.navigation.navigate("dashboard")
     };
@@ -69,8 +71,8 @@ export class EditTrashComponent extends Component {
         });
         this.props.navigation.navigate("trash");
     };
-    handleColor = async (color) => {
-        await this.setState({
+    handleColor = (color) => {
+        this.setState({
             color: color
         });
         let data = {
@@ -78,6 +80,7 @@ export class EditTrashComponent extends Component {
             color: this.state.color,
         };
         updateColor(data).then(res => {
+            return res
         });
     };
     componentDidMount() {
@@ -91,11 +94,10 @@ export class EditTrashComponent extends Component {
     render() {
         return (
             <View style={{
-                backgroundColor: this.state.color,
-                height: "100%"
+                backgroundColor: this.state.color
             }}>
                 <View style={styles.arrowLeft}>
-                    <Icon1
+                    <ArrowLeft
                         name="arrow-left"
                         size={25}
                         onPress={() => { this.handleEditCard() }} />
@@ -121,7 +123,7 @@ export class EditTrashComponent extends Component {
                 </View>
                 <View
                     style={styles.elipsis}>
-                    <Icon4
+                    <ElipsisIcon
                         name="ellipsis-v"
                         size={25}
                         onPress={() => { this.RBSheet.open() }} />
@@ -134,13 +136,9 @@ export class EditTrashComponent extends Component {
                                 flexDirection: "column",
                             }
                         }}>
-                        <View style={{
-                            flexDirection: "row",
-                            left: 10,
-                            marginTop: 18
-                        }}>
+                        <View style={styles.deleteIcon}>
                             <TouchableOpacity onPress={() => this.handleRestore()}>
-                                <Icon0
+                                <RestoreIcon
                                     name="restore-clock"
                                     size={20} />
                                 <Text style={styles.restor}>Restore</Text>
@@ -149,7 +147,7 @@ export class EditTrashComponent extends Component {
                         <View
                             style={styles.deleteForever}>
                             <TouchableOpacity onPress={() => this.handleDeleteForever()}>
-                                <Icon2 name="delete-forever" size={22} />
+                                <DeleteForeverIcon name="delete-forever" size={22} />
                                 <Text style={styles.deleteForeverText}>DeleteForever</Text>
                             </TouchableOpacity>
                         </View>
@@ -162,8 +160,7 @@ export class EditTrashComponent extends Component {
                                         style={styles.colorBtn}>
                                         <IconButton
                                             style={{
-                                                backgroundColor: item.hexcode,
-                                                borderRadius: 15
+                                                backgroundColor: item.hexcode
                                             }}
                                             value={item.hexcode}
                                             size={40}
