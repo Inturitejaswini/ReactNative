@@ -142,7 +142,7 @@ export class EditReminderComponent extends Component {
         this.props.navigation.navigate("getReminder");
     };
     handleColor = (color) => {
-         this.setState({
+        this.setState({
             color: color
         });
         let data = {
@@ -167,7 +167,8 @@ export class EditReminderComponent extends Component {
     render() {
         return (
             <View style={{
-                backgroundColor: this.state.color}}>
+                backgroundColor: this.state.color
+            }}>
                 <View >
                     <View style={styles.arrowLeft}>
                         <ArrowLeft
@@ -268,9 +269,9 @@ export class EditReminderComponent extends Component {
                                 data={colors}
                                 horizontal={true}
                                 renderItem={({ item }) => (
-                                    <View style={{ marginTop: 10 }}>
+                                    <View >
                                         <IconButton
-                                            style={{ backgroundColor: item.hexcode, borderRadius: 15 }}
+                                            style={{ backgroundColor: item.hexcode }}
                                             value={item.hexcode}
                                             size={40}
                                             onPress={() => this.handleColor(item.hexcode)} />
