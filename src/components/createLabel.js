@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 import { ScrollView, Text, TextInput, View, TouchableOpacity } from "react-native";
 import styles from '../Styles';
-import Icon from "react-native-vector-icons/MaterialCommunityIcons";
-import Icon1 from "react-native-vector-icons/Entypo";
-import Icon2 from "react-native-vector-icons/MaterialIcons";
+import PlusIcon from "react-native-vector-icons/MaterialCommunityIcons";
+import CrossIcon from "react-native-vector-icons/Entypo";
+import DoneIcon from "react-native-vector-icons/MaterialIcons";
 import { Divider } from 'react-native-paper';
 import { getAllLabels } from '../services/noteServices'
 import { CheckBox } from 'react-native-elements'
@@ -23,10 +23,10 @@ export class CreateLabelComponent extends Component {
   }
   static navigationOptions = {
     drawerLabel: "CreateLabel",
-    drawerIcon: <Icon name="plus" size={25} />,
+    drawerIcon: <PlusIcon name="plus" size={25} />,
   };
-  handleSelection = async (labelName) => {
-    await this.setState({
+  handleSelection = (labelName) => {
+    this.setState({
       selectedLabels: labelName
     });
   };
@@ -34,8 +34,8 @@ export class CreateLabelComponent extends Component {
     this.getLabels()
   }
   getLabels() {
-    getAllLabels().then(async res => {
-      await this.setState({
+    getAllLabels().then(res => {
+      this.setState({
         labelData: res.data.data.details
       })
     })
@@ -69,7 +69,7 @@ export class CreateLabelComponent extends Component {
         <Divider type='horizontal' style={styles.height}></Divider>
         <View style={styles.editcrossicon}>
           <View style={styles.crossicon}>
-            <Icon1 name="cross" size={25} />
+            <CrossIcon name="cross" size={25} />
           </View>
           <View >
             <TextInput
@@ -79,7 +79,7 @@ export class CreateLabelComponent extends Component {
               onChangeText={this.handleSearchValue} />
           </View>
           <View>
-            <Icon2
+            <DoneIcon
               style={styles.doneicon}
               name="done"
               size={25} />
