@@ -45,8 +45,7 @@ export class ArchiveComponent extends Component {
                             })}>
                             <Card
                                 containerStyle={{
-                                    backgroundColor: key.color,
-                                    borderRadius: 10
+                                    backgroundColor: key.color
                                 }}>
                                 <Text> {key.title}</Text>
                                 <Text> {key.description}</Text>
