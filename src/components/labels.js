@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { View, Text, TouchableOpacity, TextInput, AsyncStorage } from 'react-native'
 import { CheckBox } from 'react-native-elements'
 import styles from "../Styles";
-import Icon from 'react-native-vector-icons/Feather'
+import ArrowLeftIcon from 'react-native-vector-icons/Feather'
 import { createLabel, getAllLabels } from '../services/noteServices'
 var tempCheckValues = [];
 export default class Labels extends Component {
@@ -19,7 +19,7 @@ export default class Labels extends Component {
             selectedLabelsId: [],
         }
     }
-    handleAddLabel = async () => {
+    handleAddLabel = () => {
         this.setState({ userId: userId })
         const data = {
             label: this.state.labelName,
@@ -30,15 +30,17 @@ export default class Labels extends Component {
         createLabel(data).then(res => {
             this.getLabels()
         }).catch(err => {
+            alert(err)
         })
     }
     componentDidMount() {
         this.getLabels()
     }
     getLabels() {
-        getAllLabels().then(async res => {
-            await this.setState({ allLables: res.data.data.details })
+        getAllLabels().then( res => {
+             this.setState({ allLables: res.data.data.details })
         }).catch(err => {
+            alert(err)
         })
     }
     checkBoxChanged(id, label, value) {
@@ -72,7 +74,7 @@ export default class Labels extends Component {
                 <View style={styles.labelHeaderContainer}>
                     <View style={styles.arrowIconContainer}>
                         <TouchableOpacity onPress={() => { this.handleCloseLabels(this.state.selectedLabels, this.state.selectedLabelsId) }}>
-                            <Icon name="arrow-left" size={25} color="black" />
+                            <ArrowLeftIcon name="arrow-left" size={25} color="black" />
                         </TouchableOpacity>
                     </View>
                     <View style={styles.labelTextFldContainer}>
@@ -84,7 +86,7 @@ export default class Labels extends Component {
                 <View>
                     <TouchableOpacity onPress={this.handleAddLabel} style={styles.plusIconAndLableContainer}>
                         <View style={styles.plusIconContainer}>
-                            <Icon name="plus" size={23} color="#FFA500" />
+                            <ArrowLeftIcon name="plus" size={23} color="#FFA500" />
                         </View>
                         <View style={styles.labelTextContainer}>
                             <Text style={styles.createLabel1}>Create "{this.state.labelName}"</Text>
