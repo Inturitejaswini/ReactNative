@@ -114,7 +114,7 @@ export class DashBoard extends React.Component {
     this.setState({ dialogVisible: false });
   };
   handleSignOut = () => {
-    userLogOut().then(response => {
+    userLogOut().then({
     });
     this.props.navigation.navigate("login");
     this.setState({ dialogVisible: false });
