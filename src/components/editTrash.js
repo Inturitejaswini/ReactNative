@@ -68,8 +68,8 @@ export class EditTrashComponent extends Component {
             this.setState({
                 color: res.color
             })
-        });
         this.props.navigation.navigate("trash");
+        },100);
     };
     handleColor = (color) => {
         this.setState({
