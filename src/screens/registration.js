@@ -81,7 +81,8 @@ export class RegisterComponent extends Component {
         password: this.state.password,
         service: "advance",
       }
-      register(user).then((response) => {
+      register(user).then((res) => {
+        return res
       })
     }
   }
