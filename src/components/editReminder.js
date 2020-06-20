@@ -8,7 +8,7 @@ import { RBSheet, RBSheet2 } from "react-native-raw-bottom-sheet";
 import { IconButton } from "react-native-paper";
 import styles from "../Styles";
 import { editNotes, archiveNotes, deleteNotes, pinNotes, UnpinNotes, updateColor, createLabels } from '../services/noteServices'
-import ReminderComponent from '../components/remainder'
+import ReminderComponent from './reminder'
 import { Text, TextInput, View, FlatList, TouchableOpacity } from "react-native";
 const colors = [
     { name: "blue", hexcode: " #b8abb9" },

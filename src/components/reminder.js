@@ -31,7 +31,7 @@ export default class ReminderComponent extends Component {
 
   handleSave = () => {
     let value = this.state.date + " " + this.state.time;
-     this.setState({
+    this.setState({
       reminderValue: value,
       dialogVisible: false
     });

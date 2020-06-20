@@ -8,7 +8,7 @@ import { RBSheet, RBSheet2 } from "react-native-raw-bottom-sheet";
 import { IconButton, Divider, Chip } from "react-native-paper";
 import styles from "../Styles";
 import { editNotes, archiveNotes, deleteNotes, pinNotes, UnpinNotes, updateColor, createLabels, getAllLabels, reminderUpdate } from '../services/noteServices'
-import ReminderComponent from '../components/remainder'
+import ReminderComponent from './reminder'
 import { ScrollView, Text, TextInput, View, FlatList, TouchableOpacity } from "react-native";
 import { CheckBox } from 'react-native-elements'
 const colors = [
