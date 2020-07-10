@@ -55,7 +55,6 @@ export class SearchComponent extends Component {
         });
     };
     render() {
-
         return (
             <View >
                 <View style={styles.searchView}>

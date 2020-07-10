@@ -129,7 +129,7 @@ export class DashBoard extends React.Component {
     let Align = this.state.listOpen ? styles.listAlign : styles.gridAlign;
     let pinCount = 0
     let unPinCount = 0
-    var noteDetails = this.state.notes.map(key => {
+    let noteDetails = this.state.notes.map(key => {
       if (key.isPined !== true && key.isDeleted !== true && key.isArchived !== true) {
         unPinCount++
         return (
