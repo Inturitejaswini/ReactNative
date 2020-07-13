@@ -29,7 +29,7 @@ export class LoginComponent extends Component {
       password: '',
       snackIsVisible: false,
     };
-    
+
   }
   handleEmail = (event) => {
     this.setState({email: event});
@@ -37,7 +37,7 @@ export class LoginComponent extends Component {
   handlePassword = (event) => {
     this.setState({password: event});
   };
-  handleLogin = async () => {
+  handleLogin =  () => {
     if (this.state.email === '') {
       this.setState({
         snackIsVisible: !this.state.snackIsVisible,
