@@ -1,31 +1,30 @@
-/******************************************************************************
- *  Execution       :   1. default node         cmd> node dashBoard.js
- *                      2. if nodemon installed cmd> nodemodule dashBoard.js
- * 
- *  Purpose         : creating dashboard application page.
- *  @description    
- * 
- *  @file           :dashBoard.jsx
- *  @overview       : creating dashBoard page.
- *  @module         :dashBoard - This is optional if expeclictly its an npm or local package
- *  @author         :Tejaswini<chowdarytejaswini2@gmail.com>
- *  @version        :1.0
- *  @since          :24-0-2020
- ******************************************************************************/
 import * as React from 'react';
 import styles from '../Styles';
-import { DrawerActions } from 'react-navigation-drawer';
-import { View, Text, TouchableOpacity, ProgressBarAndroid, Image } from 'react-native';
-import { Card } from "react-native-elements";
-import { GridIcon, BrushIcon, ImageIcon } from "react-native-vector-icons/Entypo";
-import { PlusCircleIcon, CheckSquare, BulbIcon } from "react-native-vector-icons/AntDesign";
-import KeyboardVoice from "react-native-vector-icons/MaterialIcons";
-import { Avatar, Divider } from "react-native-elements";
-import Dialog from "react-native-dialog";
-import { ViewStreamIcon, AccountCircleIcon } from "react-native-vector-icons/MaterialCommunityIcons";
-import { getNotes } from '../services/noteServices'
-import { userLogOut, uploadProfile } from '../services/userServices'
-import { ScrollView } from 'react-native-gesture-handler';
+import {DrawerActions} from 'react-navigation-drawer';
+import {
+  View,
+  Text,
+  TouchableOpacity,
+  ProgressBarAndroid,
+  Image,
+} from 'react-native';
+import {Card} from 'react-native-elements';
+import {GridIcon, BrushIcon, ImageIcon} from 'react-native-vector-icons/Entypo';
+import {
+  PlusCircleIcon,
+  CheckSquare,
+  BulbIcon,
+} from 'react-native-vector-icons/AntDesign';
+import KeyboardVoice from 'react-native-vector-icons/MaterialIcons';
+import {Avatar, Divider} from 'react-native-elements';
+import Dialog from 'react-native-dialog';
+import {
+  ViewStreamIcon,
+  AccountCircleIcon,
+} from 'react-native-vector-icons/MaterialCommunityIcons';
+import {getNotes} from '../services/noteServices';
+import {userLogOut, uploadProfile} from '../services/userServices';
+import {ScrollView} from 'react-native-gesture-handler';
 import ImagePicker from 'react-native-image-picker';
 export class DashBoard extends React.Component {
   constructor() {
@@ -40,98 +39,100 @@ export class DashBoard extends React.Component {
       visible: false,
       searchOpen: false,
       labelValue: [],
-      fileData: "",
-      filePath: "",
-      fileUri: ""
-    }
+      fileData: '',
+      filePath: '',
+      fileUri: '',
+    };
   }
   componentDidMount() {
     this.getNotes();
   }
   getNotes = () => {
-    getNotes().then(res => {
+    getNotes().then((res) => {
       this.setState({
-        notes: res.data.data.data
+        notes: res.data.data.data,
       });
     });
   };
   handleProfile = () => {
     const options = {
-      title: "Select Avatar",
+      title: 'Select Avatar',
       customButtons: [
-        { name: 'customOptionKey', title: 'Choose Photo from Custom Option' },
+        {name: 'customOptionKey', title: 'Choose Photo from Custom Option'},
       ],
       storageOptions: {
         skipBackup: true,
-        path: "images"
-      }
-    }
+        path: 'images',
+      },
+    };
     ImagePicker.showImagePicker(options, (response) => {
       if (response.didCancel) {
       } else if (response.error) {
       } else if (response.customButton) {
       } else {
         const source = {
-          uri: response.uri
+          uri: response.uri,
         };
         this.setState({
           filePath: response,
           fileData: response.data,
-          fileUri: response.uri
+          fileUri: response.uri,
         });
-        uploadProfile(source).then(res => {
-          this.setState({
-            resImage: res
-          });
-        })
-          .catch(err => {
-          });
+        uploadProfile(source)
+          .then((res) => {
+            this.setState({
+              resImage: res,
+            });
+          })
+          .catch((err) => {});
       }
     });
-  }
+  };
 
   openDrawer = () => {
-    this.setState({ openDrawer: !this.state.openDrawer })
-  }
+    this.setState({openDrawer: !this.state.openDrawer});
+  };
   handleNote = () => {
-    this.props.navigation.navigate("notes");
+    this.props.navigation.navigate('notes');
   };
   handleSearch = () => {
     this.setState({
-      searchOpen: !this.state.searchOpen
+      searchOpen: !this.state.searchOpen,
     });
-    this.props.navigation.navigate('search')
-  }
+    this.props.navigation.navigate('search');
+  };
   handleGridView() {
     this.setState({
-      listOpen: !this.state.listOpen
+      listOpen: !this.state.listOpen,
     });
   }
   showDialog = () => {
-    this.setState({ dialogVisible: true });
+    this.setState({dialogVisible: true});
   };
   handleCancel = () => {
-    this.setState({ dialogVisible: false });
+    this.setState({dialogVisible: false});
   };
   handleSignOut = () => {
-    userLogOut().then({
-    });
-    this.props.navigation.navigate("login");
-    this.setState({ dialogVisible: false });
+    userLogOut().then({});
+    this.props.navigation.navigate('login');
+    this.setState({dialogVisible: false});
   };
   static navigationOptions = {
-    drawerLabel: "Notes",
-    drawerIcon: <BulbIcon name="bulb" size={20} />
-
+    drawerLabel: 'Notes',
+    drawerIcon: <BulbIcon name="bulb" size={20} />,
   };
 
   render() {
     let Align = this.state.listOpen ? styles.listAlign : styles.gridAlign;
-    let pinCount = 0
-    let unPinCount = 0
-    let noteDetails = this.state.notes.map(key => {
-      if (key.isPined !== true && key.isDeleted !== true && key.isArchived !== true) {
-        unPinCount++
+    let pinCount = 0;
+    let unPinCount = 0;
+    let noteDetails = this.state.notes.map((key) => {
+      if (
+        key.isPined !== true &&
+        key.isDeleted !== true &&
+        key.isArchived !== true
+      ) {
+        unPinCount++;
         return (
           <View style={Align}>
             <ScrollView>
@@ -139,12 +140,14 @@ export class DashBoard extends React.Component {
                 onPress={() =>
                   this.props.navigation.navigate('edit', {
                     display: key,
-                    key: key.id
-                  })}>
-                <Card containerStyle={{
-                  backgroundColor: key.color,
-                  borderRadius: 10
-                }}>
+                    key: key.id,
+                  })
+                }>
+                <Card
+                  containerStyle={{
+                    backgroundColor: key.color,
+                    borderRadius: 10,
+                  }}>
                   <View>
                     <Text>{key.title}</Text>
                     <Text>{key.description}</Text>
@@ -155,24 +158,30 @@ export class DashBoard extends React.Component {
               </TouchableOpacity>
             </ScrollView>
           </View>
-        )
+        );
       }
     });
-    let pinNoteDetails = this.state.notes.map(key => {
-      if (key.isPined === true && key.isDeleted !== true && key.isArchived !== true) {
+    let pinNoteDetails = this.state.notes.map((key) => {
+      if (
+        key.isPined === true &&
+        key.isDeleted !== true &&
+        key.isArchived !== true
+      ) {
         pinCount++;
         return (
           <View style={Align}>
             <TouchableOpacity
               onPress={() =>
-                this.props.navigation.navigate("edit", {
+                this.props.navigation.navigate('edit', {
                   display: key,
-                  key: key.id
-                })}>
-              <Card containerStyle={{
-                backgroundColor: key.color,
-                borderRadius: 10
-              }}>
+                  key: key.id,
+                })
+              }>
+              <Card
+                containerStyle={{
+                  backgroundColor: key.color,
+                  borderRadius: 10,
+                }}>
                 <Text> {key.title}</Text>
                 <Text> {key.description}</Text>
                 <Text> {key.reminder}</Text>
@@ -185,54 +194,65 @@ export class DashBoard extends React.Component {
     });
     return (
       <View style={styles.dashboardContainer}>
-        <Card style={styles.top} containerStyle={{ height: 50, borderRadius: 10 }}>
+        <Card
+          style={styles.top}
+          containerStyle={{height: 50, borderRadius: 10}}>
           <View style={styles.appicons}>
             <View style={styles.menuitem}>
-              <View >
+              <View>
                 <TouchableOpacity
-                  onPress={() => this.props.navigation.dispatch(DrawerActions.openDrawer())}>
-                  <Image source={require("../assets/menuicon.png")}>
-                  </Image>
+                  onPress={() =>
+                    this.props.navigation.dispatch(DrawerActions.openDrawer())
+                  }>
+                  <Image source={require('../assets/menuicon.png')}></Image>
                 </TouchableOpacity>
               </View>
-              <View >
-                <Image source={require("../assets/keepicon.png")} style={styles.keepicon}></Image>
+              <View>
+                <Image
+                  source={require('../assets/keepicon.png')}
+                  style={styles.keepicon}></Image>
               </View>
-              <View containerStyle={{ left: 10 }}>
+              <View containerStyle={{left: 10}}>
                 <Text style={styles.fundootext}>
-                  <Text style={{ color: "red" }}>F</Text>
-                  <Text style={{ color: "aqua" }}>u</Text>
-                  <Text style={{ color: "blue" }}>n</Text>
-                  <Text style={{ color: "darkGreen" }}>d</Text>
-                  <Text style={{ color: "purple" }}>o</Text>
-                  <Text style={{ color: "orange" }}>o</Text>
-                  <Text style={{ color: "black" }}>Note</Text>
+                  <Text style={{color: 'red'}}>F</Text>
+                  <Text style={{color: 'aqua'}}>u</Text>
+                  <Text style={{color: 'blue'}}>n</Text>
+                  <Text style={{color: 'darkGreen'}}>d</Text>
+                  <Text style={{color: 'purple'}}>o</Text>
+                  <Text style={{color: 'orange'}}>o</Text>
+                  <Text style={{color: 'black'}}>Note</Text>
                 </Text>
               </View>
             </View>
             <View style={styles.searchicon}>
               <View style={styles.search}>
-                <TouchableOpacity onPress={() => { this.handleSearch() }}>
-                  <Image source={require("../assets/searchicon.png")}>
-                  </Image>
+                <TouchableOpacity
+                  onPress={() => {
+                    this.handleSearch();
+                  }}>
+                  <Image source={require('../assets/searchicon.png')}></Image>
                 </TouchableOpacity>
               </View>
               <View style={styles.grid}>
                 {!this.state.listOpen ? (
-                  <TouchableOpacity >
+                  <TouchableOpacity>
                     <ViewStreamIcon
                       name="view-stream"
-                      size={30} onPress={() => this.handleGridView()} />
+                      size={30}
+                      onPress={() => this.handleGridView()}
+                    />
                   </TouchableOpacity>
                 ) : (
-                    <TouchableOpacity>
-                      <GridIcon
-                        name="grid"
-                        size={30} onPress={() => this.handleGridView()} />
-                    </TouchableOpacity>
-                  )}
+                  <TouchableOpacity>
+                    <GridIcon
+                      name="grid"
+                      size={30}
+                      onPress={() => this.handleGridView()}
+                    />
+                  </TouchableOpacity>
+                )}
               </View>
-              <View >
+              <View>
                 <View>
                   <TouchableOpacity>
                     <AccountCircleIcon
@@ -245,7 +265,7 @@ export class DashBoard extends React.Component {
                     />
                   </TouchableOpacity>
                   <Dialog.Container visible={this.state.dialogVisible}>
-                    <View style={{ flexDirection: "row", marginTop: -10 }}>
+                    <View style={{flexDirection: 'row', marginTop: -10}}>
                       <View>
                         <AccountCircleIcon
                           name="account-circle"
@@ -257,9 +277,7 @@ export class DashBoard extends React.Component {
                         />
                       </View>
                       <View>
-                        <Text>
-                          Inturitejaswini
-                          </Text>
+                        <Text>Inturitejaswini</Text>
                         <Text>chowdarytejaswini2gmail.com</Text>
                       </View>
                     </View>
@@ -292,33 +310,30 @@ export class DashBoard extends React.Component {
               <View style={styles.getNoteCard}>{noteDetails}</View>
             </View>
           ) : (
-              <ProgressBarAndroid
-                color="gray"
-                progress={0.9}
-                style={styles.progress} />
-            )}
+            <ProgressBarAndroid
+              color="gray"
+              progress={0.9}
+              style={styles.progress}
+            />
+          )}
         </ScrollView>
 
         <Card style={styles.input4}>
           <View style={styles.input5}>
-            <View >
-              <CheckSquare name="checksquareo" size={20} >
-              </CheckSquare>
-            </View>
-            <View >
-              <BrushIcon name="brush" size={20}>
-              </BrushIcon>
-            </View>
-            <View >
-              <KeyboardVoice name="keyboard-voice" size={20}>
-              </KeyboardVoice>
-            </View>
-            <View >
-              <ImageIcon name="image" size={20}>
-              </ImageIcon>
+            <View>
+              <CheckSquare name="checksquareo" size={20}></CheckSquare>
             </View>
             <View>
-              <TouchableOpacity  >
+              <BrushIcon name="brush" size={20}></BrushIcon>
+            </View>
+            <View>
+              <KeyboardVoice name="keyboard-voice" size={20}></KeyboardVoice>
+            </View>
+            <View>
+              <ImageIcon name="image" size={20}></ImageIcon>
+            </View>
+            <View>
+              <TouchableOpacity>
                 <PlusCircleIcon
                   name="pluscircleo"
                   size={30}
@@ -328,11 +343,9 @@ export class DashBoard extends React.Component {
             </View>
           </View>
         </Card>
-
       </View>
     );
   }
 }
 
-
-export default DashBoard
+export default DashBoard;
