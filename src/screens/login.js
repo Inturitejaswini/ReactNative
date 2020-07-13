@@ -29,6 +29,7 @@ export class LoginComponent extends Component {
       password: '',
       snackIsVisible: false,
     };
+    
   }
   handleEmail = (event) => {
     this.setState({email: event});
