@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {View, Button, Text} from 'react-native';
-import {forget} from '../services/userServices';
+import {userForgetPassword} from '../services/userServices';
 import {Card} from 'react-native-elements';
 import styles from '../Styles';
 import Snackbar from 'react-native-snackbar-component';
@@ -27,7 +27,7 @@ export class Forgetpassword extends Component {
       const user = {
         email: this.state.email,
       };
-      forget(user);
+      userForgetPassword(user);
     }
   };
   render() {

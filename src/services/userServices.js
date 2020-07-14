@@ -9,7 +9,7 @@ export default function userRegistration(data) {
 export function UserLogin(data) {
   return axios.post(Config.REACT_APP_BASE_URL + configApi.login, data);
 }
-export function forget(data) {
+export function userForgetPassword(data) {
   return axios.post(Config.REACT_APP_BASE_URL + configApi.forgetPassword, data);
 }
 
