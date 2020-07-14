@@ -150,12 +150,12 @@ export class EditComponent extends Component {
       title: this.state.title,
       description: this.state.description,
       isDeleted: this.state.isDeleted,
-      noteId: this.props.navigation.state.params.key,
       reminder: this.state.reminderDate,
       isArchived: this.state.isArchived,
       isPined: this.state.isPined,
       color: this.state.color,
       labelValue: this.state.label,
+      noteId: this.props.navigation.state.params.key
     };
     editNotes(data).then((res) => {
       this.setState({
