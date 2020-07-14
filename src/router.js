@@ -1,7 +1,7 @@
 import {createStackNavigator} from 'react-navigation-stack';
 import LoginComponent from './screens/login';
 import RegisterComponent from './screens/registration';
-import Forget from './screens/forgetPassword';
+import Forgetpassword from './screens/forgetPassword';
 import DashBoard from './components/dashboard';
 import Notes from './components/notes';
 import CreateLabelComponent from './components/createLabel';
@@ -32,7 +32,7 @@ const AppNavigation = createStackNavigator(
       },
     },
     forgetPassword: {
-      screen: Forget,
+      screen: Forgetpassword,
       navigationOptions: {
         header: null,
       },
