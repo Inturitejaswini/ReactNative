@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {View, Button, Text, TouchableOpacity, TextInput} from 'react-native';
+import {View, Text, TouchableOpacity, TextInput} from 'react-native';
 import styles from '../Styles';
 import {
   ArrowLeftIcon,
