@@ -243,10 +243,7 @@ export class Notes extends React.Component {
       );
     });
     return (
-      <View
-        style={{
-          backgroundColor: this.state.color,
-        }}>
+      <View style={{backgroundColor: this.state.color}}>
         <ScrollView>
           <View>
             <TouchableOpacity onPress={() => this.handleNote()}>
