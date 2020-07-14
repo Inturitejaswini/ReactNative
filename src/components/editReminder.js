@@ -18,7 +18,7 @@ import {
   pinNotes,
   UnpinNotes,
   updateColor,
-  createLabels,
+  createLabels
 } from '../services/noteServices';
 import ReminderComponent from './reminder';
 import {Text, TextInput, View, FlatList, TouchableOpacity} from 'react-native';
@@ -36,7 +36,7 @@ const colors = [
   {name: 'blue', hexcode: '#D2B4DE'},
   {name: 'gray', hexcode: '#ABB2B9'},
   {name: 'salmon', hexcode: '#98AFC7'},
-  {name: 'mistyRose', hexcode: '#74a775'},
+  {name: 'mistyRose', hexcode: '#74a775'}
 ];
 export class EditReminderComponent extends Component {
   constructor() {
@@ -55,13 +55,13 @@ export class EditReminderComponent extends Component {
       labelValue: '',
       selectedLabels: '',
       labelData: [],
-      label: false,
+      label: false
     };
     this.reminderData = this.reminderData.bind(this);
   }
   reminderData = (value) => {
     this.setState({
-      reminderDate: value,
+      reminderDate: value
     });
   };
   handlePin = () => {
@@ -70,7 +70,7 @@ export class EditReminderComponent extends Component {
     });
     let data = {
       noteIdList: [this.props.navigation.state.params.key],
-      isPined: this.state.isPined,
+      isPined: this.state.isPined
     };
     pinNotes(data);
   };
@@ -80,7 +80,7 @@ export class EditReminderComponent extends Component {
     });
     let data = {
       noteIdList: [this.props.navigation.state.params.key],
-      isPined: this.state.isPined,
+      isPined: this.state.isPined
     };
     UnpinNotes(data);
   };
@@ -88,7 +88,7 @@ export class EditReminderComponent extends Component {
     this.setState({isDeleted: true});
     let data = {
       noteIdList: [this.props.navigation.state.params.key],
-      isDeleted: this.state.isDeleted,
+      isDeleted: this.state.isDeleted
     };
     deleteNotes(data);
     this.props.navigation.navigate('dashboard');
@@ -97,7 +97,7 @@ export class EditReminderComponent extends Component {
     this.setState({isArchived: true});
     let data = {
       noteIdList: [this.props.navigation.state.params.key],
-      isArchived: this.state.isArchived,
+      isArchived: this.state.isArchived
     };
     archiveNotes(data);
     this.props.navigation.navigate('dashboard');
@@ -106,21 +106,21 @@ export class EditReminderComponent extends Component {
     this.setState({label: true});
     let data = {
       noteIdList: [this.props.navigation.state.params.key],
-      label: this.state.label,
+      label: this.state.label
     };
     console.warn('label data', data);
     createLabels(data);
   };
   handleSelectLabel = (labelName) => {
     this.setState({
-      selectedLabels: labelName,
+      selectedLabels: labelName
     });
   };
   handleLabelArrow = (labelValue) => {
     this.RBSheet2.close();
     this.RBSheet.close();
     this.setState({
-      labelValue: labelValue,
+      labelValue: labelValue
     });
   };
   handleEditCard = () => {
@@ -133,22 +133,22 @@ export class EditReminderComponent extends Component {
       isArchived: this.state.isArchived,
       isPined: this.state.isPined,
       color: this.state.color,
-      labelValue: this.state.labelValue,
+      labelValue: this.state.labelValue
     };
     editNotes(data).then((res) => {
       this.setState({
-        color: res.color,
+        color: res.color
       });
     });
     this.props.navigation.navigate('getReminder');
   };
   handleColor = (color) => {
     this.setState({
-      color: color,
+      color: color
     });
     let data = {
       noteIdList: [this.props.navigation.state.params.key],
-      color: this.state.color,
+      color: this.state.color
     };
     updateColor(data);
   };
@@ -160,7 +160,7 @@ export class EditReminderComponent extends Component {
       reminder: this.props.navigation.state.params.display.reminder,
       isArchived: this.props.navigation.state.params.display.isArchived,
       color: this.props.navigation.state.params.display.color,
-      labelValue: this.props.navigation.state.params.display.labelValue,
+      labelValue: this.props.navigation.state.params.display.labelValue
     });
   }
   render() {
