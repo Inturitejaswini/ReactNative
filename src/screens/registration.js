@@ -1,25 +1,10 @@
-/******************************************************************************
- * Execution : 1. default node cmd> node registration.js
- * 2. if nodemon installed cmd> nodemodule registration.js
- *
- * Purpose : create registration page.
- * @description
- *
- * @file :registration
- * @overview :registration form problem.
- * @module :registration - This is optional if expeclictly its an npm or local package
- * @author :tejaswini<chowdarytejaswini2@gmail.com>
- * @version :0.61.5
- * @since :-23-02-2020
- ******************************************************************************/
-
 import React, {Component} from 'react';
-import {View, Button, Text, Alert} from 'react-native';
+import {View, Button, Text} from 'react-native';
 import styles from '../Styles';
-import register from '../services/userServices';
+import {userRegistration} from '../services/userServices';
 import {Card} from 'react-native-elements';
 import Snackbar from 'react-native-snackbar-component';
-import {TextInput, ScrollView} from 'react-native-gesture-handler';
+import {TextInput} from 'react-native-gesture-handler';
 export class RegisterComponent extends Component {
   constructor() {
     super();
@@ -79,7 +64,7 @@ export class RegisterComponent extends Component {
         password: this.state.password,
         service: 'advance',
       };
-      register(user);
+      userRegistration(user);
     }
   };
   handleLogin = () => {

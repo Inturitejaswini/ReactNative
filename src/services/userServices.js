@@ -2,7 +2,7 @@ import axios from 'axios';
 import configApi from '../constants/userApiConstants';
 import Config from 'react-native-config';
 import AsyncStorage from '@react-native-community/async-storage';
-export default function register(data) {
+export default function userRegistration(data) {
   return axios.post(Config.REACT_APP_BASE_URL + configApi.registration, data);
 }
 
