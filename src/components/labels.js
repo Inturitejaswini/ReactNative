@@ -10,7 +10,7 @@ import {CheckBox} from 'react-native-elements';
 import styles from '../Styles';
 import ArrowLeftIcon from 'react-native-vector-icons/Feather';
 import {createLabel, getAllLabels} from '../services/noteServices';
-var tempCheckValues = [];
+let tempCheckValues = [];
 export default class Labels extends Component {
   constructor(props) {
     super(props);
@@ -44,7 +44,7 @@ export default class Labels extends Component {
         alert(err);
       });
   };
-  
+
   getLabels() {
     getAllLabels()
       .then((res) => {
@@ -60,7 +60,7 @@ export default class Labels extends Component {
     this.setState({
       checkBoxChecked: tempCheckValues,
     });
-    var tempCheckBoxChecked = this.state.checkBoxChecked;
+    let tempCheckBoxChecked = this.state.checkBoxChecked;
     tempCheckBoxChecked[id] = !value;
     this.setState({
       checkBoxChecked: tempCheckBoxChecked,
