@@ -13,7 +13,7 @@ import {Card} from 'react-native-elements';
 import styles from '../Styles';
 import {getNotes} from '../services/noteServices';
 import {DrawerActions} from 'react-navigation-drawer';
-export class ReminderComponent1 extends Component {
+export class ReminderComponent extends Component {
   constructor() {
     super();
     this.state = {
@@ -132,4 +132,4 @@ export class ReminderComponent1 extends Component {
     );
   }
 }
-export default ReminderComponent1;
+export default ReminderComponent;
