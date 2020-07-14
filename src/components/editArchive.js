@@ -162,10 +162,7 @@ export class EditArchiveComponent extends Component {
   }
   render() {
     return (
-      <View
-        style={{
-          backgroundColor: this.state.color,
-        }}>
+      <View style={{backgroundColor: this.state.color}}>
         <View style={styles.view}>
           <View>
             <ArrowLeft
