@@ -1,4 +1,4 @@
-var configApi = {
+let configApi = {
   registration: '/user/userSignUp',
   login: '/user/login',
   forgetPassword: '/user/reset-password',
