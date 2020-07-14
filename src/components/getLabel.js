@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {Text, ScrollView} from 'react-native';
 import {getAllLabels} from '../services/noteServices';
-import LabelIcon from 'react-native-vector-icons/MaterialCommunityIcons';
+import {LabelIcon} from 'react-native-vector-icons/MaterialCommunityIcons';
 import styles from '../Styles';
 export class GetLabelComponent extends Component {
   constructor() {
