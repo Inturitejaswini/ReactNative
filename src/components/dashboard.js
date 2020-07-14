@@ -76,7 +76,7 @@ export class DashBoard extends React.Component {
         this.setState({
           filePath: response,
           fileData: response.data,
-          fileUri: response.uri,
+          fileUri: response.uri
         });
         uploadProfile(source)
           .then((res) => {
@@ -84,7 +84,9 @@ export class DashBoard extends React.Component {
               resImage: res,
             });
           })
-          .catch((err) => {});
+          .catch((err) => {
+            return err;
+          });
       }
     });
   };
