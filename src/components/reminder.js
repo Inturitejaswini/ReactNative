@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Button, View, Text, Card, TouchableOpacity, Picker} from 'react-native';
+import {View, Text, TouchableOpacity, Picker} from 'react-native';
 import styles from '../Styles';
 import DateTimePicker from 'react-native-modal-datetime-picker';
 import {Divider} from 'react-native-elements';
@@ -70,7 +70,7 @@ export default class ReminderComponent extends Component {
   };
   static navigationOptions = {
     drawerLabel: 'Reminder',
-    drawerIcon: <ReminderIcon name="bell-plus-outline" size={20} />,
+    drawerIcon: <ReminderIcon name="bell-plus-outline" size={20} />
   };
   render() {
     return (
