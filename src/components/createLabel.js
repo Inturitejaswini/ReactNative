@@ -31,11 +31,6 @@ export class CreateLabelComponent extends Component {
     drawerLabel: 'CreateLabel',
     drawerIcon: <PlusIcon name="plus" size={25} />,
   };
-  handleSelection = (labelName) => {
-    this.setState({
-      selectedLabels: labelName,
-    });
-  };
   componentDidMount() {
     this.getLabels();
   }
@@ -46,6 +41,11 @@ export class CreateLabelComponent extends Component {
       });
     });
   }
+  handleSelection = (labelName) => {
+    this.setState({
+      selectedLabels: labelName,
+    });
+  };
   handleArrow = () => {
     this.props.navigation.navigate('dashboard');
   };
