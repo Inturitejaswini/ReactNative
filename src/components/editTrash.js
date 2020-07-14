@@ -95,10 +95,7 @@ export class EditTrashComponent extends Component {
   }
   render() {
     return (
-      <View
-        style={{
-          backgroundColor: this.state.color,
-        }}>
+      <View style={{backgroundColor: this.state.color}}>
         <View style={styles.arrowLeft}>
           <ArrowLeft
             name="arrow-left"
