@@ -8,13 +8,13 @@ import {
   ScrollView,
   ProgressBarAndroid,
 } from 'react-native';
-import ViewStreamIcon from 'react-native-vector-icons/MaterialCommunityIcons';
-import ThLargeIcon from 'react-native-vector-icons/FontAwesome';
+import {ViewStreamIcon} from 'react-native-vector-icons/MaterialCommunityIcons';
+import {ThLargeIcon} from 'react-native-vector-icons/FontAwesome';
 import {Card} from 'react-native-elements';
 import styles from '../Styles';
 import {getNotes} from '../services/noteServices';
 import {DrawerActions} from 'react-navigation-drawer';
-import DeleteIcon from 'react-native-vector-icons/AntDesign';
+import {DeleteIcon} from 'react-native-vector-icons/AntDesign';
 export class Trash extends Component {
   constructor() {
     super();
