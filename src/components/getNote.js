@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {ScrollView, Text, View, TouchableOpacity, Image} from 'react-native';
+import {ScrollView, Text, View, TouchableOpacity} from 'react-native';
 import {Card} from 'react-native-elements';
 import styles from '../Styles';
 import {getNotes} from '../services/noteServices';
