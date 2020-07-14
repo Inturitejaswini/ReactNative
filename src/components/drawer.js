@@ -1,4 +1,3 @@
-import React, {Component} from 'react';
 import {createDrawerNavigator} from 'react-navigation-drawer';
 import {createAppContainer} from 'react-navigation';
 import DashBoard from '../components/dashboard';
@@ -12,7 +11,7 @@ const Drawer = createDrawerNavigator(
       screen: DashBoard,
     },
     Remainder: {
-      screen: ReminderComponent1,
+      screen: ReminderComponent,
     },
     createLabel: {
       screen: CreateLabelComponent,
