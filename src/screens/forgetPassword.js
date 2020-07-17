@@ -10,24 +10,45 @@ export class Forgetpassword extends Component {
     super();
     this.state = {
       email: '',
-      snackIsVisible: false,
+      snackbarMsg: '',
+      snackbarOpen: false
     };
   }
   handleEmail = (event) => {
-    console.warn(event);
     this.setState({email: event});
   };
 
   handleForget = () => {
     if (this.state.email === '') {
-      this.setState({
-        snackIsVisible: !this.state.snackIsVisible,
-      });
-    } else {
-      const user = {
-        email: this.state.email,
-      };
-      userForgetPassword(user);
+      if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(this.state.email)) {
+        const user = {
+          email: this.state.email,
+        };
+        userForgetPassword(user)
+          .then((res) => {
+            if (res === undefined) {
+              this.setState({
+                snackbarOpen: true,
+                snackbarMsg: 'Check your email',
+              });
+              setTimeout(() => {
+                this.props.history.push('/login');
+              }, 1000);
+              return;
+            } else {
+              this.setState({
+                snackbarOpen: true,
+                snackbarMsg: 'Invalid email',
+              });
+            }
+          })
+          .catch((err) => {
+            this.setState({
+              snackbarOpen: true,
+              snackbarMsg: err,
+            });
+          });
+      }
     }
   };
   render() {
