@@ -1,24 +1,12 @@
 import React, {Component} from 'react';
 import {DoneIcon, UnArchiveIcon} from 'react-native-vector-icons/MaterialIcons';
 import ArrowLeft from 'react-native-vector-icons/MaterialCommunityIcons';
-import {
-  ShareAltIcon,
-  DeleteIcon,
-  PushPinIcon,
-} from 'react-native-vector-icons/AntDesign';
+import {ShareAltIcon,DeleteIcon,PushPinIcon} from 'react-native-vector-icons/AntDesign';
 import ElipsisIcon from 'react-native-vector-icons/FontAwesome';
 import {RBSheet, RBSheet2} from 'react-native-raw-bottom-sheet';
 import {IconButton} from 'react-native-paper';
 import styles from '../Styles';
-import {
-  editNotes,
-  UnArchiveNotes,
-  deleteNotes,
-  pinNotes,
-  UnpinNotes,
-  updateColor,
-  createLabels,
-} from '../services/noteServices';
+import {editNotes,UnArchiveNotes,deleteNotes,pinNotes,UnpinNotes,updateColor,createLabels} from '../services/noteServices';
 import ReminderComponent from './reminder';
 import {Text, TextInput, View, FlatList, TouchableOpacity} from 'react-native';
 const colors = [
@@ -56,7 +44,6 @@ export class EditArchiveComponent extends Component {
       labelData: [],
       label: false,
     };
-    this.reminderData = this.reminderData.bind(this);
   }
   reminderData = (value) => {
     this.setState({
@@ -193,7 +180,7 @@ export class EditArchiveComponent extends Component {
             </View>
             <View>
               <ReminderComponent
-                reminderProps={this.reminderData}></ReminderComponent>
+                reminderProps={()=>this.reminderData}></ReminderComponent>
             </View>
             <View style={styles.unarchive}>
               <UnArchiveIcon
