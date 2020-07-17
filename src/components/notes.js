@@ -1,63 +1,18 @@
-/******************************************************************************
- * Execution : 1. default node cmd> node notes.js
- * 2. if nodemon installed cmd> nodemodule notes.js
- *
- * Purpose : create notes page.
- * @description
- *
- * @file :notes
- * @overview :notes form problem.
- * @module :notes - This is optional if expeclictly its an npm or local package
- * @author :tejaswini<chowdarytejaswini2@gmail.com>
- * @version :1.0
- * @since :-2-03-2020
- ******************************************************************************/
 import React, {Component} from 'react';
-import {
-  View,
-  Button,
-  Text,
-  Image,
-  TouchableOpacity,
-  FlatList,
-} from 'react-native';
+import {View,Button,Text,Image,TouchableOpacity,FlatList} from 'react-native';
 import styles from '../Styles';
 import {TextInput, ScrollView} from 'react-native-gesture-handler';
-import {
-  RBSheet,
-  RBSheet1,
-  RBSheet2,
-  RBSheet3,
-} from 'react-native-raw-bottom-sheet';
+import {RBSheet,RBSheet1,RBSheet2,RBSheet3} from 'react-native-raw-bottom-sheet';
 import PlusIconSquare from 'react-native-vector-icons/Feather';
 import ReminderComponent from './remainder';
 import CrossIcon from 'react-native-vector-icons/Entypo';
-import {
-  DeletIcon,
-  ShareAltIcon,
-  PlusIcon,
-  PushPinIcon,
-  LabelIcon,
-} from 'react-native-vector-icons/AntDesign';
-import {
-  AccountIcon,
-  ClockIcon,
-} from 'react-native-vector-icons/MaterialCommunityIcons';
+import { DeletIcon, ShareAltIcon, PlusIcon, PushPinIcon, LabelIcon} from 'react-native-vector-icons/AntDesign';
+import {AccountIcon,ClockIcon} from 'react-native-vector-icons/MaterialCommunityIcons';
 import MoreIcon from 'react-native-vector-icons/Feather';
 import {Divider, IconButton, Chip} from 'react-native-paper';
 import ArchiveIcon from 'react-native-vector-icons/Ionicons';
 import {CheckBox} from 'react-native-elements';
-import {
-  getNotes,
-  getAllLabels,
-  deleteNotes,
-  pinNotes,
-  UnpinNotes,
-  updateColor,
-  createLabels,
-  noteCollaborator,
-  createNotes,
-} from '../services/noteServices';
+import {getNotes,getAllLabels,deleteNotes,pinNotes,UnpinNotes,updateColor,createLabels,noteCollaborator,createNotes} from '../services/noteServices';
 let CheckValue = [];
 const colors = [
   {name: 'blue', hexcode: ' #39a78e'},
@@ -98,7 +53,6 @@ export class Notes extends React.Component {
       checkBox: [],
       checked: false,
     };
-    this.reminderData = this.reminderData.bind(this);
   }
   componentDidMount() {
     this.getNotes();
@@ -272,7 +226,7 @@ export class Notes extends React.Component {
             </View>
             <View style={styles.icons1}>
               <ReminderComponent
-                reminderProps={this.reminderData}></ReminderComponent>
+                reminderProps={()=>this.reminderData()}></ReminderComponent>
             </View>
             <View style={styles.icons2}>
               <ArchiveIcon
