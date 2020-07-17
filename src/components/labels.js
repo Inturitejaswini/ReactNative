@@ -1,11 +1,5 @@
 import React, {Component} from 'react';
-import {
-  View,
-  Text,
-  TouchableOpacity,
-  TextInput,
-  AsyncStorage,
-} from 'react-native';
+import {View,Text,TouchableOpacity,TextInput} from 'react-native';
 import {CheckBox} from 'react-native-elements';
 import styles from '../Styles';
 import ArrowLeftIcon from 'react-native-vector-icons/Feather';
