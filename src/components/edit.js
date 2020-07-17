@@ -1,40 +1,15 @@
 import React, {Component} from 'react';
-import {
-  ArrowLeftIcon,
-  ClockOutlineIcon,
-} from 'react-native-vector-icons/MaterialCommunityIcons';
-import {
-  SharealtIcon,
-  DeleteIcon,
-  PushPinIcon,
-  LabelOutlineIcon,
-} from 'react-native-vector-icons/AntDesign';
+import {ArrowLeftIcon,ClockOutlineIcon} from 'react-native-vector-icons/MaterialCommunityIcons';
+import {SharealtIcon,DeleteIcon,PushPinIcon,LabelOutlineIcon} from 'react-native-vector-icons/AntDesign';
 import ArchiveIcon from 'react-native-vector-icons/Foundation';
 import ElipsisIcon from 'react-native-vector-icons/FontAwesome';
 import PlusIcon from 'react-native-vector-icons/Feather';
 import {RBSheet, RBSheet2} from 'react-native-raw-bottom-sheet';
 import {IconButton, Divider, Chip} from 'react-native-paper';
 import styles from '../Styles';
-import {
-  editNotes,
-  archiveNotes,
-  deleteNotes,
-  pinNotes,
-  UnpinNotes,
-  updateColor,
-  createLabels,
-  getAllLabels,
-  reminderUpdate,
-} from '../services/noteServices';
+import {editNotes,archiveNotes,deleteNotes,pinNotes,UnpinNotes,updateColor,createLabels,getAllLabels,reminderUpdate} from '../services/noteServices';
 import ReminderComponent from './reminder';
-import {
-  ScrollView,
-  Text,
-  TextInput,
-  View,
-  FlatList,
-  TouchableOpacity,
-} from 'react-native';
+import {ScrollView,Text,TextInput,View,FlatList,TouchableOpacity} from 'react-native';
 import {CheckBox} from 'react-native-elements';
 const colors = [
   {name: 'blue', hexcode: ' #b8abb9'},
@@ -52,7 +27,7 @@ const colors = [
   {name: 'salmon', hexcode: '#98AFC7'},
   {name: 'mistyRose', hexcode: '#74a775'},
 ];
-var CheckValue = [];
+let CheckValue = [];
 export class EditComponent extends Component {
   constructor() {
     super();
@@ -75,7 +50,6 @@ export class EditComponent extends Component {
       label: false,
       labelName: '',
     };
-    this.reminderData = this.reminderData.bind(this);
   }
   reminderData = (reminderDate) => {
     this.setState({reminderDate: reminderDate});
@@ -252,7 +226,7 @@ export class EditComponent extends Component {
             </View>
             <View>
               <ReminderComponent
-                reminderProps={this.reminderData}></ReminderComponent>
+                reminderProps={()=>this.reminderData()}></ReminderComponent>
             </View>
             <View style={styles.archive}>
               <ArchiveIcon
