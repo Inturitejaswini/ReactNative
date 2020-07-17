@@ -14,8 +14,8 @@ export class RegisterComponent extends Component {
       phoneNumber: '',
       email: '',
       password: '',
-      snackIsVisible: false,
-      visible: false,
+      SnackbarMsg: '',
+      snackbarOpen: false,
     };
   }
   x;
