@@ -12,7 +12,8 @@ export class LoginComponent extends Component {
     this.state = {
       email: '',
       password: '',
-      snackIsVisible: false,
+      SnackbarMsg: '',
+      snackbarOpen: false,
     };
   }
   handleEmail = (event) => {
@@ -22,13 +23,15 @@ export class LoginComponent extends Component {
     this.setState({password: event});
   };
   handleLogin = () => {
-    if (this.state.email === '') {
+    if ( /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(this.state.email)) {
       this.setState({
-        snackIsVisible: !this.state.snackIsVisible,
+        snackbarOpen: true,
+        SnackbarMsg: "Invalid Email"
       });
     } else if (this.state.password === '') {
       this.setState({
-        snackIsVisible: !this.state.snackIsVisible,
+        snackbarOpen: true,
+        SnackbarMsg: "Invalid password"
       });
     } else {
       const user = {
@@ -39,7 +42,10 @@ export class LoginComponent extends Component {
         let Id = AsyncStorage.setItem('@storage_Key', response.data.id);
         let AccessToken = AsyncStorage.getItem('@storage_Key');
         this.props.navigation.navigate('dashboard');
-      });
+      })
+    .catch(err=>{
+    throw err
+      })
     }
   };
   render() {
