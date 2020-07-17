@@ -34,26 +34,37 @@ export class RegisterComponent extends Component {
   handlePassword = (event) => {
     this.setState({password: event});
   };
+
   handleRegister = () => {
-    if (this.state.firstName === '') {
+    if (/^[a-zA-Z]{2,12}$/i.test(this.state.firstName)) {
       this.setState({
-        snackIsVisible: !this.state.snackIsVisible,
+        snackbarOpen: true,
+        SnackbarMsg: 'firstName cant contain numbers or special characters',
       });
-    } else if (this.state.lastName === '') {
+    } else if (/^[a-zA-Z]{2,12}$/i.test(this.state.lastName)) {
       this.setState({
-        snackIsVisible: !this.state.snackIsVisible,
+        snackbarOpen: true,
+        SnackbarMsg: 'lastName cant contain numbers or special characters',
       });
-    } else if (this.state.phoneNumber === '') {
+    } else if (/^[0-9]+$/.test(this.state.phoneNumber)) {
       this.setState({
-        snackIsVisible: !this.state.snackIsVisible,
+        snackbarOpen: true,
+        SnackbarMsg: 'Invalid phoneNumber',
       });
-    } else if (this.state.email === '') {
+    } else if (
+      /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(this.state.email)
+    ) {
       this.setState({
-        snackIsVisible: !this.state.snackIsVisible,
+        snackbarOpen: true,
+        SnackbarMsg: 'Invalid e-mail',
       });
-    } else if (this.state.password === '') {
+    } else if (
+      this.state.password === this.state.password.length > 5 &&
+      this.state.password.length < 8
+    ) {
       this.setState({
-        snackIsVisible: !this.state.snackIsVisible,
+        snackbarOpen: true,
+        SnackbarMsg: 'Invalid password',
       });
     } else {
       const user = {
@@ -64,7 +75,26 @@ export class RegisterComponent extends Component {
         password: this.state.password,
         service: 'advance',
       };
-      userRegistration(user);
+      userRegistration(user)
+        .then((res) => {
+          if (res.user) {
+            this.setState({
+              snackbarOpen: true,
+              SnackbarMsg: 'Registration Successful',
+            });
+          } else {
+            this.setState({
+              snackbarOpen: true,
+              SnackbarMsg: 'Some problem occured while Registration',
+            });
+          }
+        })
+        .catch((err) => {
+          this.setState({
+            snackbarOpen: true,
+            SnackbarMsg: err,
+          });
+        });
     }
   };
   handleLogin = () => {
