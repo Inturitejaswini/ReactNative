@@ -1,19 +1,10 @@
 import React, {Component} from 'react';
-import {
-  ArrowLeft,
-  DeleteForeverIcon,
-  RestoreIcon,
-} from 'react-native-vector-icons/MaterialCommunityIcons';
+import {ArrowLeft,DeleteForeverIcon,RestoreIcon} from 'react-native-vector-icons/MaterialCommunityIcons';
 import ElipsisIcon from 'react-native-vector-icons/FontAwesome';
 import RBSheet from 'react-native-raw-bottom-sheet';
 import {IconButton, Colors} from 'react-native-paper';
 import styles from '../Styles';
-import {
-  editNotes,
-  deleteForever,
-  updateColor,
-  restore,
-} from '../services/noteServices';
+import {editNotes,deleteForever,updateColor,restore} from '../services/noteServices';
 import {Text, TextInput, View, FlatList, TouchableOpacity} from 'react-native';
 const colors = [
   {name: 'blue', hexcode: ' #b8abb9'},
