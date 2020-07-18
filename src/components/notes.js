@@ -1,18 +1,50 @@
 import React, {Component} from 'react';
-import {View,Button,Text,Image,TouchableOpacity,FlatList} from 'react-native';
+import {
+  View,
+  Button,
+  Text,
+  Image,
+  TouchableOpacity,
+  FlatList,
+} from 'react-native';
 import styles from '../Styles';
 import {TextInput, ScrollView} from 'react-native-gesture-handler';
-import {RBSheet,RBSheet1,RBSheet2,RBSheet3} from 'react-native-raw-bottom-sheet';
+import {
+  RBSheet,
+  RBSheet1,
+  RBSheet2,
+  RBSheet3,
+} from 'react-native-raw-bottom-sheet';
 import PlusIconSquare from 'react-native-vector-icons/Feather';
 import ReminderComponent from './remainder';
 import CrossIcon from 'react-native-vector-icons/Entypo';
-import { DeletIcon, ShareAltIcon, PlusIcon, PushPinIcon, LabelIcon} from 'react-native-vector-icons/AntDesign';
-import {AccountIcon,ClockIcon} from 'react-native-vector-icons/MaterialCommunityIcons';
+import {
+  DeletIcon,
+  ShareAltIcon,
+  PlusIcon,
+  PushPinIcon,
+  LabelIcon,
+} from 'react-native-vector-icons/AntDesign';
+import {
+  AccountIcon,
+  ClockIcon,
+} from 'react-native-vector-icons/MaterialCommunityIcons';
 import MoreIcon from 'react-native-vector-icons/Feather';
 import {Divider, IconButton, Chip} from 'react-native-paper';
 import ArchiveIcon from 'react-native-vector-icons/Ionicons';
 import {CheckBox} from 'react-native-elements';
-import {getNotes,getAllLabels,deleteNotes,pinNotes,UnpinNotes,updateColor,createLabels,noteCollaborator,createNotes} from '../services/noteServices';
+import Snackbar from 'react-native-snackbar-component';
+import {
+  getNotes,
+  getAllLabels,
+  deleteNotes,
+  pinNotes,
+  unpinNotes,
+  updateColor,
+  createLabels,
+  noteCollaborator,
+  createNotes,
+} from '../services/noteServices';
 let CheckValue = [];
 const colors = [
   {name: 'blue', hexcode: ' #39a78e'},
@@ -52,6 +84,8 @@ export class Notes extends React.Component {
       users: [],
       checkBox: [],
       checked: false,
+      snackbarMsg: '',
+      snackbarOpen: false,
     };
   }
   componentDidMount() {
@@ -78,50 +112,90 @@ export class Notes extends React.Component {
     });
   };
   handleColor = (color) => {
-    this.setState({
-      color: color,
-    });
     let data = {
       noteIdList: [this.props.navigation.state.params.key],
       color: this.state.color,
     };
-    updateColor(data);
+    updateColor(data)
+      .then((res) => {
+        this.setState({
+          color: color,
+        });
+      })
+      .catch((err) => {
+        this.setState({
+          snackbarOpen: true,
+          snackbarMsg: err,
+        });
+      });
   };
   handlePin = () => {
-    this.setState({
-      isPined: true,
-    });
     let data = {
       noteIdList: [this.props.navigation.state.params.key],
       isPined: this.state.isPined,
     };
-    pinNotes(data);
+    pinNotes(data)
+      .then((res) => {
+        this.setState({
+          isPined: true,
+        });
+      })
+      .catch((err) => {
+        this.setState({
+          snackbarOpen: true,
+          snackbarMsg: err,
+        });
+      });
   };
   handleUnPin = () => {
-    this.setState({
-      isPined: false,
-    });
     let data = {
       noteIdList: [this.props.navigation.state.params.key],
       isPined: this.state.isPined,
     };
-    UnpinNotes(data);
+    unpinNotes(data)
+      .then((res) => {
+        this.setState({
+          isPined: false,
+        });
+      })
+      .catch((err) => {
+        this.setState({
+          snackbarOpen: true,
+          snackbarMsg: err,
+        });
+      });
   };
   handleDelete = () => {
-    this.setState({isDeleted: true});
     let data = {
       noteIdList: [this.props.navigation.state.params.key],
       isDeleted: this.state.isDeleted,
     };
-    deleteNotes(data);
+    deleteNotes(data)
+      .then((res) => {
+        this.setState({isDeleted: true});
+      })
+      .catch((err) => {
+        this.setState({
+          snackbarOpen: true,
+          snackbarMsg: err,
+        });
+      });
   };
   handleArchiveNote = () => {
-    this.setState({isArchived: true});
     let data = {
       noteIdList: [this.props.navigation.state.params.key],
       isArchived: this.state.isArchived,
     };
-    archiveNotes(data);
+    archiveNotes(data)
+      .then((res) => {
+        this.setState({isArchived: true});
+      })
+      .catch((err) => {
+        this.setState({
+          snackbarOpen: true,
+          snackbarMsg: err,
+        });
+      });
     this.props.navigation.navigate('dashboard');
   };
   handleNote = () => {
@@ -135,7 +209,11 @@ export class Notes extends React.Component {
       color: this.state.color,
       label: this.state.label,
     };
-    createNotes(data);
+    createNotes(data).then((res) => {
+      this.setState({
+        color: res.color,
+      });
+    });
     this.props.navigation.navigate('dashboard');
   };
   handleCrossicon() {
@@ -157,12 +235,20 @@ export class Notes extends React.Component {
     });
   };
   handleLabelDone = () => {
-    this.setState({label: true});
     let data = {
       noteIdList: [this.props.navigation.state.params.key],
       label: this.state.label,
     };
-    createLabels(data);
+    createLabels(data)
+      .then((res) => {
+        this.setState({label: true});
+      })
+      .catch((err) => {
+        this.setState({
+          snackbarOpen: true,
+          snackbarMsg: err,
+        });
+      });
   };
   handleSelection = (labelName) => {
     this.setState({
@@ -226,7 +312,7 @@ export class Notes extends React.Component {
             </View>
             <View style={styles.icons1}>
               <ReminderComponent
-                reminderProps={()=>this.reminderData()}></ReminderComponent>
+                reminderProps={() => this.reminderData()}></ReminderComponent>
             </View>
             <View style={styles.icons2}>
               <ArchiveIcon
@@ -454,6 +540,15 @@ export class Notes extends React.Component {
             </RBSheet3>
           </View>
         </ScrollView>
+        <Snackbar
+          anchorOrigin={{
+            vertical: 'bottom',
+            horizontal: 'center',
+          }}
+          autoHideDuration={3000}
+          open={this.state.snackbarOpen}
+          message={<span id="message-id">{this.state.SnackbarMsg}</span>}
+        />
       </View>
     );
   }
