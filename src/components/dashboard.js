@@ -1,14 +1,27 @@
 import * as React from 'react';
 import styles from '../Styles';
 import {DrawerActions} from 'react-navigation-drawer';
-import {View,Text,TouchableOpacity, ProgressBarAndroid,Image} from 'react-native';
+import {
+  View,
+  Text,
+  TouchableOpacity,
+  ProgressBarAndroid,
+  Image,
+} from 'react-native';
 import {Card} from 'react-native-elements';
 import {GridIcon, BrushIcon, ImageIcon} from 'react-native-vector-icons/Entypo';
-import {PlusCircleIcon,CheckSquare,BulbIcon} from 'react-native-vector-icons/AntDesign';
+import {
+  PlusCircleIcon,
+  CheckSquare,
+  BulbIcon,
+} from 'react-native-vector-icons/AntDesign';
 import KeyboardVoice from 'react-native-vector-icons/MaterialIcons';
 import {Avatar, Divider} from 'react-native-elements';
 import Dialog from 'react-native-dialog';
-import { ViewStreamIcon, AccountCircleIcon} from 'react-native-vector-icons/MaterialCommunityIcons';
+import {
+  ViewStreamIcon,
+  AccountCircleIcon,
+} from 'react-native-vector-icons/MaterialCommunityIcons';
 import {getNotes} from '../services/noteServices';
 import {userLogOut, uploadProfile} from '../services/userServices';
 import {ScrollView} from 'react-native-gesture-handler';
@@ -63,7 +76,7 @@ export class DashBoard extends React.Component {
         this.setState({
           filePath: response,
           fileData: response.data,
-          fileUri: response.uri
+          fileUri: response.uri,
         });
         uploadProfile(source)
           .then((res) => {
@@ -102,7 +115,6 @@ export class DashBoard extends React.Component {
     this.setState({dialogVisible: false});
   };
   handleSignOut = () => {
-    userLogOut().then({});
     this.props.navigation.navigate('login');
     this.setState({dialogVisible: false});
   };

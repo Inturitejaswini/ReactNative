@@ -1,13 +1,5 @@
 import React, {Component} from 'react';
-import {
-  View,
-  TextInput,
-  Text,
-  Image,
-  TouchableOpacity,
-  ScrollView,
-  ProgressBarAndroid,
-} from 'react-native';
+import {View,Text,Image,TouchableOpacity,ScrollView,ProgressBarAndroid} from 'react-native';
 import {ViewStreamIcon} from 'react-native-vector-icons/MaterialCommunityIcons';
 import {ThLargeIcon} from 'react-native-vector-icons/FontAwesome';
 import {Card} from 'react-native-elements';
