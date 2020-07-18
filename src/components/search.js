@@ -1,7 +1,11 @@
 import React, {Component} from 'react';
 import {View, Text, TouchableOpacity, TextInput} from 'react-native';
 import styles from '../Styles';
-import {ArrowLeftIcon,BellPlusIcon,LabelIcon} from 'react-native-vector-icons/MaterialCommunityIcons';
+import {
+  ArrowLeftIcon,
+  BellPlusIcon,
+  LabelIcon,
+} from 'react-native-vector-icons/MaterialCommunityIcons';
 import {Divider, Card} from 'react-native-paper';
 import {getNotes} from '../services/noteServices';
 import ArchiveIcon from 'react-native-vector-icons/Ionicons';
