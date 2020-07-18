@@ -129,7 +129,7 @@ const AppNavigation = createStackNavigator(
     },
   },
   {
-    initialRouteName: 'drawerComponent',
+    initialRouteName: 'login',
   },
 );
 export default AppNavigation;
