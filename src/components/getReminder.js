@@ -1,5 +1,12 @@
 import React, {Component} from 'react';
-import { View, Text, Image, TouchableOpacity, ScrollView, ProgressBarAndroid} from 'react-native';
+import {
+  View,
+  Text,
+  Image,
+  TouchableOpacity,
+  ScrollView,
+  ProgressBarAndroid,
+} from 'react-native';
 import ReminderIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 import ThLargeIcon from 'react-native-vector-icons/FontAwesome';
 import {Card} from 'react-native-elements';
