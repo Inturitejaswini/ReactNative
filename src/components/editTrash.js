@@ -1,10 +1,20 @@
 import React, {Component} from 'react';
-import {ArrowLeft,DeleteForeverIcon,RestoreIcon} from 'react-native-vector-icons/MaterialCommunityIcons';
+import {
+  ArrowLeft,
+  DeleteForeverIcon,
+  RestoreIcon,
+} from 'react-native-vector-icons/MaterialCommunityIcons';
 import ElipsisIcon from 'react-native-vector-icons/FontAwesome';
 import RBSheet from 'react-native-raw-bottom-sheet';
 import {IconButton, Colors} from 'react-native-paper';
 import styles from '../Styles';
-import {editNotes,deleteForever,updateColor,restore} from '../services/noteServices';
+import {
+  editNotes,
+  deleteForever,
+  updateColor,
+  restore,
+} from '../services/noteServices';
+import Snackbar from 'react-native-snackbar-component';
 import {Text, TextInput, View, FlatList, TouchableOpacity} from 'react-native';
 const colors = [
   {name: 'blue', hexcode: ' #b8abb9'},
@@ -31,24 +41,42 @@ export class EditTrashComponent extends Component {
       isDeleted: false,
       key: '',
       colors: false,
+      snackbarMsg: '',
+      snackbarOpen: false,
     };
   }
 
   handleDeleteForever = () => {
-    this.setState({isDeleted: false});
     let data = {
       noteIdList: [this.props.navigation.state.params.key],
       isDeleted: this.state.isDeleted,
     };
-    deleteForever(data);
+    deleteForever(data)
+      .then((res) => {
+        this.setState({isDeleted: false});
+      })
+      .catch((err) => {
+        this.setState({
+          snackbarOpen: true,
+          snackbarMsg: err,
+        });
+      });
   };
   handleRestore = () => {
-    this.setState({isDeleted: true});
     let data = {
       noteIdList: [this.props.navigation.state.params.key],
       isDeleted: this.state.isDeleted,
     };
-    restore(data);
+    restore(data)
+      .then((res) => {
+        this.setState({isDeleted: true});
+      })
+      .catch((err) => {
+        this.setState({
+          snackbarOpen: true,
+          snackbarMsg: err,
+        });
+      });
     this.props.navigation.navigate('dashboard');
   };
   handleEditCard = () => {
@@ -67,14 +95,22 @@ export class EditTrashComponent extends Component {
     }, 100);
   };
   handleColor = (color) => {
-    this.setState({
-      color: color,
-    });
     let data = {
       noteIdList: [this.props.navigation.state.params.key],
       color: this.state.color,
     };
-    updateColor(data);
+    updateColor(data)
+      .then((res) => {
+        this.setState({
+          color: color,
+        });
+      })
+      .catch((err) => {
+        this.setState({
+          snackbarOpen: true,
+          snackbarMsg: err,
+        });
+      });
   };
   componentDidMount() {
     this.setState({
@@ -168,6 +204,15 @@ export class EditTrashComponent extends Component {
             </View>
           </RBSheet>
         </View>
+        <Snackbar
+          anchorOrigin={{
+            vertical: 'bottom',
+            horizontal: 'center',
+          }}
+          autoHideDuration={3000}
+          open={this.state.snackbarOpen}
+          message={<span id="message-id">{this.state.SnackbarMsg}</span>}
+        />
       </View>
     );
   }
