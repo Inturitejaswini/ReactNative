@@ -1,14 +1,27 @@
 import React, {Component} from 'react';
 import DoneIcon from 'react-native-vector-icons/MaterialIcons';
 import ArrowLeft from 'react-native-vector-icons/MaterialCommunityIcons';
-import {ShareAltIcon,DeleteIcon,PushPinIcon} from 'react-native-vector-icons/AntDesign';
+import {
+  ShareAltIcon,
+  DeleteIcon,
+  PushPinIcon,
+} from 'react-native-vector-icons/AntDesign';
 import ArchiveIcon from 'react-native-vector-icons/Foundation';
 import ElipsisIcon from 'react-native-vector-icons/FontAwesome';
 import {RBSheet, RBSheet2} from 'react-native-raw-bottom-sheet';
 import {IconButton} from 'react-native-paper';
 import styles from '../Styles';
-import {editNotes,archiveNotes,deleteNotes,pinNotes,UnpinNotes,updateColor,createLabels} from '../services/noteServices';
+import {
+  editNotes,
+  archiveNotes,
+  deleteNotes,
+  pinNotes,
+  unpinNotes,
+  updateColor,
+  createLabels,
+} from '../services/noteServices';
 import ReminderComponent from './reminder';
+import Snackbar from 'react-native-snackbar-component';
 import {Text, TextInput, View, FlatList, TouchableOpacity} from 'react-native';
 const colors = [
   {name: 'blue', hexcode: ' #b8abb9'},
@@ -24,7 +37,7 @@ const colors = [
   {name: 'blue', hexcode: '#D2B4DE'},
   {name: 'gray', hexcode: '#ABB2B9'},
   {name: 'salmon', hexcode: '#98AFC7'},
-  {name: 'mistyRose', hexcode: '#74a775'}
+  {name: 'mistyRose', hexcode: '#74a775'},
 ];
 export class EditReminderComponent extends Component {
   constructor() {
@@ -43,71 +56,112 @@ export class EditReminderComponent extends Component {
       labelValue: '',
       selectedLabels: '',
       labelData: [],
-      label: false
+      label: false,
+      snackbarMsg: '',
+      snackbarOpen: false,
     };
   }
   reminderData = (value) => {
     this.setState({
-      reminderDate: value
+      reminderDate: value,
     });
   };
   handlePin = () => {
-    this.setState({
-      isPined: true,
-    });
     let data = {
       noteIdList: [this.props.navigation.state.params.key],
-      isPined: this.state.isPined
+      isPined: this.state.isPined,
     };
-    pinNotes(data);
+    pinNotes(data)
+      .then((res) => {
+        this.setState({
+          isPined: true,
+        });
+      })
+      .catch((err) => {
+        this.setState({
+          snackbarOpen: true,
+          snackbarMsg: err,
+        });
+      });
   };
   handleUnPin = () => {
-    this.setState({
-      isPined: false,
-    });
     let data = {
       noteIdList: [this.props.navigation.state.params.key],
-      isPined: this.state.isPined
+      isPined: this.state.isPined,
     };
-    UnpinNotes(data);
+    unpinNotes(data)
+      .then((res) => {
+        this.setState({
+          isPined: false,
+        });
+      })
+      .catch((err) => {
+        this.setState({
+          snackbarOpen: true,
+          snackbarMsg: err,
+        });
+      });
   };
   handleDelete = () => {
-    this.setState({isDeleted: true});
     let data = {
       noteIdList: [this.props.navigation.state.params.key],
-      isDeleted: this.state.isDeleted
+      isDeleted: this.state.isDeleted,
     };
-    deleteNotes(data);
+    deleteNotes(data)
+      .then((res) => {
+        this.setState({isDeleted: true});
+      })
+      .catch((err) => {
+        this.setState({
+          snackbarOpen: true,
+          snackbarMsg: err,
+        });
+      });
     this.props.navigation.navigate('dashboard');
   };
   handleArchiveNote = () => {
-    this.setState({isArchived: true});
     let data = {
       noteIdList: [this.props.navigation.state.params.key],
-      isArchived: this.state.isArchived
+      isArchived: this.state.isArchived,
     };
-    archiveNotes(data);
+    archiveNotes(data)
+      .then((res) => {
+        this.setState({isArchived: true});
+      })
+      .catch((err) => {
+        this.setState({
+          snackbarOpen: true,
+          snackbarMsg: err,
+        });
+      });
     this.props.navigation.navigate('dashboard');
   };
   handleLabelDone = () => {
-    this.setState({label: true});
     let data = {
       noteIdList: [this.props.navigation.state.params.key],
-      label: this.state.label
+      label: this.state.label,
     };
-    console.warn('label data', data);
-    createLabels(data);
+    createLabels(data)
+      .then((res) => {
+        this.setState({label: true});
+      })
+      .catch((err) => {
+        this.setState({
+          snackbarOpen: true,
+          snackbarMsg: err,
+        });
+      });
   };
   handleSelectLabel = (labelName) => {
     this.setState({
-      selectedLabels: labelName
+      selectedLabels: labelName,
     });
   };
   handleLabelArrow = (labelValue) => {
     this.RBSheet2.close();
     this.RBSheet.close();
     this.setState({
-      labelValue: labelValue
+      labelValue: labelValue,
     });
   };
   handleEditCard = () => {
@@ -120,24 +174,32 @@ export class EditReminderComponent extends Component {
       isArchived: this.state.isArchived,
       isPined: this.state.isPined,
       color: this.state.color,
-      labelValue: this.state.labelValue
+      labelValue: this.state.labelValue,
     };
     editNotes(data).then((res) => {
       this.setState({
-        color: res.color
+        color: res.color,
       });
     });
     this.props.navigation.navigate('getReminder');
   };
   handleColor = (color) => {
-    this.setState({
-      color: color
-    });
     let data = {
       noteIdList: [this.props.navigation.state.params.key],
-      color: this.state.color
+      color: this.state.color,
     };
-    updateColor(data);
+    updateColor(data)
+      .then((res) => {
+        this.setState({
+          color: color,
+        });
+      })
+      .catch((err) => {
+        this.setState({
+          snackbarOpen: true,
+          snackbarMsg: err,
+        });
+      });
   };
   componentDidMount() {
     this.setState({
@@ -147,7 +209,7 @@ export class EditReminderComponent extends Component {
       reminder: this.props.navigation.state.params.display.reminder,
       isArchived: this.props.navigation.state.params.display.isArchived,
       color: this.props.navigation.state.params.display.color,
-      labelValue: this.props.navigation.state.params.display.labelValue
+      labelValue: this.props.navigation.state.params.display.labelValue,
     });
   }
   render() {
@@ -186,7 +248,7 @@ export class EditReminderComponent extends Component {
             </View>
             <View>
               <ReminderComponent
-                reminderProps={()=>this.reminderData()}></ReminderComponent>
+                reminderProps={() => this.reminderData()}></ReminderComponent>
             </View>
             <View style={styles.archive}>
               <ArchiveIcon
@@ -319,6 +381,15 @@ export class EditReminderComponent extends Component {
             </View>
           </RBSheet2>
         </View>
+        <Snackbar
+          anchorOrigin={{
+            vertical: 'bottom',
+            horizontal: 'center',
+          }}
+          autoHideDuration={3000}
+          open={this.state.snackbarOpen}
+          message={<span id="message-id">{this.state.SnackbarMsg}</span>}
+        />
       </View>
     );
   }
