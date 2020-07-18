@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {View, Button, Text, Image} from 'react-native';
 import {Card} from 'react-native-elements';
 import styles from '../Styles';
-import {UserLogin} from '../services/userServices';
+import {userLogin} from '../services/userServices';
 import AsyncStorage from '@react-native-community/async-storage';
 import Snackbar from 'react-native-snackbar-component';
 import {TextInput} from 'react-native-gesture-handler';
@@ -23,48 +23,49 @@ export class LoginComponent extends Component {
     this.setState({password: event});
   };
   handleLogin = () => {
-    if ( /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(this.state.email)) {
+    if (
+      /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(this.state.email)
+    ) {
       this.setState({
         snackbarOpen: true,
-        SnackbarMsg: "Invalid Email"
+        SnackbarMsg: 'Invalid Email',
       });
     } else if (this.state.password === '') {
       this.setState({
         snackbarOpen: true,
-        SnackbarMsg: "Invalid password"
+        SnackbarMsg: 'Invalid password',
       });
     } else {
       const user = {
         email: this.state.email,
         password: this.state.password,
       };
-      UserLogin(user).then((response) => {
-        let Id = AsyncStorage.setItem('@storage_Key', response.data.id);
-        let AccessToken = AsyncStorage.getItem('@storage_Key');
-        this.props.navigation.navigate('dashboard');
-      })
-    .catch(err=>{
-    throw err
-      })
+      userLogin(user)
+        .then((response) => {
+          let Id = AsyncStorage.setItem('@storage_Key', response.data.id);
+          let AccessToken = AsyncStorage.getItem('@storage_Key');
+          this.props.navigation.navigate('dashboard');
+        })
+        .catch((err) => {
+          this.setState({
+            snackbarOpen: true,
+            snackbarMsg: err,
+          });
+        });
     }
   };
   render() {
     return (
       <View style={styles.container}>
         <Snackbar
-          style={styles.snackbar}
-          visible={this.state.snackIsVisible}
-          textMessage="enter the requirements"
-          actionHandler={() => {
-            alert('fill the correct email and password');
-            this.setState({
-              snackIsVisible: !this.state.snackIsVisible,
-            });
+          anchorOrigin={{
+            vertical: 'bottom',
+            horizontal: 'center',
           }}
-          actionText="lets go"
-          distanceCallback={(distance) => {
-            this.setState({distance: distance});
-          }}></Snackbar>
+          autoHideDuration={3000}
+          open={this.state.snackbarOpen}
+          message={<span id="message-id">{this.state.SnackbarMsg}</span>}
+        />
         <Card style={styles.cardContainer}>
           <View>
             <Text style={styles.Text}>Member Login</Text>

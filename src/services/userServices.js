@@ -9,7 +9,7 @@ export default function userRegistration(data) {
     return res;
   }
 }
-export function UserLogin(data) {
+export function userLogin(data) {
   try {
     return axios.post(Config.REACT_APP_BASE_URL + configApi.login, data);
   } catch (err) {
