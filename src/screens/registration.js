@@ -104,20 +104,14 @@ export class RegisterComponent extends Component {
     return (
       <View style={styles.registerContainer}>
         <Snackbar
-          style={styles.snackbarCss}
-          visible={this.state.snackIsVisible}
-          textMessage="enter the requirements"
-          actionHandler={() => {
-            alert('fill all the details of registration');
-            this.setState({
-              snackIsVisible: !this.state.snackIsVisible,
-            });
-          }}
-          actionText="let's go"
-          distanceCallback={(distance) => {
-            this.setState({distance: distance});
-          }}
-        />
+                anchorOrigin={{
+                  vertical: "bottom",
+                  horizontal: "center",
+                }}
+                autoHideDuration={3000}
+                open={this.state.snackbarOpen}
+                message={<span id="message-id">{this.state.SnackbarMsg}</span>}
+              />
         <Card style={styles.cardContainer1}>
           <View>
             <Text style={styles.Text1}>Registration</Text>

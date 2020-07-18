@@ -11,7 +11,7 @@ export class Forgetpassword extends Component {
     this.state = {
       email: '',
       snackbarMsg: '',
-      snackbarOpen: false
+      snackbarOpen: false,
     };
   }
   handleEmail = (event) => {
@@ -20,7 +20,9 @@ export class Forgetpassword extends Component {
 
   handleForget = () => {
     if (this.state.email === '') {
-      if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(this.state.email)) {
+      if (
+        /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(this.state.email)
+      ) {
         const user = {
           email: this.state.email,
         };
@@ -55,19 +57,14 @@ export class Forgetpassword extends Component {
     return (
       <View style={styles.forgotContainer}>
         <Snackbar
-          style={styles.snackbar}
-          visible={this.state.snackIsVisible}
-          textMessage="enter the requirements"
-          actionHandler={() => {
-            alert('fill the correct email');
-            this.setState({
-              snackIsVisible: !this.state.snackIsVisible,
-            });
+          anchorOrigin={{
+            vertical: 'bottom',
+            horizontal: 'center',
           }}
-          actionText="lets go"
-          distanceCallback={(distance) => {
-            this.setState({distance: distance});
-          }}></Snackbar>
+          autoHideDuration={3000}
+          open={this.state.snackbarOpen}
+          message={<span id="message-id">{this.state.SnackbarMsg}</span>}
+        />
         <Card style={styles.cardContainer1}>
           <View>
             <Text style={styles.Text3}>ForgotPassword</Text>
