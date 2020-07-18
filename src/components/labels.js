@@ -1,8 +1,9 @@
 import React, {Component} from 'react';
-import {View,Text,TouchableOpacity,TextInput} from 'react-native';
+import {View, Text, TouchableOpacity, TextInput} from 'react-native';
 import {CheckBox} from 'react-native-elements';
 import styles from '../Styles';
 import ArrowLeftIcon from 'react-native-vector-icons/Feather';
+import Snackbar from 'react-native-snackbar-component';
 import {createLabel, getAllLabels} from '../services/noteServices';
 let tempCheckValues = [];
 export default class Labels extends Component {
@@ -17,13 +18,14 @@ export default class Labels extends Component {
       selectedLabels: [],
       checkBoxChecked: [],
       selectedLabelsId: [],
+      snackbarMsg: '',
+      snackbarOpen: false,
     };
   }
   componentDidMount() {
     this.getLabels();
   }
   handleAddLabel = () => {
-    this.setState({userId: userId});
     const data = {
       label: this.state.labelName,
       id: this.props.noteId,
@@ -32,10 +34,14 @@ export default class Labels extends Component {
     };
     createLabel(data)
       .then((res) => {
+        this.setState({userId: userId});
         this.getLabels();
       })
       .catch((err) => {
-        alert(err);
+        this.setState({
+          snackbarOpen: true,
+          snackbarMsg: err,
+        });
       });
   };
 
@@ -45,7 +51,10 @@ export default class Labels extends Component {
         this.setState({allLables: res.data.data.details});
       })
       .catch((err) => {
-        alert(err);
+        this.setState({
+          snackbarOpen: true,
+          snackbarMsg: err,
+        });
       });
   }
   checkBoxChanged(id, label, value) {
@@ -120,6 +129,15 @@ export default class Labels extends Component {
           </TouchableOpacity>
         </View>
         <View>{labelsToDisplay}</View>
+        <Snackbar
+          anchorOrigin={{
+            vertical: 'bottom',
+            horizontal: 'center',
+          }}
+          autoHideDuration={3000}
+          open={this.state.snackbarOpen}
+          message={<span id="message-id">{this.state.SnackbarMsg}</span>}
+        />
       </View>
     );
   }
