@@ -70,7 +70,7 @@ export async function archiveNotes(data) {
   }
 }
 
-export async function UnArchiveNotes(data) {
+export async function unArchiveNotes(data) {
   try {
     let AccessToken = await AsyncStorage.getItem('@storage_Key');
     let res = axios.post(
@@ -123,7 +123,7 @@ export async function pinNotes(data) {
   }
 }
 
-export async function UnpinNotes(data) {
+export async function unpinNotes(data) {
   try {
     let AccessToken = await AsyncStorage.getItem('@storage_Key');
     let res = axios.post(
