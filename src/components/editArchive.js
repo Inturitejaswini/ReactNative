@@ -1,13 +1,26 @@
 import React, {Component} from 'react';
 import {DoneIcon, UnArchiveIcon} from 'react-native-vector-icons/MaterialIcons';
 import ArrowLeft from 'react-native-vector-icons/MaterialCommunityIcons';
-import {ShareAltIcon,DeleteIcon,PushPinIcon} from 'react-native-vector-icons/AntDesign';
+import {
+  ShareAltIcon,
+  DeleteIcon,
+  PushPinIcon,
+} from 'react-native-vector-icons/AntDesign';
 import ElipsisIcon from 'react-native-vector-icons/FontAwesome';
 import {RBSheet, RBSheet2} from 'react-native-raw-bottom-sheet';
 import {IconButton} from 'react-native-paper';
 import styles from '../Styles';
-import {editNotes,UnArchiveNotes,deleteNotes,pinNotes,UnpinNotes,updateColor,createLabels} from '../services/noteServices';
+import {
+  editNotes,
+  unArchiveNotes,
+  deleteNotes,
+  pinNotes,
+  unpinNotes,
+  updateColor,
+  createLabels,
+} from '../services/noteServices';
 import ReminderComponent from './reminder';
+import Snackbar from 'react-native-snackbar-component';
 import {Text, TextInput, View, FlatList, TouchableOpacity} from 'react-native';
 const colors = [
   {name: 'blue', hexcode: ' #39a78e'},
@@ -43,6 +56,8 @@ export class EditArchiveComponent extends Component {
       selectedLabels: '',
       labelData: [],
       label: false,
+      snackbarMsg: '',
+      snackbarOpen: false,
     };
   }
   reminderData = (value) => {
@@ -51,49 +66,89 @@ export class EditArchiveComponent extends Component {
     });
   };
   handlePin = () => {
-    this.setState({
-      isPined: true,
-    });
     let data = {
       noteIdList: [this.props.navigation.state.params.key],
       isPined: this.state.isPined,
     };
-    pinNotes(data);
+    pinNotes(data)
+      .then((res) => {
+        this.setState({
+          isPined: true,
+        });
+      })
+      .catch((err) => {
+        this.setState({
+          snackbarOpen: true,
+          snackbarMsg: err,
+        });
+      });
   };
   handleUnPin = () => {
-    this.setState({
-      isPined: false,
-    });
     let data = {
       noteIdList: [this.props.navigation.state.params.key],
       isPined: this.state.isPined,
     };
-    UnpinNotes(data);
+    unpinNotes(data)
+      .then((res) => {
+        this.setState({
+          isPined: false,
+        });
+      })
+      .catch((err) => {
+        this.setState({
+          snackbarOpen: true,
+          snackbarMsg: err,
+        });
+      });
   };
   handleDelete = () => {
-    this.setState({isDeleted: true});
     let data = {
       noteIdList: [this.props.navigation.state.params.key],
       isDeleted: this.state.isDeleted,
     };
-    deleteNotes(data);
+    deleteNotes(data)
+      .then((res) => {
+        this.setState({isDeleted: true});
+      })
+      .catch((err) => {
+        this.setState({
+          snackbarOpen: true,
+          snackbarMsg: err,
+        });
+      });
   };
   handleUnArchiveNote = () => {
-    this.setState({isArchived: false});
     let data = {
       noteIdList: [this.props.navigation.state.params.key],
       isArchived: this.state.isArchived,
     };
-    UnArchiveNotes(data);
+    unArchiveNotes(data)
+      .then((res) => {
+        this.setState({isArchived: false});
+      })
+      .catch((err) => {
+        this.setState({
+          snackbarOpen: true,
+          snackbarMsg: err,
+        });
+      });
   };
 
   handleLabelDone = () => {
-    this.setState({label: true});
     let data = {
       noteIdList: [this.props.navigation.state.params.key],
       label: this.state.label,
     };
-    createLabels(data);
+    createLabels(data)
+      .then((res) => {
+        this.setState({label: true});
+      })
+      .catch((err) => {
+        this.setState({
+          snackbarOpen: true,
+          snackbarMsg: err,
+        });
+      });
   };
   handleSelectLabel = (labelName) => {
     this.setState({
@@ -127,14 +182,22 @@ export class EditArchiveComponent extends Component {
     this.props.navigation.navigate('archive');
   };
   handleColor = (color) => {
-    this.setState({
-      color: color,
-    });
     let data = {
       noteIdList: [this.props.navigation.state.params.key],
       color: this.state.color,
     };
-    updateColor(data);
+    updateColor(data)
+      .then((res) => {
+        this.setState({
+          color: color,
+        });
+      })
+      .catch((err) => {
+        this.setState({
+          snackbarOpen: true,
+          snackbarMsg: err,
+        });
+      });
   };
   componentDidMount() {
     this.setState({
@@ -180,7 +243,7 @@ export class EditArchiveComponent extends Component {
             </View>
             <View>
               <ReminderComponent
-                reminderProps={()=>this.reminderData}></ReminderComponent>
+                reminderProps={() => this.reminderData}></ReminderComponent>
             </View>
             <View style={styles.unarchive}>
               <UnArchiveIcon
@@ -322,6 +385,15 @@ export class EditArchiveComponent extends Component {
             </View>
           </RBSheet2>
         </View>
+        <Snackbar
+          anchorOrigin={{
+            vertical: 'bottom',
+            horizontal: 'center',
+          }}
+          autoHideDuration={3000}
+          open={this.state.snackbarOpen}
+          message={<span id="message-id">{this.state.SnackbarMsg}</span>}
+        />
       </View>
     );
   }
